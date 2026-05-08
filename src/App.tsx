@@ -1,11 +1,15 @@
 import { useState } from "react"
 import { Text } from "./components/ui/text"
+import { Button } from "./components/ui/button"
 import type { VariantProps } from "class-variance-authority"
 import { textVariants } from "./components/ui/text"
+import { buttonVariants } from "./components/ui/button"
 
 type Palette = "palette-neutral" | "palette-ocean" | "palette-sunset"
-type Size = NonNullable<VariantProps<typeof textVariants>["size"]>
-type Color = NonNullable<VariantProps<typeof textVariants>["color"]>
+type TextSize  = NonNullable<VariantProps<typeof textVariants>["size"]>
+type TextColor = NonNullable<VariantProps<typeof textVariants>["color"]>
+type ButtonColor   = NonNullable<VariantProps<typeof buttonVariants>["color"]>
+type ButtonPadding = NonNullable<VariantProps<typeof buttonVariants>["padding"]>
 
 const palettes: { id: Palette; label: string }[] = [
   { id: "palette-neutral", label: "Neutral" },
@@ -13,11 +17,21 @@ const palettes: { id: Palette; label: string }[] = [
   { id: "palette-sunset",  label: "Sunset" },
 ]
 
-const sizes: Size[]   = ["xs", "sm", "md", "lg", "xl", "2xl", "display"]
-const colors: Color[] = [
+const textSizes: TextSize[]   = ["xs", "sm", "md", "lg", "xl", "2xl", "display"]
+const textColors: TextColor[] = [
   "primary", "secondary", "muted", "primary-muted", "secondary-muted",
   "info", "warning", "success", "error",
 ]
+const buttonColors: ButtonColor[] = [
+  "primary", "secondary", "muted", "info", "warning", "success", "error",
+]
+const buttonPaddings: ButtonPadding[] = ["none", "xs", "sm", "base", "md", "lg", "xl"]
+
+const thStyle: React.CSSProperties = { textAlign: "left", padding: "0.5rem 1rem 0.5rem 0", whiteSpace: "nowrap", fontFamily: "monospace", fontSize: "0.75rem", opacity: 0.5 }
+const tdLabelStyle: React.CSSProperties = { padding: "0.75rem 1rem 0.75rem 0", fontFamily: "monospace", fontSize: "0.75rem", opacity: 0.5, whiteSpace: "nowrap", verticalAlign: "middle" }
+const tdCellStyle: React.CSSProperties = { padding: "0.75rem 1rem", verticalAlign: "middle" }
+const rowStyle: React.CSSProperties = { borderTop: "1px solid oklch(0.9 0 0)" }
+const sectionTitleStyle: React.CSSProperties = { fontFamily: "monospace", fontSize: "0.85rem", fontWeight: 600, opacity: 0.4, marginBottom: "1rem", letterSpacing: "0.05em" }
 
 function App() {
   const [palette, setPalette] = useState<Palette>("palette-neutral")
@@ -45,13 +59,13 @@ function App() {
         ))}
       </div>
 
-      <table style={{ borderCollapse: "collapse", width: "100%" }}>
+      {/* Text */}
+      <div style={sectionTitleStyle}>TEXT</div>
+      <table style={{ borderCollapse: "collapse", width: "100%", marginBottom: "3rem" }}>
         <thead>
           <tr>
-            <th style={{ textAlign: "left", padding: "0.5rem 1rem 0.5rem 0", whiteSpace: "nowrap", fontFamily: "monospace", fontSize: "0.75rem", opacity: 0.5 }}>
-              color \ size
-            </th>
-            {sizes.map(size => (
+            <th style={thStyle}>color \ size</th>
+            {textSizes.map(size => (
               <th key={size} style={{ padding: "0.5rem 1rem", fontFamily: "monospace", fontSize: "0.75rem", opacity: 0.5, fontWeight: 400 }}>
                 {size}
               </th>
@@ -59,14 +73,39 @@ function App() {
           </tr>
         </thead>
         <tbody>
-          {colors.map(color => (
-            <tr key={color} style={{ borderTop: "1px solid oklch(0.9 0 0)" }}>
-              <td style={{ padding: "0.75rem 1rem 0.75rem 0", fontFamily: "monospace", fontSize: "0.75rem", opacity: 0.5, whiteSpace: "nowrap", verticalAlign: "middle" }}>
-                {color}
-              </td>
-              {sizes.map(size => (
-                <td key={size} style={{ padding: "0.75rem 1rem", verticalAlign: "middle" }}>
+          {textColors.map(color => (
+            <tr key={color} style={rowStyle}>
+              <td style={tdLabelStyle}>{color}</td>
+              {textSizes.map(size => (
+                <td key={size} style={tdCellStyle}>
                   <Text size={size} color={color}>Aa</Text>
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      {/* Button */}
+      <div style={sectionTitleStyle}>BUTTON</div>
+      <table style={{ borderCollapse: "collapse", width: "100%" }}>
+        <thead>
+          <tr>
+            <th style={thStyle}>color \ padding</th>
+            {buttonPaddings.map(padding => (
+              <th key={padding} style={{ padding: "0.5rem 1rem", fontFamily: "monospace", fontSize: "0.75rem", opacity: 0.5, fontWeight: 400 }}>
+                {padding}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {buttonColors.map(color => (
+            <tr key={color} style={rowStyle}>
+              <td style={tdLabelStyle}>{color}</td>
+              {buttonPaddings.map(padding => (
+                <td key={padding} style={tdCellStyle}>
+                  <Button color={color} padding={padding}>Button</Button>
                 </td>
               ))}
             </tr>
