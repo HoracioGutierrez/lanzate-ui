@@ -42,6 +42,11 @@ const buttonVariants = cva(
         lg:   "[&_svg]:size-[1.5em]",
         xl:   "[&_svg]:size-[2em]",
       },
+      mobile: {
+        "only-icon":  "",
+        "full-width": "w-full sm:w-auto",
+        "hidden":     "hidden sm:inline-flex",
+      },
     },
     defaultVariants: {
       color:   "primary",
@@ -50,16 +55,33 @@ const buttonVariants = cva(
   }
 )
 
+const squarePaddingMap: Record<NonNullable<VariantProps<typeof buttonVariants>["padding"]>, string> = {
+  none: "p-0",
+  xs:   "p-1",
+  sm:   "p-1.5",
+  base: "p-2",
+  md:   "p-2.5",
+  lg:   "p-3",
+  xl:   "p-4",
+}
+
 type ButtonProps = {
   color?:     VariantProps<typeof buttonVariants>["color"]
   padding?:   VariantProps<typeof buttonVariants>["padding"]
   textSize?:  VariantProps<typeof buttonVariants>["textSize"]
   iconSize?:  VariantProps<typeof buttonVariants>["iconSize"]
+  mobile?:    VariantProps<typeof buttonVariants>["mobile"]
+  icon?:      React.ReactNode
   startIcon?: React.ReactNode
   endIcon?:   React.ReactNode
 } & React.ButtonHTMLAttributes<HTMLButtonElement>
 
-function Button({ color, padding, textSize, iconSize, startIcon, endIcon, className, children, ...props }: ButtonProps) {
+function Button({
+  color, padding = "base", textSize, iconSize, mobile,
+  icon, startIcon, endIcon,
+  className, children,
+  ...props
+}: ButtonProps) {
   return (
     <button
       data-slot="button"
@@ -67,12 +89,29 @@ function Button({ color, padding, textSize, iconSize, startIcon, endIcon, classN
       data-padding={padding}
       data-text-size={textSize}
       data-icon-size={iconSize}
-      className={cn(buttonVariants({ color, padding, textSize, iconSize, className }))}
+      data-mobile={mobile}
+      className={cn(
+        buttonVariants({ color, padding, textSize, iconSize, mobile }),
+        icon != null && squarePaddingMap[padding ?? "base"],
+        className,
+      )}
       {...props}
     >
-      {startIcon}
-      {children}
-      {endIcon}
+      {icon != null ? (
+        icon
+      ) : mobile === "only-icon" ? (
+        <>
+          {startIcon}
+          {children != null && <span className="hidden sm:inline">{children}</span>}
+          {endIcon}
+        </>
+      ) : (
+        <>
+          {startIcon}
+          {children}
+          {endIcon}
+        </>
+      )}
     </button>
   )
 }

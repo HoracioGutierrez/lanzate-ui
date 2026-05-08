@@ -12,6 +12,8 @@ type TextColor = NonNullable<VariantProps<typeof textVariants>["color"]>
 type ButtonColor    = NonNullable<VariantProps<typeof buttonVariants>["color"]>
 type ButtonPadding  = NonNullable<VariantProps<typeof buttonVariants>["padding"]>
 type ButtonTextSize = NonNullable<VariantProps<typeof buttonVariants>["textSize"]>
+type ButtonIconSize = NonNullable<VariantProps<typeof buttonVariants>["iconSize"]>
+type ButtonMobile   = NonNullable<VariantProps<typeof buttonVariants>["mobile"]>
 
 const palettes: { id: Palette; label: string }[] = [
   { id: "palette-neutral", label: "Neutral" },
@@ -175,6 +177,106 @@ function App() {
               <td style={tdLabelStyle}>{caso}</td>
               <td style={tdLabelStyle}>{padding}</td>
               <td style={tdLabelStyle}>{color}</td>
+              <td style={tdCellStyle}>{node}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      {/* Button / iconSize override */}
+      <div style={{ ...sectionTitleStyle, marginTop: "3rem" }}>BUTTON / iconSize override</div>
+      <table style={{ borderCollapse: "collapse" }}>
+        <thead>
+          <tr>
+            <th style={thStyle}>iconSize</th>
+            <th style={{ padding: "0.5rem 1rem", fontFamily: "monospace", fontSize: "0.75rem", opacity: 0.5, fontWeight: 400 }}>
+              preview
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {(["xs", "sm", "base", "md", "lg", "xl"] as ButtonIconSize[]).map(iconSize => (
+            <tr key={iconSize} style={rowStyle}>
+              <td style={tdLabelStyle}>{iconSize}</td>
+              <td style={tdCellStyle}>
+                <Button startIcon={<Star />} endIcon={<ArrowRight />} iconSize={iconSize}>Acción</Button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      {/* Button / icon prop */}
+      <div style={{ ...sectionTitleStyle, marginTop: "3rem" }}>BUTTON / icon prop</div>
+      <table style={{ borderCollapse: "collapse" }}>
+        <thead>
+          <tr>
+            <th style={thStyle}>padding</th>
+            <th style={{ ...thStyle, fontWeight: 400 }}>color</th>
+            <th style={{ padding: "0.5rem 1rem", fontFamily: "monospace", fontSize: "0.75rem", opacity: 0.5, fontWeight: 400 }}>
+              preview
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {([
+            { padding: "xs",   color: "primary"   },
+            { padding: "sm",   color: "secondary" },
+            { padding: "base", color: "muted"     },
+            { padding: "md",   color: "info"      },
+            { padding: "lg",   color: "success"   },
+            { padding: "xl",   color: "warning"   },
+            { padding: "base", color: "error"     },
+          ] as { padding: ButtonPadding; color: ButtonColor }[]).map(({ padding, color }) => (
+            <tr key={`${padding}-${color}`} style={rowStyle}>
+              <td style={tdLabelStyle}>{padding}</td>
+              <td style={tdLabelStyle}>{color}</td>
+              <td style={tdCellStyle}>
+                <Button color={color} padding={padding} icon={<Search />} />
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      {/* Button / mobile prop */}
+      <div style={{ ...sectionTitleStyle, marginTop: "3rem" }}>BUTTON / mobile prop</div>
+      <table style={{ borderCollapse: "collapse" }}>
+        <thead>
+          <tr>
+            <th style={thStyle}>mobile</th>
+            <th style={{ ...thStyle, fontWeight: 400 }}>caso</th>
+            <th style={{ padding: "0.5rem 1rem", fontFamily: "monospace", fontSize: "0.75rem", opacity: 0.5, fontWeight: 400 }}>
+              preview (resize &lt;640px)
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {([
+            {
+              mobile: "only-icon",
+              caso: "texto oculto en mobile, icono siempre visible",
+              node: <Button color="primary" padding="base" mobile="only-icon" startIcon={<Search />}>Buscar</Button>,
+            },
+            {
+              mobile: "full-width",
+              caso: "full-width en mobile, auto en sm+",
+              node: <Button color="info" padding="base" mobile="full-width">Guardar</Button>,
+            },
+            {
+              mobile: "full-width",
+              caso: "full-width con startIcon",
+              node: <Button color="success" padding="base" mobile="full-width" startIcon={<Star />}>Favorito</Button>,
+            },
+            {
+              mobile: "hidden",
+              caso: "oculto en mobile, visible en sm+",
+              node: <Button color="muted" padding="base" mobile="hidden">Solo escritorio</Button>,
+            },
+          ] as { mobile: ButtonMobile; caso: string; node: React.ReactNode }[]).map(({ mobile, caso, node }) => (
+            <tr key={caso} style={rowStyle}>
+              <td style={tdLabelStyle}>{mobile}</td>
+              <td style={tdLabelStyle}>{caso}</td>
               <td style={tdCellStyle}>{node}</td>
             </tr>
           ))}
