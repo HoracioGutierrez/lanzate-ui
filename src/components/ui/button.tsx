@@ -10,13 +10,20 @@ const buttonVariants = cva(
   {
     variants: {
       color: {
-        primary:   "bg-primary text-primary-foreground hover:bg-primary/90",
-        secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        muted:     "bg-muted text-muted-foreground hover:bg-muted/80",
-        info:      "bg-info text-white hover:bg-info/90",
-        warning:   "bg-warning text-black hover:bg-warning/90",
-        success:   "bg-success text-white hover:bg-success/90",
-        error:     "bg-destructive text-white hover:bg-destructive/90",
+        primary:   "[--btn-color:var(--primary)] [--btn-fg:var(--primary-foreground)] [--btn-accent:var(--primary)]",
+        secondary: "[--btn-color:var(--secondary)] [--btn-fg:var(--secondary-foreground)] [--btn-accent:var(--secondary-foreground)]",
+        muted:     "[--btn-color:var(--muted)] [--btn-fg:var(--muted-foreground)] [--btn-accent:var(--muted-foreground)]",
+        info:      "[--btn-color:var(--info)] [--btn-fg:oklch(1_0_0)] [--btn-accent:var(--info)]",
+        warning:   "[--btn-color:var(--warning)] [--btn-fg:oklch(0_0_0)] [--btn-accent:var(--warning)]",
+        success:   "[--btn-color:var(--success)] [--btn-fg:oklch(1_0_0)] [--btn-accent:var(--success)]",
+        error:     "[--btn-color:var(--destructive)] [--btn-fg:oklch(1_0_0)] [--btn-accent:var(--destructive)]",
+      },
+      variant: {
+        solid:     "bg-(--btn-color) text-(--btn-fg) hover:bg-(--btn-color)/90",
+        outline:   "border border-(--btn-accent) text-(--btn-accent) bg-transparent hover:bg-(--btn-accent)/10",
+        ghost:     "bg-transparent text-(--btn-accent) hover:bg-(--btn-accent)/10",
+        secondary: "bg-(--btn-accent)/15 text-(--btn-accent) hover:bg-(--btn-accent)/25",
+        dashed:    "border border-dashed border-(--btn-accent) text-(--btn-accent) bg-transparent hover:bg-(--btn-accent)/10",
       },
       padding: {
         none: "px-0 py-0 text-sm",
@@ -52,6 +59,7 @@ const buttonVariants = cva(
     },
     defaultVariants: {
       color:   "primary",
+      variant: "solid",
       padding: "base",
     },
   }
@@ -69,6 +77,7 @@ const squarePaddingMap: Record<NonNullable<VariantProps<typeof buttonVariants>["
 
 type ButtonProps = {
   color?:     VariantProps<typeof buttonVariants>["color"]
+  variant?:   VariantProps<typeof buttonVariants>["variant"]
   padding?:   VariantProps<typeof buttonVariants>["padding"]
   textSize?:  VariantProps<typeof buttonVariants>["textSize"]
   iconSize?:  VariantProps<typeof buttonVariants>["iconSize"]
@@ -82,7 +91,7 @@ type ButtonProps = {
 } & React.ButtonHTMLAttributes<HTMLButtonElement>
 
 function Button({
-  color, padding = "base", textSize, iconSize, mobile,
+  color, variant, padding = "base", textSize, iconSize, mobile,
   icon, startIcon, endIcon,
   isLoading, loadingText,
   tooltip,
@@ -99,13 +108,14 @@ function Button({
     <button
       data-slot="button"
       data-color={color}
+      data-variant={variant}
       data-padding={padding}
       data-text-size={textSize}
       data-icon-size={iconSize}
       data-mobile={mobile}
       disabled={effectiveDisabled}
       className={cn(
-        buttonVariants({ color, padding, textSize, iconSize, mobile }),
+        buttonVariants({ color, variant, padding, textSize, iconSize, mobile }),
         effectiveIcon != null && squarePaddingMap[padding ?? "base"],
         className,
       )}

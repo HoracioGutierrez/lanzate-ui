@@ -10,6 +10,7 @@ type Palette = "palette-neutral" | "palette-ocean" | "palette-sunset"
 type TextSize  = NonNullable<VariantProps<typeof textVariants>["size"]>
 type TextColor = NonNullable<VariantProps<typeof textVariants>["color"]>
 type ButtonColor    = NonNullable<VariantProps<typeof buttonVariants>["color"]>
+type ButtonVariant  = NonNullable<VariantProps<typeof buttonVariants>["variant"]>
 type ButtonPadding  = NonNullable<VariantProps<typeof buttonVariants>["padding"]>
 type ButtonTextSize = NonNullable<VariantProps<typeof buttonVariants>["textSize"]>
 type ButtonIconSize = NonNullable<VariantProps<typeof buttonVariants>["iconSize"]>
@@ -29,7 +30,8 @@ const textColors: TextColor[] = [
 const buttonColors: ButtonColor[] = [
   "primary", "secondary", "muted", "info", "warning", "success", "error",
 ]
-const buttonPaddings: ButtonPadding[] = ["none", "xs", "sm", "base", "md", "lg", "xl"]
+const buttonPaddings: ButtonPadding[]  = ["none", "xs", "sm", "base", "md", "lg", "xl"]
+const buttonVariantValues: ButtonVariant[] = ["solid", "outline", "ghost", "secondary", "dashed"]
 
 const thStyle: React.CSSProperties = { textAlign: "left", padding: "0.5rem 1rem 0.5rem 0", whiteSpace: "nowrap", fontFamily: "monospace", fontSize: "0.75rem", opacity: 0.5 }
 const tdLabelStyle: React.CSSProperties = { padding: "0.75rem 1rem 0.75rem 0", fontFamily: "monospace", fontSize: "0.75rem", opacity: 0.5, whiteSpace: "nowrap", verticalAlign: "middle" }
@@ -116,6 +118,33 @@ function App() {
           ))}
         </tbody>
       </table>
+      {/* Button / variant */}
+      <div style={{ ...sectionTitleStyle, marginTop: "3rem" }}>BUTTON / variant</div>
+      <table style={{ borderCollapse: "collapse", width: "100%" }}>
+        <thead>
+          <tr>
+            <th style={thStyle}>variant \ color</th>
+            {buttonColors.map(color => (
+              <th key={color} style={{ padding: "0.5rem 1rem", fontFamily: "monospace", fontSize: "0.75rem", opacity: 0.5, fontWeight: 400 }}>
+                {color}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {buttonVariantValues.map(variant => (
+            <tr key={variant} style={rowStyle}>
+              <td style={tdLabelStyle}>{variant}</td>
+              {buttonColors.map(color => (
+                <td key={color} style={tdCellStyle}>
+                  <Button color={color} variant={variant}>Button</Button>
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
       {/* Button / textSize override */}
       <div style={{ ...sectionTitleStyle, marginTop: "3rem" }}>BUTTON / textSize override</div>
       <table style={{ borderCollapse: "collapse" }}>
