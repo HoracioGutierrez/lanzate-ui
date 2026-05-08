@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "text",
+  "title": "Text",
+  "description": "Componente de texto base con prop `as` para polimorfismo.",
+  "dependencies": [],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/components/ui/text.tsx",
+      "content": "import { cn } from \"@/lib/utils\"\n\ninterface TextProps extends React.HTMLAttributes<HTMLParagraphElement> {\n  as?: \"p\" | \"span\" | \"label\" | \"h1\" | \"h2\" | \"h3\" | \"h4\"\n}\n\nexport function Text({ as: Tag = \"p\", className, ...props }: TextProps) {\n  return (\n    <Tag\n      className={cn(\"text-base text-foreground leading-normal\", className)}\n      {...props}\n    />\n  )\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}
