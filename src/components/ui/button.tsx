@@ -1,7 +1,9 @@
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
+import { Loader2 } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 
 const buttonVariants = cva(
   "inline-flex items-center justify-center gap-2 rounded-md font-medium transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:size-[1em] [&_svg]:shrink-0",
@@ -71,18 +73,29 @@ type ButtonProps = {
   textSize?:  VariantProps<typeof buttonVariants>["textSize"]
   iconSize?:  VariantProps<typeof buttonVariants>["iconSize"]
   mobile?:    VariantProps<typeof buttonVariants>["mobile"]
-  icon?:      React.ReactNode
-  startIcon?: React.ReactNode
-  endIcon?:   React.ReactNode
+  icon?:        React.ReactNode
+  startIcon?:   React.ReactNode
+  endIcon?:     React.ReactNode
+  isLoading?:   boolean
+  loadingText?: string
+  tooltip?:     React.ReactNode
 } & React.ButtonHTMLAttributes<HTMLButtonElement>
 
 function Button({
   color, padding = "base", textSize, iconSize, mobile,
   icon, startIcon, endIcon,
+  isLoading, loadingText,
+  tooltip,
   className, children,
+  disabled,
   ...props
 }: ButtonProps) {
-  return (
+  const effectiveDisabled  = disabled || isLoading
+  const effectiveStartIcon = isLoading ? <Loader2 className="animate-spin" /> : startIcon
+  const effectiveIcon      = isLoading && icon != null ? <Loader2 className="animate-spin" /> : icon
+  const effectiveChildren  = isLoading && loadingText != null ? loadingText : children
+
+  const buttonEl = (
     <button
       data-slot="button"
       data-color={color}
@@ -90,29 +103,47 @@ function Button({
       data-text-size={textSize}
       data-icon-size={iconSize}
       data-mobile={mobile}
+      disabled={effectiveDisabled}
       className={cn(
         buttonVariants({ color, padding, textSize, iconSize, mobile }),
-        icon != null && squarePaddingMap[padding ?? "base"],
+        effectiveIcon != null && squarePaddingMap[padding ?? "base"],
         className,
       )}
       {...props}
     >
-      {icon != null ? (
-        icon
+      {effectiveIcon != null ? (
+        effectiveIcon
       ) : mobile === "only-icon" ? (
         <>
-          {startIcon}
-          {children != null && <span className="hidden sm:inline">{children}</span>}
+          {effectiveStartIcon}
+          {effectiveChildren != null && <span className="hidden sm:inline">{effectiveChildren}</span>}
           {endIcon}
         </>
       ) : (
         <>
-          {startIcon}
-          {children}
+          {effectiveStartIcon}
+          {effectiveChildren}
           {endIcon}
         </>
       )}
     </button>
+  )
+
+  if (!tooltip) return buttonEl
+
+  return (
+    <TooltipProvider>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          {effectiveDisabled ? (
+            <span tabIndex={-1} className="inline-flex">{buttonEl}</span>
+          ) : (
+            buttonEl
+          )}
+        </TooltipTrigger>
+        <TooltipContent>{tooltip}</TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
   )
 }
 

@@ -239,6 +239,60 @@ function App() {
         </tbody>
       </table>
 
+      {/* Button / isLoading */}
+      <div style={{ ...sectionTitleStyle, marginTop: "3rem" }}>BUTTON / isLoading</div>
+      <table style={{ borderCollapse: "collapse" }}>
+        <thead>
+          <tr>
+            <th style={thStyle}>caso</th>
+            <th style={{ ...thStyle, fontWeight: 400 }}>color</th>
+            <th style={{ padding: "0.5rem 1rem", fontFamily: "monospace", fontSize: "0.75rem", opacity: 0.5, fontWeight: 400 }}>
+              preview
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {([
+            {
+              caso: "loading, sin loadingText",
+              color: "primary",
+              node: <Button color="primary" padding="base" isLoading>Guardar</Button>,
+            },
+            {
+              caso: "loading + loadingText",
+              color: "secondary",
+              node: <Button color="secondary" padding="base" isLoading loadingText="Guardando...">Guardar</Button>,
+            },
+            {
+              caso: "loading sin startIcon previo",
+              color: "info",
+              node: <Button color="info" padding="base" isLoading>Enviar</Button>,
+            },
+            {
+              caso: "loading reemplaza startIcon",
+              color: "success",
+              node: <Button color="success" padding="base" isLoading startIcon={<Star />}>Favorito</Button>,
+            },
+            {
+              caso: "loading con icon prop (cuadrado)",
+              color: "warning",
+              node: <Button color="warning" padding="base" isLoading icon={<Search />} />,
+            },
+            {
+              caso: "loading + mobile only-icon",
+              color: "error",
+              node: <Button color="error" padding="base" isLoading mobile="only-icon" startIcon={<Search />}>Buscar</Button>,
+            },
+          ] as { caso: string; color: ButtonColor; node: React.ReactNode }[]).map(({ caso, color, node }) => (
+            <tr key={caso} style={rowStyle}>
+              <td style={tdLabelStyle}>{caso}</td>
+              <td style={tdLabelStyle}>{color}</td>
+              <td style={tdCellStyle}>{node}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
       {/* Button / mobile prop */}
       <div style={{ ...sectionTitleStyle, marginTop: "3rem" }}>BUTTON / mobile prop</div>
       <table style={{ borderCollapse: "collapse" }}>
@@ -277,6 +331,60 @@ function App() {
             <tr key={caso} style={rowStyle}>
               <td style={tdLabelStyle}>{mobile}</td>
               <td style={tdLabelStyle}>{caso}</td>
+              <td style={tdCellStyle}>{node}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      {/* Button / tooltip */}
+      <div style={{ ...sectionTitleStyle, marginTop: "3rem" }}>BUTTON / tooltip</div>
+      <table style={{ borderCollapse: "collapse" }}>
+        <thead>
+          <tr>
+            <th style={thStyle}>caso</th>
+            <th style={{ ...thStyle, fontWeight: 400 }}>color</th>
+            <th style={{ padding: "0.5rem 1rem", fontFamily: "monospace", fontSize: "0.75rem", opacity: 0.5, fontWeight: 400 }}>
+              preview (hover)
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {([
+            {
+              caso: "tooltip string simple",
+              color: "primary",
+              node: <Button color="primary" padding="base" tooltip="Guardar cambios">Guardar</Button>,
+            },
+            {
+              caso: "tooltip en icon-only",
+              color: "secondary",
+              node: <Button color="secondary" padding="base" icon={<Search />} tooltip="Buscar" />,
+            },
+            {
+              caso: "tooltip en mobile only-icon",
+              color: "info",
+              node: <Button color="info" padding="base" mobile="only-icon" startIcon={<Search />} tooltip="Buscar en el sitio">Buscar</Button>,
+            },
+            {
+              caso: "tooltip con JSX",
+              color: "success",
+              node: <Button color="success" padding="base" startIcon={<Star />} tooltip={<><strong>Favorito</strong> — guardar para después</>}>Agregar</Button>,
+            },
+            {
+              caso: "tooltip + isLoading (disabled)",
+              color: "warning",
+              node: <Button color="warning" padding="base" isLoading loadingText="Enviando..." tooltip="Procesando tu solicitud">Enviar</Button>,
+            },
+            {
+              caso: "tooltip + error icon-only",
+              color: "error",
+              node: <Button color="error" padding="base" icon={<Trash2 />} tooltip="Eliminar permanentemente" />,
+            },
+          ] as { caso: string; color: ButtonColor; node: React.ReactNode }[]).map(({ caso, color, node }) => (
+            <tr key={caso} style={rowStyle}>
+              <td style={tdLabelStyle}>{caso}</td>
+              <td style={tdLabelStyle}>{color}</td>
               <td style={tdCellStyle}>{node}</td>
             </tr>
           ))}
