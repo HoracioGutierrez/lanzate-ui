@@ -20,6 +20,44 @@ Componente de texto polimórfico con variantes de tamaño y color, construido so
 npx shadcn@latest add https://lanzate-ui.vercel.app/r/text.json
 ```
 
+**Configuración CSS requerida:**
+
+El componente depende de variables CSS que deben estar definidas en tu `globals.css`. Si ya usás shadcn/ui en tu proyecto, la mayoría ya las tenés — solo verificá que estén los tokens de `info`, `warning`, `success` y el tamaño `display`.
+
+Agregá esto en tu `globals.css`:
+
+```css
+/* Dentro del bloque @theme inline existente */
+@theme inline {
+  /* Tamaño display (fluid) */
+  --text-display: clamp(2rem, calc(1.417rem + 2.917vw), 3.75rem);
+
+  /* Mapeos de color necesarios */
+  --color-foreground:          var(--foreground);
+  --color-primary:             var(--primary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted-foreground:    var(--muted-foreground);
+  --color-info:                var(--info);
+  --color-warning:             var(--warning);
+  --color-success:             var(--success);
+  --color-destructive:         var(--destructive);
+}
+
+/* Dentro de :root */
+:root {
+  --foreground:           oklch(0.145 0 0);
+  --primary:              oklch(0.205 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted-foreground:     oklch(0.556 0 0);
+  --destructive:          oklch(0.577 0.245 27.325);
+
+  /* Estos tres suelen no estar en proyectos shadcn/ui por defecto */
+  --info:    oklch(0.60 0.15 240);
+  --warning: oklch(0.70 0.15 85);
+  --success: oklch(0.55 0.15 142);
+}
+```
+
 **Uso básico:**
 
 ```tsx
