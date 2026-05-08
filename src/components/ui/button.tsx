@@ -24,6 +24,7 @@ const buttonVariants = cva(
         ghost:     "bg-transparent text-(--btn-accent) hover:bg-(--btn-accent)/10",
         secondary: "bg-(--btn-accent)/15 text-(--btn-accent) hover:bg-(--btn-accent)/25",
         dashed:    "border border-dashed border-(--btn-accent) text-(--btn-accent) bg-transparent hover:bg-(--btn-accent)/10",
+        surface:   "bg-(--btn-color) text-(--btn-fg) hover:bg-(--btn-color)/90 btn-surface",
       },
       padding: {
         none: "px-0 py-0 text-sm",
@@ -82,6 +83,7 @@ type ButtonProps = {
   textSize?:  VariantProps<typeof buttonVariants>["textSize"]
   iconSize?:  VariantProps<typeof buttonVariants>["iconSize"]
   mobile?:    VariantProps<typeof buttonVariants>["mobile"]
+  elevated?:    boolean
   icon?:        React.ReactNode
   startIcon?:   React.ReactNode
   endIcon?:     React.ReactNode
@@ -95,6 +97,7 @@ function Button({
   icon, startIcon, endIcon,
   isLoading, loadingText,
   tooltip,
+  elevated,
   className, children,
   disabled,
   ...props
@@ -113,10 +116,12 @@ function Button({
       data-text-size={textSize}
       data-icon-size={iconSize}
       data-mobile={mobile}
+      data-elevated={elevated || undefined}
       disabled={effectiveDisabled}
       className={cn(
         buttonVariants({ color, variant, padding, textSize, iconSize, mobile }),
         effectiveIcon != null && squarePaddingMap[padding ?? "base"],
+        elevated && "btn-elevated",
         className,
       )}
       {...props}

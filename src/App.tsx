@@ -31,7 +31,7 @@ const buttonColors: ButtonColor[] = [
   "primary", "secondary", "muted", "info", "warning", "success", "error",
 ]
 const buttonPaddings: ButtonPadding[]  = ["none", "xs", "sm", "base", "md", "lg", "xl"]
-const buttonVariantValues: ButtonVariant[] = ["solid", "outline", "ghost", "secondary", "dashed"]
+const buttonVariantValues: ButtonVariant[] = ["solid", "outline", "ghost", "secondary", "dashed", "surface"]
 
 const thStyle: React.CSSProperties = { textAlign: "left", padding: "0.5rem 1rem 0.5rem 0", whiteSpace: "nowrap", fontFamily: "monospace", fontSize: "0.75rem", opacity: 0.5 }
 const tdLabelStyle: React.CSSProperties = { padding: "0.75rem 1rem 0.75rem 0", fontFamily: "monospace", fontSize: "0.75rem", opacity: 0.5, whiteSpace: "nowrap", verticalAlign: "middle" }
@@ -415,6 +415,40 @@ function App() {
               <td style={tdLabelStyle}>{caso}</td>
               <td style={tdLabelStyle}>{color}</td>
               <td style={tdCellStyle}>{node}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      {/* Button / elevated */}
+      <div style={{ ...sectionTitleStyle, marginTop: "3rem" }}>BUTTON / elevated</div>
+      <table style={{ borderCollapse: "collapse", width: "100%" }}>
+        <thead>
+          <tr>
+            <th style={thStyle}>variant \ color</th>
+            {buttonColors.map(color => (
+              <th key={color} style={{ padding: "0.5rem 1rem", fontFamily: "monospace", fontSize: "0.75rem", opacity: 0.5, fontWeight: 400 }}>
+                {color}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {([
+            { label: "solid",             variant: "solid",   elevated: false },
+            { label: "solid + elevated",  variant: "solid",   elevated: true  },
+            { label: "outline + elevated",variant: "outline", elevated: true  },
+            { label: "ghost + elevated",  variant: "ghost",   elevated: true  },
+            { label: "surface",           variant: "surface", elevated: false },
+            { label: "surface + elevated",variant: "surface", elevated: true  },
+          ] as { label: string; variant: ButtonVariant; elevated: boolean }[]).map(({ label, variant, elevated }) => (
+            <tr key={label} style={rowStyle}>
+              <td style={tdLabelStyle}>{label}</td>
+              {buttonColors.map(color => (
+                <td key={color} style={tdCellStyle}>
+                  <Button color={color} variant={variant} elevated={elevated}>Button</Button>
+                </td>
+              ))}
             </tr>
           ))}
         </tbody>
