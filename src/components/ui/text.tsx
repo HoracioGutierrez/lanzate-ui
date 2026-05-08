@@ -55,3 +55,4 @@ function Text({ as: Tag = "p", size, color, className, children, ...props }: Tex
 
 // eslint-disable-next-line react-refresh/only-export-components
 export { Text, textVariants }
+export type { TextProps }

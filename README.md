@@ -10,6 +10,131 @@ Componentes para proyectos React + Tailwind CSS v4, instalables via shadcn CLI.
 
 ## Componentes
 
+### Button
+
+Componente de botón con variantes de color semántico, padding, íconos, estados de carga y tooltips integrados, construido sobre [CVA](https://cva.style).
+
+**Instalación:**
+
+```bash
+npx shadcn@latest add https://lanzate-ui.vercel.app/r/button.json
+```
+
+**Importación de tipos:**
+
+```tsx
+import { Button, buttonVariants } from "@/components/ui/button"
+import type { ButtonProps } from "@/components/ui/button"
+```
+
+Instala automáticamente el componente `tooltip` de shadcn como dependencia.
+
+**Configuración CSS requerida:**
+
+Mismo bloque `@theme inline` y variables de color que el componente `Text` (ver abajo). Adicionalmente, el componente usa `animate-spin` de Tailwind (built-in) para el estado de carga.
+
+**Uso básico:**
+
+```tsx
+import { Button } from "@/components/ui/button"
+
+<Button>Guardar</Button>
+<Button color="error" startIcon={<Trash2 />}>Eliminar</Button>
+```
+
+**Props:**
+
+| Prop | Tipo | Default | Descripción |
+|---|---|---|---|
+| `color` | ver abajo | `primary` | Color semántico del botón |
+| `padding` | ver abajo | `base` | Tamaño de padding (controla también el font-size) |
+| `textSize` | `xs \| sm \| base \| lg \| xl \| 2xl \| display` | — | Override del tamaño de texto independiente del padding |
+| `iconSize` | `xs \| sm \| base \| md \| lg \| xl` | — | Override del tamaño de los SVG dentro del botón |
+| `startIcon` | `ReactNode` | — | Ícono antes del texto |
+| `endIcon` | `ReactNode` | — | Ícono después del texto |
+| `icon` | `ReactNode` | — | Ícono único — oculta el texto y usa padding cuadrado automático |
+| `mobile` | `only-icon \| full-width \| hidden` | — | Comportamiento responsivo en viewports < 640px |
+| `isLoading` | `boolean` | — | Muestra spinner animado en lugar del `startIcon` y deshabilita el botón |
+| `loadingText` | `string` | — | Reemplaza el texto del botón cuando `isLoading` es `true` |
+| `tooltip` | `ReactNode` | — | Contenido del tooltip que aparece al hacer hover |
+| `tapAnimation` | `boolean` | `true` | Animación de scale (spring) al hacer click/tap. Se desactiva automáticamente cuando el botón está `disabled` o `isLoading` |
+
+Acepta además todos los atributos nativos de `<button>` (`onClick`, `disabled`, `type`, etc.) y props de Framer Motion (`whileHover`, `animate`, `variants`, etc.).
+
+**Colores disponibles (`color`):**
+
+| Valor | Descripción |
+|---|---|
+| `primary` | Color principal del tema |
+| `secondary` | Color secundario del tema |
+| `muted` | Apagado / neutro |
+| `info` | Informativo (azul) |
+| `warning` | Advertencia (amarillo) |
+| `success` | Éxito (verde) |
+| `error` | Error / destructivo (rojo) |
+
+**Padding disponibles (`padding`):**
+
+| Valor | Clases aplicadas |
+|---|---|
+| `none` | `px-0 py-0` + `text-sm` |
+| `xs` | `px-2 py-1` + `text-xs` |
+| `sm` | `px-3 py-1.5` + `text-sm` |
+| `base` | `px-4 py-2` + `text-sm` |
+| `md` | `px-5 py-2.5` + `text-base` |
+| `lg` | `px-6 py-3` + `text-lg` |
+| `xl` | `px-8 py-4` + `text-xl` |
+
+**`mobile` prop:**
+
+| Valor | Comportamiento |
+|---|---|
+| `only-icon` | Oculta el texto en mobile (`< 640px`), solo muestra el `startIcon`. Requiere `startIcon`. |
+| `full-width` | El botón ocupa el ancho completo en mobile, `auto` en `sm+`. |
+| `hidden` | Oculta el botón completamente en mobile, visible en `sm+`. |
+
+**Interacción entre props:**
+
+- `icon` tiene precedencia total: si está presente, `children`, `startIcon` y `endIcon` son ignorados.
+- `isLoading` reemplaza el `startIcon` (o el `icon`) por un spinner con animación de entrada (scale + fade). Si también hay `icon`, el spinner se muestra como botón cuadrado.
+- `loadingText` solo tiene efecto cuando `isLoading` es `true`.
+- `mobile="only-icon"` requiere `startIcon` — sin él, el botón queda visualmente vacío en mobile.
+- Botones con `icon` o `mobile="only-icon"` deberían incluir `tooltip` o `aria-label` para accesibilidad con lectores de pantalla.
+- Cuando el botón está deshabilitado (`disabled` o `isLoading`), el tooltip sigue funcionando gracias a un `<span>` wrapper interno.
+
+**Ejemplos:**
+
+```tsx
+// Ícono solo con tooltip (recomendado para accesibilidad)
+<Button icon={<Trash2 />} color="error" tooltip="Eliminar registro" />
+
+// Estado de carga
+<Button isLoading loadingText="Guardando...">Guardar</Button>
+
+// Responsive: texto en desktop, solo ícono en mobile
+<Button mobile="only-icon" startIcon={<Search />} tooltip="Buscar">
+  Buscar
+</Button>
+
+// Tooltip con contenido JSX
+<Button
+  startIcon={<Star />}
+  tooltip={<><strong>Favorito</strong> — guardar para después</>}
+>
+  Agregar
+</Button>
+
+// Botón ancho completo en mobile
+<Button color="primary" mobile="full-width">Continuar</Button>
+
+// Extender ButtonProps en un componente propio
+import type { ButtonProps } from "@/components/ui/button"
+
+type SaveButtonProps = ButtonProps & { onSave: () => void }
+```
+
+---
+
 ### Text
 
 Componente de texto polimórfico con variantes de tamaño y color, construido sobre [CVA](https://cva.style).
