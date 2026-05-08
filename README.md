@@ -64,6 +64,29 @@ Agregá esto en tu `globals.css`:
 }
 ```
 
+**Actualización de `utils.ts` requerida:**
+
+`text-display` es un tamaño tipográfico personalizado que `tailwind-merge` no reconoce por defecto. Sin registrarlo, pasar `className="text-xl"` a un `<Text size="display">` no eliminaría `text-xl` — ambas clases quedarían aplicadas.
+
+Reemplazá el `twMerge` estándar en tu `lib/utils.ts` por `extendTailwindMerge`:
+
+```ts
+import { clsx, type ClassValue } from "clsx"
+import { extendTailwindMerge } from "tailwind-merge"
+
+const twMerge = extendTailwindMerge({
+  extend: {
+    classGroups: {
+      "font-size": ["text-display"],
+    },
+  },
+})
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs))
+}
+```
+
 **Uso básico:**
 
 ```tsx
