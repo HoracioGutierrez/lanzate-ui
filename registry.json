@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
   "name": "mi-registry",
-  "homepage": "https://mi-registry.vercel.app",
+  "homepage": "https://lanzate-ui.vercel.app",
   "items": [
     {
       "name": "button",

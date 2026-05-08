@@ -20,6 +20,13 @@ Componente de botón con variantes de color semántico, padding, íconos, estado
 npx shadcn@latest add https://lanzate-ui.vercel.app/r/button.json
 ```
 
+**Importación de tipos:**
+
+```tsx
+import { Button, buttonVariants } from "@/components/ui/button"
+import type { ButtonProps } from "@/components/ui/button"
+```
+
 Instala automáticamente el componente `tooltip` de shadcn como dependencia.
 
 **Configuración CSS requerida:**
@@ -85,16 +92,25 @@ Acepta además todos los atributos nativos de `<button>` (`onClick`, `disabled`,
 | `full-width` | El botón ocupa el ancho completo en mobile, `auto` en `sm+`. |
 | `hidden` | Oculta el botón completamente en mobile, visible en `sm+`. |
 
+**Interacción entre props:**
+
+- `icon` tiene precedencia total: si está presente, `children`, `startIcon` y `endIcon` son ignorados.
+- `isLoading` reemplaza el `startIcon` (o el `icon`) por un spinner. Si también hay `icon`, el spinner se muestra como botón cuadrado.
+- `loadingText` solo tiene efecto cuando `isLoading` es `true`.
+- `mobile="only-icon"` requiere `startIcon` — sin él, el botón queda visualmente vacío en mobile.
+- Botones con `icon` o `mobile="only-icon"` deberían incluir `tooltip` o `aria-label` para accesibilidad con lectores de pantalla.
+- Cuando el botón está deshabilitado (`disabled` o `isLoading`), el tooltip sigue funcionando gracias a un `<span>` wrapper interno.
+
 **Ejemplos:**
 
 ```tsx
-// Ícono solo (para acciones en toolbars, tablas, etc.)
+// Ícono solo con tooltip (recomendado para accesibilidad)
 <Button icon={<Trash2 />} color="error" tooltip="Eliminar registro" />
 
 // Estado de carga
 <Button isLoading loadingText="Guardando...">Guardar</Button>
 
-// Responsive: texto visible en desktop, solo ícono en mobile
+// Responsive: texto en desktop, solo ícono en mobile
 <Button mobile="only-icon" startIcon={<Search />} tooltip="Buscar">
   Buscar
 </Button>
@@ -109,6 +125,11 @@ Acepta además todos los atributos nativos de `<button>` (`onClick`, `disabled`,
 
 // Botón ancho completo en mobile
 <Button color="primary" mobile="full-width">Continuar</Button>
+
+// Extender ButtonProps en un componente propio
+import type { ButtonProps } from "@/components/ui/button"
+
+type SaveButtonProps = ButtonProps & { onSave: () => void }
 ```
 
 ---
