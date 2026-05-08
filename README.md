@@ -57,8 +57,9 @@ import { Button } from "@/components/ui/button"
 | `isLoading` | `boolean` | — | Muestra spinner animado en lugar del `startIcon` y deshabilita el botón |
 | `loadingText` | `string` | — | Reemplaza el texto del botón cuando `isLoading` es `true` |
 | `tooltip` | `ReactNode` | — | Contenido del tooltip que aparece al hacer hover |
+| `tapAnimation` | `boolean` | `true` | Animación de scale (spring) al hacer click/tap. Se desactiva automáticamente cuando el botón está `disabled` o `isLoading` |
 
-Acepta además todos los atributos nativos de `<button>` (`onClick`, `disabled`, `type`, etc.).
+Acepta además todos los atributos nativos de `<button>` (`onClick`, `disabled`, `type`, etc.) y props de Framer Motion (`whileHover`, `animate`, `variants`, etc.).
 
 **Colores disponibles (`color`):**
 
@@ -95,7 +96,7 @@ Acepta además todos los atributos nativos de `<button>` (`onClick`, `disabled`,
 **Interacción entre props:**
 
 - `icon` tiene precedencia total: si está presente, `children`, `startIcon` y `endIcon` son ignorados.
-- `isLoading` reemplaza el `startIcon` (o el `icon`) por un spinner. Si también hay `icon`, el spinner se muestra como botón cuadrado.
+- `isLoading` reemplaza el `startIcon` (o el `icon`) por un spinner con animación de entrada (scale + fade). Si también hay `icon`, el spinner se muestra como botón cuadrado.
 - `loadingText` solo tiene efecto cuando `isLoading` es `true`.
 - `mobile="only-icon"` requiere `startIcon` — sin él, el botón queda visualmente vacío en mobile.
 - Botones con `icon` o `mobile="only-icon"` deberían incluir `tooltip` o `aria-label` para accesibilidad con lectores de pantalla.
