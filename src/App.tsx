@@ -4,7 +4,7 @@ function App() {
 
   return (
     <>
-      <Text size={"2xl"}>Default Text</Text>
+      <Text size="display" color="secondary">Default Text</Text>
     </>
   )
 }

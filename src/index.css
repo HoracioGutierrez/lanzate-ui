@@ -54,6 +54,10 @@
     --text-xl:      clamp(1.25rem, calc(1.125rem + 0.625vw), 1.625rem);
     --text-2xl:     clamp(1.5rem, calc(1.25rem + 1.25vw), 2.25rem);
     --text-display: clamp(2rem, calc(1.417rem + 2.917vw), 3.75rem);
+
+    --color-info:    var(--info);
+    --color-warning: var(--warning);
+    --color-success: var(--success);
 }
 
 :root {
@@ -81,6 +85,9 @@
     --chart-4: oklch(0.371 0 0);
     --chart-5: oklch(0.269 0 0);
     --radius: 0.625rem;
+    --info:    oklch(0.60 0.15 240);
+    --warning: oklch(0.70 0.15 85);
+    --success: oklch(0.55 0.15 142);
     --sidebar: oklch(0.985 0 0);
     --sidebar-foreground: oklch(0.145 0 0);
     --sidebar-primary: oklch(0.205 0 0);
@@ -115,6 +122,9 @@
     --chart-3: oklch(0.439 0 0);
     --chart-4: oklch(0.371 0 0);
     --chart-5: oklch(0.269 0 0);
+    --info:    oklch(0.70 0.15 240);
+    --warning: oklch(0.75 0.14 85);
+    --success: oklch(0.65 0.14 142);
     --sidebar: oklch(0.205 0 0);
     --sidebar-foreground: oklch(0.985 0 0);
     --sidebar-primary: oklch(0.488 0.243 264.376);

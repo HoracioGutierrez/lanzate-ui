@@ -14,6 +14,17 @@ const textVariants = cva("text-foreground", {
       "2xl": "text-2xl leading-snug tracking-tight",
       display: "text-display leading-tight tracking-tighter",
     },
+    color: {
+      primary:           "text-primary",
+      secondary:         "text-secondary-foreground",
+      muted:             "text-muted-foreground",
+      "primary-muted":   "text-primary/60",
+      "secondary-muted": "text-secondary-foreground/60",
+      info:              "text-info",
+      warning:           "text-warning",
+      success:           "text-success",
+      error:             "text-destructive",
+    },
   },
   defaultVariants: {
     size: "md",
@@ -25,14 +36,16 @@ type TextTag = "p" | "span" | "label" | "h1" | "h2" | "h3" | "h4"
 type TextProps = {
   as?: TextTag
   size?: VariantProps<typeof textVariants>["size"]
+  color?: VariantProps<typeof textVariants>["color"]
 } & React.HTMLAttributes<HTMLElement>
 
-function Text({ as: Tag = "p", size, className, children, ...props }: TextProps) {
+function Text({ as: Tag = "p", size, color, className, children, ...props }: TextProps) {
   return (
     <Tag
       data-slot="text"
       data-size={size}
-      className={cn(textVariants({ size, className }))}
+      data-color={color}
+      className={cn(textVariants({ size, color, className }))}
       {...props}
     >
       {children}
