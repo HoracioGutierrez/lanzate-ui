@@ -4,6 +4,7 @@ import { Button } from "./components/ui/button"
 import type { VariantProps } from "class-variance-authority"
 import { textVariants } from "./components/ui/text"
 import { buttonVariants } from "./components/ui/button"
+import { Search, ArrowRight, Star, Trash2 } from "lucide-react"
 
 type Palette = "palette-neutral" | "palette-ocean" | "palette-sunset"
 type TextSize  = NonNullable<VariantProps<typeof textVariants>["size"]>
@@ -26,8 +27,7 @@ const textColors: TextColor[] = [
 const buttonColors: ButtonColor[] = [
   "primary", "secondary", "muted", "info", "warning", "success", "error",
 ]
-const buttonPaddings: ButtonPadding[]   = ["none", "xs", "sm", "base", "md", "lg", "xl"]
-const buttonTextSizes: ButtonTextSize[] = ["xs", "sm", "base", "lg", "xl", "2xl", "display"]
+const buttonPaddings: ButtonPadding[] = ["none", "xs", "sm", "base", "md", "lg", "xl"]
 
 const thStyle: React.CSSProperties = { textAlign: "left", padding: "0.5rem 1rem 0.5rem 0", whiteSpace: "nowrap", fontFamily: "monospace", fontSize: "0.75rem", opacity: 0.5 }
 const tdLabelStyle: React.CSSProperties = { padding: "0.75rem 1rem 0.75rem 0", fontFamily: "monospace", fontSize: "0.75rem", opacity: 0.5, whiteSpace: "nowrap", verticalAlign: "middle" }
@@ -120,18 +120,62 @@ function App() {
         <thead>
           <tr>
             <th style={thStyle}>textSize</th>
+            <th style={{ ...thStyle, fontWeight: 400 }}>padding</th>
+            <th style={{ ...thStyle, fontWeight: 400 }}>color</th>
             <th style={{ padding: "0.5rem 1rem", fontFamily: "monospace", fontSize: "0.75rem", opacity: 0.5, fontWeight: 400 }}>
               preview
             </th>
           </tr>
         </thead>
         <tbody>
-          {buttonTextSizes.map(textSize => (
+          {([
+            { textSize: "xs",      padding: "xl",   color: "primary"   },
+            { textSize: "sm",      padding: "lg",   color: "secondary" },
+            { textSize: "base",    padding: "base", color: "muted"     },
+            { textSize: "lg",      padding: "sm",   color: "info"      },
+            { textSize: "xl",      padding: "xs",   color: "warning"   },
+            { textSize: "2xl",     padding: "xs",   color: "success"   },
+            { textSize: "display", padding: "none", color: "error"     },
+          ] as { textSize: ButtonTextSize; padding: ButtonPadding; color: ButtonColor }[]).map(({ textSize, padding, color }) => (
             <tr key={textSize} style={rowStyle}>
               <td style={tdLabelStyle}>{textSize}</td>
+              <td style={tdLabelStyle}>{padding}</td>
+              <td style={tdLabelStyle}>{color}</td>
               <td style={tdCellStyle}>
-                <Button textSize={textSize}>Button</Button>
+                <Button color={color} padding={padding} textSize={textSize}>Button</Button>
               </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      {/* Button / icons */}
+      <div style={{ ...sectionTitleStyle, marginTop: "3rem" }}>BUTTON / icons</div>
+      <table style={{ borderCollapse: "collapse" }}>
+        <thead>
+          <tr>
+            <th style={thStyle}>caso</th>
+            <th style={{ ...thStyle, fontWeight: 400 }}>padding</th>
+            <th style={{ ...thStyle, fontWeight: 400 }}>color</th>
+            <th style={{ padding: "0.5rem 1rem", fontFamily: "monospace", fontSize: "0.75rem", opacity: 0.5, fontWeight: 400 }}>
+              preview
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {([
+            { caso: "solo start",  padding: "base", color: "primary",   node: <Button color="primary"   padding="base" startIcon={<Search />}>Buscar</Button> },
+            { caso: "solo end",    padding: "base", color: "secondary", node: <Button color="secondary" padding="base" endIcon={<ArrowRight />}>Siguiente</Button> },
+            { caso: "ambos",       padding: "base", color: "info",      node: <Button color="info"      padding="base" startIcon={<Star />} endIcon={<ArrowRight />}>Destacar</Button> },
+            { caso: "start + lg",  padding: "lg",   color: "success",   node: <Button color="success"   padding="lg"   startIcon={<Star />}>Favorito</Button> },
+            { caso: "end + xl",    padding: "xl",   color: "warning",   node: <Button color="warning"   padding="xl"   endIcon={<ArrowRight />}>Continuar</Button> },
+            { caso: "ambos + sm",  padding: "sm",   color: "error",     node: <Button color="error"     padding="sm"   startIcon={<Trash2 />} endIcon={<ArrowRight />}>Eliminar</Button> },
+            { caso: "icon-only",   padding: "base", color: "muted",     node: <Button color="muted"     padding="base" startIcon={<Search />} /> },
+          ] as { caso: string; padding: string; color: string; node: React.ReactNode }[]).map(({ caso, padding, color, node }) => (
+            <tr key={caso} style={rowStyle}>
+              <td style={tdLabelStyle}>{caso}</td>
+              <td style={tdLabelStyle}>{padding}</td>
+              <td style={tdLabelStyle}>{color}</td>
+              <td style={tdCellStyle}>{node}</td>
             </tr>
           ))}
         </tbody>

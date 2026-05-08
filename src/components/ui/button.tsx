@@ -4,7 +4,7 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 rounded-md font-medium transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex items-center justify-center gap-2 rounded-md font-medium transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:size-[1em] [&_svg]:shrink-0",
   {
     variants: {
       color: {
@@ -34,6 +34,14 @@ const buttonVariants = cva(
         "2xl":   "text-2xl",
         display: "text-display",
       },
+      iconSize: {
+        xs:   "[&_svg]:size-[0.75em]",
+        sm:   "[&_svg]:size-[0.875em]",
+        base: "[&_svg]:size-[1em]",
+        md:   "[&_svg]:size-[1.25em]",
+        lg:   "[&_svg]:size-[1.5em]",
+        xl:   "[&_svg]:size-[2em]",
+      },
     },
     defaultVariants: {
       color:   "primary",
@@ -43,22 +51,28 @@ const buttonVariants = cva(
 )
 
 type ButtonProps = {
-  color?:    VariantProps<typeof buttonVariants>["color"]
-  padding?:  VariantProps<typeof buttonVariants>["padding"]
-  textSize?: VariantProps<typeof buttonVariants>["textSize"]
+  color?:     VariantProps<typeof buttonVariants>["color"]
+  padding?:   VariantProps<typeof buttonVariants>["padding"]
+  textSize?:  VariantProps<typeof buttonVariants>["textSize"]
+  iconSize?:  VariantProps<typeof buttonVariants>["iconSize"]
+  startIcon?: React.ReactNode
+  endIcon?:   React.ReactNode
 } & React.ButtonHTMLAttributes<HTMLButtonElement>
 
-function Button({ color, padding, textSize, className, children, ...props }: ButtonProps) {
+function Button({ color, padding, textSize, iconSize, startIcon, endIcon, className, children, ...props }: ButtonProps) {
   return (
     <button
       data-slot="button"
       data-color={color}
       data-padding={padding}
       data-text-size={textSize}
-      className={cn(buttonVariants({ color, padding, textSize, className }))}
+      data-icon-size={iconSize}
+      className={cn(buttonVariants({ color, padding, textSize, iconSize, className }))}
       {...props}
     >
+      {startIcon}
       {children}
+      {endIcon}
     </button>
   )
 }
