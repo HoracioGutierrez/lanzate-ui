@@ -14,8 +14,8 @@
           "type": "registry:ui"
         }
       ],
-      "dependencies": ["class-variance-authority"],
-      "registryDependencies": []
+      "dependencies": ["class-variance-authority", "lucide-react"],
+      "registryDependencies": ["tooltip"]
     },
     {
       "name": "text",
