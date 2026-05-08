@@ -8,8 +8,9 @@ import { buttonVariants } from "./components/ui/button"
 type Palette = "palette-neutral" | "palette-ocean" | "palette-sunset"
 type TextSize  = NonNullable<VariantProps<typeof textVariants>["size"]>
 type TextColor = NonNullable<VariantProps<typeof textVariants>["color"]>
-type ButtonColor   = NonNullable<VariantProps<typeof buttonVariants>["color"]>
-type ButtonPadding = NonNullable<VariantProps<typeof buttonVariants>["padding"]>
+type ButtonColor    = NonNullable<VariantProps<typeof buttonVariants>["color"]>
+type ButtonPadding  = NonNullable<VariantProps<typeof buttonVariants>["padding"]>
+type ButtonTextSize = NonNullable<VariantProps<typeof buttonVariants>["textSize"]>
 
 const palettes: { id: Palette; label: string }[] = [
   { id: "palette-neutral", label: "Neutral" },
@@ -25,7 +26,8 @@ const textColors: TextColor[] = [
 const buttonColors: ButtonColor[] = [
   "primary", "secondary", "muted", "info", "warning", "success", "error",
 ]
-const buttonPaddings: ButtonPadding[] = ["none", "xs", "sm", "base", "md", "lg", "xl"]
+const buttonPaddings: ButtonPadding[]   = ["none", "xs", "sm", "base", "md", "lg", "xl"]
+const buttonTextSizes: ButtonTextSize[] = ["xs", "sm", "base", "lg", "xl", "2xl", "display"]
 
 const thStyle: React.CSSProperties = { textAlign: "left", padding: "0.5rem 1rem 0.5rem 0", whiteSpace: "nowrap", fontFamily: "monospace", fontSize: "0.75rem", opacity: 0.5 }
 const tdLabelStyle: React.CSSProperties = { padding: "0.75rem 1rem 0.75rem 0", fontFamily: "monospace", fontSize: "0.75rem", opacity: 0.5, whiteSpace: "nowrap", verticalAlign: "middle" }
@@ -108,6 +110,28 @@ function App() {
                   <Button color={color} padding={padding}>Button</Button>
                 </td>
               ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      {/* Button / textSize override */}
+      <div style={{ ...sectionTitleStyle, marginTop: "3rem" }}>BUTTON / textSize override</div>
+      <table style={{ borderCollapse: "collapse" }}>
+        <thead>
+          <tr>
+            <th style={thStyle}>textSize</th>
+            <th style={{ padding: "0.5rem 1rem", fontFamily: "monospace", fontSize: "0.75rem", opacity: 0.5, fontWeight: 400 }}>
+              preview
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {buttonTextSizes.map(textSize => (
+            <tr key={textSize} style={rowStyle}>
+              <td style={tdLabelStyle}>{textSize}</td>
+              <td style={tdCellStyle}>
+                <Button textSize={textSize}>Button</Button>
+              </td>
             </tr>
           ))}
         </tbody>

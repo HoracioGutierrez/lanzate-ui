@@ -4,7 +4,7 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex items-center justify-center gap-2 rounded-md font-medium transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       color: {
@@ -17,13 +17,22 @@ const buttonVariants = cva(
         error:     "bg-destructive text-white hover:bg-destructive/90",
       },
       padding: {
-        none: "px-0 py-0",
-        xs:   "px-2 py-1",
-        sm:   "px-3 py-1.5",
-        base: "px-4 py-2",
-        md:   "px-5 py-2.5",
-        lg:   "px-6 py-3",
-        xl:   "px-8 py-4",
+        none: "px-0 py-0 text-sm",
+        xs:   "px-2 py-1 text-xs",
+        sm:   "px-3 py-1.5 text-sm",
+        base: "px-4 py-2 text-sm",
+        md:   "px-5 py-2.5 text-base",
+        lg:   "px-6 py-3 text-lg",
+        xl:   "px-8 py-4 text-xl",
+      },
+      textSize: {
+        xs:      "text-xs",
+        sm:      "text-sm",
+        base:    "text-base",
+        lg:      "text-lg",
+        xl:      "text-xl",
+        "2xl":   "text-2xl",
+        display: "text-display",
       },
     },
     defaultVariants: {
@@ -34,17 +43,19 @@ const buttonVariants = cva(
 )
 
 type ButtonProps = {
-  color?:   VariantProps<typeof buttonVariants>["color"]
-  padding?: VariantProps<typeof buttonVariants>["padding"]
+  color?:    VariantProps<typeof buttonVariants>["color"]
+  padding?:  VariantProps<typeof buttonVariants>["padding"]
+  textSize?: VariantProps<typeof buttonVariants>["textSize"]
 } & React.ButtonHTMLAttributes<HTMLButtonElement>
 
-function Button({ color, padding, className, children, ...props }: ButtonProps) {
+function Button({ color, padding, textSize, className, children, ...props }: ButtonProps) {
   return (
     <button
       data-slot="button"
       data-color={color}
       data-padding={padding}
-      className={cn(buttonVariants({ color, padding, className }))}
+      data-text-size={textSize}
+      className={cn(buttonVariants({ color, padding, textSize, className }))}
       {...props}
     >
       {children}
