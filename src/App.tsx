@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useCallback } from "react"
 import { Text } from "./components/ui/text"
 import { Button } from "./components/ui/button"
 import type { VariantProps } from "class-variance-authority"
@@ -41,6 +41,12 @@ const sectionTitleStyle: React.CSSProperties = { fontFamily: "monospace", fontSi
 
 function App() {
   const [palette, setPalette] = useState<Palette>("palette-neutral")
+  const [loadingSet, setLoadingSet] = useState<Set<string>>(new Set())
+
+  const triggerLoading = useCallback((key: string, ms = 2000) => {
+    setLoadingSet(s => new Set(s).add(key))
+    setTimeout(() => setLoadingSet(s => { const n = new Set(s); n.delete(key); return n }), ms)
+  }, [])
 
   return (
     <div className={palette} style={{ minHeight: "100vh", padding: "2rem", overflowX: "auto" }}>
@@ -414,6 +420,48 @@ function App() {
             <tr key={caso} style={rowStyle}>
               <td style={tdLabelStyle}>{caso}</td>
               <td style={tdLabelStyle}>{color}</td>
+              <td style={tdCellStyle}>{node}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      {/* Button / interactive loading */}
+      <div style={{ ...sectionTitleStyle, marginTop: "3rem" }}>BUTTON / interactive loading</div>
+      <table style={{ borderCollapse: "collapse" }}>
+        <thead>
+          <tr>
+            <th style={thStyle}>caso</th>
+            <th style={{ padding: "0.5rem 1rem", fontFamily: "monospace", fontSize: "0.75rem", opacity: 0.5, fontWeight: 400 }}>
+              preview (click para activar)
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {([
+            {
+              caso: "solid, sin icono",
+              node: <Button color="primary" isLoading={loadingSet.has("a")} onClick={() => triggerLoading("a")}>Guardar</Button>,
+            },
+            {
+              caso: "solid + startIcon",
+              node: <Button color="success" startIcon={<Star />} isLoading={loadingSet.has("b")} onClick={() => triggerLoading("b")}>Favorito</Button>,
+            },
+            {
+              caso: "solid + loadingText",
+              node: <Button color="info" isLoading={loadingSet.has("c")} loadingText="Enviando..." onClick={() => triggerLoading("c")}>Enviar</Button>,
+            },
+            {
+              caso: "icon prop (cuadrado)",
+              node: <Button color="warning" icon={<Search />} isLoading={loadingSet.has("d")} onClick={() => triggerLoading("d")} />,
+            },
+            {
+              caso: "outline + startIcon",
+              node: <Button color="error" variant="outline" startIcon={<Trash2 />} isLoading={loadingSet.has("e")} onClick={() => triggerLoading("e")}>Eliminar</Button>,
+            },
+          ] as { caso: string; node: React.ReactNode }[]).map(({ caso, node }) => (
+            <tr key={caso} style={rowStyle}>
+              <td style={tdLabelStyle}>{caso}</td>
               <td style={tdCellStyle}>{node}</td>
             </tr>
           ))}

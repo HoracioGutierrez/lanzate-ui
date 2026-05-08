@@ -1,4 +1,5 @@
 import * as React from "react"
+import { motion, type HTMLMotionProps } from "framer-motion"
 import { cva, type VariantProps } from "class-variance-authority"
 import { Loader2 } from "lucide-react"
 
@@ -87,10 +88,11 @@ type ButtonProps = {
   icon?:        React.ReactNode
   startIcon?:   React.ReactNode
   endIcon?:     React.ReactNode
-  isLoading?:   boolean
-  loadingText?: string
-  tooltip?:     React.ReactNode
-} & React.ButtonHTMLAttributes<HTMLButtonElement>
+  isLoading?:    boolean
+  loadingText?:  string
+  tooltip?:      React.ReactNode
+  tapAnimation?: boolean
+} & HTMLMotionProps<"button">
 
 function Button({
   color, variant, padding = "base", textSize, iconSize, mobile,
@@ -98,17 +100,33 @@ function Button({
   isLoading, loadingText,
   tooltip,
   elevated,
+  tapAnimation = true,
   className, children,
   disabled,
   ...props
 }: ButtonProps) {
-  const effectiveDisabled  = disabled || isLoading
-  const effectiveStartIcon = isLoading ? <Loader2 className="animate-spin" /> : startIcon
-  const effectiveIcon      = isLoading && icon != null ? <Loader2 className="animate-spin" /> : icon
-  const effectiveChildren  = isLoading && loadingText != null ? loadingText : children
+  const effectiveDisabled = disabled || isLoading
+
+  const spinnerEl = (
+    <motion.span
+      initial={{ scale: 0, opacity: 0 }}
+      animate={{ scale: 1, opacity: 1 }}
+      transition={{ duration: 0.18, ease: "easeOut" }}
+    >
+      <Loader2 className="animate-spin" />
+    </motion.span>
+  )
+
+  const effectiveStartIcon = isLoading ? spinnerEl : startIcon
+  const effectiveIcon      = isLoading && icon != null ? spinnerEl : icon
+  const effectiveChildren: React.ReactNode = isLoading && loadingText != null ? loadingText : children as React.ReactNode
+
+  const shouldAnimate = tapAnimation && !effectiveDisabled
 
   const buttonEl = (
-    <button
+    <motion.button
+      whileTap={shouldAnimate ? { scale: 0.97 } : undefined}
+      transition={{ type: "spring", stiffness: 400, damping: 20 }}
       data-slot="button"
       data-color={color}
       data-variant={variant}
@@ -141,7 +159,7 @@ function Button({
           {endIcon}
         </>
       )}
-    </button>
+    </motion.button>
   )
 
   if (!tooltip) return buttonEl
