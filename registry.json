@@ -4,6 +4,20 @@
   "homepage": "https://mi-registry.vercel.app",
   "items": [
     {
+      "name": "button",
+      "type": "registry:ui",
+      "title": "Button",
+      "description": "Button component with semantic color variants built on CVA.",
+      "files": [
+        {
+          "path": "src/components/ui/button.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["class-variance-authority"],
+      "registryDependencies": []
+    },
+    {
       "name": "text",
       "type": "registry:ui",
       "title": "Text",
