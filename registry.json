@@ -7,14 +7,14 @@
       "name": "text",
       "type": "registry:ui",
       "title": "Text",
-      "description": "Componente de texto base con prop `as` para polimorfismo.",
+      "description": "Polymorphic text component with semantic size variants built on CVA.",
       "files": [
         {
           "path": "src/components/ui/text.tsx",
           "type": "registry:ui"
         }
       ],
-      "dependencies": [],
+      "dependencies": ["class-variance-authority"],
       "registryDependencies": []
     }
   ]
