@@ -1,0 +1,42 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "text",
+  "title": "Text",
+  "description": "Polymorphic text component with semantic size variants built on CVA.",
+  "dependencies": [
+    "class-variance-authority"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/components/ui/text.tsx",
+      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst textVariants = cva(\"text-foreground\", {\n  variants: {\n    size: {\n      xs: \"text-xs leading-tight tracking-wide\",\n      sm: \"text-sm leading-snug\",\n      md: \"text-base leading-normal\",\n      lg: \"text-lg leading-relaxed\",\n      xl: \"text-xl leading-relaxed\",\n      \"2xl\": \"text-2xl leading-snug tracking-tight\",\n      display: \"text-display leading-tight tracking-tighter\",\n    },\n    color: {\n      primary:           \"text-primary\",\n      secondary:         \"text-secondary-foreground\",\n      muted:             \"text-muted-foreground\",\n      \"primary-muted\":   \"text-primary/60\",\n      \"secondary-muted\": \"text-secondary-foreground/60\",\n      info:              \"text-info\",\n      warning:           \"text-warning\",\n      success:           \"text-success\",\n      error:             \"text-destructive\",\n    },\n  },\n  defaultVariants: {\n    size: \"md\",\n  },\n})\n\ntype TextTag = \"p\" | \"span\" | \"label\" | \"h1\" | \"h2\" | \"h3\" | \"h4\"\n\ntype TextProps = {\n  as?: TextTag\n  size?: VariantProps<typeof textVariants>[\"size\"]\n  color?: VariantProps<typeof textVariants>[\"color\"]\n} & React.HTMLAttributes<HTMLElement>\n\nfunction Text({ as: Tag = \"p\", size, color, className, children, ...props }: TextProps) {\n  return (\n    <Tag\n      data-slot=\"text\"\n      data-size={size}\n      data-color={color}\n      className={cn(textVariants({ size, color, className }))}\n      {...props}\n    >\n      {children}\n    </Tag>\n  )\n}\n\n// eslint-disable-next-line react-refresh/only-export-components\nexport { Text, textVariants }\nexport type { TextProps }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {
+      "--text-xs": "clamp(0.75rem, calc(0.708rem + 0.208vw), 0.875rem)",
+      "--text-sm": "clamp(0.875rem, calc(0.833rem + 0.208vw), 1rem)",
+      "--text-base": "clamp(1rem, calc(0.958rem + 0.208vw), 1.125rem)",
+      "--text-lg": "clamp(1.125rem, calc(1.042rem + 0.417vw), 1.375rem)",
+      "--text-xl": "clamp(1.25rem, calc(1.125rem + 0.625vw), 1.625rem)",
+      "--text-2xl": "clamp(1.5rem, calc(1.25rem + 1.25vw), 2.25rem)",
+      "--text-display": "clamp(2rem, calc(1.417rem + 2.917vw), 3.75rem)",
+      "--color-info": "var(--info)",
+      "--color-warning": "var(--warning)",
+      "--color-success": "var(--success)"
+    },
+    "light": {
+      "--info": "oklch(0.60 0.15 240)",
+      "--warning": "oklch(0.70 0.15 85)",
+      "--success": "oklch(0.55 0.15 142)"
+    },
+    "dark": {
+      "--info": "oklch(0.70 0.15 240)",
+      "--warning": "oklch(0.75 0.14 85)",
+      "--success": "oklch(0.65 0.14 142)"
+    }
+  },
+  "type": "registry:ui"
+}
