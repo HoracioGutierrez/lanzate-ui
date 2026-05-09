@@ -9,8 +9,6 @@ import { InstallationSection } from "./sections/InstallationSection"
 import { ThemingSection } from "./sections/ThemingSection"
 import { ButtonSection } from "./sections/ButtonSection"
 import { TextSection } from "./sections/TextSection"
-import { ScrollAreaSection } from "./sections/ScrollAreaSection"
-import { TooltipSection } from "./sections/TooltipSection"
 
 const sectionComponents: Record<string, React.ComponentType> = {
   introduction: IntroductionSection,
@@ -18,8 +16,6 @@ const sectionComponents: Record<string, React.ComponentType> = {
   theming: ThemingSection,
   button: ButtonSection,
   text: TextSection,
-  "scroll-area": ScrollAreaSection,
-  tooltip: TooltipSection,
 }
 
 export function DocsPage() {
@@ -53,7 +49,7 @@ export function DocsPage() {
       <Header />
 
       <div className="pt-14">
-        <div className="mx-auto max-w-[1600px] px-6 flex gap-10">
+        <div className="mx-auto max-w-400 px-6 flex gap-10">
 
           {/* ===== SIDEBAR ===== */}
           <aside className="hidden md:block w-60 shrink-0 sticky top-14 self-start h-[calc(100vh-3.5rem)] py-8 pr-3">
@@ -95,7 +91,7 @@ export function DocsPage() {
                               }`}
                             >
                               <span
-                                className={`w-1.5 h-1.5 rounded-full flex-shrink-0 transition-colors ${
+                                className={`w-1.5 h-1.5 rounded-full shrink-0 transition-colors ${
                                   isActive ? "bg-brand" : "bg-border"
                                 }`}
                               />

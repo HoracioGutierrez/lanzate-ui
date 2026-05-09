@@ -23,8 +23,6 @@ export const docsNav: DocGroup[] = [
     items: [
       { id: "button", label: "Button" },
       { id: "text", label: "Text" },
-      { id: "scroll-area", label: "ScrollArea" },
-      { id: "tooltip", label: "Tooltip" },
     ],
   },
 ]
@@ -37,6 +35,4 @@ export const titleMap: Record<string, string> = {
   theming: "Theming",
   button: "Button",
   text: "Text",
-  "scroll-area": "ScrollArea",
-  tooltip: "Tooltip",
 }
