@@ -1,6 +1,7 @@
 import { Text } from "@/components/ui/text"
 import { Button } from "@/components/ui/button"
 import { PreviewPane, CodeBlock, ApiTable, SectionBadge } from "../DocComponents"
+import { ArrowRight, Download, Trash2, Plus, Star, Bell } from "lucide-react"
 
 export function ButtonSection() {
   return (
@@ -92,6 +93,65 @@ export function ButtonSection() {
             <Button color="error">Error</Button>
           </div>
         </PreviewPane>
+      </div>
+
+      {/* Icons */}
+      <div className="mt-10">
+        <Text as="h2" size="2xl" className="tracking-tight">
+          Iconos
+        </Text>
+        <PreviewPane>
+          <div className="flex flex-wrap items-center justify-center gap-2.5">
+            <Button startIcon={<Download />}>startIcon</Button>
+            <Button endIcon={<ArrowRight />}>endIcon</Button>
+            <Button startIcon={<Plus />} endIcon={<ArrowRight />}>Ambos</Button>
+            <Button variant="outline" startIcon={<Trash2 />} color="error">Eliminar</Button>
+          </div>
+        </PreviewPane>
+        <CodeBlock>{`<Button startIcon={<Download />}>Descargar</Button>
+<Button endIcon={<ArrowRight />}>Continuar</Button>
+<Button startIcon={<Plus />} endIcon={<ArrowRight />}>Ambos</Button>`}</CodeBlock>
+      </div>
+
+      {/* Only icon */}
+      <div className="mt-10">
+        <Text as="h2" size="2xl" className="tracking-tight">
+          Solo icono
+        </Text>
+        <PreviewPane>
+          <div className="flex flex-wrap items-center justify-center gap-2.5">
+            <Button icon={<Plus />} />
+            <Button icon={<Star />} variant="outline" />
+            <Button icon={<Bell />} variant="ghost" />
+            <Button icon={<Trash2 />} color="error" variant="secondary" />
+            <Button icon={<Download />} elevated />
+          </div>
+        </PreviewPane>
+        <CodeBlock>{`<Button icon={<Plus />} />
+<Button icon={<Star />} variant="outline" />
+<Button icon={<Trash2 />} color="error" variant="secondary" />`}</CodeBlock>
+      </div>
+
+      {/* Tooltip */}
+      <div className="mt-10">
+        <Text as="h2" size="2xl" className="tracking-tight">
+          Con tooltip
+        </Text>
+        <PreviewPane>
+          <div className="flex flex-wrap items-center justify-center gap-2.5">
+            <Button tooltip="Crear nuevo elemento">Nuevo</Button>
+            <Button icon={<Plus />} variant="outline" tooltip="Agregar ítem" />
+            <Button icon={<Trash2 />} color="error" variant="ghost" tooltip="Eliminar selección" />
+            <Button disabled tooltip="Necesitás permisos de admin">Admin only</Button>
+          </div>
+        </PreviewPane>
+        <CodeBlock>{`<Button tooltip="Crear nuevo elemento">Nuevo</Button>
+<Button icon={<Plus />} variant="outline" tooltip="Agregar ítem" />
+
+// El tooltip funciona incluso con disabled
+<Button disabled tooltip="Necesitás permisos de admin">
+  Admin only
+</Button>`}</CodeBlock>
       </div>
 
       {/* Installation */}
