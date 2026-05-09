@@ -91,7 +91,7 @@ function App() {
                     className="hidden xl:flex items-center gap-2 text-xs text-muted-foreground border border-border rounded-md px-2.5 py-1.5 w-56 bg-card/60 overflow-hidden"
                   >
                     <Search size={14} className="shrink-0" />
-                    <span className="whitespace-nowrap">Buscar componentes...</span>
+                    <span className="whitespace-nowrap">Search components...</span>
                     <span className="ml-auto font-mono text-[10px] border border-border rounded px-1.5 py-0.5 whitespace-nowrap">⌘K</span>
                   </motion.div>
                 )}
@@ -122,7 +122,7 @@ function App() {
               </AnimatePresence>
 
               <a href="#docs" className="inline-flex h-9 items-center px-3.5 rounded-md bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition gap-1.5 shrink-0 whitespace-nowrap">
-                Empezar
+                Get Started
                 <ArrowRight size={14} />
               </a>
             </div>
@@ -144,8 +144,8 @@ function App() {
             <div className="flex flex-col items-center text-center">
 
               <a href="#changelog" className="inline-flex items-center gap-2 text-xs font-medium border border-border rounded-full pl-1 pr-3 py-1 bg-card/70 backdrop-blur shadow-soft hover:bg-accent transition">
-                <span className="bg-brand text-brand-foreground rounded-full px-2 py-0.5 text-[10px] font-semibold tracking-wide uppercase">Nuevo</span>
-                <span className="text-muted-foreground">v{pkg.version} · 2 componentes accesibles</span>
+                <span className="bg-brand text-brand-foreground rounded-full px-2 py-0.5 text-[10px] font-semibold tracking-wide uppercase">New</span>
+                <span className="text-muted-foreground">v{pkg.version} · 2 accessible components</span>
                 <ArrowRight size={12} className="text-muted-foreground" />
               </a>
 
@@ -158,27 +158,27 @@ function App() {
                   color: "transparent",
                 }}
               >
-                Componentes <em className="font-serif font-normal not-italic" style={{ fontStyle: "italic" }}>que despegan</em>
-                <br />tu próxima interfaz.
+                Components <em className="font-serif font-normal not-italic" style={{ fontStyle: "italic" }}>that take off</em>
+                <br />your next interface.
               </h1>
 
               <p className="mt-7 max-w-2xl text-lg md:text-xl text-muted-foreground leading-relaxed">
-                Lanzate UI es una colección open source de componentes copy-paste para React,
-                construidos sobre Radix y Tailwind. Diseño limpio, accesible y 100% tuyo.
+                Lanzate UI is an open source collection of copy-paste components for React,
+                built on Radix and Tailwind. Clean design, accessible, and 100% yours.
               </p>
 
               <div className="mt-9 flex flex-col sm:flex-row items-center gap-3">
                 <a href="#docs" className="h-11 px-5 inline-flex items-center gap-2 rounded-md bg-primary text-primary-foreground font-medium shadow-soft hover:opacity-90 transition">
-                  Empezar ahora
+                  Get Started Now
                   <ArrowRight size={14} />
                 </a>
                 <button
                   onClick={handleCopy}
-                  className="h-11 px-4 inline-flex items-center gap-3 rounded-md border border-border bg-card font-mono text-sm hover:bg-accent transition"
+                  className="h-11 px-4 inline-flex items-center gap-3 rounded-md border border-border bg-card font-mono text-sm hover:bg-accent transition w-full sm:w-auto max-w-full overflow-hidden"
                 >
-                  <span className="text-muted-foreground">$</span>
-                  <span className="truncate">npx shadcn@latest add https://lanzate-ui.vercel.app/r/button.json</span>
-                  <span className="ml-1 text-muted-foreground">
+                  <span className="text-muted-foreground shrink-0">$</span>
+                  <span className="truncate min-w-0">npx shadcn@latest add https://lanzate-ui.vercel.app/r/button.json</span>
+                  <span className="ml-1 text-muted-foreground shrink-0">
                     {copied
                       ? <Check size={14} className="text-brand" />
                       : <Copy size={14} />
@@ -190,10 +190,10 @@ function App() {
               {/* Stats row */}
               <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-px bg-border/70 border border-border rounded-xl overflow-hidden w-full max-w-3xl">
                 {[
-                  { value: "2",    label: "Componentes" },
-                  { value: "100%", label: "Accesibles · WCAG AA" },
-                  { value: "0kb",  label: "Runtime extra" },
-                  { value: "MIT",  label: "Licencia open" },
+                  { value: "2",    label: "Components" },
+                  { value: "100%", label: "Accessible · WCAG AA" },
+                  { value: "0kb",  label: "Extra Runtime" },
+                  { value: "MIT",  label: "Open License" },
                 ].map(({ value, label }) => (
                   <div key={label} className="bg-background p-5 text-left">
                     <div className="text-2xl font-semibold tracking-tight">{value}</div>
@@ -307,15 +307,15 @@ function App() {
               <div className="max-w-2xl">
                 <div className="inline-flex items-center gap-2 text-xs font-mono text-muted-foreground mb-4">
                   <span className="w-1.5 h-1.5 rounded-full bg-brand" />
-                  COMPONENTES · 01 — 02
+                  COMPONENTS · 01 — 02
                 </div>
                 <h2 className="text-4xl md:text-5xl font-semibold tracking-tight leading-[1.05]">
-                  Una pieza para cada<br />parte de la interfaz.
+                  One piece for every<br />part of the interface.
                 </h2>
               </div>
               <p className="md:max-w-sm text-muted-foreground leading-relaxed">
-                Cada componente vive en tu repo, no en un node_module.
-                Copia, pega, modifica. Sin lock-in, sin sorpresas.
+                Each component lives in your repo, not in a node_module.
+                Copy, paste, modify. No lock-in, no surprises.
               </p>
             </div>
 
@@ -345,7 +345,7 @@ function App() {
                       <Button color="error" variant="secondary" padding="sm">Error secondary</Button>
                       <Button color="info" variant="ghost" padding="sm">Info ghost</Button>
                       <Button elevated padding="sm">Elevated</Button>
-                      <Button padding="sm" isLoading loadingText="Cargando…" tapAnimation={false}>-</Button>
+                      <Button padding="sm" isLoading loadingText="Loading…" tapAnimation={false}>-</Button>
                       <Button padding="sm" disabled>Disabled</Button>
                     </div>
                   </ScrollArea>
@@ -353,7 +353,7 @@ function App() {
                 <div className="px-5 py-4 border-t border-border flex items-center justify-between">
                   <div>
                     <div className="text-sm font-medium">Button</div>
-                    <div className="text-xs text-muted-foreground mt-0.5">6 variantes, 7 colores y loading.</div>
+                    <div className="text-xs text-muted-foreground mt-0.5">6 variants, 7 colors and loading.</div>
                   </div>
                   <span className="font-mono text-[10px] text-muted-foreground">01</span>
                 </div>
@@ -376,9 +376,9 @@ function App() {
                       <Text size="sm" color="muted">SM — Small text</Text>
                       <Text size="xs" color="muted">XS — Caption · tracking wide</Text>
                       <Text size="sm" color="info">Info · informational</Text>
-                      <Text size="sm" color="warning">Warning · precaución</Text>
-                      <Text size="sm" color="success">Success · confirmación</Text>
-                      <Text size="sm" color="error">Error · atención</Text>
+                      <Text size="sm" color="warning">Warning · caution</Text>
+                      <Text size="sm" color="success">Success · confirmation</Text>
+                      <Text size="sm" color="error">Error · attention</Text>
                       <Text size="sm" color="primary-muted">Primary muted</Text>
                       <Text size="sm" color="secondary">Secondary</Text>
                     </div>
@@ -387,7 +387,7 @@ function App() {
                 <div className="px-5 py-4 border-t border-border flex items-center justify-between">
                   <div>
                     <div className="text-sm font-medium">Text</div>
-                    <div className="text-xs text-muted-foreground mt-0.5">7 tamaños fluidos, 9 colores.</div>
+                    <div className="text-xs text-muted-foreground mt-0.5">7 fluid sizes, 9 colors.</div>
                   </div>
                   <span className="font-mono text-[10px] text-muted-foreground">02</span>
                 </div>
@@ -405,14 +405,14 @@ function App() {
             <div>
               <div className="inline-flex items-center gap-2 text-xs font-mono text-muted-foreground mb-4">
                 <span className="w-1.5 h-1.5 rounded-full bg-brand" />
-                INSTALACIÓN
+                INSTALLATION
               </div>
               <h3 className="text-3xl md:text-4xl font-semibold tracking-tight leading-tight">
-                Un comando<br />y estás en órbita.
+                One command<br />and you're in orbit.
               </h3>
               <p className="mt-4 text-muted-foreground leading-relaxed max-w-md">
-                Lanzate UI no se instala como dependencia. Trae los componentes a tu repo,
-                edítalos a tu gusto y mantén control total del código que envías a producción.
+                Lanzate UI is not installed as a dependency. Bring the components to your repo,
+                edit them to your liking, and maintain full control of the code you ship to production.
               </p>
               <div className="mt-6 flex flex-wrap gap-2 text-xs font-mono text-muted-foreground">
                 {["React 18+", "Next.js", "Vite", "Remix", "Tailwind 4+"].map(tag => (
@@ -430,11 +430,11 @@ function App() {
               </div>
               <pre className="p-5 text-sm font-mono leading-relaxed overflow-x-auto">
                 <code>
-                  <span className="text-muted-foreground"># Agrega el componente Button</span>{"\n"}
+                  <span className="text-muted-foreground"># Add the Button component</span>{"\n"}
                   <span className="text-brand">$</span>{" npx shadcn@latest add \\\n  https://lanzate-ui.vercel.app/r/button.json\n\n"}
-                  <span className="text-muted-foreground"># O el componente Text</span>{"\n"}
+                  <span className="text-muted-foreground"># Or the Text component</span>{"\n"}
                   <span className="text-brand">$</span>{" npx shadcn@latest add \\\n  https://lanzate-ui.vercel.app/r/text.json\n\n"}
-                  <span className="text-muted-foreground"># Importa y úsalos</span>{"\n"}
+                  <span className="text-muted-foreground"># Import and use them</span>{"\n"}
                   <span className="text-foreground">{"import"}</span>{" { Button } "}
                   <span className="text-foreground">{"from"}</span>
                   {" "}<span className="text-brand">"@/components/ui/button"</span>{"\n"}
@@ -458,12 +458,12 @@ function App() {
                   <span className="font-semibold tracking-tight">Lanzate <span className="text-muted-foreground font-normal">UI</span></span>
                 </div>
                 <p className="mt-4 text-sm text-muted-foreground max-w-xs leading-relaxed">
-                  Componentes copy-paste para construir interfaces que despegan. Open source bajo licencia MIT.
+                  Copy-paste components to build interfaces that take off. Open source under MIT license.
                 </p>
               </div>
 
               <div>
-                <div className="text-xs font-mono uppercase tracking-wide text-muted-foreground mb-3">Comunidad</div>
+                <div className="text-xs font-mono uppercase tracking-wide text-muted-foreground mb-3">Community</div>
                 <ul className="space-y-2 text-sm">
                   <li>
                     <a href="https://github.com/HoracioGutierrez/lanzate-ui" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:text-brand transition">
@@ -486,12 +486,12 @@ function App() {
             </div>
 
             <div className="mt-16 pt-6 border-t border-border flex flex-col md:flex-row md:items-center md:justify-between gap-4 text-xs text-muted-foreground">
-              <div>© 2026 Lanzate UI · Construido con Radix, Tailwind y café.</div>
+              <div>© 2026 Lanzate UI · Built with Radix, Tailwind and coffee.</div>
               <div className="inline-flex items-center gap-2 text-xs font-medium border border-border rounded-full pl-1 pr-3 py-1 bg-card/30">
                 <span className="bg-brand text-brand-foreground rounded-full px-2 py-0.5 text-[10px] font-semibold tracking-wide uppercase">v{pkg.version}</span>
                 <span className="flex items-center gap-1.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-brand" />
-                  Todos los sistemas operativos
+                  All operating systems
                 </span>
               </div>
             </div>
