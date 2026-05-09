@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 import { Copy, Check, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Text } from "@/components/ui/text"
@@ -8,6 +9,7 @@ import pkg from "../../package.json"
 
 export function HomePage() {
   const [copied, setCopied] = useState(false)
+  const navigate = useNavigate()
 
   function handleCopy() {
     navigator.clipboard?.writeText(
@@ -369,6 +371,12 @@ export function HomePage() {
                   <span className="font-mono text-[10px] text-muted-foreground">02</span>
                 </div>
               </article>
+            </div>
+
+            <div className="mt-8 flex justify-center">
+              <Button endIcon={<ArrowRight size={14} />} onClick={() => navigate("/docs")}>
+                Ir a documentación
+              </Button>
             </div>
           </div>
         </section>

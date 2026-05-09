@@ -31,7 +31,7 @@ export function ThemingSection() {
   --foreground: oklch(0.205 0 0);
 
   /* Semantic */
-  --primary: oklch(0.205 0 0);
+  --primary: oklch(0.62 0.18 35);
   --primary-foreground: oklch(0.985 0 0);
   --secondary: oklch(0.97 0 0);
   --muted: oklch(0.97 0 0);
@@ -45,7 +45,7 @@ export function ThemingSection() {
   --success:     oklch(0.65 0.18 150);
 
   /* Brand */
-  --brand: oklch(0.65 0.22 28);
+  --brand: oklch(0.62 0.18 35);
 
   /* Radius */
   --radius: 0.625rem;
@@ -54,8 +54,8 @@ export function ThemingSection() {
 .dark {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
-  --primary: oklch(0.985 0 0);
-  --primary-foreground: oklch(0.205 0 0);
+  --primary: oklch(0.66 0.18 35);
+  --primary-foreground: oklch(0.98 0.01 80);
   /* ... */
 }`}</CodeBlock>
         </div>

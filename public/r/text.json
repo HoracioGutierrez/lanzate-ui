@@ -28,11 +28,15 @@
       "--color-success": "var(--success)"
     },
     "light": {
+      "--primary": "oklch(0.62 0.18 35)",
+      "--primary-foreground": "oklch(0.985 0 0)",
       "--info": "oklch(0.60 0.15 240)",
       "--warning": "oklch(0.70 0.15 85)",
       "--success": "oklch(0.55 0.15 142)"
     },
     "dark": {
+      "--primary": "oklch(0.66 0.18 35)",
+      "--primary-foreground": "oklch(0.98 0.01 80)",
       "--info": "oklch(0.70 0.15 240)",
       "--warning": "oklch(0.75 0.14 85)",
       "--success": "oklch(0.65 0.14 142)"

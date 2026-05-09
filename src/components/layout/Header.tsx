@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Link, useLocation } from "react-router-dom"
-import { Sun, Moon, Search, ArrowRight } from "lucide-react"
+import { Sun, Moon, ArrowRight } from "lucide-react"
 
 export function Header() {
   const [dark, setDark] = useState(() => {
@@ -96,25 +96,6 @@ export function Header() {
           </AnimatePresence>
 
           <div className="flex items-center gap-2 ml-auto">
-            <AnimatePresence>
-              {!floating && (
-                <motion.div
-                  key="search"
-                  initial={{ opacity: 0, width: 0 }}
-                  animate={{ opacity: 1, width: "auto" }}
-                  exit={{ opacity: 0, width: 0 }}
-                  transition={{ duration: 0.2 }}
-                  className="hidden xl:flex items-center gap-2 text-xs text-muted-foreground border border-border rounded-md px-2.5 py-1.5 w-56 bg-card/60 overflow-hidden"
-                >
-                  <Search size={14} className="shrink-0" />
-                  <span className="whitespace-nowrap">Search components...</span>
-                  <span className="ml-auto font-mono text-[10px] border border-border rounded px-1.5 py-0.5 whitespace-nowrap">
-                    ⌘K
-                  </span>
-                </motion.div>
-              )}
-            </AnimatePresence>
-
             <button
               onClick={() => setDark((d) => !d)}
               aria-label="Toggle theme"
