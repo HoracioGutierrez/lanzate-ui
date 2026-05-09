@@ -227,6 +227,16 @@
   }
 
   .marquee-track { animation: marquee 40s linear infinite; }
+
+  .scroll-fade {
+    mask-image: linear-gradient(
+      to bottom,
+      transparent 0%,
+      black 18%,
+      black 82%,
+      transparent 100%
+    );
+  }
 }
 
 @keyframes marquee {
