@@ -166,6 +166,7 @@ Agregá esto en tu `globals.css`:
   /* Mapeos de color necesarios */
   --color-foreground:          var(--foreground);
   --color-primary:             var(--primary);
+  --color-primary-foreground:  var(--primary-foreground);
   --color-secondary-foreground: var(--secondary-foreground);
   --color-muted-foreground:    var(--muted-foreground);
   --color-info:                var(--info);
@@ -177,7 +178,8 @@ Agregá esto en tu `globals.css`:
 /* Dentro de :root */
 :root {
   --foreground:           oklch(0.145 0 0);
-  --primary:              oklch(0.205 0 0);
+  --primary:              oklch(0.62 0.18 35);
+  --primary-foreground:   oklch(0.985 0 0);
   --secondary-foreground: oklch(0.205 0 0);
   --muted-foreground:     oklch(0.556 0 0);
   --destructive:          oklch(0.577 0.245 27.325);
@@ -186,6 +188,11 @@ Agregá esto en tu `globals.css`:
   --info:    oklch(0.60 0.15 240);
   --warning: oklch(0.70 0.15 85);
   --success: oklch(0.55 0.15 142);
+}
+
+.dark {
+  --primary:            oklch(0.66 0.18 35);
+  --primary-foreground: oklch(0.98 0.01 80);
 }
 ```
 
