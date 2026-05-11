@@ -6,6 +6,12 @@ import { Loader2 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 
+const ELEVATED_CLASSES =
+  "shadow-[0_4px_12px_rgba(0,0,0,0.15)] hover:shadow-[0_6px_20px_rgba(0,0,0,0.2)] active:shadow-[0_2px_6px_rgba(0,0,0,0.12)] transition-shadow duration-150"
+
+const GLOW_CLASSES =
+  "shadow-[0_0_8px_2px_color-mix(in_oklch,var(--btn-color)_50%,transparent),0_0_24px_6px_color-mix(in_oklch,var(--btn-color)_22%,transparent)] hover:shadow-[0_0_12px_4px_color-mix(in_oklch,var(--btn-color)_65%,transparent),0_0_36px_10px_color-mix(in_oklch,var(--btn-color)_30%,transparent)] active:shadow-[0_0_5px_1px_color-mix(in_oklch,var(--btn-color)_40%,transparent),0_0_14px_3px_color-mix(in_oklch,var(--btn-color)_18%,transparent)] transition-shadow duration-200"
+
 const buttonVariants = cva(
   "inline-flex items-center justify-center gap-2 font-medium transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:size-[1em] [&_svg]:shrink-0",
   {
@@ -25,7 +31,15 @@ const buttonVariants = cva(
         ghost:     "bg-transparent text-(--btn-accent) hover:bg-(--btn-accent)/10",
         secondary: "bg-(--btn-accent)/15 text-(--btn-accent) hover:bg-(--btn-accent)/25",
         dashed:    "border border-dashed border-(--btn-accent) text-(--btn-accent) bg-transparent hover:bg-(--btn-accent)/10",
-        surface:   "bg-(--btn-color) text-(--btn-fg) hover:bg-(--btn-color)/90 btn-surface",
+        surface: [
+          "bg-(--btn-color) text-(--btn-fg) hover:bg-(--btn-color)/90",
+          "bg-[linear-gradient(to_bottom,rgba(255,255,255,0.12),rgba(0,0,0,0.1))]",
+          "shadow-[inset_0_1px_0_rgba(255,255,255,0.35),inset_0_-1px_0_rgba(0,0,0,0.25),inset_1px_0_0_rgba(255,255,255,0.15),inset_-1px_0_0_rgba(0,0,0,0.12)]",
+          "active:bg-[linear-gradient(to_bottom,rgba(0,0,0,0.08),rgba(255,255,255,0.04))]",
+          "active:shadow-[inset_0_2px_1px_rgba(0,0,0,0.15),inset_0_-1px_0_rgba(255,255,255,0.08)]",
+          "active:translate-y-px",
+          "[transition:box-shadow_0.15s_ease,transform_0.15s_ease,background-color_0.15s_ease,color_0.15s_ease,border-color_0.15s_ease]",
+        ].join(" "),
       },
       padding: {
         none: "px-0 py-0 text-sm",
@@ -167,8 +181,8 @@ function Button({
       className={cn(
         buttonVariants({ color, variant, padding, radius, textSize, iconSize, mobile }),
         effectiveIcon != null && squarePaddingMap[padding ?? "base"],
-        elevated && "btn-elevated",
-        glow && "btn-glow",
+        elevated && ELEVATED_CLASSES,
+        glow && GLOW_CLASSES,
         className,
       )}
       {...props}
