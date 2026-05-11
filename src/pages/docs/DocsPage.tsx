@@ -21,9 +21,38 @@ const sectionComponents: Record<string, React.ComponentType> = {
 export function DocsPage() {
   const { section = "introduction" } = useParams()
   const [filter, setFilter] = useState("")
+  const [activeTocId, setActiveTocId] = useState("")
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior })
+  }, [section])
+
+  useEffect(() => {
+    const links = getTocLinks(section)
+    const ids = links.map((l) => l.href.slice(1)).filter(Boolean)
+    if (ids.length === 0) return
+
+    const onScroll = () => {
+      const HEADER_OFFSET = 80
+      let currentId = ids[0]
+      for (const id of ids) {
+        const el = document.getElementById(id)
+        if (!el) continue
+        if (el.getBoundingClientRect().top <= HEADER_OFFSET) {
+          currentId = id
+        } else {
+          break
+        }
+      }
+      setActiveTocId(currentId)
+    }
+
+    const timer = setTimeout(onScroll, 0)
+    window.addEventListener("scroll", onScroll, { passive: true })
+    return () => {
+      clearTimeout(timer)
+      window.removeEventListener("scroll", onScroll)
+    }
   }, [section])
 
   const currentIndex = allSections.findIndex((s) => s.id === section)
@@ -171,15 +200,31 @@ export function DocsPage() {
               En esta página
             </div>
             <nav className="space-y-px">
-              {getTocLinks(section).map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  className="block text-[13px] text-muted-foreground border-l-2 border-transparent px-3 py-1 hover:text-foreground hover:border-border transition"
-                >
-                  {link.label}
-                </a>
-              ))}
+              {getTocLinks(section).map((link) => {
+                const id = link.href.slice(1)
+                const isActive = activeTocId === id
+                return (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      const el = document.getElementById(id)
+                      if (el) {
+                        const top = el.getBoundingClientRect().top + window.scrollY - 80
+                        window.scrollTo({ top, behavior: "smooth" })
+                      }
+                    }}
+                    className={`block text-[13px] border-l-2 px-3 py-1 transition ${
+                      isActive
+                        ? "border-brand text-foreground"
+                        : "text-muted-foreground border-transparent hover:text-foreground hover:border-border"
+                    }`}
+                  >
+                    {link.label}
+                  </a>
+                )
+              })}
             </nav>
 
             <div className="mt-8 mx-1 p-3 rounded-lg border border-border bg-card">
@@ -233,20 +278,30 @@ function getTocLinks(section: string): { label: string; href: string }[] {
       { label: "Dark mode", href: "#" },
     ],
     button: [
-      { label: "Vista previa", href: "#" },
-      { label: "Colores", href: "#" },
-      { label: "Tamaños", href: "#" },
-      { label: "Estados", href: "#" },
-      { label: "Instalación", href: "#" },
-      { label: "Uso", href: "#" },
-      { label: "API", href: "#" },
+      { label: "Vista previa",           href: "#vista-previa" },
+      { label: "Colores",                href: "#colores" },
+      { label: "Tamaños",                href: "#tamanos" },
+      { label: "Redondeado",             href: "#redondeado" },
+      { label: "Tamaño de texto",        href: "#tamano-de-texto" },
+      { label: "Tamaño de icono",        href: "#tamano-de-icono" },
+      { label: "Estados",                href: "#estados" },
+      { label: "Iconos",                 href: "#iconos" },
+      { label: "Solo icono",             href: "#solo-icono" },
+      { label: "Con tooltip",            href: "#con-tooltip" },
+      { label: "Responsive",             href: "#responsive" },
+      { label: "Estilos personalizados", href: "#estilos-personalizados" },
+      { label: "Instalación",            href: "#instalacion" },
+      { label: "Uso",                    href: "#uso" },
+      { label: "API",                    href: "#api" },
     ],
     text: [
-      { label: "Tamaños", href: "#" },
-      { label: "Colores", href: "#" },
-      { label: "Instalación", href: "#" },
-      { label: "Uso", href: "#" },
-      { label: "API", href: "#" },
+      { label: "Tamaños",         href: "#tamanos" },
+      { label: "Colores",         href: "#colores" },
+      { label: "Elemento HTML",   href: "#elemento-html" },
+      { label: "Personalización", href: "#personalizacion" },
+      { label: "Instalación",     href: "#instalacion" },
+      { label: "Uso",             href: "#uso" },
+      { label: "API",             href: "#api" },
     ],
     "scroll-area": [
       { label: "Vista previa", href: "#" },

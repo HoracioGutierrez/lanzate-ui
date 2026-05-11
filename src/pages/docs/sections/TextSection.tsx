@@ -26,7 +26,7 @@ export function TextSection() {
       </div>
 
       {/* Sizes preview */}
-      <div className="mt-8">
+      <div id="tamanos" className="mt-8 scroll-mt-20">
         <Text as="h2" size="2xl" className="tracking-tight">
           Tamaños
         </Text>
@@ -52,7 +52,7 @@ export function TextSection() {
       </div>
 
       {/* Colors preview */}
-      <div className="mt-10">
+      <div id="colores" className="mt-10 scroll-mt-20">
         <Text as="h2" size="2xl" className="tracking-tight">
           Colores
         </Text>
@@ -91,7 +91,7 @@ export function TextSection() {
       </div>
 
       {/* As prop */}
-      <div className="mt-10">
+      <div id="elemento-html" className="mt-10 scroll-mt-20">
         <Text as="h2" size="2xl" className="tracking-tight">
           Elemento HTML
         </Text>
@@ -113,7 +113,7 @@ export function TextSection() {
       </div>
 
       {/* Personalización */}
-      <div className="mt-10">
+      <div id="personalizacion" className="mt-10 scroll-mt-20">
         <Text as="h2" size="2xl" className="tracking-tight">
           Personalización
         </Text>
@@ -150,7 +150,7 @@ export function TextSection() {
       </div>
 
       {/* Installation */}
-      <div className="mt-12">
+      <div id="instalacion" className="mt-12 scroll-mt-20">
         <Text as="h2" size="2xl" className="tracking-tight">
           Instalación
         </Text>
@@ -158,7 +158,7 @@ export function TextSection() {
       </div>
 
       {/* Usage */}
-      <div className="mt-10">
+      <div id="uso" className="mt-10 scroll-mt-20">
         <Text as="h2" size="2xl" className="tracking-tight">
           Uso
         </Text>
@@ -184,7 +184,7 @@ export function TextSection() {
       </div>
 
       {/* API */}
-      <div className="mt-10">
+      <div id="api" className="mt-10 scroll-mt-20">
         <Text as="h2" size="2xl" className="tracking-tight">
           API
         </Text>

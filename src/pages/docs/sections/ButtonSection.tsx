@@ -27,7 +27,7 @@ export function ButtonSection() {
       </div>
 
       {/* Preview */}
-      <div className="mt-8">
+      <div id="vista-previa" className="mt-8 scroll-mt-20">
         <Text as="h2" size="2xl" className="tracking-tight">
           Vista previa
         </Text>
@@ -44,7 +44,7 @@ export function ButtonSection() {
       </div>
 
       {/* Colors */}
-      <div className="mt-10">
+      <div id="colores" className="mt-10 scroll-mt-20">
         <Text as="h2" size="2xl" className="tracking-tight">
           Colores
         </Text>
@@ -62,7 +62,7 @@ export function ButtonSection() {
       </div>
 
       {/* Sizes */}
-      <div className="mt-10">
+      <div id="tamanos" className="mt-10 scroll-mt-20">
         <Text as="h2" size="2xl" className="tracking-tight">
           Tamaños
         </Text>
@@ -80,7 +80,7 @@ export function ButtonSection() {
       </div>
 
       {/* Radius */}
-      <div className="mt-10">
+      <div id="redondeado" className="mt-10 scroll-mt-20">
         <Text as="h2" size="2xl" className="tracking-tight">
           Redondeado
         </Text>
@@ -105,7 +105,7 @@ export function ButtonSection() {
       </div>
 
       {/* Text Size */}
-      <div className="mt-10">
+      <div id="tamano-de-texto" className="mt-10 scroll-mt-20">
         <Text as="h2" size="2xl" className="tracking-tight">
           Tamaño de texto
         </Text>
@@ -130,7 +130,7 @@ export function ButtonSection() {
       </div>
 
       {/* Icon Size */}
-      <div className="mt-10">
+      <div id="tamano-de-icono" className="mt-10 scroll-mt-20">
         <Text as="h2" size="2xl" className="tracking-tight">
           Tamaño de icono
         </Text>
@@ -153,7 +153,7 @@ export function ButtonSection() {
       </div>
 
       {/* States */}
-      <div className="mt-10">
+      <div id="estados" className="mt-10 scroll-mt-20">
         <Text as="h2" size="2xl" className="tracking-tight">
           Estados
         </Text>
@@ -170,7 +170,7 @@ export function ButtonSection() {
       </div>
 
       {/* Icons */}
-      <div className="mt-10">
+      <div id="iconos" className="mt-10 scroll-mt-20">
         <Text as="h2" size="2xl" className="tracking-tight">
           Iconos
         </Text>
@@ -188,7 +188,7 @@ export function ButtonSection() {
       </div>
 
       {/* Only icon */}
-      <div className="mt-10">
+      <div id="solo-icono" className="mt-10 scroll-mt-20">
         <Text as="h2" size="2xl" className="tracking-tight">
           Solo icono
         </Text>
@@ -207,7 +207,7 @@ export function ButtonSection() {
       </div>
 
       {/* Tooltip */}
-      <div className="mt-10">
+      <div id="con-tooltip" className="mt-10 scroll-mt-20">
         <Text as="h2" size="2xl" className="tracking-tight">
           Con tooltip
         </Text>
@@ -229,7 +229,7 @@ export function ButtonSection() {
       </div>
 
       {/* Mobile */}
-      <div className="mt-10">
+      <div id="responsive" className="mt-10 scroll-mt-20">
         <Text as="h2" size="2xl" className="tracking-tight">
           Responsive
         </Text>
@@ -254,7 +254,7 @@ export function ButtonSection() {
       </div>
 
       {/* Custom class props */}
-      <div className="mt-10">
+      <div id="estilos-personalizados" className="mt-10 scroll-mt-20">
         <Text as="h2" size="2xl" className="tracking-tight">
           Estilos personalizados
         </Text>
@@ -314,7 +314,7 @@ export function ButtonSection() {
       </div>
 
       {/* Installation */}
-      <div className="mt-12">
+      <div id="instalacion" className="mt-12 scroll-mt-20">
         <Text as="h2" size="2xl" className="tracking-tight">
           Instalación
         </Text>
@@ -322,7 +322,7 @@ export function ButtonSection() {
       </div>
 
       {/* Usage */}
-      <div className="mt-10">
+      <div id="uso" className="mt-10 scroll-mt-20">
         <Text as="h2" size="2xl" className="tracking-tight">
           Uso
         </Text>
@@ -352,7 +352,7 @@ export function ButtonSection() {
       </div>
 
       {/* API */}
-      <div className="mt-10">
+      <div id="api" className="mt-10 scroll-mt-20">
         <Text as="h2" size="2xl" className="tracking-tight">
           API
         </Text>
