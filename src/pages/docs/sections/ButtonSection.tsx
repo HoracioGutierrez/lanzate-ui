@@ -1,7 +1,7 @@
 import { Text } from "@/components/ui/text"
 import { Button } from "@/components/ui/button"
 import { PreviewPane, CodeBlock, ApiTable, SectionBadge } from "../DocComponents"
-import { ArrowRight, Download, Trash2, Plus, Star, Bell } from "lucide-react"
+import { ArrowRight, Download, Trash2, Plus, Star, Bell, Sparkles } from "lucide-react"
 
 export function ButtonSection() {
   return (
@@ -68,6 +68,7 @@ export function ButtonSection() {
         </Text>
         <PreviewPane>
           <div className="flex flex-wrap items-end justify-center gap-2.5">
+            <Button padding="none">None</Button>
             <Button padding="xs">XS</Button>
             <Button padding="sm">SM</Button>
             <Button padding="base">Base</Button>
@@ -85,18 +86,70 @@ export function ButtonSection() {
         </Text>
         <PreviewPane>
           <div className="flex flex-wrap items-center justify-center gap-2.5">
+            <Button radius="none">None</Button>
             <Button radius="sm">SM</Button>
             <Button radius="md">MD</Button>
+            <Button radius="lg">LG</Button>
             <Button radius="xl">XL</Button>
             <Button radius="full">Full</Button>
             <Button icon={<Plus />} radius="full" tooltip="Crear" />
           </div>
         </PreviewPane>
-        <CodeBlock>{`<Button radius="sm">SM</Button>
+        <CodeBlock>{`<Button radius="none">None</Button>
+<Button radius="sm">SM</Button>
 <Button radius="md">MD</Button>
+<Button radius="lg">LG</Button>
 <Button radius="xl">XL</Button>
-<Button radius="full">Continuar</Button>
+<Button radius="full">Full</Button>
 <Button icon={<Plus />} radius="full" tooltip="Crear" />`}</CodeBlock>
+      </div>
+
+      {/* Text Size */}
+      <div className="mt-10">
+        <Text as="h2" size="2xl" className="tracking-tight">
+          Tamaño de texto
+        </Text>
+        <PreviewPane>
+          <div className="flex flex-wrap items-end justify-center gap-2.5">
+            <Button textSize="xs">XS</Button>
+            <Button textSize="sm">SM</Button>
+            <Button textSize="base">Base</Button>
+            <Button textSize="lg">LG</Button>
+            <Button textSize="xl">XL</Button>
+            <Button textSize="2xl">2XL</Button>
+            <Button textSize="display">Display</Button>
+          </div>
+        </PreviewPane>
+        <CodeBlock>{`<Button textSize="xs">XS</Button>
+<Button textSize="sm">SM</Button>
+<Button textSize="base">Base</Button>
+<Button textSize="lg">LG</Button>
+<Button textSize="xl">XL</Button>
+<Button textSize="2xl">2XL</Button>
+<Button textSize="display">Display</Button>`}</CodeBlock>
+      </div>
+
+      {/* Icon Size */}
+      <div className="mt-10">
+        <Text as="h2" size="2xl" className="tracking-tight">
+          Tamaño de icono
+        </Text>
+        <PreviewPane>
+          <div className="flex flex-wrap items-center justify-center gap-2.5">
+            <Button iconSize="xs" startIcon={<Sparkles />}>XS</Button>
+            <Button iconSize="sm" startIcon={<Sparkles />}>SM</Button>
+            <Button iconSize="base" startIcon={<Sparkles />}>Base</Button>
+            <Button iconSize="md" startIcon={<Sparkles />}>MD</Button>
+            <Button iconSize="lg" startIcon={<Sparkles />}>LG</Button>
+            <Button iconSize="xl" startIcon={<Sparkles />}>XL</Button>
+          </div>
+        </PreviewPane>
+        <CodeBlock>{`<Button iconSize="xs" startIcon={<Sparkles />}>XS</Button>
+<Button iconSize="sm" startIcon={<Sparkles />}>SM</Button>
+<Button iconSize="base" startIcon={<Sparkles />}>Base</Button>
+<Button iconSize="md" startIcon={<Sparkles />}>MD</Button>
+<Button iconSize="lg" startIcon={<Sparkles />}>LG</Button>
+<Button iconSize="xl" startIcon={<Sparkles />}>XL</Button>`}</CodeBlock>
       </div>
 
       {/* States */}
@@ -175,6 +228,31 @@ export function ButtonSection() {
 </Button>`}</CodeBlock>
       </div>
 
+      {/* Mobile */}
+      <div className="mt-10">
+        <Text as="h2" size="2xl" className="tracking-tight">
+          Responsive
+        </Text>
+        <Text size="sm" color="muted" className="mt-1">
+          Redimensioná la ventana para ver el efecto en mobile (&lt;640px).
+        </Text>
+        <PreviewPane>
+          <div className="flex flex-wrap items-center justify-center gap-2.5">
+            <Button mobile="only-icon" startIcon={<Plus />}>Nuevo</Button>
+            <Button mobile="full-width">Ancho completo</Button>
+            <Button mobile="hidden">Solo escritorio</Button>
+          </div>
+        </PreviewPane>
+        <CodeBlock>{`// Texto oculto en mobile, visible en sm+
+<Button mobile="only-icon" startIcon={<Plus />}>Nuevo</Button>
+
+// Ancho completo en mobile, automático en sm+
+<Button mobile="full-width">Ancho completo</Button>
+
+// Oculto en mobile, visible en sm+
+<Button mobile="hidden">Solo escritorio</Button>`}</CodeBlock>
+      </div>
+
       {/* Installation */}
       <div className="mt-12">
         <Text as="h2" size="2xl" className="tracking-tight">
@@ -243,6 +321,16 @@ export function ButtonSection() {
               type: '"none" | "sm" | "md" | "lg" | "xl" | "full"',
               default: '"md"',
               description: "Redondeado del borde del botón.",
+            },
+            {
+              prop: "textSize",
+              type: '"xs" | "sm" | "base" | "lg" | "xl" | "2xl" | "display"',
+              description: "Tamaño de texto independiente del padding.",
+            },
+            {
+              prop: "iconSize",
+              type: '"xs" | "sm" | "base" | "md" | "lg" | "xl"',
+              description: "Tamaño de los íconos SVG en unidades relativas al texto.",
             },
             {
               prop: "isLoading",
