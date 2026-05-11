@@ -272,6 +272,7 @@ import { Text } from "@/components/ui/text"
 | `as` | `p \| span \| label \| h1 \| h2 \| h3 \| h4` | `p` | Elemento HTML que se renderiza |
 | `size` | ver abajo | `md` | Tamaño tipográfico |
 | `color` | ver abajo | — | Color semántico del texto |
+| `className` | `string` | — | Clases de Tailwind adicionales. Se mergean después de las clases de variante, por lo que pueden sobreescribir o extender cualquier estilo base del componente |
 
 **Tamaños disponibles (`size`):**
 

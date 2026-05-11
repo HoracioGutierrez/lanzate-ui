@@ -112,6 +112,43 @@ export function TextSection() {
 <Text as="span" size="xs" color="muted">Inline</Text>`}</CodeBlock>
       </div>
 
+      {/* Personalización */}
+      <div className="mt-10">
+        <Text as="h2" size="2xl" className="tracking-tight">
+          Personalización
+        </Text>
+        <Text size="sm" color="muted" className="mt-1">
+          <code className="font-mono text-xs bg-muted px-1.5 py-0.5 rounded">className</code> se
+          mergea después de las variantes — puede extender o sobreescribir cualquier estilo.
+        </Text>
+        <PreviewPane className="min-h-0!">
+          <div className="w-full px-6 py-8 space-y-2 text-left">
+            <Text size="lg" className="font-black tracking-tight">Negrita con tracking ajustado</Text>
+            <Text size="sm" color="muted" className="italic">Texto muted + cursiva</Text>
+            <Text size="md" className="underline decoration-wavy decoration-primary">
+              Subrayado decorativo
+            </Text>
+            <Text size="sm" className="bg-primary/10 text-primary px-2 py-0.5 rounded w-fit">
+              Badge inline
+            </Text>
+          </div>
+        </PreviewPane>
+        <CodeBlock>{`// Extender con estilos tipográficos
+<Text size="lg" className="font-black tracking-tight">
+  Negrita con tracking
+</Text>
+
+// Combinar color semántico con ajustes extra
+<Text size="sm" color="muted" className="italic">
+  Texto atenuado en cursiva
+</Text>
+
+// Usar como base para patrones ad-hoc
+<Text size="sm" className="bg-primary/10 text-primary px-2 py-0.5 rounded">
+  Badge inline
+</Text>`}</CodeBlock>
+      </div>
+
       {/* Installation */}
       <div className="mt-12">
         <Text as="h2" size="2xl" className="tracking-tight">
@@ -173,7 +210,7 @@ export function TextSection() {
             {
               prop: "className",
               type: "string",
-              description: "Clases de Tailwind adicionales.",
+              description: "Clases de Tailwind adicionales. Se mergean después de las clases de variantes (size/color), por lo que pueden sobreescribir o extender cualquier estilo base.",
             },
           ]}
         />
