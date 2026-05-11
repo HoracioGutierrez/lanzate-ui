@@ -95,6 +95,7 @@ type ButtonProps = {
   iconSize?:  VariantProps<typeof buttonVariants>["iconSize"]
   mobile?:    VariantProps<typeof buttonVariants>["mobile"]
   elevated?:    boolean
+  glow?:        boolean
   icon?:        React.ReactNode
   startIcon?:   React.ReactNode
   endIcon?:     React.ReactNode
@@ -113,6 +114,7 @@ function Button({
   isLoading, loadingText,
   tooltip,
   elevated,
+  glow,
   tapAnimation = true,
   className, children,
   disabled,
@@ -160,11 +162,13 @@ function Button({
       data-icon-size={iconSize}
       data-mobile={mobile}
       data-elevated={elevated || undefined}
+      data-glow={glow || undefined}
       disabled={effectiveDisabled}
       className={cn(
         buttonVariants({ color, variant, padding, radius, textSize, iconSize, mobile }),
         effectiveIcon != null && squarePaddingMap[padding ?? "base"],
         elevated && "btn-elevated",
+        glow && "btn-glow",
         className,
       )}
       {...props}

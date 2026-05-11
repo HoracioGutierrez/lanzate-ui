@@ -55,6 +55,8 @@ import { Button } from "@/components/ui/button"
 | `endIcon` | `ReactNode` | — | Ícono después del texto |
 | `icon` | `ReactNode` | — | Ícono único — oculta el texto y usa padding cuadrado automático |
 | `mobile` | `only-icon \| full-width \| hidden` | — | Comportamiento responsivo en viewports < 640px |
+| `elevated` | `boolean` | — | Sombra elevada (profundidad) |
+| `glow` | `boolean` | — | Efecto glow/neon usando el color del botón |
 | `isLoading` | `boolean` | — | Muestra spinner animado en lugar del `startIcon` y deshabilita el botón |
 | `loadingText` | `string` | — | Reemplaza el texto del botón cuando `isLoading` es `true` |
 | `tooltip` | `ReactNode` | — | Contenido del tooltip que aparece al hacer hover |

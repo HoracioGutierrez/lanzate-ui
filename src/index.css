@@ -180,13 +180,13 @@
   .btn-elevated:active:not(:disabled) {
     --btn-elevation: 0 2px 6px rgba(0, 0, 0, 0.12);
   }
-  .btn-elevated:not(.btn-surface) {
+  .btn-elevated:not(.btn-surface):not(.btn-glow) {
     box-shadow: var(--btn-elevation);
   }
-  .btn-elevated:not(.btn-surface):hover:not(:disabled) {
+  .btn-elevated:not(.btn-surface):not(.btn-glow):hover:not(:disabled) {
     box-shadow: var(--btn-elevation);
   }
-  .btn-elevated:not(.btn-surface):active:not(:disabled) {
+  .btn-elevated:not(.btn-surface):not(.btn-glow):active:not(:disabled) {
     box-shadow: var(--btn-elevation);
   }
 
@@ -216,6 +216,26 @@
       inset 0 -1px 0 rgba(255, 255, 255, 0.08),
       var(--btn-elevation, 0 0 #0000);
     transform: translateY(1px);
+  }
+
+  .btn-glow {
+    box-shadow:
+      0 0 8px 2px color-mix(in oklch, var(--btn-color) 50%, transparent),
+      0 0 24px 6px color-mix(in oklch, var(--btn-color) 22%, transparent),
+      var(--btn-elevation, 0 0 #0000);
+    transition: box-shadow 0.2s ease;
+  }
+  .btn-glow:hover:not(:disabled) {
+    box-shadow:
+      0 0 12px 4px color-mix(in oklch, var(--btn-color) 65%, transparent),
+      0 0 36px 10px color-mix(in oklch, var(--btn-color) 30%, transparent),
+      var(--btn-elevation, 0 0 #0000);
+  }
+  .btn-glow:active:not(:disabled) {
+    box-shadow:
+      0 0 5px 1px color-mix(in oklch, var(--btn-color) 40%, transparent),
+      0 0 14px 3px color-mix(in oklch, var(--btn-color) 18%, transparent),
+      var(--btn-elevation, 0 0 #0000);
   }
 
   .grid-bg {

@@ -169,6 +169,30 @@ export function ButtonSection() {
         </PreviewPane>
       </div>
 
+      {/* Glow */}
+      <div id="glow" className="mt-10 scroll-mt-20">
+        <Text as="h2" size="2xl" className="tracking-tight">
+          Glow
+        </Text>
+        <PreviewPane>
+          <div className="flex flex-wrap items-center justify-center gap-2.5">
+            <Button glow>Primary</Button>
+            <Button glow color="info">Info</Button>
+            <Button glow color="success">Success</Button>
+            <Button glow color="warning">Warning</Button>
+            <Button glow color="error">Error</Button>
+            <Button glow variant="outline">Outline</Button>
+            <Button glow variant="ghost">Ghost</Button>
+            <Button glow elevated>Elevated + Glow</Button>
+          </div>
+        </PreviewPane>
+        <CodeBlock>{`<Button glow>Primary</Button>
+<Button glow color="info">Info</Button>
+<Button glow color="success">Success</Button>
+<Button glow variant="outline">Outline</Button>
+<Button glow elevated>Elevated + Glow</Button>`}</CodeBlock>
+      </div>
+
       {/* Icons */}
       <div id="iconos" className="mt-10 scroll-mt-20">
         <Text as="h2" size="2xl" className="tracking-tight">
@@ -423,6 +447,12 @@ export function ButtonSection() {
               type: "boolean",
               default: "false",
               description: "Aplica sombra y gradiente elevado.",
+            },
+            {
+              prop: "glow",
+              type: "boolean",
+              default: "false",
+              description: "Aplica efecto de glow/neon usando el color del botón.",
             },
             {
               prop: "tooltip",
