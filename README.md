@@ -48,6 +48,7 @@ import { Button } from "@/components/ui/button"
 |---|---|---|---|
 | `color` | ver abajo | `primary` | Color semántico del botón |
 | `padding` | ver abajo | `base` | Tamaño de padding (controla también el font-size) |
+| `radius` | ver abajo | `md` | Redondeado del borde del botón |
 | `textSize` | `xs \| sm \| base \| lg \| xl \| 2xl \| display` | — | Override del tamaño de texto independiente del padding |
 | `iconSize` | `xs \| sm \| base \| md \| lg \| xl` | — | Override del tamaño de los SVG dentro del botón |
 | `startIcon` | `ReactNode` | — | Ícono antes del texto |
@@ -85,6 +86,17 @@ Acepta además todos los atributos nativos de `<button>` (`onClick`, `disabled`,
 | `lg` | `px-6 py-3` + `text-lg` |
 | `xl` | `px-8 py-4` + `text-xl` |
 
+**Redondeados disponibles (`radius`):**
+
+| Valor | Clases aplicadas |
+|---|---|
+| `none` | `rounded-none` |
+| `sm` | `rounded-sm` |
+| `md` | `rounded-md` |
+| `lg` | `rounded-lg` |
+| `xl` | `rounded-xl` |
+| `full` | `rounded-full` |
+
 **`mobile` prop:**
 
 | Valor | Comportamiento |
@@ -110,6 +122,9 @@ Acepta además todos los atributos nativos de `<button>` (`onClick`, `disabled`,
 
 // Estado de carga
 <Button isLoading loadingText="Guardando...">Guardar</Button>
+
+// Redondeado completo
+<Button radius="full">Continuar</Button>
 
 // Responsive: texto en desktop, solo ícono en mobile
 <Button mobile="only-icon" startIcon={<Search />} tooltip="Buscar">

@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 rounded-md font-medium transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:size-[1em] [&_svg]:shrink-0",
+  "inline-flex items-center justify-center gap-2 font-medium transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:size-[1em] [&_svg]:shrink-0",
   {
     variants: {
       color: {
@@ -36,6 +36,14 @@ const buttonVariants = cva(
         lg:   "px-6 py-3 text-lg",
         xl:   "px-8 py-4 text-xl",
       },
+      radius: {
+        none: "rounded-none",
+        sm:   "rounded-sm",
+        md:   "rounded-md",
+        lg:   "rounded-lg",
+        xl:   "rounded-xl",
+        full: "rounded-full",
+      },
       textSize: {
         xs:      "text-xs",
         sm:      "text-sm",
@@ -63,6 +71,7 @@ const buttonVariants = cva(
       color:   "primary",
       variant: "solid",
       padding: "base",
+      radius:  "md",
     },
   }
 )
@@ -81,6 +90,7 @@ type ButtonProps = {
   color?:     VariantProps<typeof buttonVariants>["color"]
   variant?:   VariantProps<typeof buttonVariants>["variant"]
   padding?:   VariantProps<typeof buttonVariants>["padding"]
+  radius?:    VariantProps<typeof buttonVariants>["radius"]
   textSize?:  VariantProps<typeof buttonVariants>["textSize"]
   iconSize?:  VariantProps<typeof buttonVariants>["iconSize"]
   mobile?:    VariantProps<typeof buttonVariants>["mobile"]
@@ -95,7 +105,7 @@ type ButtonProps = {
 } & HTMLMotionProps<"button">
 
 function Button({
-  color, variant, padding = "base", textSize, iconSize, mobile,
+  color, variant, padding = "base", radius, textSize, iconSize, mobile,
   icon, startIcon, endIcon,
   isLoading, loadingText,
   tooltip,
@@ -131,13 +141,14 @@ function Button({
       data-color={color}
       data-variant={variant}
       data-padding={padding}
+      data-radius={radius}
       data-text-size={textSize}
       data-icon-size={iconSize}
       data-mobile={mobile}
       data-elevated={elevated || undefined}
       disabled={effectiveDisabled}
       className={cn(
-        buttonVariants({ color, variant, padding, textSize, iconSize, mobile }),
+        buttonVariants({ color, variant, padding, radius, textSize, iconSize, mobile }),
         effectiveIcon != null && squarePaddingMap[padding ?? "base"],
         elevated && "btn-elevated",
         className,

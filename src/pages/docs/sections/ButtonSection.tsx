@@ -78,6 +78,27 @@ export function ButtonSection() {
         </PreviewPane>
       </div>
 
+      {/* Radius */}
+      <div className="mt-10">
+        <Text as="h2" size="2xl" className="tracking-tight">
+          Redondeado
+        </Text>
+        <PreviewPane>
+          <div className="flex flex-wrap items-center justify-center gap-2.5">
+            <Button radius="sm">SM</Button>
+            <Button radius="md">MD</Button>
+            <Button radius="xl">XL</Button>
+            <Button radius="full">Full</Button>
+            <Button icon={<Plus />} radius="full" tooltip="Crear" />
+          </div>
+        </PreviewPane>
+        <CodeBlock>{`<Button radius="sm">SM</Button>
+<Button radius="md">MD</Button>
+<Button radius="xl">XL</Button>
+<Button radius="full">Continuar</Button>
+<Button icon={<Plus />} radius="full" tooltip="Crear" />`}</CodeBlock>
+      </div>
+
       {/* States */}
       <div className="mt-10">
         <Text as="h2" size="2xl" className="tracking-tight">
@@ -216,6 +237,12 @@ export function ButtonSection() {
               type: '"none" | "xs" | "sm" | "base" | "md" | "lg" | "xl"',
               default: '"base"',
               description: "Tamaño del padding y texto.",
+            },
+            {
+              prop: "radius",
+              type: '"none" | "sm" | "md" | "lg" | "xl" | "full"',
+              default: '"md"',
+              description: "Redondeado del borde del botón.",
             },
             {
               prop: "isLoading",
