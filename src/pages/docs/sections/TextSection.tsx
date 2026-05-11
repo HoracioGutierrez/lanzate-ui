@@ -71,6 +71,9 @@ export function TextSection() {
             <Text size="sm" color="primary-muted">
               primary-muted — primary al 60%
             </Text>
+            <Text size="sm" color="secondary-muted">
+              secondary-muted — secondary al 60%
+            </Text>
             <Text size="sm" color="info">
               info — informacional
             </Text>
@@ -85,6 +88,28 @@ export function TextSection() {
             </Text>
           </div>
         </PreviewPane>
+      </div>
+
+      {/* As prop */}
+      <div className="mt-10">
+        <Text as="h2" size="2xl" className="tracking-tight">
+          Elemento HTML
+        </Text>
+        <PreviewPane className="min-h-0!">
+          <div className="w-full px-6 py-8 space-y-1.5 text-left">
+            <Text as="h1" size="2xl">h1 — Título principal de página</Text>
+            <Text as="h2" size="xl">h2 — Sección de contenido</Text>
+            <Text as="h3" size="lg">h3 — Subsección</Text>
+            <Text as="h4" size="md">h4 — Elemento de grupo</Text>
+            <Text as="p">p — Párrafo estándar (default)</Text>
+            <Text as="span" size="sm" color="muted" className="block">span — Texto en línea</Text>
+            <Text as="label" size="sm" className="block">label — Etiqueta de formulario</Text>
+          </div>
+        </PreviewPane>
+        <CodeBlock>{`<Text as="h1" size="display">Título</Text>
+<Text as="h3" size="lg">Subsección</Text>
+<Text as="label" size="sm">Email</Text>
+<Text as="span" size="xs" color="muted">Inline</Text>`}</CodeBlock>
       </div>
 
       {/* Installation */}

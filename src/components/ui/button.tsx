@@ -98,6 +98,8 @@ type ButtonProps = {
   icon?:        React.ReactNode
   startIcon?:   React.ReactNode
   endIcon?:     React.ReactNode
+  iconClassName?: string
+  textClassName?: string
   isLoading?:    boolean
   loadingText?:  string
   tooltip?:      React.ReactNode
@@ -107,6 +109,7 @@ type ButtonProps = {
 function Button({
   color, variant, padding = "base", radius, textSize, iconSize, mobile,
   icon, startIcon, endIcon,
+  iconClassName, textClassName,
   isLoading, loadingText,
   tooltip,
   elevated,
@@ -133,6 +136,17 @@ function Button({
 
   const shouldAnimate = tapAnimation && !effectiveDisabled
 
+  const wrapIcon = (node: React.ReactNode) =>
+    node == null
+      ? null
+      : iconClassName
+        ? <span className={iconClassName}>{node}</span>
+        : node
+
+  const wrappedStartIcon = wrapIcon(effectiveStartIcon)
+  const wrappedEndIcon   = wrapIcon(endIcon)
+  const wrappedIcon      = wrapIcon(effectiveIcon)
+
   const buttonEl = (
     <motion.button
       whileTap={shouldAnimate ? { scale: 0.97 } : undefined}
@@ -155,19 +169,23 @@ function Button({
       )}
       {...props}
     >
-      {effectiveIcon != null ? (
-        effectiveIcon
+      {wrappedIcon != null ? (
+        wrappedIcon
       ) : mobile === "only-icon" ? (
         <>
-          {effectiveStartIcon}
-          {effectiveChildren != null && <span className="hidden sm:inline">{effectiveChildren}</span>}
-          {endIcon}
+          {wrappedStartIcon}
+          {effectiveChildren != null && (
+            <span className={cn("hidden sm:inline", textClassName)}>{effectiveChildren}</span>
+          )}
+          {wrappedEndIcon}
         </>
       ) : (
         <>
-          {effectiveStartIcon}
-          {effectiveChildren}
-          {endIcon}
+          {wrappedStartIcon}
+          {textClassName
+            ? <span className={textClassName}>{effectiveChildren}</span>
+            : effectiveChildren}
+          {wrappedEndIcon}
         </>
       )}
     </motion.button>

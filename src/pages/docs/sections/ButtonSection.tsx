@@ -253,6 +253,66 @@ export function ButtonSection() {
 <Button mobile="hidden">Solo escritorio</Button>`}</CodeBlock>
       </div>
 
+      {/* Custom class props */}
+      <div className="mt-10">
+        <Text as="h2" size="2xl" className="tracking-tight">
+          Estilos personalizados
+        </Text>
+        <Text size="sm" color="muted" className="mt-1">
+          Usá <code>iconClassName</code> y <code>textClassName</code> para customizar íconos y texto de forma independiente, sin perder las variantes del botón.
+        </Text>
+        <PreviewPane>
+          <div className="flex flex-wrap items-center justify-center gap-2.5">
+            <Button startIcon={<Star />} iconClassName="text-yellow-400">
+              Favorito
+            </Button>
+            <Button
+              startIcon={<Sparkles />}
+              iconClassName="text-purple-400"
+              textClassName="italic font-light"
+              variant="outline"
+            >
+              Especial
+            </Button>
+            <Button
+              startIcon={<Bell />}
+              iconClassName="text-blue-400"
+              textClassName="tracking-widest uppercase text-xs"
+              variant="outline"
+              color="info"
+            >
+              Notificaciones
+            </Button>
+            <Button icon={<Download />} iconClassName="text-green-400" variant="secondary" color="success" />
+          </div>
+        </PreviewPane>
+        <CodeBlock>{`// Ícono con color distinto al texto
+<Button startIcon={<Star />} iconClassName="text-yellow-400">
+  Favorito
+</Button>
+
+// Combinando iconClassName y textClassName
+<Button
+  startIcon={<Sparkles />}
+  iconClassName="text-purple-400"
+  textClassName="italic font-light"
+  variant="outline"
+>
+  Especial
+</Button>
+
+// Texto con estilo tipográfico personalizado
+<Button
+  startIcon={<Bell />}
+  iconClassName="text-blue-400"
+  textClassName="tracking-widest uppercase text-xs"
+  variant="outline"
+  color="info"
+>
+  Notificaciones
+</Button>`}</CodeBlock>
+      </div>
+
       {/* Installation */}
       <div className="mt-12">
         <Text as="h2" size="2xl" className="tracking-tight">
@@ -379,6 +439,21 @@ export function ButtonSection() {
               prop: "mobile",
               type: '"only-icon" | "full-width" | "hidden"',
               description: "Comportamiento responsive en mobile.",
+            },
+            {
+              prop: "className",
+              type: "string",
+              description: "Clases adicionales para el elemento <button> raíz. Se mergean después de las clases de variantes.",
+            },
+            {
+              prop: "iconClassName",
+              type: "string",
+              description: "Clases aplicadas al wrapper de todos los íconos (startIcon, endIcon, icon). Útil para cambiar color o tamaño de forma independiente al texto.",
+            },
+            {
+              prop: "textClassName",
+              type: "string",
+              description: 'Clases aplicadas al wrapper del texto (children / loadingText). En mobile="only-icon" se mergean automáticamente con "hidden sm:inline".',
             },
           ]}
         />

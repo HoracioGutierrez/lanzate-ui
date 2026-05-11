@@ -59,6 +59,9 @@ import { Button } from "@/components/ui/button"
 | `loadingText` | `string` | — | Reemplaza el texto del botón cuando `isLoading` es `true` |
 | `tooltip` | `ReactNode` | — | Contenido del tooltip que aparece al hacer hover |
 | `tapAnimation` | `boolean` | `true` | Animación de scale (spring) al hacer click/tap. Se desactiva automáticamente cuando el botón está `disabled` o `isLoading` |
+| `className` | `string` | — | Clases adicionales para el elemento `<button>` raíz |
+| `iconClassName` | `string` | — | Clases aplicadas al wrapper de todos los íconos (`startIcon`, `endIcon`, `icon`). Útil para cambiar color, tamaño o spacing de los íconos de forma independiente al texto |
+| `textClassName` | `string` | — | Clases aplicadas al wrapper del texto (`children`/`loadingText`). Compatibles con `mobile="only-icon"` — se mergean con `hidden sm:inline` automáticamente |
 
 Acepta además todos los atributos nativos de `<button>` (`onClick`, `disabled`, `type`, etc.) y props de Framer Motion (`whileHover`, `animate`, `variants`, etc.).
 
@@ -146,6 +149,26 @@ Acepta además todos los atributos nativos de `<button>` (`onClick`, `disabled`,
 import type { ButtonProps } from "@/components/ui/button"
 
 type SaveButtonProps = ButtonProps & { onSave: () => void }
+
+// Ícono con color distinto al texto
+<Button startIcon={<Star />} iconClassName="text-yellow-400">
+  Favorito
+</Button>
+
+// Texto con estilo tipográfico personalizado
+<Button textClassName="tracking-widest uppercase text-xs font-bold">
+  Acción
+</Button>
+
+// Combinar ambos para control total
+<Button
+  startIcon={<Sparkles />}
+  iconClassName="text-purple-400"
+  textClassName="italic font-light"
+  variant="outline"
+>
+  Especial
+</Button>
 ```
 
 ---
