@@ -79,7 +79,7 @@ export function Header() {
                   href="/#components"
                   className="px-3 py-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-accent transition"
                 >
-                  Componentes
+                  Components
                 </a>
                 <Link
                   to="/docs"

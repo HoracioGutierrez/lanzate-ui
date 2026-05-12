@@ -11,15 +11,15 @@ export type DocGroup = {
 
 export const docsNav: DocGroup[] = [
   {
-    group: "Empezar",
+    group: "Get Started",
     items: [
-      { id: "introduction", label: "Introducción" },
-      { id: "installation", label: "Instalación" },
+      { id: "introduction", label: "Introduction" },
+      { id: "installation", label: "Installation" },
       { id: "theming", label: "Theming" },
     ],
   },
   {
-    group: "Componentes",
+    group: "Components",
     items: [
       { id: "button", label: "Button" },
       { id: "text", label: "Text" },
@@ -30,8 +30,8 @@ export const docsNav: DocGroup[] = [
 export const allSections: DocItem[] = docsNav.flatMap((g) => g.items)
 
 export const titleMap: Record<string, string> = {
-  introduction: "Introducción",
-  installation: "Instalación",
+  introduction: "Introduction",
+  installation: "Installation",
   theming: "Theming",
   button: "Button",
   text: "Text",

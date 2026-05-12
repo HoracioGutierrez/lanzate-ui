@@ -1,7 +1,7 @@
 import { Text } from "@/components/ui/text"
 import { Button } from "@/components/ui/button"
 import { PreviewPane, CodeBlock, ApiTable, SectionBadge } from "../DocComponents"
-import { ArrowRight, Download, Trash2, Plus, Star, Bell } from "lucide-react"
+import { ArrowRight, Download, Trash2, Plus, Star, Bell, Sparkles } from "lucide-react"
 
 export function ButtonSection() {
   return (
@@ -11,8 +11,8 @@ export function ButtonSection() {
         Button
       </Text>
       <Text size="lg" color="muted" className="mt-3 max-w-2xl leading-relaxed">
-        El componente más fundamental. 6 variantes, 7 colores, tamaños, estado de loading y soporte
-        para iconos.
+        6 style variants, 7 semantic colors, elevated and glow effects, loading state with spinner,
+        icons, and tooltip.
       </Text>
 
       <div className="mt-6 flex items-center gap-2 text-xs">
@@ -27,9 +27,9 @@ export function ButtonSection() {
       </div>
 
       {/* Preview */}
-      <div className="mt-8">
+      <div id="vista-previa" className="mt-8 scroll-mt-20">
         <Text as="h2" size="2xl" className="tracking-tight">
-          Vista previa
+          Preview
         </Text>
         <PreviewPane>
           <div className="flex flex-wrap items-center justify-center gap-2.5">
@@ -44,9 +44,9 @@ export function ButtonSection() {
       </div>
 
       {/* Colors */}
-      <div className="mt-10">
+      <div id="colores" className="mt-10 scroll-mt-20">
         <Text as="h2" size="2xl" className="tracking-tight">
-          Colores
+          Colors
         </Text>
         <PreviewPane>
           <div className="flex flex-wrap items-center justify-center gap-2.5">
@@ -62,12 +62,13 @@ export function ButtonSection() {
       </div>
 
       {/* Sizes */}
-      <div className="mt-10">
+      <div id="tamanos" className="mt-10 scroll-mt-20">
         <Text as="h2" size="2xl" className="tracking-tight">
-          Tamaños
+          Sizes
         </Text>
         <PreviewPane>
           <div className="flex flex-wrap items-end justify-center gap-2.5">
+            <Button padding="none">None</Button>
             <Button padding="xs">XS</Button>
             <Button padding="sm">SM</Button>
             <Button padding="base">Base</Button>
@@ -78,14 +79,87 @@ export function ButtonSection() {
         </PreviewPane>
       </div>
 
-      {/* States */}
-      <div className="mt-10">
+      {/* Radius */}
+      <div id="redondeado" className="mt-10 scroll-mt-20">
         <Text as="h2" size="2xl" className="tracking-tight">
-          Estados
+          Radius
         </Text>
         <PreviewPane>
           <div className="flex flex-wrap items-center justify-center gap-2.5">
-            <Button isLoading loadingText="Cargando…" tapAnimation={false}>
+            <Button radius="none">None</Button>
+            <Button radius="sm">SM</Button>
+            <Button radius="md">MD</Button>
+            <Button radius="lg">LG</Button>
+            <Button radius="xl">XL</Button>
+            <Button radius="full">Full</Button>
+            <Button icon={<Plus />} radius="full" tooltip="Crear" />
+          </div>
+        </PreviewPane>
+        <CodeBlock>{`<Button radius="none">None</Button>
+<Button radius="sm">SM</Button>
+<Button radius="md">MD</Button>
+<Button radius="lg">LG</Button>
+<Button radius="xl">XL</Button>
+<Button radius="full">Full</Button>
+<Button icon={<Plus />} radius="full" tooltip="Crear" />`}</CodeBlock>
+      </div>
+
+      {/* Text Size */}
+      <div id="tamano-de-texto" className="mt-10 scroll-mt-20">
+        <Text as="h2" size="2xl" className="tracking-tight">
+          Text Size
+        </Text>
+        <PreviewPane>
+          <div className="flex flex-wrap items-end justify-center gap-2.5">
+            <Button textSize="xs">XS</Button>
+            <Button textSize="sm">SM</Button>
+            <Button textSize="base">Base</Button>
+            <Button textSize="lg">LG</Button>
+            <Button textSize="xl">XL</Button>
+            <Button textSize="2xl">2XL</Button>
+            <Button textSize="display">Display</Button>
+          </div>
+        </PreviewPane>
+        <CodeBlock>{`<Button textSize="xs">XS</Button>
+<Button textSize="sm">SM</Button>
+<Button textSize="base">Base</Button>
+<Button textSize="lg">LG</Button>
+<Button textSize="xl">XL</Button>
+<Button textSize="2xl">2XL</Button>
+<Button textSize="display">Display</Button>`}</CodeBlock>
+      </div>
+
+      {/* Icon Size */}
+      <div id="tamano-de-icono" className="mt-10 scroll-mt-20">
+        <Text as="h2" size="2xl" className="tracking-tight">
+          Icon Size
+        </Text>
+        <PreviewPane>
+          <div className="flex flex-wrap items-center justify-center gap-2.5">
+            <Button iconSize="xs" startIcon={<Sparkles />}>XS</Button>
+            <Button iconSize="sm" startIcon={<Sparkles />}>SM</Button>
+            <Button iconSize="base" startIcon={<Sparkles />}>Base</Button>
+            <Button iconSize="md" startIcon={<Sparkles />}>MD</Button>
+            <Button iconSize="lg" startIcon={<Sparkles />}>LG</Button>
+            <Button iconSize="xl" startIcon={<Sparkles />}>XL</Button>
+          </div>
+        </PreviewPane>
+        <CodeBlock>{`<Button iconSize="xs" startIcon={<Sparkles />}>XS</Button>
+<Button iconSize="sm" startIcon={<Sparkles />}>SM</Button>
+<Button iconSize="base" startIcon={<Sparkles />}>Base</Button>
+<Button iconSize="md" startIcon={<Sparkles />}>MD</Button>
+<Button iconSize="lg" startIcon={<Sparkles />}>LG</Button>
+<Button iconSize="xl" startIcon={<Sparkles />}>XL</Button>`}</CodeBlock>
+      </div>
+
+      {/* States */}
+      <div id="estados" className="mt-10 scroll-mt-20">
+        <Text as="h2" size="2xl" className="tracking-tight">
+          States
+        </Text>
+        <PreviewPane>
+          <div className="flex flex-wrap items-center justify-center gap-2.5">
+            <Button isLoading loadingText="Loading…" tapAnimation={false}>
               Loading
             </Button>
             <Button disabled>Disabled</Button>
@@ -95,28 +169,52 @@ export function ButtonSection() {
         </PreviewPane>
       </div>
 
-      {/* Icons */}
-      <div className="mt-10">
+      {/* Glow */}
+      <div id="glow" className="mt-10 scroll-mt-20">
         <Text as="h2" size="2xl" className="tracking-tight">
-          Iconos
+          Glow
+        </Text>
+        <PreviewPane>
+          <div className="flex flex-wrap items-center justify-center gap-2.5">
+            <Button glow>Primary</Button>
+            <Button glow color="info">Info</Button>
+            <Button glow color="success">Success</Button>
+            <Button glow color="warning">Warning</Button>
+            <Button glow color="error">Error</Button>
+            <Button glow variant="outline">Outline</Button>
+            <Button glow variant="ghost">Ghost</Button>
+            <Button glow elevated>Elevated + Glow</Button>
+          </div>
+        </PreviewPane>
+        <CodeBlock>{`<Button glow>Primary</Button>
+<Button glow color="info">Info</Button>
+<Button glow color="success">Success</Button>
+<Button glow variant="outline">Outline</Button>
+<Button glow elevated>Elevated + Glow</Button>`}</CodeBlock>
+      </div>
+
+      {/* Icons */}
+      <div id="iconos" className="mt-10 scroll-mt-20">
+        <Text as="h2" size="2xl" className="tracking-tight">
+          Icons
         </Text>
         <PreviewPane>
           <div className="flex flex-wrap items-center justify-center gap-2.5">
             <Button startIcon={<Download />}>startIcon</Button>
             <Button endIcon={<ArrowRight />}>endIcon</Button>
-            <Button startIcon={<Plus />} endIcon={<ArrowRight />}>Ambos</Button>
-            <Button variant="outline" startIcon={<Trash2 />} color="error">Eliminar</Button>
+            <Button startIcon={<Plus />} endIcon={<ArrowRight />}>Both</Button>
+            <Button variant="outline" startIcon={<Trash2 />} color="error">Delete</Button>
           </div>
         </PreviewPane>
-        <CodeBlock>{`<Button startIcon={<Download />}>Descargar</Button>
-<Button endIcon={<ArrowRight />}>Continuar</Button>
-<Button startIcon={<Plus />} endIcon={<ArrowRight />}>Ambos</Button>`}</CodeBlock>
+        <CodeBlock>{`<Button startIcon={<Download />}>Download</Button>
+<Button endIcon={<ArrowRight />}>Continue</Button>
+<Button startIcon={<Plus />} endIcon={<ArrowRight />}>Both</Button>`}</CodeBlock>
       </div>
 
       {/* Only icon */}
-      <div className="mt-10">
+      <div id="solo-icono" className="mt-10 scroll-mt-20">
         <Text as="h2" size="2xl" className="tracking-tight">
-          Solo icono
+          Icon Only
         </Text>
         <PreviewPane>
           <div className="flex flex-wrap items-center justify-center gap-2.5">
@@ -133,67 +231,152 @@ export function ButtonSection() {
       </div>
 
       {/* Tooltip */}
-      <div className="mt-10">
+      <div id="con-tooltip" className="mt-10 scroll-mt-20">
         <Text as="h2" size="2xl" className="tracking-tight">
-          Con tooltip
+          With Tooltip
         </Text>
         <PreviewPane>
           <div className="flex flex-wrap items-center justify-center gap-2.5">
-            <Button tooltip="Crear nuevo elemento">Nuevo</Button>
-            <Button icon={<Plus />} variant="outline" tooltip="Agregar ítem" />
-            <Button icon={<Trash2 />} color="error" variant="ghost" tooltip="Eliminar selección" />
-            <Button disabled tooltip="Necesitás permisos de admin">Admin only</Button>
+            <Button tooltip="Create new element">New</Button>
+            <Button icon={<Plus />} variant="outline" tooltip="Add item" />
+            <Button icon={<Trash2 />} color="error" variant="ghost" tooltip="Delete selection" />
+            <Button disabled tooltip="You need admin permissions">Admin only</Button>
           </div>
         </PreviewPane>
-        <CodeBlock>{`<Button tooltip="Crear nuevo elemento">Nuevo</Button>
-<Button icon={<Plus />} variant="outline" tooltip="Agregar ítem" />
+        <CodeBlock>{`<Button tooltip="Create new element">New</Button>
+<Button icon={<Plus />} variant="outline" tooltip="Add item" />
 
-// El tooltip funciona incluso con disabled
-<Button disabled tooltip="Necesitás permisos de admin">
+// Tooltip works even when disabled
+<Button disabled tooltip="You need admin permissions">
   Admin only
 </Button>`}</CodeBlock>
       </div>
 
-      {/* Installation */}
-      <div className="mt-12">
+      {/* Mobile */}
+      <div id="responsive" className="mt-10 scroll-mt-20">
         <Text as="h2" size="2xl" className="tracking-tight">
-          Instalación
+          Responsive
+        </Text>
+        <Text size="sm" color="muted" className="mt-1">
+          Resize the window to see the effect on mobile (&lt;640px).
+        </Text>
+        <PreviewPane>
+          <div className="flex flex-wrap items-center justify-center gap-2.5">
+            <Button mobile="only-icon" startIcon={<Plus />}>New</Button>
+            <Button mobile="full-width">Full width</Button>
+            <Button mobile="hidden">Desktop only</Button>
+          </div>
+        </PreviewPane>
+        <CodeBlock>{`// Text hidden on mobile, visible on sm+
+<Button mobile="only-icon" startIcon={<Plus />}>New</Button>
+
+// Full width on mobile, auto on sm+
+<Button mobile="full-width">Full width</Button>
+
+// Hidden on mobile, visible on sm+
+<Button mobile="hidden">Desktop only</Button>`}</CodeBlock>
+      </div>
+
+      {/* Custom class props */}
+      <div id="estilos-personalizados" className="mt-10 scroll-mt-20">
+        <Text as="h2" size="2xl" className="tracking-tight">
+          Custom Styles
+        </Text>
+        <Text size="sm" color="muted" className="mt-1">
+          Use <code>iconClassName</code> and <code>textClassName</code> to customize icons and text independently, without losing button variants.
+        </Text>
+        <PreviewPane>
+          <div className="flex flex-wrap items-center justify-center gap-2.5">
+            <Button startIcon={<Star />} iconClassName="text-yellow-400">
+              Favorite
+            </Button>
+            <Button
+              startIcon={<Sparkles />}
+              iconClassName="text-purple-400"
+              textClassName="italic font-light"
+              variant="outline"
+            >
+              Special
+            </Button>
+            <Button
+              startIcon={<Bell />}
+              iconClassName="text-blue-400"
+              textClassName="tracking-widest uppercase text-xs"
+              variant="outline"
+              color="info"
+            >
+              Notifications
+            </Button>
+            <Button icon={<Download />} iconClassName="text-green-400" variant="secondary" color="success" />
+          </div>
+        </PreviewPane>
+        <CodeBlock>{`// Icon with different color than text
+<Button startIcon={<Star />} iconClassName="text-yellow-400">
+  Favorite
+</Button>
+
+// Combining iconClassName and textClassName
+<Button
+  startIcon={<Sparkles />}
+  iconClassName="text-purple-400"
+  textClassName="italic font-light"
+  variant="outline"
+>
+  Special
+</Button>
+
+// Text with custom typographic style
+<Button
+  startIcon={<Bell />}
+  iconClassName="text-blue-400"
+  textClassName="tracking-widest uppercase text-xs"
+  variant="outline"
+  color="info"
+>
+  Notifications
+</Button>`}</CodeBlock>
+      </div>
+
+      {/* Installation */}
+      <div id="instalacion" className="mt-12 scroll-mt-20">
+        <Text as="h2" size="2xl" className="tracking-tight">
+          Installation
         </Text>
         <CodeBlock>{`$ npx shadcn@latest add https://lanzate-ui.vercel.app/r/button.json`}</CodeBlock>
       </div>
 
       {/* Usage */}
-      <div className="mt-10">
+      <div id="uso" className="mt-10 scroll-mt-20">
         <Text as="h2" size="2xl" className="tracking-tight">
-          Uso
+          Usage
         </Text>
         <CodeBlock>{`import { Button } from "@/components/ui/button";
 
-// Variante básica
-<Button>Despegar 🚀</Button>
+// Basic variant
+<Button>Take off 🚀</Button>
 
-// Con variante y color
+// With variant and color
 <Button variant="outline" color="success">
-  Confirmado
+  Confirmed
 </Button>
 
-// Con icono y estado loading
+// With icon and loading state
 <Button
   isLoading={isPending}
-  loadingText="Guardando..."
+  loadingText="Saving..."
   startIcon={<Save />}
 >
-  Guardar
+  Save
 </Button>
 
-// Elevado con tooltip
-<Button elevated tooltip="Acción principal">
-  Publicar
+// Elevated with tooltip
+<Button elevated tooltip="Main action">
+  Publish
 </Button>`}</CodeBlock>
       </div>
 
       {/* API */}
-      <div className="mt-10">
+      <div id="api" className="mt-10 scroll-mt-20">
         <Text as="h2" size="2xl" className="tracking-tight">
           API
         </Text>
@@ -203,67 +386,104 @@ export function ButtonSection() {
               prop: "variant",
               type: '"solid" | "outline" | "ghost" | "secondary" | "dashed" | "surface"',
               default: '"solid"',
-              description: "Estilo visual del botón.",
+              description: "Visual style of the button.",
             },
             {
               prop: "color",
               type: '"primary" | "secondary" | "muted" | "info" | "warning" | "success" | "error"',
               default: '"primary"',
-              description: "Color semántico del botón.",
+              description: "Semantic color of the button.",
             },
             {
               prop: "padding",
               type: '"none" | "xs" | "sm" | "base" | "md" | "lg" | "xl"',
               default: '"base"',
-              description: "Tamaño del padding y texto.",
+              description: "Padding and text size.",
+            },
+            {
+              prop: "radius",
+              type: '"none" | "sm" | "md" | "lg" | "xl" | "full"',
+              default: '"md"',
+              description: "Border radius of the button.",
+            },
+            {
+              prop: "textSize",
+              type: '"xs" | "sm" | "base" | "lg" | "xl" | "2xl" | "display"',
+              description: "Text size independent of padding.",
+            },
+            {
+              prop: "iconSize",
+              type: '"xs" | "sm" | "base" | "md" | "lg" | "xl"',
+              description: "Size of SVG icons in units relative to the text.",
             },
             {
               prop: "isLoading",
               type: "boolean",
               default: "false",
-              description: "Muestra spinner y deshabilita el botón.",
+              description: "Shows a spinner and disables the button.",
             },
             {
               prop: "loadingText",
               type: "string",
-              description: "Texto alternativo durante el estado loading.",
+              description: "Alternative text during the loading state.",
             },
             {
               prop: "startIcon",
               type: "ReactNode",
-              description: "Icono a la izquierda del texto.",
+              description: "Icon to the left of the text.",
             },
             {
               prop: "endIcon",
               type: "ReactNode",
-              description: "Icono a la derecha del texto.",
+              description: "Icon to the right of the text.",
             },
             {
               prop: "icon",
               type: "ReactNode",
-              description: "Icono centrado (convierte el botón en cuadrado).",
+              description: "Centered icon (converts the button to a square).",
             },
             {
               prop: "elevated",
               type: "boolean",
               default: "false",
-              description: "Aplica sombra y gradiente elevado.",
+              description: "Applies shadow and elevated gradient.",
+            },
+            {
+              prop: "glow",
+              type: "boolean",
+              default: "false",
+              description: "Applies a glow/neon effect using the button's color.",
             },
             {
               prop: "tooltip",
               type: "ReactNode",
-              description: "Contenido del tooltip al hacer hover.",
+              description: "Tooltip content on hover.",
             },
             {
               prop: "tapAnimation",
               type: "boolean",
               default: "true",
-              description: "Animación de escala al hacer click.",
+              description: "Scale animation on click.",
             },
             {
               prop: "mobile",
               type: '"only-icon" | "full-width" | "hidden"',
-              description: "Comportamiento responsive en mobile.",
+              description: "Responsive behavior on mobile.",
+            },
+            {
+              prop: "className",
+              type: "string",
+              description: "Additional classes for the root <button> element. Merged after variant classes.",
+            },
+            {
+              prop: "iconClassName",
+              type: "string",
+              description: "Classes applied to the wrapper of all icons (startIcon, endIcon, icon). Useful for changing color or size independently from the text.",
+            },
+            {
+              prop: "textClassName",
+              type: "string",
+              description: 'Classes applied to the text wrapper (children / loadingText). With mobile="only-icon" they are automatically merged with "hidden sm:inline".',
             },
           ]}
         />

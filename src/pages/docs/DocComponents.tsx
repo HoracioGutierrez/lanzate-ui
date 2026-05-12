@@ -63,7 +63,7 @@ export function ApiTable({ rows }: { rows: ApiRow[] }) {
       <table className="w-full border-collapse text-[13px]">
         <thead>
           <tr>
-            {["Prop", "Tipo", "Default", "Descripción"].map((h) => (
+            {["Prop", "Type", "Default", "Description"].map((h) => (
               <th
                 key={h}
                 className="text-left px-3.5 py-2.5 font-medium text-[11px] uppercase tracking-[0.04em] text-muted-foreground bg-muted/40 border-b border-border"
@@ -107,7 +107,7 @@ export function ApiTable({ rows }: { rows: ApiRow[] }) {
 export function SectionBadge({ number, isNew }: { number: string; isNew?: boolean }) {
   return (
     <div className="flex items-center gap-2 text-xs text-muted-foreground mb-2 font-mono">
-      COMPONENTE · {number}
+      COMPONENT · {number}
       {isNew && (
         <span className="text-[9px] font-mono px-1 py-0.5 rounded bg-brand/15 text-brand">
           NEW

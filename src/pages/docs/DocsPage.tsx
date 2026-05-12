@@ -21,9 +21,38 @@ const sectionComponents: Record<string, React.ComponentType> = {
 export function DocsPage() {
   const { section = "introduction" } = useParams()
   const [filter, setFilter] = useState("")
+  const [activeTocId, setActiveTocId] = useState("")
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior })
+  }, [section])
+
+  useEffect(() => {
+    const links = getTocLinks(section)
+    const ids = links.map((l) => l.href.slice(1)).filter(Boolean)
+    if (ids.length === 0) return
+
+    const onScroll = () => {
+      const HEADER_OFFSET = 80
+      let currentId = ids[0]
+      for (const id of ids) {
+        const el = document.getElementById(id)
+        if (!el) continue
+        if (el.getBoundingClientRect().top <= HEADER_OFFSET) {
+          currentId = id
+        } else {
+          break
+        }
+      }
+      setActiveTocId(currentId)
+    }
+
+    const timer = setTimeout(onScroll, 0)
+    window.addEventListener("scroll", onScroll, { passive: true })
+    return () => {
+      clearTimeout(timer)
+      window.removeEventListener("scroll", onScroll)
+    }
   }, [section])
 
   const currentIndex = allSections.findIndex((s) => s.id === section)
@@ -57,7 +86,7 @@ export function DocsPage() {
               <div className="mb-5">
                 <input
                   type="text"
-                  placeholder="Filtrar..."
+                  placeholder="Filter..."
                   value={filter}
                   onChange={(e) => setFilter(e.target.value)}
                   className="w-full h-8 pl-3 pr-2 text-xs rounded-md border border-input bg-background focus:outline-none focus:ring-2 focus:ring-ring/30 placeholder:text-muted-foreground"
@@ -111,7 +140,7 @@ export function DocsPage() {
 
                 {filter && totalVisible === 0 && (
                   <p className="px-2 text-xs text-muted-foreground">
-                    Sin resultados para "{filter}".
+                    No results for "{filter}".
                   </p>
                 )}
               </div>
@@ -144,7 +173,7 @@ export function DocsPage() {
                   to={`/docs/${prev.id}`}
                   className="flex-1 max-w-xs rounded-lg border border-border bg-card p-4 hover:bg-accent transition"
                 >
-                  <div className="text-[11px] text-muted-foreground">← Anterior</div>
+                  <div className="text-[11px] text-muted-foreground">← Previous</div>
                   <div className="text-sm font-medium mt-0.5">{prev.label}</div>
                 </Link>
               ) : (
@@ -156,7 +185,7 @@ export function DocsPage() {
                   to={`/docs/${next.id}`}
                   className="flex-1 max-w-xs text-right rounded-lg border border-border bg-card p-4 hover:bg-accent transition"
                 >
-                  <div className="text-[11px] text-muted-foreground">Siguiente →</div>
+                  <div className="text-[11px] text-muted-foreground">Next →</div>
                   <div className="text-sm font-medium mt-0.5">{next.label}</div>
                 </Link>
               ) : (
@@ -168,23 +197,39 @@ export function DocsPage() {
           {/* ===== TOC RIGHT ===== */}
           <aside className="hidden xl:block w-48 shrink-0 sticky top-14 self-start h-[calc(100vh-3.5rem)] py-10">
             <div className="text-[11px] font-mono uppercase tracking-wider text-muted-foreground/70 mb-3 px-1">
-              En esta página
+              On this page
             </div>
             <nav className="space-y-px">
-              {getTocLinks(section).map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  className="block text-[13px] text-muted-foreground border-l-2 border-transparent px-3 py-1 hover:text-foreground hover:border-border transition"
-                >
-                  {link.label}
-                </a>
-              ))}
+              {getTocLinks(section).map((link) => {
+                const id = link.href.slice(1)
+                const isActive = activeTocId === id
+                return (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      const el = document.getElementById(id)
+                      if (el) {
+                        const top = el.getBoundingClientRect().top + window.scrollY - 80
+                        window.scrollTo({ top, behavior: "smooth" })
+                      }
+                    }}
+                    className={`block text-[13px] border-l-2 px-3 py-1 transition ${
+                      isActive
+                        ? "border-brand text-foreground"
+                        : "text-muted-foreground border-transparent hover:text-foreground hover:border-border"
+                    }`}
+                  >
+                    {link.label}
+                  </a>
+                )
+              })}
             </nav>
 
             <div className="mt-8 mx-1 p-3 rounded-lg border border-border bg-card">
               <div className="text-[11px] font-mono uppercase tracking-wide text-muted-foreground">
-                Editar
+                Edit
               </div>
               <a
                 href="https://github.com/HoracioGutierrez/lanzate-ui"
@@ -192,7 +237,7 @@ export function DocsPage() {
                 rel="noopener noreferrer"
                 className="mt-1.5 inline-flex items-center gap-1.5 text-xs font-medium hover:text-brand transition"
               >
-                Mejorar esta página
+                Improve this page
                 <svg
                   width="11"
                   height="11"
@@ -216,48 +261,59 @@ export function DocsPage() {
 function getTocLinks(section: string): { label: string; href: string }[] {
   const tocMap: Record<string, { label: string; href: string }[]> = {
     introduction: [
-      { label: "¿Qué es Lanzate UI?", href: "#" },
-      { label: "Filosofía", href: "#" },
+      { label: "What is Lanzate UI?", href: "#" },
+      { label: "Philosophy", href: "#" },
       { label: "Stack", href: "#" },
     ],
     installation: [
-      { label: "Configura shadcn/ui", href: "#" },
-      { label: "Añade un componente", href: "#" },
-      { label: "Importa y usa", href: "#" },
-      { label: "Requisitos", href: "#" },
+      { label: "Set up shadcn/ui", href: "#" },
+      { label: "Add a component", href: "#" },
+      { label: "Import and use", href: "#" },
+      { label: "Requirements", href: "#" },
     ],
     theming: [
-      { label: "Variables CSS", href: "#" },
-      { label: "Tipografía fluida", href: "#" },
-      { label: "Personalizar colores", href: "#" },
+      { label: "CSS Variables", href: "#" },
+      { label: "Fluid Typography", href: "#" },
+      { label: "Tailwind Color Mappings", href: "#" },
+      { label: "Customize Colors", href: "#" },
       { label: "Dark mode", href: "#" },
     ],
     button: [
-      { label: "Vista previa", href: "#" },
-      { label: "Colores", href: "#" },
-      { label: "Tamaños", href: "#" },
-      { label: "Estados", href: "#" },
-      { label: "Instalación", href: "#" },
-      { label: "Uso", href: "#" },
-      { label: "API", href: "#" },
+      { label: "Preview",        href: "#vista-previa" },
+      { label: "Colors",         href: "#colores" },
+      { label: "Sizes",          href: "#tamanos" },
+      { label: "Radius",         href: "#redondeado" },
+      { label: "Text Size",      href: "#tamano-de-texto" },
+      { label: "Icon Size",      href: "#tamano-de-icono" },
+      { label: "States",         href: "#estados" },
+      { label: "Icons",          href: "#iconos" },
+      { label: "Icon Only",      href: "#solo-icono" },
+      { label: "With Tooltip",   href: "#con-tooltip" },
+      { label: "Responsive",     href: "#responsive" },
+      { label: "Custom Styles",  href: "#estilos-personalizados" },
+      { label: "Installation",   href: "#instalacion" },
+      { label: "Usage",          href: "#uso" },
+      { label: "API",            href: "#api" },
     ],
     text: [
-      { label: "Tamaños", href: "#" },
-      { label: "Colores", href: "#" },
-      { label: "Instalación", href: "#" },
-      { label: "Uso", href: "#" },
-      { label: "API", href: "#" },
+      { label: "Sizes",          href: "#tamanos" },
+      { label: "Colors",         href: "#colores" },
+      { label: "HTML Element",   href: "#elemento-html" },
+      { label: "Customization",  href: "#personalizacion" },
+      { label: "Installation",   href: "#instalacion" },
+      { label: "Usage",          href: "#uso" },
+      { label: "API",            href: "#api" },
     ],
     "scroll-area": [
-      { label: "Vista previa", href: "#" },
-      { label: "Instalación", href: "#" },
-      { label: "Uso", href: "#" },
+      { label: "Preview", href: "#" },
+      { label: "Installation", href: "#" },
+      { label: "Usage", href: "#" },
       { label: "API", href: "#" },
     ],
     tooltip: [
-      { label: "Vista previa", href: "#" },
-      { label: "Instalación", href: "#" },
-      { label: "Uso", href: "#" },
+      { label: "Preview", href: "#" },
+      { label: "Installation", href: "#" },
+      { label: "Usage", href: "#" },
       { label: "API", href: "#" },
     ],
   }
