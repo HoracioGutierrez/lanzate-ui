@@ -274,6 +274,7 @@ function getTocLinks(section: string): { label: string; href: string }[] {
     theming: [
       { label: "CSS Variables", href: "#" },
       { label: "Fluid Typography", href: "#" },
+      { label: "Tailwind Color Mappings", href: "#" },
       { label: "Customize Colors", href: "#" },
       { label: "Dark mode", href: "#" },
     ],
