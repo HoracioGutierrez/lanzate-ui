@@ -11,7 +11,7 @@ export function TextSection() {
       <Text size="lg" color="muted" className="mt-3 max-w-2xl leading-relaxed">
         Componente tipográfico polimórfico. 7 tamaños fluidos con{" "}
         <code className="font-mono text-sm bg-muted px-1.5 py-0.5 rounded">clamp()</code>, 9
-        colores semánticos y soporte para cualquier etiqueta HTML.
+        colores semánticos. Renderiza como p, span, label o heading (h1–h4).
       </Text>
 
       <div className="mt-6 flex items-center gap-2 text-xs">

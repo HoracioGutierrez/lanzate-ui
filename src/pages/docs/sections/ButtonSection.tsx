@@ -11,8 +11,8 @@ export function ButtonSection() {
         Button
       </Text>
       <Text size="lg" color="muted" className="mt-3 max-w-2xl leading-relaxed">
-        El componente más fundamental. 6 variantes, 7 colores, tamaños, estado de loading y soporte
-        para iconos.
+        6 variantes de estilo, 7 colores semánticos, efectos elevated y glow, estado de carga con
+        spinner, iconos y tooltip.
       </Text>
 
       <div className="mt-6 flex items-center gap-2 text-xs">
