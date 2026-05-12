@@ -5,43 +5,42 @@ export function InstallationSection() {
   return (
     <div>
       <Text as="h1" size="display" className="tracking-tight">
-        Instalación
+        Installation
       </Text>
       <Text size="lg" color="muted" className="mt-3 max-w-2xl leading-relaxed">
-        Lanzate UI funciona con cualquier stack que use React + Tailwind. Añade componentes
-        directamente a tu proyecto con el CLI de shadcn.
+        Lanzate UI works with any stack using React + Tailwind. Add components directly to your
+        project with the shadcn CLI.
       </Text>
 
       <div className="mt-10 space-y-10 max-w-2xl">
         <div>
           <Text as="h2" size="2xl" className="tracking-tight">
-            1. Configura shadcn/ui
+            1. Set up shadcn/ui
           </Text>
           <Text color="muted" className="mt-2 leading-relaxed">
-            Si aún no lo tienes, inicializa shadcn/ui en tu proyecto. Esto crea el archivo{" "}
+            If you don't have it yet, initialize shadcn/ui in your project. This creates the{" "}
             <code className="font-mono text-sm bg-muted px-1.5 py-0.5 rounded">
               components.json
             </code>{" "}
-            y configura los paths y alias necesarios.
+            file and sets up the required paths and aliases.
           </Text>
           <CodeBlock>{`$ npx shadcn@latest init`}</CodeBlock>
         </div>
 
         <div>
           <Text as="h2" size="2xl" className="tracking-tight">
-            2. Añade un componente
+            2. Add a component
           </Text>
           <Text color="muted" className="mt-2 leading-relaxed">
-            Usa el CLI para copiar componentes directamente desde el registry de Lanzate UI a tu
-            proyecto.
+            Use the CLI to copy components directly from the Lanzate UI registry into your project.
           </Text>
-          <CodeBlock>{`# Añadir el componente Button
+          <CodeBlock>{`# Add the Button component
 $ npx shadcn@latest add https://lanzate-ui.vercel.app/r/button.json
 
-# Añadir el componente Text
+# Add the Text component
 $ npx shadcn@latest add https://lanzate-ui.vercel.app/r/text.json
 
-# Añadir múltiples a la vez
+# Add multiple at once
 $ npx shadcn@latest add \\
   https://lanzate-ui.vercel.app/r/button.json \\
   https://lanzate-ui.vercel.app/r/text.json`}</CodeBlock>
@@ -49,14 +48,14 @@ $ npx shadcn@latest add \\
 
         <div>
           <Text as="h2" size="2xl" className="tracking-tight">
-            3. Importa y usa
+            3. Import and use
           </Text>
           <Text color="muted" className="mt-2 leading-relaxed">
-            Los componentes se copian a{" "}
+            Components are copied to{" "}
             <code className="font-mono text-sm bg-muted px-1.5 py-0.5 rounded">
               src/components/ui/
             </code>
-            . Importalos directamente.
+            . Import them directly.
           </Text>
           <CodeBlock>{`// app/page.tsx
 import { Button } from "@/components/ui/button";
@@ -65,7 +64,7 @@ import { Text } from "@/components/ui/text";
 export default function Page() {
   return (
     <div>
-      <Text as="h1" size="2xl">¡Despegando!</Text>
+      <Text as="h1" size="2xl">Taking off!</Text>
       <Button>Get Started</Button>
     </div>
   );
@@ -74,14 +73,14 @@ export default function Page() {
 
         <div>
           <Text as="h2" size="2xl" className="tracking-tight">
-            Requisitos
+            Requirements
           </Text>
           <div className="mt-3 grid sm:grid-cols-2 gap-3">
             {[
-              { label: "React", value: "18 o superior" },
-              { label: "Tailwind CSS", value: "v4 recomendado" },
-              { label: "TypeScript", value: "Opcional pero recomendado" },
-              { label: "shadcn/ui CLI", value: "Para instalar componentes" },
+              { label: "React", value: "18 or higher" },
+              { label: "Tailwind CSS", value: "v4 recommended" },
+              { label: "TypeScript", value: "Optional but recommended" },
+              { label: "shadcn/ui CLI", value: "To install components" },
             ].map((req) => (
               <div
                 key={req.label}

@@ -8,22 +8,22 @@ export function ThemingSection() {
         Theming
       </Text>
       <Text size="lg" color="muted" className="mt-3 max-w-2xl leading-relaxed">
-        Tokens basados en variables CSS en espacio de color{" "}
-        <code className="font-mono text-sm bg-muted px-1.5 py-0.5 rounded">oklch()</code>.
-        Sobreescríbelos en tu{" "}
+        CSS variable-based tokens in the{" "}
+        <code className="font-mono text-sm bg-muted px-1.5 py-0.5 rounded">oklch()</code> color
+        space. Override them in your{" "}
         <code className="font-mono text-sm bg-muted px-1.5 py-0.5 rounded">globals.css</code>.
       </Text>
 
       <div className="mt-10 space-y-10 max-w-2xl">
         <div>
           <Text as="h2" size="2xl" className="tracking-tight">
-            Variables CSS
+            CSS Variables
           </Text>
           <Text color="muted" className="mt-2 leading-relaxed">
-            Todos los tokens se definen en{" "}
-            <code className="font-mono text-sm bg-muted px-1.5 py-0.5 rounded">:root</code> con
-            soporte dark mode vía clase{" "}
-            <code className="font-mono text-sm bg-muted px-1.5 py-0.5 rounded">.dark</code>.
+            All tokens are defined in{" "}
+            <code className="font-mono text-sm bg-muted px-1.5 py-0.5 rounded">:root</code> with
+            dark mode support via the{" "}
+            <code className="font-mono text-sm bg-muted px-1.5 py-0.5 rounded">.dark</code> class.
           </Text>
           <CodeBlock>{`:root {
   /* Base */
@@ -62,12 +62,12 @@ export function ThemingSection() {
 
         <div>
           <Text as="h2" size="2xl" className="tracking-tight">
-            Tipografía fluida
+            Fluid Typography
           </Text>
           <Text color="muted" className="mt-2 leading-relaxed">
-            Los tamaños de texto usan{" "}
-            <code className="font-mono text-sm bg-muted px-1.5 py-0.5 rounded">clamp()</code> para
-            escalar automáticamente sin breakpoints.
+            Text sizes use{" "}
+            <code className="font-mono text-sm bg-muted px-1.5 py-0.5 rounded">clamp()</code> to
+            scale automatically without breakpoints.
           </Text>
           <CodeBlock>{`@theme {
   --text-xs:      clamp(0.75rem, 0.72rem + 0.14vw, 0.875rem);
@@ -82,14 +82,13 @@ export function ThemingSection() {
 
         <div>
           <Text as="h2" size="2xl" className="tracking-tight">
-            Personalizar colores
+            Customize Colors
           </Text>
           <Text color="muted" className="mt-2 leading-relaxed">
-            Sobreescribe cualquier token en tu CSS global. Para cambiar el color brand a azul, por
-            ejemplo:
+            Override any token in your global CSS. For example, to change the brand color to blue:
           </Text>
           <CodeBlock>{`:root {
-  --brand: oklch(0.6 0.2 240);   /* azul */
+  --brand: oklch(0.6 0.2 240);   /* blue */
   --brand-foreground: oklch(1 0 0);
 }`}</CodeBlock>
         </div>
@@ -99,13 +98,13 @@ export function ThemingSection() {
             Dark mode
           </Text>
           <Text color="muted" className="mt-2 leading-relaxed">
-            El dark mode se activa añadiendo la clase{" "}
-            <code className="font-mono text-sm bg-muted px-1.5 py-0.5 rounded">.dark</code> al
-            elemento{" "}
+            Dark mode is activated by adding the{" "}
+            <code className="font-mono text-sm bg-muted px-1.5 py-0.5 rounded">.dark</code> class
+            to the{" "}
             <code className="font-mono text-sm bg-muted px-1.5 py-0.5 rounded">
               &lt;html&gt;
-            </code>
-            . El Header lo gestiona automáticamente y persiste en{" "}
+            </code>{" "}
+            element. The Header manages it automatically and persists in{" "}
             <code className="font-mono text-sm bg-muted px-1.5 py-0.5 rounded">
               localStorage
             </code>

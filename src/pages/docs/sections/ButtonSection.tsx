@@ -11,8 +11,8 @@ export function ButtonSection() {
         Button
       </Text>
       <Text size="lg" color="muted" className="mt-3 max-w-2xl leading-relaxed">
-        6 variantes de estilo, 7 colores semánticos, efectos elevated y glow, estado de carga con
-        spinner, iconos y tooltip.
+        6 style variants, 7 semantic colors, elevated and glow effects, loading state with spinner,
+        icons, and tooltip.
       </Text>
 
       <div className="mt-6 flex items-center gap-2 text-xs">
@@ -29,7 +29,7 @@ export function ButtonSection() {
       {/* Preview */}
       <div id="vista-previa" className="mt-8 scroll-mt-20">
         <Text as="h2" size="2xl" className="tracking-tight">
-          Vista previa
+          Preview
         </Text>
         <PreviewPane>
           <div className="flex flex-wrap items-center justify-center gap-2.5">
@@ -46,7 +46,7 @@ export function ButtonSection() {
       {/* Colors */}
       <div id="colores" className="mt-10 scroll-mt-20">
         <Text as="h2" size="2xl" className="tracking-tight">
-          Colores
+          Colors
         </Text>
         <PreviewPane>
           <div className="flex flex-wrap items-center justify-center gap-2.5">
@@ -64,7 +64,7 @@ export function ButtonSection() {
       {/* Sizes */}
       <div id="tamanos" className="mt-10 scroll-mt-20">
         <Text as="h2" size="2xl" className="tracking-tight">
-          Tamaños
+          Sizes
         </Text>
         <PreviewPane>
           <div className="flex flex-wrap items-end justify-center gap-2.5">
@@ -82,7 +82,7 @@ export function ButtonSection() {
       {/* Radius */}
       <div id="redondeado" className="mt-10 scroll-mt-20">
         <Text as="h2" size="2xl" className="tracking-tight">
-          Redondeado
+          Radius
         </Text>
         <PreviewPane>
           <div className="flex flex-wrap items-center justify-center gap-2.5">
@@ -107,7 +107,7 @@ export function ButtonSection() {
       {/* Text Size */}
       <div id="tamano-de-texto" className="mt-10 scroll-mt-20">
         <Text as="h2" size="2xl" className="tracking-tight">
-          Tamaño de texto
+          Text Size
         </Text>
         <PreviewPane>
           <div className="flex flex-wrap items-end justify-center gap-2.5">
@@ -132,7 +132,7 @@ export function ButtonSection() {
       {/* Icon Size */}
       <div id="tamano-de-icono" className="mt-10 scroll-mt-20">
         <Text as="h2" size="2xl" className="tracking-tight">
-          Tamaño de icono
+          Icon Size
         </Text>
         <PreviewPane>
           <div className="flex flex-wrap items-center justify-center gap-2.5">
@@ -155,11 +155,11 @@ export function ButtonSection() {
       {/* States */}
       <div id="estados" className="mt-10 scroll-mt-20">
         <Text as="h2" size="2xl" className="tracking-tight">
-          Estados
+          States
         </Text>
         <PreviewPane>
           <div className="flex flex-wrap items-center justify-center gap-2.5">
-            <Button isLoading loadingText="Cargando…" tapAnimation={false}>
+            <Button isLoading loadingText="Loading…" tapAnimation={false}>
               Loading
             </Button>
             <Button disabled>Disabled</Button>
@@ -196,25 +196,25 @@ export function ButtonSection() {
       {/* Icons */}
       <div id="iconos" className="mt-10 scroll-mt-20">
         <Text as="h2" size="2xl" className="tracking-tight">
-          Iconos
+          Icons
         </Text>
         <PreviewPane>
           <div className="flex flex-wrap items-center justify-center gap-2.5">
             <Button startIcon={<Download />}>startIcon</Button>
             <Button endIcon={<ArrowRight />}>endIcon</Button>
-            <Button startIcon={<Plus />} endIcon={<ArrowRight />}>Ambos</Button>
-            <Button variant="outline" startIcon={<Trash2 />} color="error">Eliminar</Button>
+            <Button startIcon={<Plus />} endIcon={<ArrowRight />}>Both</Button>
+            <Button variant="outline" startIcon={<Trash2 />} color="error">Delete</Button>
           </div>
         </PreviewPane>
-        <CodeBlock>{`<Button startIcon={<Download />}>Descargar</Button>
-<Button endIcon={<ArrowRight />}>Continuar</Button>
-<Button startIcon={<Plus />} endIcon={<ArrowRight />}>Ambos</Button>`}</CodeBlock>
+        <CodeBlock>{`<Button startIcon={<Download />}>Download</Button>
+<Button endIcon={<ArrowRight />}>Continue</Button>
+<Button startIcon={<Plus />} endIcon={<ArrowRight />}>Both</Button>`}</CodeBlock>
       </div>
 
       {/* Only icon */}
       <div id="solo-icono" className="mt-10 scroll-mt-20">
         <Text as="h2" size="2xl" className="tracking-tight">
-          Solo icono
+          Icon Only
         </Text>
         <PreviewPane>
           <div className="flex flex-wrap items-center justify-center gap-2.5">
@@ -233,21 +233,21 @@ export function ButtonSection() {
       {/* Tooltip */}
       <div id="con-tooltip" className="mt-10 scroll-mt-20">
         <Text as="h2" size="2xl" className="tracking-tight">
-          Con tooltip
+          With Tooltip
         </Text>
         <PreviewPane>
           <div className="flex flex-wrap items-center justify-center gap-2.5">
-            <Button tooltip="Crear nuevo elemento">Nuevo</Button>
-            <Button icon={<Plus />} variant="outline" tooltip="Agregar ítem" />
-            <Button icon={<Trash2 />} color="error" variant="ghost" tooltip="Eliminar selección" />
-            <Button disabled tooltip="Necesitás permisos de admin">Admin only</Button>
+            <Button tooltip="Create new element">New</Button>
+            <Button icon={<Plus />} variant="outline" tooltip="Add item" />
+            <Button icon={<Trash2 />} color="error" variant="ghost" tooltip="Delete selection" />
+            <Button disabled tooltip="You need admin permissions">Admin only</Button>
           </div>
         </PreviewPane>
-        <CodeBlock>{`<Button tooltip="Crear nuevo elemento">Nuevo</Button>
-<Button icon={<Plus />} variant="outline" tooltip="Agregar ítem" />
+        <CodeBlock>{`<Button tooltip="Create new element">New</Button>
+<Button icon={<Plus />} variant="outline" tooltip="Add item" />
 
-// El tooltip funciona incluso con disabled
-<Button disabled tooltip="Necesitás permisos de admin">
+// Tooltip works even when disabled
+<Button disabled tooltip="You need admin permissions">
   Admin only
 </Button>`}</CodeBlock>
       </div>
@@ -258,37 +258,37 @@ export function ButtonSection() {
           Responsive
         </Text>
         <Text size="sm" color="muted" className="mt-1">
-          Redimensioná la ventana para ver el efecto en mobile (&lt;640px).
+          Resize the window to see the effect on mobile (&lt;640px).
         </Text>
         <PreviewPane>
           <div className="flex flex-wrap items-center justify-center gap-2.5">
-            <Button mobile="only-icon" startIcon={<Plus />}>Nuevo</Button>
-            <Button mobile="full-width">Ancho completo</Button>
-            <Button mobile="hidden">Solo escritorio</Button>
+            <Button mobile="only-icon" startIcon={<Plus />}>New</Button>
+            <Button mobile="full-width">Full width</Button>
+            <Button mobile="hidden">Desktop only</Button>
           </div>
         </PreviewPane>
-        <CodeBlock>{`// Texto oculto en mobile, visible en sm+
-<Button mobile="only-icon" startIcon={<Plus />}>Nuevo</Button>
+        <CodeBlock>{`// Text hidden on mobile, visible on sm+
+<Button mobile="only-icon" startIcon={<Plus />}>New</Button>
 
-// Ancho completo en mobile, automático en sm+
-<Button mobile="full-width">Ancho completo</Button>
+// Full width on mobile, auto on sm+
+<Button mobile="full-width">Full width</Button>
 
-// Oculto en mobile, visible en sm+
-<Button mobile="hidden">Solo escritorio</Button>`}</CodeBlock>
+// Hidden on mobile, visible on sm+
+<Button mobile="hidden">Desktop only</Button>`}</CodeBlock>
       </div>
 
       {/* Custom class props */}
       <div id="estilos-personalizados" className="mt-10 scroll-mt-20">
         <Text as="h2" size="2xl" className="tracking-tight">
-          Estilos personalizados
+          Custom Styles
         </Text>
         <Text size="sm" color="muted" className="mt-1">
-          Usá <code>iconClassName</code> y <code>textClassName</code> para customizar íconos y texto de forma independiente, sin perder las variantes del botón.
+          Use <code>iconClassName</code> and <code>textClassName</code> to customize icons and text independently, without losing button variants.
         </Text>
         <PreviewPane>
           <div className="flex flex-wrap items-center justify-center gap-2.5">
             <Button startIcon={<Star />} iconClassName="text-yellow-400">
-              Favorito
+              Favorite
             </Button>
             <Button
               startIcon={<Sparkles />}
@@ -296,7 +296,7 @@ export function ButtonSection() {
               textClassName="italic font-light"
               variant="outline"
             >
-              Especial
+              Special
             </Button>
             <Button
               startIcon={<Bell />}
@@ -305,27 +305,27 @@ export function ButtonSection() {
               variant="outline"
               color="info"
             >
-              Notificaciones
+              Notifications
             </Button>
             <Button icon={<Download />} iconClassName="text-green-400" variant="secondary" color="success" />
           </div>
         </PreviewPane>
-        <CodeBlock>{`// Ícono con color distinto al texto
+        <CodeBlock>{`// Icon with different color than text
 <Button startIcon={<Star />} iconClassName="text-yellow-400">
-  Favorito
+  Favorite
 </Button>
 
-// Combinando iconClassName y textClassName
+// Combining iconClassName and textClassName
 <Button
   startIcon={<Sparkles />}
   iconClassName="text-purple-400"
   textClassName="italic font-light"
   variant="outline"
 >
-  Especial
+  Special
 </Button>
 
-// Texto con estilo tipográfico personalizado
+// Text with custom typographic style
 <Button
   startIcon={<Bell />}
   iconClassName="text-blue-400"
@@ -333,14 +333,14 @@ export function ButtonSection() {
   variant="outline"
   color="info"
 >
-  Notificaciones
+  Notifications
 </Button>`}</CodeBlock>
       </div>
 
       {/* Installation */}
       <div id="instalacion" className="mt-12 scroll-mt-20">
         <Text as="h2" size="2xl" className="tracking-tight">
-          Instalación
+          Installation
         </Text>
         <CodeBlock>{`$ npx shadcn@latest add https://lanzate-ui.vercel.app/r/button.json`}</CodeBlock>
       </div>
@@ -348,30 +348,30 @@ export function ButtonSection() {
       {/* Usage */}
       <div id="uso" className="mt-10 scroll-mt-20">
         <Text as="h2" size="2xl" className="tracking-tight">
-          Uso
+          Usage
         </Text>
         <CodeBlock>{`import { Button } from "@/components/ui/button";
 
-// Variante básica
-<Button>Despegar 🚀</Button>
+// Basic variant
+<Button>Take off 🚀</Button>
 
-// Con variante y color
+// With variant and color
 <Button variant="outline" color="success">
-  Confirmado
+  Confirmed
 </Button>
 
-// Con icono y estado loading
+// With icon and loading state
 <Button
   isLoading={isPending}
-  loadingText="Guardando..."
+  loadingText="Saving..."
   startIcon={<Save />}
 >
-  Guardar
+  Save
 </Button>
 
-// Elevado con tooltip
-<Button elevated tooltip="Acción principal">
-  Publicar
+// Elevated with tooltip
+<Button elevated tooltip="Main action">
+  Publish
 </Button>`}</CodeBlock>
       </div>
 
@@ -386,104 +386,104 @@ export function ButtonSection() {
               prop: "variant",
               type: '"solid" | "outline" | "ghost" | "secondary" | "dashed" | "surface"',
               default: '"solid"',
-              description: "Estilo visual del botón.",
+              description: "Visual style of the button.",
             },
             {
               prop: "color",
               type: '"primary" | "secondary" | "muted" | "info" | "warning" | "success" | "error"',
               default: '"primary"',
-              description: "Color semántico del botón.",
+              description: "Semantic color of the button.",
             },
             {
               prop: "padding",
               type: '"none" | "xs" | "sm" | "base" | "md" | "lg" | "xl"',
               default: '"base"',
-              description: "Tamaño del padding y texto.",
+              description: "Padding and text size.",
             },
             {
               prop: "radius",
               type: '"none" | "sm" | "md" | "lg" | "xl" | "full"',
               default: '"md"',
-              description: "Redondeado del borde del botón.",
+              description: "Border radius of the button.",
             },
             {
               prop: "textSize",
               type: '"xs" | "sm" | "base" | "lg" | "xl" | "2xl" | "display"',
-              description: "Tamaño de texto independiente del padding.",
+              description: "Text size independent of padding.",
             },
             {
               prop: "iconSize",
               type: '"xs" | "sm" | "base" | "md" | "lg" | "xl"',
-              description: "Tamaño de los íconos SVG en unidades relativas al texto.",
+              description: "Size of SVG icons in units relative to the text.",
             },
             {
               prop: "isLoading",
               type: "boolean",
               default: "false",
-              description: "Muestra spinner y deshabilita el botón.",
+              description: "Shows a spinner and disables the button.",
             },
             {
               prop: "loadingText",
               type: "string",
-              description: "Texto alternativo durante el estado loading.",
+              description: "Alternative text during the loading state.",
             },
             {
               prop: "startIcon",
               type: "ReactNode",
-              description: "Icono a la izquierda del texto.",
+              description: "Icon to the left of the text.",
             },
             {
               prop: "endIcon",
               type: "ReactNode",
-              description: "Icono a la derecha del texto.",
+              description: "Icon to the right of the text.",
             },
             {
               prop: "icon",
               type: "ReactNode",
-              description: "Icono centrado (convierte el botón en cuadrado).",
+              description: "Centered icon (converts the button to a square).",
             },
             {
               prop: "elevated",
               type: "boolean",
               default: "false",
-              description: "Aplica sombra y gradiente elevado.",
+              description: "Applies shadow and elevated gradient.",
             },
             {
               prop: "glow",
               type: "boolean",
               default: "false",
-              description: "Aplica efecto de glow/neon usando el color del botón.",
+              description: "Applies a glow/neon effect using the button's color.",
             },
             {
               prop: "tooltip",
               type: "ReactNode",
-              description: "Contenido del tooltip al hacer hover.",
+              description: "Tooltip content on hover.",
             },
             {
               prop: "tapAnimation",
               type: "boolean",
               default: "true",
-              description: "Animación de escala al hacer click.",
+              description: "Scale animation on click.",
             },
             {
               prop: "mobile",
               type: '"only-icon" | "full-width" | "hidden"',
-              description: "Comportamiento responsive en mobile.",
+              description: "Responsive behavior on mobile.",
             },
             {
               prop: "className",
               type: "string",
-              description: "Clases adicionales para el elemento <button> raíz. Se mergean después de las clases de variantes.",
+              description: "Additional classes for the root <button> element. Merged after variant classes.",
             },
             {
               prop: "iconClassName",
               type: "string",
-              description: "Clases aplicadas al wrapper de todos los íconos (startIcon, endIcon, icon). Útil para cambiar color o tamaño de forma independiente al texto.",
+              description: "Classes applied to the wrapper of all icons (startIcon, endIcon, icon). Useful for changing color or size independently from the text.",
             },
             {
               prop: "textClassName",
               type: "string",
-              description: 'Clases aplicadas al wrapper del texto (children / loadingText). En mobile="only-icon" se mergean automáticamente con "hidden sm:inline".',
+              description: 'Classes applied to the text wrapper (children / loadingText). With mobile="only-icon" they are automatically merged with "hidden sm:inline".',
             },
           ]}
         />

@@ -375,7 +375,7 @@ export function HomePage() {
 
             <div className="mt-8 flex justify-center">
               <Button endIcon={<ArrowRight size={14} />} onClick={() => navigate("/docs")}>
-                Ir a documentación
+                Go to docs
               </Button>
             </div>
           </div>
