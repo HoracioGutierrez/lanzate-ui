@@ -178,6 +178,27 @@ test("placement sets the wrapper's position", () => {
   expect(wrapper().className).not.toContain("fixed")
 })
 
+test("marks which edges have hidden options as the toolbar scrolls", () => {
+  render(<Editor />)
+  const toolbar = screen.getByRole("toolbar", { name: "Editor" })
+  Object.defineProperty(toolbar, "scrollWidth", { configurable: true, value: 300 })
+  Object.defineProperty(toolbar, "clientWidth", { configurable: true, value: 200 })
+  const scrollTo = (left: number) => {
+    toolbar.scrollLeft = left
+    toolbar.dispatchEvent(new Event("scroll"))
+  }
+  const edges = () => [toolbar.hasAttribute("data-more-start"), toolbar.hasAttribute("data-more-end")]
+
+  scrollTo(0)
+  expect(edges()).toEqual([false, true])
+  scrollTo(50)
+  expect(edges()).toEqual([true, true])
+  scrollTo(100)
+  expect(edges()).toEqual([true, false])
+  expect(toolbar.parentElement?.getAttribute("data-slot")).toBe("floating-toolbar-surface")
+  expect(toolbar.className).not.toContain("bg-popover")
+})
+
 test("an agent can find every option and run items at both levels", async () => {
   render(<Editor />)
   await tick()

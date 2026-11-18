@@ -14,9 +14,9 @@ export const floatingToolbarSurfaceClasses =
 // and roving focus scrolls the focused item into view.
 export const floatingToolbarClasses = [
   "flex max-w-full min-w-0 items-center gap-1 overflow-x-auto overscroll-x-contain rounded-full p-1.5",
-  "scroll-px-10 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden",
+  "scroll-px-16 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden",
   // With the scrollbar hidden, these fades are the only cue that more items exist past an edge.
-  "data-more-start:mask-l-from-[calc(100%-2.5rem)] data-more-end:mask-r-from-[calc(100%-2.5rem)]",
+  "data-more-start:mask-l-from-[calc(100%-4rem)] data-more-end:mask-r-from-[calc(100%-4rem)]",
   "data-disabled:opacity-60",
 ].join(" ")
 
@@ -29,8 +29,6 @@ export const floatingToolbarButtonClasses = [
   "data-disabled:pointer-events-none data-disabled:opacity-50",
   "[&_svg]:size-5 [&_svg]:shrink-0",
 ].join(" ")
-
-export const floatingToolbarSentinelClasses = "-mx-0.5 h-px w-px shrink-0"
 
 export const floatingToolbarSeparatorClasses = "mx-0.5 h-6 w-px shrink-0 bg-border"
 
