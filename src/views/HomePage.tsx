@@ -1,5 +1,7 @@
+"use client"
+
 import { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useRouter } from "next/navigation"
 import { Copy, Check, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Text } from "@/components/ui/text"
@@ -9,7 +11,7 @@ import pkg from "../../package.json"
 
 export function HomePage() {
   const [copied, setCopied] = useState(false)
-  const navigate = useNavigate()
+  const router = useRouter()
 
   function handleCopy() {
     navigator.clipboard?.writeText(
@@ -374,7 +376,7 @@ export function HomePage() {
             </div>
 
             <div className="mt-8 flex justify-center">
-              <Button endIcon={<ArrowRight size={14} />} onClick={() => navigate("/docs")}>
+              <Button endIcon={<ArrowRight size={14} />} onClick={() => router.push("/docs")}>
                 Go to docs
               </Button>
             </div>

@@ -1,21 +1,35 @@
-import { useState, useEffect } from "react"
+"use client"
+
+import { useState, useEffect, useSyncExternalStore } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Link, useLocation } from "react-router-dom"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { Sun, Moon, ArrowRight } from "lucide-react"
 
-export function Header() {
-  const [dark, setDark] = useState(() => {
-    const saved = localStorage.getItem("lanzate-theme")
-    if (saved) return saved === "dark"
-    return window.matchMedia("(prefers-color-scheme: dark)").matches
-  })
-  const [floating, setFloating] = useState(false)
-  const location = useLocation()
+// The initial theme is applied to <html> by an inline script in the root
+// layout (before paint), so the Header just mirrors the "dark" class.
+function subscribeToTheme(onChange: () => void) {
+  const observer = new MutationObserver(onChange)
+  observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] })
+  return () => observer.disconnect()
+}
 
-  useEffect(() => {
-    document.documentElement.classList.toggle("dark", dark)
+const getThemeSnapshot = () => document.documentElement.classList.contains("dark")
+const getServerThemeSnapshot = () => false
+
+function setDarkTheme(dark: boolean) {
+  document.documentElement.classList.toggle("dark", dark)
+  try {
     localStorage.setItem("lanzate-theme", dark ? "dark" : "light")
-  }, [dark])
+  } catch {
+    // Storage can be unavailable (private mode, blocked site data)
+  }
+}
+
+export function Header() {
+  const dark = useSyncExternalStore(subscribeToTheme, getThemeSnapshot, getServerThemeSnapshot)
+  const [floating, setFloating] = useState(false)
+  const pathname = usePathname()
 
   useEffect(() => {
     const onScroll = () => setFloating(window.scrollY > 80)
@@ -23,7 +37,7 @@ export function Header() {
     return () => window.removeEventListener("scroll", onScroll)
   }, [])
 
-  const isDocsActive = location.pathname.startsWith("/docs")
+  const isDocsActive = pathname.startsWith("/docs")
 
   return (
     <header className="fixed left-0 right-0 top-0 z-50">
@@ -56,7 +70,7 @@ export function Header() {
         />
 
         <div className="relative flex items-center justify-between gap-4 h-14 px-6">
-          <Link to="/" className="flex items-center gap-2.5 shrink-0">
+          <Link href="/" className="flex items-center gap-2.5 shrink-0">
             <span className="bg-foreground text-background w-7 h-7 rounded-md grid place-items-center font-mono text-[13px] font-semibold tracking-tight">
               L
             </span>
@@ -82,7 +96,7 @@ export function Header() {
                   Components
                 </a>
                 <Link
-                  to="/docs"
+                  href="/docs"
                   className={`px-3 py-1.5 rounded-md hover:bg-accent transition ${
                     isDocsActive
                       ? "font-medium text-foreground"
@@ -97,7 +111,7 @@ export function Header() {
 
           <div className="flex items-center gap-2 ml-auto">
             <button
-              onClick={() => setDark((d) => !d)}
+              onClick={() => setDarkTheme(!dark)}
               aria-label="Toggle theme"
               className="h-9 w-9 grid place-items-center rounded-md border border-border hover:bg-accent transition shrink-0"
             >
@@ -123,7 +137,7 @@ export function Header() {
             </AnimatePresence>
 
             <Link
-              to="/docs"
+              href="/docs"
               className="inline-flex h-9 items-center px-3.5 rounded-md bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition gap-1.5 shrink-0 whitespace-nowrap"
             >
               Get Started

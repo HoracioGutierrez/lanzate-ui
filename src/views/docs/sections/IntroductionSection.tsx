@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { Text } from "@/components/ui/text"
 
@@ -16,7 +16,7 @@ export function IntroductionSection() {
 
       <div className="mt-10 grid sm:grid-cols-2 gap-4 max-w-3xl">
         <Link
-          to="/docs/installation"
+          href="/docs/installation"
           className="rounded-lg border border-border bg-card p-5 hover:bg-accent transition"
         >
           <div className="flex items-center gap-2 text-sm font-medium">
@@ -28,7 +28,7 @@ export function IntroductionSection() {
           </Text>
         </Link>
         <Link
-          to="/docs/button"
+          href="/docs/button"
           className="rounded-lg border border-border bg-card p-5 hover:bg-accent transition"
         >
           <div className="flex items-center gap-2 text-sm font-medium">

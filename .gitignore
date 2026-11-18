@@ -26,3 +26,8 @@ dist-ssr
 .agents
 .claude
 .kiro
+# Next.js
+.next
+out
+next-env.d.ts
+*.tsbuildinfo

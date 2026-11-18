@@ -1,3 +1,5 @@
+"use client"
+
 import * as React from "react"
 import { motion, type HTMLMotionProps } from "framer-motion"
 import { cva, type VariantProps } from "class-variance-authority"
@@ -227,6 +229,5 @@ function Button({
   )
 }
 
-// eslint-disable-next-line react-refresh/only-export-components
 export { Button, buttonVariants }
 export type { ButtonProps }
