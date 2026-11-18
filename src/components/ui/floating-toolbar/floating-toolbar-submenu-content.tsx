@@ -11,6 +11,8 @@ import {
   MenuSubContent,
 } from "@ui-sdk/react/menu"
 
+// Import other registry components by exact file, not their folder's index.ts.
+import { Text } from "@/components/ui/text/text"
 import { cn } from "@/lib/cn"
 
 import { FloatingToolbarMenuContentContext, FloatingToolbarSubmenuContext } from "./floating-toolbar.constants"
@@ -78,13 +80,20 @@ export function FloatingToolbarSubmenuContent({
         <MenuItemIcon mirror className={floatingToolbarMenuItemIconClasses}>
           <ChevronLeft />
         </MenuItemIcon>
-        {backLabel}
+        <Text render={<span />} variant="overline" size="2xs" color="inherit">
+          {backLabel}
+        </Text>
       </MenuItem>
       <MenuSeparator className={floatingToolbarMenuSeparatorClasses} />
       <FloatingToolbarMenuContentContext value={context}>
         {title ? (
           <MenuGroup>
-            <MenuGroupLabel className={floatingToolbarSubmenuTitleClasses}>{title}</MenuGroupLabel>
+            {/* Text goes inside the label: the label keeps ui-sdk's data-slot, which Text would replace with its own. */}
+            <MenuGroupLabel className={floatingToolbarSubmenuTitleClasses}>
+              <Text render={<span />} variant="overline" size="2xs" color="primary">
+                {title}
+              </Text>
+            </MenuGroupLabel>
             {children}
           </MenuGroup>
         ) : (

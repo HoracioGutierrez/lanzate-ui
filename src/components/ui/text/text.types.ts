@@ -5,8 +5,11 @@ import type { IntentColor } from "@/lib/tokens.types"
 /** Type scale steps. `md` is the body size (the `text-base` token). `inherit` keeps the parent's size, for inline text. */
 export type TextSizeStep = "2xs" | "xs" | "sm" | "md" | "lg" | "xl" | "2xl" | "display" | "inherit"
 
-/** Every intent color from the tokens, plus softer variants of primary and secondary. */
-export type TextColor = IntentColor | "primary-muted" | "secondary-muted"
+/**
+ * Every intent color from the tokens, plus softer variants of primary and secondary.
+ * `inherit` takes the parent's color, for text inside a control that colors its own states (a highlighted menu item).
+ */
+export type TextColor = IntentColor | "primary-muted" | "secondary-muted" | "inherit"
 
 /** Role presets. `heading`: the heading font (`--font-heading`), semibold, tight tracking. `overline`: a small label in mono caps, muted. */
 export type TextVariant = "body" | "heading" | "overline"

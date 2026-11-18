@@ -69,6 +69,14 @@ Both items now list `button` in `registryDependencies`.
   pulls in Tooltip). That is a few more files in the consumer's `ui` folder.
 - A core component's API is now a contract for composites too. A breaking
   change to Button or Text is checked against every composite that uses it.
-- Still to do: Frame's title, the toolbar's submenu title and Back item, and
-  both menus' item labels still re-create `Text`. Move them to `Text`.
+- Frame's title, the toolbar's submenu title and Back item, and both menus'
+  item labels moved to `Text` as well. Doing so added `color="inherit"` to
+  Text: the menu item colors its own states (highlighted, destructive), and
+  a label with a fixed color would ignore them. A core component grows an
+  option like this when a composite needs it; that is the rule's other side.
+- `Text` is placed *inside* ui-sdk parts that own the element (`MenuGroupLabel`),
+  not passed to their `render`: Text sets its own `data-slot`, which would
+  replace the part's.
+- The toolbar's item numbers stay as classes: they are a CSS counter in an
+  `::after` pseudo-element, the documented exception.
 - Not enforced by lint (see [linting.md](../linting.md)): checked in review.

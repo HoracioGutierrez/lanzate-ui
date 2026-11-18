@@ -2,6 +2,8 @@
 
 import { MenuItem, MenuItemIcon } from "@ui-sdk/react/menu"
 
+// Import other registry components by exact file, not their folder's index.ts.
+import { Text } from "@/components/ui/text/text"
 import { cn } from "@/lib/cn"
 
 import type { FrameMenuItemProps } from "./frame.types"
@@ -11,7 +13,10 @@ export function FrameMenuItem({ className, icon, children, ...props }: FrameMenu
   return (
     <MenuItem className={cn(frameMenuItemClasses, className)} {...props}>
       {icon && <MenuItemIcon className={frameMenuItemIconClasses}>{icon}</MenuItemIcon>}
-      <span className={frameMenuItemLabelClasses}>{children}</span>
+      {/* `inherit`: the item colors its own states (highlighted, destructive). */}
+      <Text render={<span />} size="sm" color="inherit" className={frameMenuItemLabelClasses}>
+        {children}
+      </Text>
     </MenuItem>
   )
 }

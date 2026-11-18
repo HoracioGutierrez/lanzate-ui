@@ -26,6 +26,12 @@ minor bump may contain breaking changes.
 - **Floating Toolbar**: options and menu triggers are drawn with the
   registry's `Button` (ghost, icon only), so `button` now installs with
   `floating-toolbar`. Same props, size, focus ring and open state.
+- **Frame** and **Floating Toolbar**: titles, the toolbar's Back item and
+  menu item labels are drawn with the registry's `Text` (the `overline`
+  variant for small caps labels), so `text` installs with both. Labels
+  read slightly wider: they take `overline`'s `tracking-wider`.
+- **Text**: `color="inherit"` takes the parent's color, for text inside a
+  control that colors its own states (a highlighted menu item).
 
 ## 0.10.0
 

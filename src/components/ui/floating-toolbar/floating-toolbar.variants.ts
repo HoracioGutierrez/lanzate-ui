@@ -70,7 +70,7 @@ export const floatingToolbarSubmenuContentClasses = [
 ].join(" ")
 
 export const floatingToolbarMenuItemClasses = [
-  "group/item flex min-h-9 cursor-default items-center gap-2.5 rounded-xs px-2.5 py-1.5 text-sm outline-none select-none",
+  "group/item flex min-h-9 cursor-default items-center gap-2.5 rounded-xs px-2.5 py-1.5 outline-none select-none",
   "data-highlighted:bg-accent data-highlighted:text-accent-foreground",
   "data-disabled:pointer-events-none data-disabled:opacity-50",
   "data-destructive:text-error data-destructive:data-highlighted:bg-error/10",
@@ -92,6 +92,8 @@ export const floatingToolbarPanelCounterClasses = {
   2: "[counter-reset:ft-sub]",
 } satisfies Record<FloatingToolbarPanelLevel, string>
 
+// Exception to "build on core components": a CSS counter lives in a pseudo-element, which can't be
+// a Text, so the number keeps its own type classes (registry.md#building-on-core-components).
 const numberClasses =
   "after:min-w-[2ch] after:text-end after:font-mono after:text-2xs after:tracking-wide after:text-muted-foreground data-highlighted:after:text-primary"
 
@@ -108,8 +110,8 @@ export const floatingToolbarItemNumberClasses = {
   },
 } satisfies Record<FloatingToolbarPanelLevel, Record<FloatingToolbarNumbering, string>>
 
-export const floatingToolbarBackItemClasses = "min-h-8 font-mono text-2xs tracking-wide text-muted-foreground uppercase"
+export const floatingToolbarBackItemClasses = "min-h-8 text-muted-foreground"
 
-export const floatingToolbarSubmenuTitleClasses = "px-2.5 pt-2 pb-1 font-mono text-2xs tracking-wide text-primary uppercase"
+export const floatingToolbarSubmenuTitleClasses = "px-2.5 pt-2 pb-1"
 
 export const floatingToolbarMenuSeparatorClasses = "-mx-1 my-1 h-px bg-border"

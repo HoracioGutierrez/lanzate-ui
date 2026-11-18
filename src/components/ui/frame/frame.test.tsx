@@ -137,6 +137,21 @@ test("the menu opens from the three-dot button and runs an item", async () => {
   expect(onAction).toHaveBeenCalledWith("edit", expect.anything())
 })
 
+test("the title and menu labels are the registry's Text, taking their control's color", async () => {
+  const user = userEvent.setup()
+  render(<OrderCard />)
+  const title = screen.getByText("Order 4189")
+  expect(title.getAttribute("data-slot")).toBe("text")
+  expect(title.getAttribute("data-variant")).toBe("overline")
+  expect(title.getAttribute("data-color")).toBe("inherit")
+
+  await user.click(screen.getByRole("button", { name: "Order actions" }))
+  for (const name of ["Edit", "Export"]) {
+    const label = (await screen.findByRole("menuitem", { name })).querySelector('[data-slot="text"]')
+    expect(label?.getAttribute("data-color")).toBe("inherit")
+  }
+})
+
 test("submenu items are reachable", async () => {
   const user = userEvent.setup()
   render(<OrderCard />)

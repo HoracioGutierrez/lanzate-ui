@@ -310,6 +310,7 @@
       ],
       "registryDependencies": [
         "https://lanzate-ui.vercel.app/r/button.json",
+        "https://lanzate-ui.vercel.app/r/text.json",
         "https://lanzate-ui.vercel.app/r/lanzate-theme.json",
         "https://lanzate-ui.vercel.app/r/lanzate-utils.json"
       ]
@@ -388,6 +389,7 @@
       ],
       "registryDependencies": [
         "https://lanzate-ui.vercel.app/r/button.json",
+        "https://lanzate-ui.vercel.app/r/text.json",
         "https://lanzate-ui.vercel.app/r/lanzate-theme.json",
         "https://lanzate-ui.vercel.app/r/lanzate-utils.json"
       ]

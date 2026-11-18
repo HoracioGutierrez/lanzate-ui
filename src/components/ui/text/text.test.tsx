@@ -69,6 +69,14 @@ test("overline variant is mono caps and muted, and color overrides the muted", (
   expect(el().className).not.toContain("text-muted-foreground")
 })
 
+test("color inherit takes the parent's color, for text inside a control that sets its own", () => {
+  render(<Text render={<span />} variant="overline" color="inherit">Label</Text>)
+  const el = screen.getByText("Label")
+  expect(el.className).toContain("text-inherit")
+  expect(el.className).not.toContain("text-foreground")
+  expect(el.className).not.toContain("text-muted-foreground")
+})
+
 test("leading overrides the size's line height", () => {
   render(<Text size="lg" leading="none">Tight</Text>)
   const el = screen.getByText("Tight")

@@ -133,6 +133,22 @@ test("a sub-item opens a nested panel over the first, with a back item and title
   expect(screen.getByRole("menuitem", { name: "Circle" })).toBeTruthy()
 })
 
+test("panel text is the registry's Text: overline for the back item and title, inherited color for labels", async () => {
+  const user = userEvent.setup()
+  render(<Editor />)
+  await user.click(screen.getByRole("button", { name: "Insert" }))
+  await user.click(await screen.findByRole("menuitem", { name: "Shape" }))
+  await waitFor(() => expect(openPanels()).toHaveLength(2))
+
+  const text = (el: Element | null | undefined) => el?.querySelector('[data-slot="text"]')
+  expect(text(screen.getByRole("menuitem", { name: "Back" }))?.getAttribute("data-variant")).toBe("overline")
+  const nested = openPanels().find((panel) => panel.hasAttribute("data-nested"))
+  expect(text(nested?.querySelector('[data-slot="menu-group-label"]'))?.getAttribute("data-variant")).toBe("overline")
+  for (const name of ["Circle", "Image", "Shape"]) {
+    expect(text(screen.getByRole("menuitem", { name }))?.getAttribute("data-color")).toBe("inherit")
+  }
+})
+
 test("Back closes only the nested panel and returns focus to its trigger", async () => {
   const user = userEvent.setup()
   render(<Editor />)

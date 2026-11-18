@@ -49,6 +49,7 @@ const colorClasses = {
   warning: "text-warning",
   success: "text-success",
   error: "text-error",
+  inherit: "text-inherit",
 } satisfies Record<TextColor, string>
 
 // Order matters: later groups win conflicts (cn runs tailwind-merge), so

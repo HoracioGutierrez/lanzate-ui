@@ -62,7 +62,7 @@ export const frameHeaderClasses =
   "flex min-w-0 items-center gap-1 border-b border-(--frame-divider) p-1 group-data-closed/frame:border-b-transparent"
 
 export const frameTitleClasses =
-  "flex min-h-(--frame-control) min-w-0 flex-1 items-center gap-2 px-2 text-start font-mono text-xs tracking-wide uppercase"
+  "flex min-h-(--frame-control) min-w-0 flex-1 items-center gap-2 px-2 text-start"
 
 export const frameTitleTriggerClasses = [
   "cursor-pointer outline-none select-none",
@@ -110,7 +110,7 @@ export const frameMenuContentClasses = [
 export const frameSubmenuContentClasses = framePanelClasses
 
 export const frameMenuItemClasses = [
-  "group/item flex min-h-9 cursor-default items-center gap-2.5 px-2.5 py-1.5 text-sm outline-none select-none",
+  "group/item flex min-h-9 cursor-default items-center gap-2.5 px-2.5 py-1.5 outline-none select-none",
   "data-highlighted:bg-accent data-highlighted:text-accent-foreground",
   "data-disabled:pointer-events-none data-disabled:opacity-50",
   "data-destructive:text-error data-destructive:data-highlighted:bg-error/10",
