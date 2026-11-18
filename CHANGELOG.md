@@ -4,6 +4,20 @@ All notable changes to the Lanzate UI registry. Versions follow
 [Semantic Versioning](https://semver.org); while the version is `0.x`, a
 minor bump may contain breaking changes.
 
+## 0.9.0
+
+### Added
+
+- **Text:** `variant` (`"body"`, `"heading"`, `"overline"`): role presets.
+  `heading` is semibold with tight tracking; `overline` is a small mono,
+  uppercase, muted label.
+- **Text:** `weight` (`"normal"`, `"medium"`, `"semibold"`), `font`
+  (`"sans"`, `"mono"`) and `leading` (`"none"` … `"relaxed"`), so common
+  type adjustments don't need `className`.
+- **Text:** `size="2xs"`, and `size="inherit"` for inline text that keeps its
+  parent's size.
+- Exported types: `TextVariant`, `TextWeight`, `TextFont`, `TextLeading`.
+
 ## 0.8.0
 
 ### Added

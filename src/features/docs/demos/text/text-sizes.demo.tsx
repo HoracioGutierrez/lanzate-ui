@@ -3,7 +3,7 @@ import { Text } from "@/components/ui/text"
 export function TextSizesDemo() {
   return (
     <div className="space-y-2">
-      <Text render={<p />} size="display" className="leading-none">
+      <Text size="display" leading="none">
         Display — The interface that takes off
       </Text>
       <Text size="2xl">2XL — Main heading</Text>
@@ -15,6 +15,9 @@ export function TextSizesDemo() {
       </Text>
       <Text size="xs" color="muted">
         XS — Caption · tracking wide · ideal for metadata
+      </Text>
+      <Text size="2xs" color="muted">
+        2XS — Fine print and compact labels
       </Text>
     </div>
   )

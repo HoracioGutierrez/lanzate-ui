@@ -16,6 +16,7 @@ import { TextColorsDemo } from "./text/text-colors.demo"
 import { TextCustomizationDemo } from "./text/text-customization.demo"
 import { TextElementDemo } from "./text/text-element.demo"
 import { TextSizesDemo } from "./text/text-sizes.demo"
+import { TextVariantsDemo } from "./text/text-variants.demo"
 
 /**
  * Every demo MDX can show with <Demo name="…" />. The Demo renders the component
@@ -37,6 +38,7 @@ export const demoRegistry = {
   "button-custom-styles": { component: ButtonCustomStylesDemo, file: "button/button-custom-styles.demo.tsx" },
   "text-sizes": { component: TextSizesDemo, file: "text/text-sizes.demo.tsx", layout: "stack" },
   "text-colors": { component: TextColorsDemo, file: "text/text-colors.demo.tsx", layout: "stack" },
+  "text-variants": { component: TextVariantsDemo, file: "text/text-variants.demo.tsx", layout: "stack" },
   "text-element": { component: TextElementDemo, file: "text/text-element.demo.tsx", layout: "stack" },
   "text-customization": { component: TextCustomizationDemo, file: "text/text-customization.demo.tsx", layout: "stack" },
 } satisfies Record<string, DemoEntry>
