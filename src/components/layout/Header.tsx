@@ -89,12 +89,12 @@ export function Header() {
                 transition={{ duration: 0.2 }}
                 className="hidden md:flex items-center gap-1 text-sm"
               >
-                <a
+                <Link
                   href="/#components"
                   className="px-3 py-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-accent transition"
                 >
                   Components
-                </a>
+                </Link>
                 <Link
                   href="/docs"
                   className={`px-3 py-1.5 rounded-md hover:bg-accent transition ${

@@ -8,6 +8,74 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 <!-- END:nextjs-agent-rules -->
 
+## Project
+
+Lanzate UI is a **component registry** (installed by other projects with the
+shadcn CLI) plus the **website** that documents it. The registry is the
+product; the website consumes it. Everything in this repo is in English.
+
+Architecture docs: `docs/architecture/README.md`. Read the doc for the area
+you touch before changing it. Folders with their own `AGENTS.md` add rules
+for that folder (e.g. `src/components/ui/AGENTS.md`).
+
+```
+tokens/              design tokens source (phase 2)
+src/app/             Next.js routes only: read params, render one feature component
+src/features/        the website, one folder per feature (legacy: src/views, src/components/layout)
+src/components/ui/   the registry, one folder per component
+src/hooks/, src/lib/ shipped with the registry
+src/styles/          global CSS, generated token files
+tooling/             ESLint rules and scripts
+```
+
+## Rules
+
+Each rule links to its explanation. Most are enforced by `bun run lint`.
+
+1. **One component per file**, named after it in kebab-case
+   (`ButtonSpinner` → `button-spinner.tsx`). → `conventions.md#one-component-per-file`
+2. **Types live in `*.types.ts` files**, which hold only types. No `type`,
+   `interface` or inline object types (`{ a }: { a: string }`) elsewhere.
+   No `enum`. Implementations check against types with `satisfies`.
+   → `conventions.md#types-live-in-types-files`
+3. **No literal design values** (`oklch(…)`, `#hex`, `text-[13px]`,
+   `shadow-[…]`, `cubic-bezier`). Use tokens; add one if it's missing.
+   → `tokens.md#no-magic-values`
+4. **Imports point inward**: app → features → ui → hooks → lib → styles. The
+   registry never imports website code. → `layers.md`
+5. **kebab-case** files and folders; suffixes `.types.ts`, `.variants.ts`,
+   `.constants.ts`, `use-*.ts`, `.test.tsx`, `.demo.tsx`. → `conventions.md#file-naming`
+6. **Named exports only** (`export default` only in `src/app` route files).
+   No `export *`. `index.ts` only at a registry component's folder root.
+   `import type` for types. → `conventions.md#exports-and-imports`
+7. **Route params** use Next's global `PageProps<"/route">` /
+   `LayoutProps<"/route">`, not local types.
+8. **Server Components by default**; `"use client"` on the smallest
+   component that needs it.
+9. **TypeScript is `strict`** with `noUncheckedIndexedAccess`.
+
+Architecture lint rules are warnings while the migration runs (status in
+`docs/architecture/README.md#migration-status`). **New code must not add
+warnings.**
+
+## When you add or change a rule
+
+Update all three: the short rule in the nearest `AGENTS.md`, its explanation
+in `docs/architecture/`, and, if it's mechanical, an ESLint rule in
+`tooling/eslint/` whose message links to that explanation. Record
+non-obvious choices in `docs/architecture/decisions/`. See
+`docs/architecture/linting.md#adding-a-rule`.
+
+## Commands
+
+Run all three before finishing:
+
+- `bun run test` — Vitest (components and ESLint rules)
+- `bun run typecheck` — `next typegen` + `tsc --noEmit`
+- `bun run lint` — ESLint, architecture rules included
+
+`bun run registry:build` after changing a registry component.
+
 ## ui-sdk
 
 Components with behavior (focus, keyboard, popups, ARIA) are built on ui-sdk (`@ui-sdk/react` + `@ui-sdk/core`), not Radix.
@@ -17,4 +85,4 @@ Components with behavior (focus, keyboard, popups, ARIA) are built on ui-sdk (`@
 - Import each component from its own entry (`@ui-sdk/react/tooltip`), never from the package root or `@ui-sdk/core/internal/*`. Change a part's element with `render`, not `asChild` or `as`.
 - Style from state: `data-slot`, state attributes (`data-open`, `data-side`, `data-pending`…) and the CSS variables each component lists.
 - Name every control (visible label or `aria-label`) so screen readers and agents (`createAgent` from `@ui-sdk/react/agent`) can find it.
-- Every registry component gets tests in `src/**/*.test.tsx` (Vitest + jsdom, setup in `src/test/setup.ts`), including the agent test from the skill's `references/agent-ready.md`. Run `bun run test`, `bunx tsc --noEmit` and `bun run lint` before finishing.
+- Every registry component gets tests in `src/**/*.test.tsx` (Vitest + jsdom, setup in `src/test/setup.ts`), including the agent test from the skill's `references/agent-ready.md`.

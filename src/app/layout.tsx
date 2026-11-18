@@ -34,10 +34,11 @@ export const viewport: Viewport = {
 // Applies the saved (or system) theme before first paint to avoid a flash.
 const themeScript = `(function(){try{var t=localStorage.getItem("lanzate-theme");var d=t?t==="dark":window.matchMedia("(prefers-color-scheme: dark)").matches;document.documentElement.classList.toggle("dark",d)}catch(e){}})()`
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        {/* eslint-disable-next-line @eslint-react/dom-no-dangerously-set-innerhtml -- static, trusted script: applies the theme before first paint */}
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body>{children}</body>

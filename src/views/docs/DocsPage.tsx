@@ -35,7 +35,7 @@ export function DocsPage({ section }: { section: string }) {
 
     const onScroll = () => {
       const HEADER_OFFSET = 80
-      let currentId = ids[0]
+      let currentId = ids[0] ?? ""
       for (const id of ids) {
         const el = document.getElementById(id)
         if (!el) continue
