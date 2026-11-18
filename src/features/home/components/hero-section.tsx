@@ -1,5 +1,7 @@
 import { ArrowRight } from "lucide-react"
 
+import { Button } from "@/components/ui/button"
+
 import { INSTALL_COMMAND } from "../home.constants"
 import { HeroBadge } from "./hero-badge"
 import { InstallCommandButton } from "./install-command-button"
@@ -28,13 +30,14 @@ export function HeroSection() {
           </p>
 
           <div className="mt-9 flex flex-col items-center gap-3 sm:flex-row">
-            <a
-              href="#docs"
-              className="inline-flex h-11 items-center gap-2 rounded-md bg-primary px-5 font-medium text-primary-foreground shadow-soft transition hover:opacity-90"
+            <Button
+              render={<a href="#docs" />}
+              padding="md"
+              effect="elevated"
+              endIcon={<ArrowRight aria-hidden="true" />}
             >
               Get Started Now
-              <ArrowRight size={14} aria-hidden="true" />
-            </a>
+            </Button>
             <InstallCommandButton command={INSTALL_COMMAND} />
           </div>
 

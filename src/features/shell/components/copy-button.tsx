@@ -2,7 +2,7 @@
 
 import { Check, Copy } from "lucide-react"
 
-import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
 
 import { useCopyToClipboard } from "../hooks/use-copy-to-clipboard"
 import type { CopyButtonProps } from "../shell.types"
@@ -12,19 +12,21 @@ export function CopyButton({ value, label = "Copy", className }: CopyButtonProps
   const { copied, copy } = useCopyToClipboard()
 
   return (
-    <button
-      type="button"
-      onClick={() => copy(value)}
+    <Button
+      variant="subtle"
+      padding="xs"
+      icon={
+        <>
+          {copied ? <Check className="text-brand" aria-hidden="true" /> : <Copy aria-hidden="true" />}
+          <span className="sr-only" aria-live="polite">
+            {copied ? "Copied" : ""}
+          </span>
+        </>
+      }
+      tooltip={copied ? "Copied" : label}
       aria-label={label}
-      className={cn(
-        "grid size-7 place-items-center rounded-md border border-border bg-background transition hover:bg-accent",
-        className
-      )}
-    >
-      {copied ? <Check size={13} className="text-brand" aria-hidden="true" /> : <Copy size={13} aria-hidden="true" />}
-      <span className="sr-only" aria-live="polite">
-        {copied ? "Copied" : ""}
-      </span>
-    </button>
+      onClick={() => copy(value)}
+      className={className}
+    />
   )
 }

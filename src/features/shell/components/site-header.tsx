@@ -3,6 +3,7 @@
 import { ArrowRight } from "lucide-react"
 import Link from "next/link"
 
+import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
 import { useScrolledPast } from "../hooks/use-scrolled-past"
@@ -42,13 +43,13 @@ export function SiteHeader() {
           <div className="ml-auto flex items-center gap-2">
             <ThemeToggle />
             <HeaderGithubLink hidden={floating} />
-            <Link
-              href="/docs"
-              className="inline-flex h-9 shrink-0 items-center gap-1.5 rounded-md bg-primary px-3.5 text-sm font-medium whitespace-nowrap text-primary-foreground transition hover:opacity-90"
+            <Button
+              render={<Link href="/docs" />}
+              endIcon={<ArrowRight aria-hidden="true" />}
+              className="shrink-0 whitespace-nowrap"
             >
               Get Started
-              <ArrowRight size={14} aria-hidden="true" />
-            </Link>
+            </Button>
           </div>
         </div>
       </div>
