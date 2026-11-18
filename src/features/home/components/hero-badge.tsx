@@ -12,7 +12,7 @@ export function HeroBadge() {
     >
       <span className="rounded-full bg-brand px-2 py-0.5 text-3xs font-semibold tracking-wide text-brand-foreground uppercase">New</span>
       <Text render={<span />} size="inherit" color="muted">
-        v{VERSION} · 2 accessible components
+        v{VERSION} · 4 accessible components
       </Text>
       <ArrowRight size={12} className="text-muted-foreground" aria-hidden="true" />
     </a>

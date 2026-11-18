@@ -7,7 +7,7 @@ export const VERSION = pkg.version
 export const INSTALL_COMMAND = "npx shadcn@latest add https://lanzate-ui.vercel.app/r/button.json"
 
 export const STATS: StatItem[] = [
-  { value: "2", label: "Components" },
+  { value: "4", label: "Components" },
   { value: "100%", label: "Accessible · WCAG AA" },
   { value: "0kb", label: "Extra Runtime" },
   { value: "MIT", label: "Open License" },
