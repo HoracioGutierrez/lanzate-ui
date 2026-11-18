@@ -1,0 +1,73 @@
+<ComponentBadge number="03" isNew />
+
+# Floating Toolbar
+
+<Lead>A floating row of icon options. An option can run an action or open a panel of items, and an item can open a second panel over the first, with a back item to return. When the options don't fit the screen, the toolbar scrolls sideways with a finger.</Lead>
+
+<DependencyList items={["@ui-sdk/react", "lucide-react"]} />
+
+## Example
+
+<Demo name="floating-toolbar-basic" />
+
+Tab into the toolbar and use Left and Right to move between options. Down, Enter or Space opens an option's panel. In a nested panel, Back, Escape or Left returns to the first panel.
+
+## Options with and without a submenu
+
+A submenu is optional per option. `FloatingToolbarButton` is a plain action; wrap a `FloatingToolbarMenuTrigger` and a `FloatingToolbarMenuContent` in `FloatingToolbarMenu` for an option with items. Inside the panel, `FloatingToolbarSubmenu` adds a second level that opens over the first.
+
+## Numbering
+
+Number panel items like the parts on a technical drawing with `numbering` on `FloatingToolbarMenuContent`. `"sequential"` restarts at 01 in every panel; `"hierarchical"` prefixes a nested panel's numbers with its parent item's (03.1, 03.2). A nested panel inherits its parent's setting, and `FloatingToolbarSubmenuContent` takes its own `numbering` to change it. Numbers follow item order and stay out of each item's accessible name.
+
+<Demo name="floating-toolbar-numbering" />
+
+## Scrolling on small screens
+
+The toolbar never grows wider than the screen. Extra options scroll sideways with a swipe, fades at each edge show there's more, and moving with the arrow keys scrolls the focused option into view. Panels open in the top layer, so the scroller never clips them.
+
+## Installation
+
+```bash
+npx shadcn@latest add https://lanzate-ui.vercel.app/r/floating-toolbar.json
+```
+
+## Usage
+
+```tsx
+import {
+  FloatingToolbar,
+  FloatingToolbarButton,
+  FloatingToolbarMenu,
+  FloatingToolbarMenuContent,
+  FloatingToolbarMenuItem,
+  FloatingToolbarMenuTrigger,
+  FloatingToolbarSubmenu,
+  FloatingToolbarSubmenuContent,
+  FloatingToolbarSubmenuTrigger,
+} from "@/components/ui/floating-toolbar"
+
+<FloatingToolbar aria-label="Editor">
+  <FloatingToolbarButton label="Undo" onClick={undo}>
+    <Undo2 />
+  </FloatingToolbarButton>
+  <FloatingToolbarMenu onAction={run}>
+    <FloatingToolbarMenuTrigger label="Insert">
+      <Plus />
+    </FloatingToolbarMenuTrigger>
+    <FloatingToolbarMenuContent>
+      <FloatingToolbarMenuItem value="image">Image</FloatingToolbarMenuItem>
+      <FloatingToolbarSubmenu>
+        <FloatingToolbarSubmenuTrigger>Shape</FloatingToolbarSubmenuTrigger>
+        <FloatingToolbarSubmenuContent title="Shapes">
+          <FloatingToolbarMenuItem value="circle">Circle</FloatingToolbarMenuItem>
+        </FloatingToolbarSubmenuContent>
+      </FloatingToolbarSubmenu>
+    </FloatingToolbarMenuContent>
+  </FloatingToolbarMenu>
+</FloatingToolbar>
+```
+
+## API
+
+<ApiTable name="floating-toolbar" />

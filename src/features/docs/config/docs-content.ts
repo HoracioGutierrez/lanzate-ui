@@ -7,6 +7,7 @@ export const docsContent = {
   theming: () => import("../content/theming.mdx"),
   button: () => import("../content/button.mdx"),
   text: () => import("../content/text.mdx"),
+  "floating-toolbar": () => import("../content/floating-toolbar.mdx"),
 } satisfies Record<DocId, () => Promise<MdxModule>>
 
 /** Folder with the MDX sources, relative to the project root (read for the table of contents). */

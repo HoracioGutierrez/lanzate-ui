@@ -4,6 +4,24 @@ All notable changes to the Lanzate UI registry. Versions follow
 [Semantic Versioning](https://semver.org); while the version is `0.x`, a
 minor bump may contain breaking changes.
 
+## 0.10.0
+
+### Added
+
+- **Floating Toolbar** (`floating-toolbar`): a floating row of icon options
+  on ui-sdk's Toolbar. `FloatingToolbarButton` runs an action;
+  `FloatingToolbarMenu` with `FloatingToolbarMenuTrigger` and
+  `FloatingToolbarMenuContent` opens a panel of items, and
+  `FloatingToolbarSubmenu` opens a second panel over the first with a
+  back item. `placement` (`"bottom"`, `"top"`, `"inline"`) pins it to the
+  viewport or leaves it in the flow. Options that don't fit scroll
+  sideways, with edge fades.
+- **Floating Toolbar:** `numbering` (`"none"`, `"sequential"`,
+  `"hierarchical"`) on `FloatingToolbarMenuContent` and
+  `FloatingToolbarSubmenuContent` numbers panel items like part numbers
+  (01, 02 or 03.1). Off by default; a nested panel inherits its parent's.
+  Exported type: `FloatingToolbarNumbering`.
+
 ## 0.9.0
 
 ### Added

@@ -1,0 +1,17 @@
+import { createContext } from "react"
+
+import type {
+  FloatingToolbarContextValue,
+  FloatingToolbarMenuContentContextValue,
+  FloatingToolbarSubmenuState,
+} from "./floating-toolbar.types"
+
+export const FloatingToolbarContext = createContext<FloatingToolbarContextValue>({ placement: "inline" })
+
+export const FloatingToolbarMenuContentContext = createContext<FloatingToolbarMenuContentContextValue>({
+  side: "top",
+  numbering: "none",
+  level: 1,
+})
+
+export const FloatingToolbarSubmenuContext = createContext<FloatingToolbarSubmenuState | null>(null)
