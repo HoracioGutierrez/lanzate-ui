@@ -2,6 +2,7 @@ import { ArrowRight } from "lucide-react"
 import Link from "next/link"
 
 import { Button } from "@/components/ui/button"
+import { Text } from "@/components/ui/text"
 
 import { ButtonShowcase } from "./button-showcase"
 import { SectionEyebrow } from "./section-eyebrow"
@@ -14,15 +15,15 @@ export function ComponentsSection() {
         <div className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div className="max-w-2xl">
             <SectionEyebrow>COMPONENTS · 01 — 02</SectionEyebrow>
-            <h2 id="components-title" className="text-4xl leading-[1.05] font-semibold tracking-tight md:text-5xl">
+            <Text render={<h2 id="components-title" />} variant="heading" size="display">
               One piece for every
               <br />
               part of the interface.
-            </h2>
+            </Text>
           </div>
-          <p className="leading-relaxed text-muted-foreground md:max-w-sm">
+          <Text color="muted" leading="relaxed" className="md:max-w-sm">
             Each component lives in your repo, not in a node_module. Copy, paste, modify. No lock-in, no surprises.
-          </p>
+          </Text>
         </div>
 
         <div className="grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2">
