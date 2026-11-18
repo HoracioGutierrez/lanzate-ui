@@ -1,5 +1,5 @@
 import type { ComponentProps, ReactNode } from "react"
-import type { Button } from "@ui-sdk/react/button"
+import type { ButtonProps } from "@/components/ui/button/button.types"
 import type { Collapsible, CollapsiblePanel, CollapsibleTrigger } from "@ui-sdk/react/collapsible"
 import type { IntentColor } from "@/lib/tokens.types"
 import type { Menu, MenuItem, MenuSeparator, MenuSub, MenuSubContent, MenuSubTrigger } from "@ui-sdk/react/menu"
@@ -50,8 +50,8 @@ export type FrameContentProps = Omit<ComponentProps<"div">, "className"> &
     className?: string
   }
 
-export type FrameBackProps = Omit<ComponentProps<typeof Button>, "className" | "children"> & {
-  className?: string
+/** The registry Button's props, minus what the back button fixes: its icon and look. */
+export type FrameBackProps = Omit<ButtonProps, "children" | "icon" | "startIcon" | "endIcon" | "variant" | "padding" | "radius"> & {
   /** Accessible name of the icon-only button. Defaults to "Back". */
   label?: string
 }

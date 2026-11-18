@@ -18,6 +18,8 @@ minor bump may contain breaking changes.
   hides `FrameContent` on ui-sdk's Collapsible. `color` takes any intent
   color (`"warning"`, `"error"`, …): it colors the corner marks and, except
   for the default `"primary"`, tints the background and borders.
+  The back and three-dot buttons are the registry's `Button` (square,
+  ghost), so `button` installs with it and `FrameBack` takes its props.
 
 ## 0.10.0
 

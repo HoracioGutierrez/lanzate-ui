@@ -119,6 +119,16 @@ test("the back button has a default name and runs onClick", async () => {
   expect(onBack).toHaveBeenCalledTimes(1)
 })
 
+test("back and the three-dot trigger are the registry's square ghost Button", () => {
+  render(<OrderCard />)
+  for (const name of ["Back", "Order actions"]) {
+    const button = screen.getByRole("button", { name })
+    expect(button.getAttribute("data-variant")).toBe("ghost")
+    expect(button.getAttribute("data-radius")).toBe("none")
+    expect(button.className).toContain("size-(--frame-control)")
+  }
+})
+
 test("the menu opens from the three-dot button and runs an item", async () => {
   const user = userEvent.setup()
   render(<OrderCard />)

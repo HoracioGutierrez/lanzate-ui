@@ -82,15 +82,12 @@ export const frameContentPanelClasses = [
   "data-starting-style:h-0 data-ending-style:h-0",
 ].join(" ")
 
-export const frameIconButtonClasses = [
-  "inline-flex size-(--frame-control) shrink-0 cursor-pointer items-center justify-center text-muted-foreground outline-none",
-  "transition-[background-color,color] duration-150 ease-out motion-reduce:transition-none",
-  "hover:bg-accent hover:text-accent-foreground active:bg-accent/70",
-  "focus-visible:inset-ring focus-visible:inset-ring-ring",
-  "data-open:bg-primary/10 data-open:text-primary",
-  "disabled:pointer-events-none disabled:opacity-50",
-  "[&_svg]:size-4 [&_svg]:shrink-0 [&_svg]:stroke-[1.75]",
-].join(" ")
+// The header buttons are the registry's Button (square ghost, icon only); the frame only sizes them
+// from --frame-control so they follow the header height, and keeps the focus ring inside the gap.
+export const frameControlClasses = "size-(--frame-control) shrink-0 focus-visible:ring-offset-0 [&_svg]:size-4"
+
+// The three-dot button stays marked while its menu is open.
+export const frameMenuTriggerClasses = "data-open:bg-primary/10 data-open:text-primary"
 
 export const frameBackIconClasses = "rtl:-scale-x-100"
 
