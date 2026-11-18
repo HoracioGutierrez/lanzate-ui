@@ -1,6 +1,6 @@
 import { Routes, Route, Navigate } from "react-router-dom"
-import { HomePage } from "./pages/HomePage"
-import { DocsPage } from "./pages/docs/DocsPage"
+import { HomePage } from "./views/HomePage"
+import { DocsPage } from "./views/docs/DocsPage"
 
 function App() {
   return (
