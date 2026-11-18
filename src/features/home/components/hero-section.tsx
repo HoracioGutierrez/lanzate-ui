@@ -41,6 +41,7 @@ export function HeroSection() {
               render={<a href="#docs" />}
               padding="md"
               effect="elevated"
+              className="shrink-0"
               endIcon={<ArrowRight aria-hidden="true" />}
             >
               Get Started Now

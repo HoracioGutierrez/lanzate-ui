@@ -26,7 +26,7 @@ export function InstallCommandButton({ command }: InstallCommandButtonProps) {
       textClassName="min-w-0 truncate font-mono"
       aria-label={copied ? "Copied install command" : `Copy install command: ${command}`}
       onClick={() => copy(command)}
-      className="max-w-full"
+      className="max-w-full min-w-0"
     >
       {command}
     </Button>
