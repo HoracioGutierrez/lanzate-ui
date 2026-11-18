@@ -6,5 +6,5 @@ export type TextSize = "3xs" | "2xs" | "xs" | "sm" | "base" | "lg" | "xl" | "2xl
 export type Radius = "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl"
 export type Shadow = "elevated" | "elevated-hover" | "elevated-active" | "button-glow" | "button-glow-hover" | "button-glow-active" | "button-surface" | "button-surface-active" | "soft" | "pop" | "floating"
 export type Ease = "spring"
-export type FontFamily = "sans" | "heading" | "mono" | "serif"
+export type FontFamily = "heading" | "sans" | "mono" | "serif"
 export type ThemeName = "ocean" | "sunset"

@@ -16,7 +16,7 @@ const sizeClasses = {
 
 const variantClasses = {
   body: "",
-  heading: "font-semibold tracking-tight",
+  heading: "font-heading font-semibold tracking-tight",
   overline: "font-mono uppercase tracking-wider text-muted-foreground",
 } satisfies Record<TextVariant, string>
 

@@ -44,6 +44,7 @@ test("heading variant is semibold with tight tracking; weight overrides it", () 
   const { rerender } = render(<Text variant="heading" size="display">Title</Text>)
   const el = () => screen.getByText("Title")
   expect(el().getAttribute("data-variant")).toBe("heading")
+  expect(el().className).toContain("font-heading")
   expect(el().className).toContain("font-semibold")
   expect(el().className).toContain("tracking-tight")
   expect(el().className).not.toContain("tracking-tighter")
@@ -73,6 +74,13 @@ test("leading overrides the size's line height", () => {
   const el = screen.getByText("Tight")
   expect(el.className).toContain("leading-none")
   expect(el.className).not.toContain("leading-relaxed")
+})
+
+test("font overrides the heading variant's family", () => {
+  render(<Text variant="heading" font="mono">Title</Text>)
+  const el = screen.getByText("Title")
+  expect(el.className).toContain("font-mono")
+  expect(el.className).not.toContain("font-heading")
 })
 
 test("font and weight set the family and weight", () => {

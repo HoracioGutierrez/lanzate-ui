@@ -8,7 +8,7 @@ export type TextSizeStep = "2xs" | "xs" | "sm" | "md" | "lg" | "xl" | "2xl" | "d
 /** Every intent color from the tokens, plus softer variants of primary and secondary. */
 export type TextColor = IntentColor | "primary-muted" | "secondary-muted"
 
-/** Role presets. `heading`: semibold, tight tracking. `overline`: a small label in mono caps, muted. */
+/** Role presets. `heading`: the heading font (`--font-heading`), semibold, tight tracking. `overline`: a small label in mono caps, muted. */
 export type TextVariant = "body" | "heading" | "overline"
 
 export type TextWeight = "normal" | "medium" | "semibold"

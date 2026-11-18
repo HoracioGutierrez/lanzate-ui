@@ -9,11 +9,14 @@ minor bump may contain breaking changes.
 ### Added
 
 - **Text:** `variant` (`"body"`, `"heading"`, `"overline"`): role presets.
-  `heading` is semibold with tight tracking; `overline` is a small mono,
+  `heading` uses the heading font, semibold with tight tracking; `overline` is a small mono,
   uppercase, muted label.
 - **Text:** `weight` (`"normal"`, `"medium"`, `"semibold"`), `font`
   (`"sans"`, `"mono"`) and `leading` (`"none"` … `"relaxed"`), so common
   type adjustments don't need `className`.
+- `--font-heading` theme token in `lanzate-theme` (`font-heading`
+  utility). It defaults to `var(--font-sans)`; set it to give headings
+  their own family.
 - **Text:** `size="2xs"`, and `size="inherit"` for inline text that keeps its
   parent's size.
 - Exported types: `TextVariant`, `TextWeight`, `TextFont`, `TextLeading`.

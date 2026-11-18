@@ -40,8 +40,8 @@ export const twMergeTheme = {
     "spring"
   ],
   "font": [
-    "sans",
     "heading",
+    "sans",
     "mono",
     "serif"
   ]
