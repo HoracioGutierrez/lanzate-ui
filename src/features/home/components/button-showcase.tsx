@@ -4,13 +4,14 @@ import { ShowcaseCard } from "./showcase-card"
 
 export function ButtonShowcase() {
   return (
-    <ShowcaseCard title="Button" description="6 variants, 7 colors and loading." number="01">
+    <ShowcaseCard title="Button" description="7 variants, 7 colors and loading." number="01">
       <div className="flex flex-col items-center gap-3 px-6 py-8">
         <Button padding="sm">Solid</Button>
         <Button variant="outline" padding="sm">Outline</Button>
         <Button variant="ghost" padding="sm">Ghost</Button>
         <Button variant="soft" padding="sm">Soft</Button>
         <Button variant="dashed" padding="sm">Dashed</Button>
+        <Button variant="subtle" padding="sm">Subtle</Button>
         <Button variant="surface" padding="sm">Surface</Button>
         <Button color="info" padding="sm">Info</Button>
         <Button color="warning" padding="sm">Warning</Button>

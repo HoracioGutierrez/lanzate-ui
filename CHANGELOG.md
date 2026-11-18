@@ -4,6 +4,25 @@ All notable changes to the Lanzate UI registry. Versions follow
 [Semantic Versioning](https://semver.org); while the version is `0.x`, a
 minor bump may contain breaking changes.
 
+## 0.8.0
+
+### Added
+
+- **Button:** `variant="subtle"`, a neutral bordered button (theme border,
+  card fill, accent on hover). It ignores `color`, for toolbar and utility
+  actions like copy or theme toggles.
+
+### Changed
+
+- **Button:** every variant has a 1px border (transparent on `solid`,
+  `ghost`, `soft` and `surface`), so buttons with the same `padding` are the
+  same size whatever the variant. Unbordered buttons grow by 2px.
+- **Button:** an icon-only button (`icon`) sizes its icon box to the text's
+  line height, so it is square and exactly as tall as a text button with the
+  same `padding`. Icon-only buttons grow a few pixels.
+- **Button:** `opacity` is now part of the transition, so a button shown or
+  hidden by changing its opacity fades instead of popping.
+
 ## 0.7.0
 
 ### Breaking

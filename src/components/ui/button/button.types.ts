@@ -6,7 +6,8 @@ import type { IntentColor, TextSize } from "@/lib/tokens.types"
 /** Every intent color defined in the tokens. */
 export type ButtonColor = IntentColor
 
-export type ButtonVariant = "solid" | "outline" | "ghost" | "soft" | "dashed" | "surface"
+/** `subtle` is neutral and ignores `color`. */
+export type ButtonVariant = "solid" | "outline" | "ghost" | "soft" | "dashed" | "subtle" | "surface"
 
 /** Depth treatment. One at a time: they all set the shadow. */
 export type ButtonEffect = "none" | "elevated" | "glow"

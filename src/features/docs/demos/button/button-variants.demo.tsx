@@ -8,6 +8,7 @@ export function ButtonVariantsDemo() {
       <Button variant="ghost">Ghost</Button>
       <Button variant="soft">Soft</Button>
       <Button variant="dashed">Dashed</Button>
+      <Button variant="subtle">Subtle</Button>
       <Button variant="surface">Surface</Button>
     </div>
   )
