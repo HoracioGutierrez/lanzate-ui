@@ -309,6 +309,87 @@
         "@ui-sdk/core@0.1.0-beta.6"
       ],
       "registryDependencies": [
+        "https://lanzate-ui.vercel.app/r/button.json",
+        "https://lanzate-ui.vercel.app/r/text.json",
+        "https://lanzate-ui.vercel.app/r/lanzate-theme.json",
+        "https://lanzate-ui.vercel.app/r/lanzate-utils.json"
+      ]
+    },
+    {
+      "name": "frame",
+      "type": "registry:ui",
+      "title": "Frame",
+      "description": "Industrial box with corner registration marks for anything from a card to a page section; an optional header holds a back button, free title content and a three-dot menu, and can collapse the content, built on ui-sdk.",
+      "files": [
+        {
+          "path": "src/components/ui/frame/frame-back.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/frame/frame-content.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/frame/frame-header.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/frame/frame-menu-item.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/frame/frame-menu-separator.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/frame/frame-menu.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/frame/frame-submenu-content.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/frame/frame-submenu-trigger.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/frame/frame-submenu.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/frame/frame-title.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/frame/frame.constants.ts",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/frame/frame.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/frame/frame.types.ts",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/frame/frame.variants.ts",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/frame/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": [
+        "lucide-react",
+        "@ui-sdk/react@0.1.0-beta.6",
+        "@ui-sdk/core@0.1.0-beta.6"
+      ],
+      "registryDependencies": [
+        "https://lanzate-ui.vercel.app/r/button.json",
+        "https://lanzate-ui.vercel.app/r/text.json",
         "https://lanzate-ui.vercel.app/r/lanzate-theme.json",
         "https://lanzate-ui.vercel.app/r/lanzate-utils.json"
       ]

@@ -1,4 +1,4 @@
-import { act, render, screen } from "@testing-library/react"
+import { act, render, screen, waitFor } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { createAgent } from "@ui-sdk/react/agent"
 import { Circle, Plus, Undo2 } from "lucide-react"
@@ -54,6 +54,16 @@ function Editor() {
 
 const openPanels = () => [...document.querySelectorAll('[data-slot="menu-content"][data-open]')]
 
+// Reaches the Shape item from the keyboard, the way a user does. Focusing it by hand after a click
+// races ui-sdk's own initial focus, which can land on the panel and leave no item highlighted.
+async function focusShape(user: ReturnType<typeof userEvent.setup>) {
+  screen.getByRole("button", { name: "Insert" }).focus()
+  await user.keyboard("{ArrowDown}")
+  await waitFor(() => expect(document.activeElement).toBe(screen.getByRole("menuitem", { name: "Image" })))
+  await user.keyboard("{ArrowDown}")
+  await waitFor(() => expect(document.activeElement).toBe(screen.getByRole("menuitem", { name: "Shape" })))
+}
+
 test("renders a named toolbar of icon-only options, each named by its label", () => {
   render(<Editor />)
   const toolbar = screen.getByRole("toolbar", { name: "Editor" })
@@ -64,6 +74,16 @@ test("renders a named toolbar of icon-only options, each named by its label", ()
   expect(insert.getAttribute("aria-haspopup")).toBe("menu")
   expect(undo.querySelector('[aria-hidden="true"] svg')).not.toBeNull()
   expect(undo.closest("[data-slot=\"toolbar\"]")).not.toBeNull()
+})
+
+test("options and menu triggers are the registry's ghost Button, sized by the toolbar", () => {
+  render(<Editor />)
+  for (const name of ["Undo", "Insert"]) {
+    const button = screen.getByRole("button", { name })
+    expect(button.getAttribute("data-variant")).toBe("ghost")
+    expect(button.className).toContain("size-10")
+    expect(button.className).toContain("rounded-xs")
+  }
 })
 
 test("an option without a submenu runs its action", async () => {
@@ -113,36 +133,51 @@ test("a sub-item opens a nested panel over the first, with a back item and title
   expect(screen.getByRole("menuitem", { name: "Circle" })).toBeTruthy()
 })
 
-test("Back closes only the nested panel and returns focus to its trigger", async () => {
+test("panel text is the registry's Text: overline for the back item and title, inherited color for labels", async () => {
   const user = userEvent.setup()
   render(<Editor />)
   await user.click(screen.getByRole("button", { name: "Insert" }))
-  await tick()
-  screen.getByRole("menuitem", { name: "Shape" }).focus()
+  await user.click(await screen.findByRole("menuitem", { name: "Shape" }))
+  await waitFor(() => expect(openPanels()).toHaveLength(2))
+
+  const text = (el: Element | null | undefined) => el?.querySelector('[data-slot="text"]')
+  expect(text(screen.getByRole("menuitem", { name: "Back" }))?.getAttribute("data-variant")).toBe("overline")
+  const nested = openPanels().find((panel) => panel.hasAttribute("data-nested"))
+  expect(text(nested?.querySelector('[data-slot="menu-group-label"]'))?.getAttribute("data-variant")).toBe("overline")
+  for (const name of ["Circle", "Image", "Shape"]) {
+    expect(text(screen.getByRole("menuitem", { name }))?.getAttribute("data-color")).toBe("inherit")
+  }
+})
+
+test("Back closes only the nested panel and returns focus to its trigger", async () => {
+  const user = userEvent.setup()
+  render(<Editor />)
+  await focusShape(user)
   await user.keyboard("{Enter}")
-  await tick()
-  expect(openPanels()).toHaveLength(2)
-  expect(document.activeElement).toBe(screen.getByRole("menuitem", { name: "Back" }))
+  // Opening and closing a panel moves focus over more than one task: wait for it to settle.
+  await waitFor(() => {
+    expect(openPanels()).toHaveLength(2)
+    expect(document.activeElement).toBe(screen.getByRole("menuitem", { name: "Back" }))
+  })
 
   await user.keyboard("{Enter}")
-  await tick()
-  expect(openPanels()).toHaveLength(1)
-  expect(document.activeElement).toBe(screen.getByRole("menuitem", { name: "Shape" }))
+  await waitFor(() => {
+    expect(openPanels()).toHaveLength(1)
+    expect(document.activeElement).toBe(screen.getByRole("menuitem", { name: "Shape" }))
+  })
 })
 
 test("Escape in the nested panel also goes back to the first panel", async () => {
   const user = userEvent.setup()
   render(<Editor />)
-  await user.click(screen.getByRole("button", { name: "Insert" }))
-  await tick()
-  screen.getByRole("menuitem", { name: "Shape" }).focus()
+  await focusShape(user)
   await user.keyboard("{ArrowRight}")
-  await tick()
-  expect(openPanels()).toHaveLength(2)
+  await waitFor(() => expect(openPanels()).toHaveLength(2))
   await user.keyboard("{Escape}")
-  await tick()
-  expect(openPanels()).toHaveLength(1)
-  expect(document.activeElement).toBe(screen.getByRole("menuitem", { name: "Shape" }))
+  await waitFor(() => {
+    expect(openPanels()).toHaveLength(1)
+    expect(document.activeElement).toBe(screen.getByRole("menuitem", { name: "Shape" }))
+  })
 })
 
 test("a sub-item runs with the menu's onAction and closes every panel", async () => {

@@ -33,15 +33,13 @@ export const floatingToolbarClasses = [
   "data-disabled:opacity-60",
 ].join(" ")
 
-export const floatingToolbarButtonClasses = [
-  "inline-flex size-10 shrink-0 items-center justify-center rounded-xs text-muted-foreground outline-none",
-  "transition-[background-color,color,box-shadow] duration-150 ease-out motion-reduce:transition-none",
-  "hover:bg-accent hover:text-accent-foreground active:bg-accent/70",
-  "focus-visible:inset-ring focus-visible:inset-ring-ring",
-  "data-open:bg-primary/10 data-open:text-primary data-open:inset-ring data-open:inset-ring-primary/50",
-  "data-disabled:pointer-events-none data-disabled:opacity-50",
-  "[&_svg]:size-5 [&_svg]:shrink-0 [&_svg]:stroke-[1.75]",
-].join(" ")
+// Options and menu triggers are the registry's Button (ghost, icon only); the toolbar only sizes
+// them and keeps the focus ring inside, since the row scrolls and would clip an outer ring.
+export const floatingToolbarControlClasses =
+  "size-10 shrink-0 rounded-xs focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:inset-ring focus-visible:inset-ring-ring [&_svg]:size-5"
+
+// A menu trigger stays marked while its panel is open.
+export const floatingToolbarMenuTriggerClasses = "data-open:bg-primary/10 data-open:text-primary data-open:inset-ring data-open:inset-ring-primary/50"
 
 export const floatingToolbarSeparatorClasses = "mx-1 h-6 w-px shrink-0 bg-border"
 
@@ -72,7 +70,7 @@ export const floatingToolbarSubmenuContentClasses = [
 ].join(" ")
 
 export const floatingToolbarMenuItemClasses = [
-  "group/item flex min-h-9 cursor-default items-center gap-2.5 rounded-xs px-2.5 py-1.5 text-sm outline-none select-none",
+  "group/item flex min-h-9 cursor-default items-center gap-2.5 rounded-xs px-2.5 py-1.5 outline-none select-none",
   "data-highlighted:bg-accent data-highlighted:text-accent-foreground",
   "data-disabled:pointer-events-none data-disabled:opacity-50",
   "data-destructive:text-error data-destructive:data-highlighted:bg-error/10",
@@ -94,6 +92,8 @@ export const floatingToolbarPanelCounterClasses = {
   2: "[counter-reset:ft-sub]",
 } satisfies Record<FloatingToolbarPanelLevel, string>
 
+// Exception to "build on core components": a CSS counter lives in a pseudo-element, which can't be
+// a Text, so the number keeps its own type classes (registry.md#building-on-core-components).
 const numberClasses =
   "after:min-w-[2ch] after:text-end after:font-mono after:text-2xs after:tracking-wide after:text-muted-foreground data-highlighted:after:text-primary"
 
@@ -110,8 +110,8 @@ export const floatingToolbarItemNumberClasses = {
   },
 } satisfies Record<FloatingToolbarPanelLevel, Record<FloatingToolbarNumbering, string>>
 
-export const floatingToolbarBackItemClasses = "min-h-8 font-mono text-2xs tracking-wide text-muted-foreground uppercase"
+export const floatingToolbarBackItemClasses = "min-h-8 text-muted-foreground"
 
-export const floatingToolbarSubmenuTitleClasses = "px-2.5 pt-2 pb-1 font-mono text-2xs tracking-wide text-primary uppercase"
+export const floatingToolbarSubmenuTitleClasses = "px-2.5 pt-2 pb-1"
 
 export const floatingToolbarMenuSeparatorClasses = "-mx-1 my-1 h-px bg-border"

@@ -18,6 +18,12 @@ heading that explains them.
 | Next.js | `@next/next/*` (core-web-vitals) | `@next/eslint-plugin-next` |
 | Registry file lists, exact-file imports, `@/lib/cn` not `@/lib/utils`, shipped `@/lib` deps, no `target`/`cssVars` | `bun run registry:check` (not ESLint) | `tooling/registry/check.js` |
 | Generated token files up to date | `bun run tokens:check` (not ESLint) | `tooling/tokens/build.js` |
+| Composites build on core components | not enforced: review | [registry.md](registry.md#building-on-core-components) |
+
+"Composites build on core components" has no lint rule on purpose. Telling
+that a class string re-creates a `Text` variant or a `Button` isn't
+mechanical, and a rule would flag legitimate layout classes. It is checked
+in review.
 
 `eslint-plugin-react` is not used: it doesn't support ESLint 10.
 `@eslint-react` has no "one component per file" rule, hence the local one.

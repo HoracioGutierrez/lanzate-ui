@@ -7,6 +7,6 @@ export const textApi: ApiRow[] = [
   { prop: "weight", type: '"normal" | "medium" | "semibold"', description: "Font weight. Overrides the variant's." },
   { prop: "font", type: '"sans" | "mono"', description: "Font family." },
   { prop: "leading", type: '"none" | "tight" | "snug" | "normal" | "relaxed"', description: "Line height. Overrides the one the size sets." },
-  { prop: "color", type: '"primary" | "secondary" | "muted" | "primary-muted" | "secondary-muted" | "info" | "warning" | "success" | "error"', description: "Intent color. Overrides the variant's. Without it, the text uses the foreground color." },
+  { prop: "color", type: '"primary" | "secondary" | "muted" | "primary-muted" | "secondary-muted" | "info" | "warning" | "success" | "error" | "inherit"', description: "Intent color. Overrides the variant's. Without it, the text uses the foreground color. `inherit` takes the parent's color, for text inside a control that colors its own states." },
   { prop: "className", type: "string", description: "Classes merged after the variants, so they can extend or override any base style." },
 ]

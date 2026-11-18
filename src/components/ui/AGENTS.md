@@ -14,6 +14,17 @@ reference example of every rule below.
   `@/components/ui/tooltip/tooltip-content`, never `@/components/ui/tooltip`
   (the shadcn CLI breaks folder imports; see decision 0003). Import ui-sdk
   parts from ui-sdk. Never `../tooltip`.
+- **Build on core components** (`button`, `text`, `tooltip`,
+  `scroll-area`). A composite uses them for what they already cover instead
+  of re-creating their look with classes: a button is `Button`, typography
+  is `Text`.
+  - Core components stay composable: forward props and the ref, merge
+    `className`, accept `render`, render one element.
+  - Composites never import each other. A shared piece becomes a new core
+    component.
+  - Exceptions get a comment in the code.
+
+  See `docs/architecture/registry.md#building-on-core-components`.
 - Merge classes with `cn` from `@/lib/cn`, **never `@/lib/utils`**: a
   consumer's stock `cn` drops token classes (`text-display` vs
   `text-primary`; decision 0004). Every component lists

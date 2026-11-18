@@ -4,6 +4,36 @@ All notable changes to the Lanzate UI registry. Versions follow
 [Semantic Versioning](https://semver.org); while the version is `0.x`, a
 minor bump may contain breaking changes.
 
+## 0.11.0
+
+### Added
+
+- **Frame** (`frame`): an industrial box with registration marks on all
+  four corners, sized with `size` (`"sm"` for cards, `"md"`, `"lg"` for
+  page sections). `FrameHeader` (optional, `height` `"sm" | "md" | "lg"`)
+  takes free content: `FrameBack` for a back button, `FrameTitle`, and
+  `FrameMenu` for a three-dot menu with `FrameMenuItem`,
+  `FrameMenuSeparator` and `FrameSubmenu`. With `collapsible` (and
+  `open` / `defaultOpen` / `onOpenChange`), pressing the title shows or
+  hides `FrameContent` on ui-sdk's Collapsible. `color` takes any intent
+  color (`"warning"`, `"error"`, …): it colors the corner marks and, except
+  for the default `"primary"`, tints the background and borders.
+  The back and three-dot buttons are the registry's `Button` (square,
+  ghost), so `button` installs with it and `FrameBack` takes its props.
+  `FrameTitle` takes `size` from `Text`'s scale (default `"xs"`).
+
+### Changed
+
+- **Floating Toolbar**: options and menu triggers are drawn with the
+  registry's `Button` (ghost, icon only), so `button` now installs with
+  `floating-toolbar`. Same props, size, focus ring and open state.
+- **Frame** and **Floating Toolbar**: titles, the toolbar's Back item and
+  menu item labels are drawn with the registry's `Text` (the `overline`
+  variant for small caps labels), so `text` installs with both. Labels
+  read slightly wider: they take `overline`'s `tracking-wider`.
+- **Text**: `color="inherit"` takes the parent's color, for text inside a
+  control that colors its own states (a highlighted menu item).
+
 ## 0.10.0
 
 ### Added
