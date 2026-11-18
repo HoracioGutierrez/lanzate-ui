@@ -1,0 +1,23 @@
+{
+  "$description": "Theme: overrides semantic light-mode colors. Applied with the .theme-ocean class. Paths must match tokens in semantic/color.light.json.",
+  "registry": {
+    "color": {
+      "$type": "color",
+      "primary": { "$value": "oklch(0.35 0.18 250)" },
+      "primary-foreground": { "$value": "oklch(0.98 0 0)" }
+    }
+  },
+  "site": {
+    "color": {
+      "$type": "color",
+      "secondary": { "$value": "oklch(0.92 0.04 250)" },
+      "secondary-foreground": { "$value": "oklch(0.25 0.12 250)" },
+      "accent": { "$value": "oklch(0.88 0.08 220)" },
+      "accent-foreground": { "$value": "oklch(0.2 0.15 250)" },
+      "ring": { "$value": "oklch(0.5 0.18 250)" },
+      "border": { "$value": "oklch(0.85 0.06 250)" },
+      "muted": { "$value": "oklch(0.94 0.03 250)" },
+      "muted-foreground": { "$value": "oklch(0.5 0.08 250)" }
+    }
+  }
+}

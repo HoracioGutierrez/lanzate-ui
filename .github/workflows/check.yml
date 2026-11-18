@@ -1,0 +1,47 @@
+# Runs every architecture check on pushes and pull requests.
+# See docs/architecture/linting.md for what each step enforces.
+name: Check
+
+on:
+  push:
+    branches: [dev, main]
+  pull_request:
+
+concurrency:
+  group: check-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      # The token build (Style Dictionary 5) needs Node 22+.
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.2.2
+
+      - name: Install
+        run: bun install --frozen-lockfile
+
+      # tokens:check, registry:check, test, typecheck, lint (--max-warnings 0)
+      - name: Check
+        run: bun run check
+
+      - name: Build
+        run: bun run build
+
+      # public/r is what consumers install; it must match the source it's built from.
+      - name: Registry output is up to date
+        run: |
+          bun run registry:build
+          git diff --exit-code -- public/r registry.json || {
+            echo "::error::public/r is out of date. Run 'bun run registry:build' and commit the result."
+            exit 1
+          }

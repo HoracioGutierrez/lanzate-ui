@@ -1,0 +1,80 @@
+# Theming
+
+<Lead>Every color, size, shadow and easing is a design token: a CSS variable you can override in your global CSS.</Lead>
+
+## What gets installed
+
+The first Lanzate component that needs tokens also installs `lanzate-theme`. It adds Lanzate's variables to your global CSS and maps them for Tailwind, so utilities like `bg-info`, `text-display` and `shadow-elevated` work. It doesn't touch shadcn's standard variables (`--background`, `--border`…), except `--primary`.
+
+```css
+:root {
+  --primary: oklch(0.62 0.18 35);
+  --primary-foreground: oklch(0.985 0 0);
+  --error: oklch(0.577 0.245 27.325);
+  --error-foreground: oklch(1 0 0);
+  --info: oklch(0.60 0.15 240);
+  --info-foreground: oklch(1 0 0);
+  --warning: oklch(0.70 0.15 85);
+  --warning-foreground: oklch(0 0 0);
+  --success: oklch(0.55 0.15 142);
+  --success-foreground: oklch(1 0 0);
+}
+
+.dark {
+  --primary: oklch(0.66 0.18 35);
+  --primary-foreground: oklch(0.98 0.01 80);
+  --error: oklch(0.704 0.191 22.216);
+  --info: oklch(0.70 0.15 240);
+  --warning: oklch(0.75 0.14 85);
+  --success: oklch(0.65 0.14 142);
+  /* …foregrounds as in :root */
+}
+```
+
+## Intent colors
+
+Components' `color` prop takes an intent: `primary`, `secondary`, `muted`, `info`, `warning`, `success` or `error`. Each intent has a `-foreground` partner for text on top of it, so contrast is decided once, in the tokens.
+
+## Fluid typography
+
+The type scale uses `clamp()`, so text grows with the viewport without breakpoints.
+
+```css
+@theme inline {
+  --text-xs: clamp(0.75rem, calc(0.708rem + 0.208vw), 0.875rem);
+  --text-sm: clamp(0.875rem, calc(0.833rem + 0.208vw), 1rem);
+  --text-base: clamp(1rem, calc(0.958rem + 0.208vw), 1.125rem);
+  --text-lg: clamp(1.125rem, calc(1.042rem + 0.417vw), 1.375rem);
+  --text-xl: clamp(1.25rem, calc(1.125rem + 0.625vw), 1.625rem);
+  --text-2xl: clamp(1.5rem, calc(1.25rem + 1.25vw), 2.25rem);
+  --text-display: clamp(2rem, calc(1.417rem + 2.917vw), 3.75rem);
+}
+```
+
+## Customize colors
+
+Override any token after the installed ones. For example, a blue primary:
+
+```css
+:root {
+  --primary: oklch(0.6 0.2 240);
+  --primary-foreground: oklch(1 0 0);
+}
+```
+
+Check contrast after a change: text needs 4.5:1 against what's behind it.
+
+## Merging classes
+
+Lanzate components merge their classes with their own `cn()` (`lib/cn.ts`, installed by `lanzate-utils`), which knows the token class names. shadcn's stock `cn()` in `lib/utils.ts` doesn't: it reads `text-display` as a color and drops it next to `text-primary`.
+
+Your `lib/utils.ts` is left as it is. If your own components use Lanzate's token classes, re-export Lanzate's `cn()` from it:
+
+```ts
+// lib/utils.ts
+export { cn } from "@/lib/cn"
+```
+
+## Dark mode
+
+Dark mode is on when the `.dark` class is on `<html>`. The same tokens switch values; components need no changes.

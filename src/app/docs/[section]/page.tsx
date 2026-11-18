@@ -1,22 +1,23 @@
 import type { Metadata } from "next"
-import { redirect } from "next/navigation"
-import { DocsPage } from "@/views/docs/DocsPage"
-import { allSections, titleMap } from "@/views/docs/docs-config"
+import { notFound } from "next/navigation"
 
-type Props = { params: Promise<{ section: string }> }
+import { DocsPage } from "@/features/docs/components/docs-page"
+import { allDocs } from "@/features/docs/config/docs-nav"
+import { findDoc, isDocId } from "@/features/docs/lib/docs-navigation"
+
+export const dynamicParams = false
 
 export function generateStaticParams() {
-  return allSections.map((s) => ({ section: s.id }))
+  return allDocs.map((doc) => ({ section: doc.id }))
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({ params }: PageProps<"/docs/[section]">): Promise<Metadata> {
   const { section } = await params
-  const title = titleMap[section]
-  return title ? { title } : {}
+  return isDocId(section) ? { title: findDoc(section).label } : {}
 }
 
-export default async function DocsSectionPage({ params }: Props) {
+export default async function DocsSectionPage({ params }: PageProps<"/docs/[section]">) {
   const { section } = await params
-  if (!allSections.some((s) => s.id === section)) redirect("/docs/introduction")
-  return <DocsPage section={section} />
+  if (!isDocId(section)) notFound()
+  return <DocsPage id={section} />
 }

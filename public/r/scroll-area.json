@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "scroll-area",
+  "title": "Scroll Area",
+  "description": "Scroll area with styled scrollbars built on ui-sdk.",
+  "dependencies": [
+    "@ui-sdk/react@0.1.0-beta.6",
+    "@ui-sdk/core@0.1.0-beta.6"
+  ],
+  "registryDependencies": [
+    "https://lanzate-ui.vercel.app/r/lanzate-utils.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/scroll-area/index.ts",
+      "content": "export { ScrollArea } from \"./scroll-area\"\nexport { ScrollBar } from \"./scroll-bar\"\nexport type { ScrollAreaOrientation, ScrollAreaProps, ScrollBarProps } from \"./scroll-area.types\"\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "src/components/ui/scroll-area/scroll-area.tsx",
+      "content": "\"use client\"\n\nimport {\n  ScrollArea as ScrollAreaRoot,\n  ScrollAreaContent,\n  ScrollAreaCorner,\n  ScrollAreaViewport,\n} from \"@ui-sdk/react/scroll-area\"\n\nimport { cn } from \"@/lib/cn\"\n\nimport { ScrollBar } from \"./scroll-bar\"\nimport type { ScrollAreaProps } from \"./scroll-area.types\"\nimport { scrollAreaViewportClasses } from \"./scroll-area.variants\"\n\nexport function ScrollArea({ className, children, orientation = \"vertical\", viewportProps, ...props }: ScrollAreaProps) {\n  const { className: viewportClassName, ...restViewportProps } = viewportProps ?? {}\n\n  return (\n    <ScrollAreaRoot className={cn(\"relative\", className)} {...props}>\n      <ScrollAreaViewport\n        className={cn(scrollAreaViewportClasses, typeof viewportClassName === \"string\" ? viewportClassName : undefined)}\n        {...restViewportProps}\n      >\n        <ScrollAreaContent>{children}</ScrollAreaContent>\n      </ScrollAreaViewport>\n      {orientation !== \"horizontal\" && <ScrollBar orientation=\"vertical\" />}\n      {orientation !== \"vertical\" && <ScrollBar orientation=\"horizontal\" />}\n      {orientation === \"both\" && <ScrollAreaCorner />}\n    </ScrollAreaRoot>\n  )\n}\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "src/components/ui/scroll-area/scroll-area.types.ts",
+      "content": "import type { ComponentProps } from \"react\"\nimport type {\n  ScrollArea as ScrollAreaRoot,\n  ScrollAreaScrollbar,\n  ScrollAreaViewport,\n} from \"@ui-sdk/react/scroll-area\"\n\nexport type ScrollAreaOrientation = \"vertical\" | \"horizontal\" | \"both\"\n\nexport type ScrollAreaProps = Omit<ComponentProps<typeof ScrollAreaRoot>, \"className\"> & {\n  className?: string\n  /** Which axes get a scrollbar. Defaults to \"vertical\". */\n  orientation?: ScrollAreaOrientation\n  /** Props for the scrollable viewport, e.g. `role` and `aria-label` to name the region. */\n  viewportProps?: ComponentProps<typeof ScrollAreaViewport>\n}\n\nexport type ScrollBarProps = Omit<ComponentProps<typeof ScrollAreaScrollbar>, \"className\"> & {\n  className?: string\n}\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "src/components/ui/scroll-area/scroll-area.variants.ts",
+      "content": "export const scrollAreaViewportClasses =\n  \"size-full rounded-[inherit] transition-[color,box-shadow] outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:outline-1\"\n\nexport const scrollBarClasses = [\n  \"flex touch-none p-px opacity-0 transition-opacity duration-150 select-none data-visible:opacity-100 motion-reduce:transition-none\",\n  \"data-[orientation=horizontal]:h-2.5 data-[orientation=horizontal]:flex-col data-[orientation=horizontal]:border-t data-[orientation=horizontal]:border-t-transparent\",\n  \"data-[orientation=vertical]:w-2.5 data-[orientation=vertical]:border-l data-[orientation=vertical]:border-l-transparent\",\n].join(\" \")\n\nexport const scrollBarThumbClasses = \"relative flex-1 rounded-full bg-border\"\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "src/components/ui/scroll-area/scroll-bar.tsx",
+      "content": "\"use client\"\n\nimport { ScrollAreaScrollbar, ScrollAreaThumb } from \"@ui-sdk/react/scroll-area\"\n\nimport { cn } from \"@/lib/cn\"\n\nimport type { ScrollBarProps } from \"./scroll-area.types\"\nimport { scrollBarClasses, scrollBarThumbClasses } from \"./scroll-area.variants\"\n\nexport function ScrollBar({ className, orientation = \"vertical\", ...props }: ScrollBarProps) {\n  return (\n    <ScrollAreaScrollbar orientation={orientation} className={cn(scrollBarClasses, className)} {...props}>\n      <ScrollAreaThumb className={scrollBarThumbClasses} />\n    </ScrollAreaScrollbar>\n  )\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

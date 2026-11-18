@@ -1,0 +1,59 @@
+<ComponentBadge number="02" />
+
+# Text
+
+<Lead>Typography with 7 fluid sizes and 9 intent colors. It renders a paragraph by default; pick another element, like a heading, with `render`.</Lead>
+
+<DependencyList items={["@ui-sdk/react", "class-variance-authority"]} />
+
+## Sizes
+
+<Demo name="text-sizes" />
+
+## Colors
+
+<Demo name="text-colors" />
+
+## HTML element
+
+`render` sets the element; `size` and `color` stay independent of it, so the document outline and the visual scale don't have to match.
+
+<Demo name="text-element" />
+
+## Customization
+
+<Demo name="text-customization" />
+
+## Installation
+
+```bash
+npx shadcn@latest add https://lanzate-ui.vercel.app/r/text.json
+```
+
+## Usage
+
+```tsx
+import { Text } from "@/components/ui/text"
+
+// Default paragraph (size="md")
+<Text>Standard body text.</Text>
+
+// h1 with the display size
+<Text render={<h1 />} size="display">
+  The interface that takes off
+</Text>
+
+// Caption with an intent color
+<Text render={<span />} size="xs" color="muted">
+  Last updated: 2 min ago
+</Text>
+
+// Error message
+<Text size="sm" color="error">
+  This field is required.
+</Text>
+```
+
+## API
+
+<ApiTable name="text" />

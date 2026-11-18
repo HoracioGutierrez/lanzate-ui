@@ -1,14 +1,4 @@
-import { clsx, type ClassValue } from "clsx"
-import { extendTailwindMerge } from "tailwind-merge"
-
-const twMerge = extendTailwindMerge({
-  extend: {
-    classGroups: {
-      "font-size": ["text-display"],
-    },
-  },
-})
-
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
-}
+// shadcn's conventional entry point for cn(). The website and any shadcn
+// component use it; it's the same token-aware merger the registry ships.
+// Registry components import `@/lib/cn` directly (see src/components/ui/AGENTS.md).
+export { cn } from "@/lib/cn"

@@ -1,0 +1,59 @@
+# Installation
+
+<Lead>Lanzate UI works with any React + Tailwind stack. Add components to your project with the shadcn CLI.</Lead>
+
+## Set up shadcn/ui
+
+If you don't have it yet, initialize shadcn/ui in your project. This creates the `components.json` file and sets up the paths and aliases the CLI needs.
+
+```bash
+npx shadcn@latest init
+```
+
+## Add a component
+
+Use the CLI to copy components from the Lanzate UI registry into your project. Each component brings what it needs: its files, the shared design tokens and Lanzate's `cn()`.
+
+```bash
+# Add the Button component
+npx shadcn@latest add https://lanzate-ui.vercel.app/r/button.json
+
+# Add the Text component
+npx shadcn@latest add https://lanzate-ui.vercel.app/r/text.json
+
+# Add several at once
+npx shadcn@latest add \
+  https://lanzate-ui.vercel.app/r/button.json \
+  https://lanzate-ui.vercel.app/r/text.json
+```
+
+## Import and use
+
+Each component installs as a folder under your `ui` alias, for example `components/ui/button/`. Import it from the folder.
+
+```tsx
+import { Button } from "@/components/ui/button"
+import { Text } from "@/components/ui/text"
+
+export default function Page() {
+  return (
+    <div>
+      <Text render={<h1 />} size="2xl">
+        Taking off!
+      </Text>
+      <Button>Get Started</Button>
+    </div>
+  )
+}
+```
+
+## Requirements
+
+<InfoGrid
+  items={[
+    { label: "React", value: "18 or higher" },
+    { label: "Tailwind CSS", value: "v4" },
+    { label: "TypeScript", value: "Optional but recommended" },
+    { label: "shadcn/ui CLI", value: "To install components" },
+  ]}
+/>
