@@ -21,8 +21,12 @@ registry. Full rules: `docs/architecture/registry.md`.
   `data-slot` and state attributes. Every control has an accessible name.
 - Every component has tests, including the ui-sdk agent test.
 - After any change: update `registry.json` (every file listed, no `target`,
-  `registryDependencies` for other components) and run
+  `registryDependencies` for other components, no `cssVars`) and run
   `bun run registry:build`.
+- Using a `registry`-scope token (`info`, `text-display`, `shadow-elevated`,
+  `ease-spring`…)? Add `https://lanzate-ui.vercel.app/r/lanzate-theme.json` to
+  the item's `registryDependencies`. Prop types for colors and sizes come
+  from `@/styles/generated/tokens.types` (`IntentColor`, `TextSize`…).
 
 > Until phase 3 lands, the existing components are single files
 > (`button.tsx`, …). New components use the folder layout.

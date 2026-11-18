@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next"
-import "@/index.css"
+import "@/styles/globals.css"
 
 const description =
   "Open source collection of copy-paste React components built on ui-sdk and Tailwind. Accessible (WCAG AA), zero runtime dependencies, 100% yours."

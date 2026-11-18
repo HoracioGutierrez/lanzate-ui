@@ -71,6 +71,7 @@ tester.run("no-magic-design-values", noMagicDesignValues, {
     { code: "const c = 'shadow-[var(--shadow-pop)] text-(--btn-fg)'" },
     { code: "const c = 'color-mix(in oklch, var(--border) 60%, transparent)'" },
     { code: "const c = 'w-[22rem] min-h-[16rem]'" },
+    { code: "const c = 'oklch(from var(--foreground) l c h / 0.65)'" },
   ],
   invalid: [
     { code: "const c = '[--btn-fg:oklch(1_0_0)]'", errors: [{ messageId: "magic" }] },

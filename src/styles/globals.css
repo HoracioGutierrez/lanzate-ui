@@ -1,0 +1,55 @@
+@layer ui-sdk;
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "@fontsource-variable/geist";
+
+/* Design tokens: colors, type scale, radius, shadows, easing, themes.
+   Generated from tokens/ — edit the JSON there and run `bun run tokens`. */
+@import "./generated/tokens.css";
+
+/* Docs and tooling mention class names in prose; don't generate CSS for them. */
+@source not "../../docs";
+@source not "../../tooling";
+@source not "../../tokens";
+
+@custom-variant dark (&:is(.dark *));
+
+@layer utilities {
+  .grid-bg {
+    background-image:
+      linear-gradient(to right, color-mix(in oklch, var(--border) 60%, transparent) 1px, transparent 1px),
+      linear-gradient(to bottom, color-mix(in oklch, var(--border) 60%, transparent) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 80%);
+  }
+
+  .marquee-track { animation: marquee 40s linear infinite; }
+
+  .scroll-fade {
+    mask-image: linear-gradient(
+      to bottom,
+      transparent 0%,
+      black 18%,
+      black 82%,
+      transparent 100%
+    );
+  }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+}

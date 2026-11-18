@@ -1,0 +1,51 @@
+{
+  "$description": "Tier 2 — mode-independent tokens. 'theme' tokens become Tailwind theme variables (@theme inline), so each one is also a utility: text-xs, shadow-soft, ease-spring, rounded-lg, font-sans. 'root' tokens are plain CSS variables on :root.",
+  "registry": {
+    "theme": {
+      "text": {
+        "3xs": { "$value": "0.625rem" },
+        "2xs": { "$value": "0.6875rem" },
+        "xs": { "$value": "clamp(0.75rem, calc(0.708rem + 0.208vw), 0.875rem)" },
+        "sm": { "$value": "clamp(0.875rem, calc(0.833rem + 0.208vw), 1rem)" },
+        "base": { "$value": "clamp(1rem, calc(0.958rem + 0.208vw), 1.125rem)" },
+        "lg": { "$value": "clamp(1.125rem, calc(1.042rem + 0.417vw), 1.375rem)" },
+        "xl": { "$value": "clamp(1.25rem, calc(1.125rem + 0.625vw), 1.625rem)" },
+        "2xl": { "$value": "clamp(1.5rem, calc(1.25rem + 1.25vw), 2.25rem)" },
+        "display": { "$value": "clamp(2rem, calc(1.417rem + 2.917vw), 3.75rem)" }
+      },
+      "shadow": {
+        "elevated": { "$value": "0 4px 12px {primitive.color.black-alpha.15}" },
+        "elevated-hover": { "$value": "0 6px 20px {primitive.color.black-alpha.20}" },
+        "elevated-active": { "$value": "0 2px 6px {primitive.color.black-alpha.12}" }
+      },
+      "ease": {
+        "spring": { "$value": "cubic-bezier(0.34, 1.56, 0.64, 1)", "$description": "Overshoots slightly, then settles. For press and pop feedback." }
+      }
+    }
+  },
+  "site": {
+    "root": {
+      "radius": { "$value": "0.625rem", "$description": "Base corner radius; the radius scale is computed from it." }
+    },
+    "theme": {
+      "font": {
+        "sans": { "$value": "'Geist Variable', sans-serif" },
+        "heading": { "$value": "var(--font-sans)" }
+      },
+      "radius": {
+        "sm": { "$value": "calc(var(--radius) * 0.6)" },
+        "md": { "$value": "calc(var(--radius) * 0.8)" },
+        "lg": { "$value": "var(--radius)" },
+        "xl": { "$value": "calc(var(--radius) * 1.4)" },
+        "2xl": { "$value": "calc(var(--radius) * 1.8)" },
+        "3xl": { "$value": "calc(var(--radius) * 2.2)" },
+        "4xl": { "$value": "calc(var(--radius) * 2.6)" }
+      },
+      "shadow": {
+        "soft": { "$value": "0 1px 2px 0 {primitive.color.black-alpha.4}, 0 1px 3px 0 {primitive.color.black-alpha.6}" },
+        "pop": { "$value": "0 10px 30px -12px {primitive.color.black-alpha.18}, 0 2px 6px -1px {primitive.color.black-alpha.6}" },
+        "floating": { "$value": "0 8px 24px -10px {primitive.color.black-alpha.20}" }
+      }
+    }
+  }
+}

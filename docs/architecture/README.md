@@ -46,7 +46,7 @@ not errors, and some legacy code doesn't follow the rules yet.
 | --- | --- | --- |
 | 0 | Spike: registry folder layout ([0001](decisions/0001-registry-component-folders.md)) | Done |
 | 1 | Lint rules, TypeScript `strict`, these docs | Done |
-| 2 | Design tokens: DTCG source, Style Dictionary, generated CSS and types | Pending |
+| 2 | Design tokens: DTCG source, Style Dictionary, generated CSS and types ([0002](decisions/0002-design-token-pipeline.md)) | Done |
 | 3 | Registry components moved to per-component folders | Pending |
 | 4 | Website moved to `src/features` (shell, docs with MDX, home) | Pending |
 | 5 | Architecture rules switched to errors; CI checks | Pending |

@@ -16,10 +16,10 @@ product; the website consumes it. Everything in this repo is in English.
 
 Architecture docs: `docs/architecture/README.md`. Read the doc for the area
 you touch before changing it. Folders with their own `AGENTS.md` add rules
-for that folder (e.g. `src/components/ui/AGENTS.md`).
+for that folder (`src/components/ui/AGENTS.md`, `tokens/AGENTS.md`).
 
 ```
-tokens/              design tokens source (phase 2)
+tokens/              design tokens source (DTCG JSON); generated into src/styles/generated
 src/app/             Next.js routes only: read params, render one feature component
 src/features/        the website, one folder per feature (legacy: src/views, src/components/layout)
 src/components/ui/   the registry, one folder per component
@@ -40,7 +40,8 @@ Each rule links to its explanation. Most are enforced by `bun run lint`.
    → `conventions.md#types-live-in-types-files`
 3. **No literal design values** (`oklch(…)`, `#hex`, `text-[13px]`,
    `shadow-[…]`, `cubic-bezier`). Use tokens; add one if it's missing.
-   → `tokens.md#no-magic-values`
+   Tokens live in `tokens/` (JSON); `src/styles/generated/` is output — never
+   edit it. → `tokens.md#no-magic-values`
 4. **Imports point inward**: app → features → ui → hooks → lib → styles. The
    registry never imports website code. → `layers.md`
 5. **kebab-case** files and folders; suffixes `.types.ts`, `.variants.ts`,
@@ -68,13 +69,15 @@ non-obvious choices in `docs/architecture/decisions/`. See
 
 ## Commands
 
-Run all three before finishing:
+Run `bun run check` before finishing. It runs, in order:
 
-- `bun run test` — Vitest (components and ESLint rules)
+- `bun run tokens:check` — generated token files match `tokens/`
+- `bun run test` — Vitest (components, utils and ESLint rules)
 - `bun run typecheck` — `next typegen` + `tsc --noEmit`
 - `bun run lint` — ESLint, architecture rules included
 
-`bun run registry:build` after changing a registry component.
+`bun run tokens` after changing anything in `tokens/`.
+`bun run registry:build` after changing a registry component or tokens.
 
 ## ui-sdk
 

@@ -2,7 +2,8 @@
 // See docs/architecture/tokens.md#no-magic-values
 
 const PATTERNS = [
-  { re: /\b(?:oklch|oklab|rgba?|hsla?|lab|lch|hwb)\(/, what: "a raw color" },
+  // `oklch(from var(--token) …)` derives a color from a token, so it's allowed.
+  { re: /\b(?:oklch|oklab|rgba?|hsla?|lab|lch|hwb)\((?!from\s+var\()/, what: "a raw color" },
   { re: /-\[#[0-9a-fA-F]{3,8}\]/, what: "an arbitrary hex color" },
   { re: /\b(?:text|leading|tracking)-\[-?[\d.]+(?:px|rem|em)\]/, what: "an arbitrary type-scale value" },
   { re: /\bshadow-\[(?!var\()/, what: "an arbitrary shadow" },

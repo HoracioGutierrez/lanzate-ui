@@ -1,7 +1,7 @@
 # Layers
 
 ```
-tokens/                  design tokens source (DTCG JSON) — phase 2
+tokens/                  design tokens source (DTCG JSON), see tokens.md
 src/
 ├── app/                 Next.js routes only
 ├── features/            the website, one folder per feature
@@ -10,7 +10,7 @@ src/
 ├── lib/                 utilities shipped with the registry (cn, …)
 ├── styles/              global CSS and generated token files
 └── test/                test setup
-tooling/                 ESLint rules and build scripts (Node, not shipped)
+tooling/                 ESLint rules and the token build (Node, not shipped)
 docs/architecture/       these docs
 ```
 

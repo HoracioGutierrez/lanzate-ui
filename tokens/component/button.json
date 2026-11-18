@@ -1,0 +1,18 @@
+{
+  "$description": "Tier 3 — Button-only tokens. Glow shadows read --btn-color, the color the Button sets from its `color` prop, so they live in @theme inline and resolve on the button itself.",
+  "registry": {
+    "theme": {
+      "shadow": {
+        "button-glow": { "$value": "0 0 8px 2px color-mix(in oklch, var(--btn-color) 50%, transparent), 0 0 24px 6px color-mix(in oklch, var(--btn-color) 22%, transparent)" },
+        "button-glow-hover": { "$value": "0 0 12px 4px color-mix(in oklch, var(--btn-color) 65%, transparent), 0 0 36px 10px color-mix(in oklch, var(--btn-color) 30%, transparent)" },
+        "button-glow-active": { "$value": "0 0 5px 1px color-mix(in oklch, var(--btn-color) 40%, transparent), 0 0 14px 3px color-mix(in oklch, var(--btn-color) 18%, transparent)" },
+        "button-surface": { "$value": "inset 0 1px 0 oklch(1 0 0 / 0.35), inset 0 -1px 0 oklch(0 0 0 / 0.25), inset 1px 0 0 oklch(1 0 0 / 0.15), inset -1px 0 0 oklch(0 0 0 / 0.12)" },
+        "button-surface-active": { "$value": "inset 0 2px 1px oklch(0 0 0 / 0.15), inset 0 -1px 0 oklch(1 0 0 / 0.08)" }
+      }
+    },
+    "root": {
+      "button-surface-gradient": { "$value": "linear-gradient(to bottom, oklch(1 0 0 / 0.12), oklch(0 0 0 / 0.1))" },
+      "button-surface-gradient-active": { "$value": "linear-gradient(to bottom, oklch(0 0 0 / 0.08), oklch(1 0 0 / 0.04))" }
+    }
+  }
+}

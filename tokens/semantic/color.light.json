@@ -1,0 +1,54 @@
+{
+  "$description": "Tier 2 — semantic colors, light mode (:root). 'registry' tokens ship to consumers in the lanzate-theme registry item; 'site' tokens are the standard shadcn set, which consumers already have. Tokens marked intent are the values of components' `color` prop.",
+  "registry": {
+    "color": {
+      "$type": "color",
+      "primary": { "$value": "{primitive.color.orange.500}", "$extensions": { "lanzate": { "intent": true } } },
+      "primary-foreground": { "$value": "{primitive.color.neutral.50}" },
+      "error": { "$value": "{primitive.color.red.600}", "$extensions": { "lanzate": { "intent": true } } },
+      "error-foreground": { "$value": "{primitive.color.neutral.0}" },
+      "info": { "$value": "{primitive.color.blue.500}", "$extensions": { "lanzate": { "intent": true } } },
+      "info-foreground": { "$value": "{primitive.color.neutral.0}" },
+      "warning": { "$value": "{primitive.color.yellow.500}", "$extensions": { "lanzate": { "intent": true } } },
+      "warning-foreground": { "$value": "{primitive.color.neutral.1000}" },
+      "success": { "$value": "{primitive.color.green.600}", "$extensions": { "lanzate": { "intent": true } } },
+      "success-foreground": { "$value": "{primitive.color.neutral.0}" }
+    }
+  },
+  "site": {
+    "color": {
+      "$type": "color",
+      "background": { "$value": "{primitive.color.neutral.0}" },
+      "foreground": { "$value": "{primitive.color.neutral.950}" },
+      "card": { "$value": "{primitive.color.neutral.0}" },
+      "card-foreground": { "$value": "{primitive.color.neutral.950}" },
+      "popover": { "$value": "{primitive.color.neutral.0}" },
+      "popover-foreground": { "$value": "{primitive.color.neutral.950}" },
+      "secondary": { "$value": "{primitive.color.neutral.100}", "$extensions": { "lanzate": { "intent": true } } },
+      "secondary-foreground": { "$value": "{primitive.color.neutral.900}" },
+      "muted": { "$value": "{primitive.color.neutral.100}", "$extensions": { "lanzate": { "intent": true } } },
+      "muted-foreground": { "$value": "{primitive.color.neutral.500}" },
+      "accent": { "$value": "{primitive.color.neutral.100}" },
+      "accent-foreground": { "$value": "{primitive.color.neutral.900}" },
+      "destructive": { "$value": "{registry.color.error}", "$description": "shadcn name for error; kept so shadcn components keep working." },
+      "border": { "$value": "{primitive.color.neutral.200}" },
+      "input": { "$value": "{primitive.color.neutral.200}" },
+      "ring": { "$value": "{primitive.color.neutral.400}" },
+      "brand": { "$value": "{primitive.color.orange.500}" },
+      "brand-foreground": { "$value": "{primitive.color.neutral.0}" },
+      "chart-1": { "$value": "{primitive.color.neutral.300}" },
+      "chart-2": { "$value": "{primitive.color.neutral.500}" },
+      "chart-3": { "$value": "{primitive.color.neutral.600}" },
+      "chart-4": { "$value": "{primitive.color.neutral.700}" },
+      "chart-5": { "$value": "{primitive.color.neutral.800}" },
+      "sidebar": { "$value": "{primitive.color.neutral.50}" },
+      "sidebar-foreground": { "$value": "{primitive.color.neutral.950}" },
+      "sidebar-primary": { "$value": "{primitive.color.orange.500}" },
+      "sidebar-primary-foreground": { "$value": "{primitive.color.neutral.50}" },
+      "sidebar-accent": { "$value": "{primitive.color.neutral.100}" },
+      "sidebar-accent-foreground": { "$value": "{primitive.color.neutral.900}" },
+      "sidebar-border": { "$value": "{primitive.color.neutral.200}" },
+      "sidebar-ring": { "$value": "{primitive.color.neutral.400}" }
+    }
+  }
+}
