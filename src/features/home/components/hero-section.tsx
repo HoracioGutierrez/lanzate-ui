@@ -26,7 +26,7 @@ export function HeroSection() {
             leading="none"
             className="text-fade mt-6 max-w-5xl text-5xl md:text-7xl lg:text-hero"
           >
-            Components <em className="font-serif font-normal italic">that take off</em>
+            Components <em className="pr-3 font-serif font-normal italic">that take off</em>
             <br />
             your next interface.
           </Text>

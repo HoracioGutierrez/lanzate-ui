@@ -41,6 +41,8 @@ export const twMergeTheme = {
   ],
   "font": [
     "sans",
-    "heading"
+    "heading",
+    "mono",
+    "serif"
   ]
 }

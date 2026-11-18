@@ -64,6 +64,13 @@
         },
         "heading": {
           "$value": "var(--font-sans)"
+        },
+        "mono": {
+          "$value": "'Geist Mono Variable', ui-monospace, monospace"
+        },
+        "serif": {
+          "$value": "'Instrument Serif', ui-serif, Georgia, serif",
+          "$description": "Accent serif, italic only: the home page hero."
         }
       },
       "radius": {
