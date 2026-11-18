@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Link, useLocation } from "react-router-dom"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { Sun, Moon, ArrowRight } from "lucide-react"
 
 export function Header() {
@@ -10,7 +11,7 @@ export function Header() {
     return window.matchMedia("(prefers-color-scheme: dark)").matches
   })
   const [floating, setFloating] = useState(false)
-  const location = useLocation()
+  const pathname = usePathname()
 
   useEffect(() => {
     document.documentElement.classList.toggle("dark", dark)
@@ -23,7 +24,7 @@ export function Header() {
     return () => window.removeEventListener("scroll", onScroll)
   }, [])
 
-  const isDocsActive = location.pathname.startsWith("/docs")
+  const isDocsActive = pathname.startsWith("/docs")
 
   return (
     <header className="fixed left-0 right-0 top-0 z-50">
@@ -56,7 +57,7 @@ export function Header() {
         />
 
         <div className="relative flex items-center justify-between gap-4 h-14 px-6">
-          <Link to="/" className="flex items-center gap-2.5 shrink-0">
+          <Link href="/" className="flex items-center gap-2.5 shrink-0">
             <span className="bg-foreground text-background w-7 h-7 rounded-md grid place-items-center font-mono text-[13px] font-semibold tracking-tight">
               L
             </span>
@@ -82,7 +83,7 @@ export function Header() {
                   Components
                 </a>
                 <Link
-                  to="/docs"
+                  href="/docs"
                   className={`px-3 py-1.5 rounded-md hover:bg-accent transition ${
                     isDocsActive
                       ? "font-medium text-foreground"
@@ -123,7 +124,7 @@ export function Header() {
             </AnimatePresence>
 
             <Link
-              to="/docs"
+              href="/docs"
               className="inline-flex h-9 items-center px-3.5 rounded-md bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition gap-1.5 shrink-0 whitespace-nowrap"
             >
               Get Started

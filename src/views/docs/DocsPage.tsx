@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { useParams, Navigate, Link } from "react-router-dom"
+import Link from "next/link"
 import { ChevronRight } from "lucide-react"
 import { Header } from "@/components/layout/Header"
 import { ScrollArea } from "@/components/ui/scroll-area"
@@ -18,8 +18,7 @@ const sectionComponents: Record<string, React.ComponentType> = {
   text: TextSection,
 }
 
-export function DocsPage() {
-  const { section = "introduction" } = useParams()
+export function DocsPage({ section }: { section: string }) {
   const [filter, setFilter] = useState("")
   const [activeTocId, setActiveTocId] = useState("")
 
@@ -57,7 +56,7 @@ export function DocsPage() {
 
   const currentIndex = allSections.findIndex((s) => s.id === section)
 
-  if (currentIndex === -1) return <Navigate to="/docs/introduction" replace />
+  if (currentIndex === -1) return null
 
   const SectionComponent = sectionComponents[section]
   const prev = currentIndex > 0 ? allSections[currentIndex - 1] : null
@@ -112,7 +111,7 @@ export function DocsPage() {
                         return (
                           <li key={item.id}>
                             <Link
-                              to={`/docs/${item.id}`}
+                              href={`/docs/${item.id}`}
                               className={`flex items-center gap-2.5 px-2 py-1.5 rounded-md text-sm transition ${
                                 isActive
                                   ? "bg-accent text-foreground font-medium"
@@ -152,11 +151,11 @@ export function DocsPage() {
 
             {/* Breadcrumb */}
             <div className="flex items-center gap-1.5 text-xs text-muted-foreground mb-6">
-              <Link to="/" className="hover:text-foreground transition">
+              <Link href="/" className="hover:text-foreground transition">
                 Lanzate UI
               </Link>
               <ChevronRight size={12} />
-              <Link to="/docs" className="hover:text-foreground transition">
+              <Link href="/docs" className="hover:text-foreground transition">
                 Docs
               </Link>
               <ChevronRight size={12} />
@@ -170,7 +169,7 @@ export function DocsPage() {
             <div className="mt-20 pt-6 border-t border-border flex items-center justify-between gap-4">
               {prev ? (
                 <Link
-                  to={`/docs/${prev.id}`}
+                  href={`/docs/${prev.id}`}
                   className="flex-1 max-w-xs rounded-lg border border-border bg-card p-4 hover:bg-accent transition"
                 >
                   <div className="text-[11px] text-muted-foreground">← Previous</div>
@@ -182,7 +181,7 @@ export function DocsPage() {
 
               {next ? (
                 <Link
-                  to={`/docs/${next.id}`}
+                  href={`/docs/${next.id}`}
                   className="flex-1 max-w-xs text-right rounded-lg border border-border bg-card p-4 hover:bg-accent transition"
                 >
                   <div className="text-[11px] text-muted-foreground">Next →</div>
