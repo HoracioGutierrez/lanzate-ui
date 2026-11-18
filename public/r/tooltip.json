@@ -10,8 +10,28 @@
   "registryDependencies": [],
   "files": [
     {
-      "path": "src/components/ui/tooltip.tsx",
-      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport {\n  Tooltip as TooltipRoot,\n  TooltipArrow,\n  TooltipContent as TooltipContentPart,\n  TooltipShortcut,\n  TooltipTrigger,\n} from \"@ui-sdk/react/tooltip\"\n\nimport { cn } from \"@/lib/utils\"\n\nfunction Tooltip({ delay = 0, ...props }: React.ComponentProps<typeof TooltipRoot>) {\n  return <TooltipRoot delay={delay} {...props} />\n}\n\ntype TooltipContentProps = Omit<React.ComponentProps<typeof TooltipContentPart>, \"className\" | \"children\"> & {\n  className?: string\n  children?: React.ReactNode\n  arrow?: boolean\n}\n\nfunction TooltipContent({\n  className,\n  sideOffset = 6,\n  arrow = true,\n  children,\n  ...props\n}: TooltipContentProps) {\n  return (\n    <TooltipContentPart\n      sideOffset={sideOffset}\n      className={cn(\n        \"z-50 inline-flex w-fit max-w-xs origin-(--transform-origin) items-center gap-1.5 rounded-md bg-foreground px-3 py-1.5 text-xs text-background\",\n        \"transition-[opacity,scale,translate] duration-150 ease-out data-instant:transition-none\",\n        \"data-starting-style:scale-95 data-starting-style:opacity-0 data-ending-style:scale-95 data-ending-style:opacity-0\",\n        \"data-starting-style:data-[side=top]:translate-y-1 data-starting-style:data-[side=bottom]:-translate-y-1 data-starting-style:data-[side=left]:translate-x-1 data-starting-style:data-[side=right]:-translate-x-1\",\n        \"motion-reduce:data-starting-style:scale-100 motion-reduce:data-starting-style:translate-0 motion-reduce:data-ending-style:scale-100\",\n        className\n      )}\n      {...props}\n    >\n      {children}\n      {arrow && (\n        <TooltipArrow\n          className={cn(\n            \"size-2.5 rotate-45 rounded-[2px] bg-foreground\",\n            \"data-[side=top]:-bottom-1 data-[side=bottom]:-top-1 data-[side=left]:-right-1 data-[side=right]:-left-1\"\n          )}\n        />\n      )}\n    </TooltipContentPart>\n  )\n}\n\nexport { Tooltip, TooltipContent, TooltipShortcut, TooltipTrigger }\nexport type { TooltipContentProps }\n",
+      "path": "src/components/ui/tooltip/index.ts",
+      "content": "export { Tooltip } from \"./tooltip\"\nexport { TooltipContent } from \"./tooltip-content\"\nexport { TooltipShortcut, TooltipTrigger } from \"@ui-sdk/react/tooltip\"\nexport type { TooltipContentProps, TooltipProps } from \"./tooltip.types\"\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "src/components/ui/tooltip/tooltip-content.tsx",
+      "content": "\"use client\"\n\nimport { TooltipArrow, TooltipContent as TooltipContentPart } from \"@ui-sdk/react/tooltip\"\n\nimport { cn } from \"@/lib/utils\"\n\nimport type { TooltipContentProps } from \"./tooltip.types\"\nimport { tooltipArrowClasses, tooltipContentClasses } from \"./tooltip.variants\"\n\nexport function TooltipContent({ className, sideOffset = 6, arrow = true, children, ...props }: TooltipContentProps) {\n  return (\n    <TooltipContentPart sideOffset={sideOffset} className={cn(tooltipContentClasses, className)} {...props}>\n      {children}\n      {arrow && <TooltipArrow className={tooltipArrowClasses} />}\n    </TooltipContentPart>\n  )\n}\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "src/components/ui/tooltip/tooltip.tsx",
+      "content": "\"use client\"\n\nimport { Tooltip as TooltipRoot } from \"@ui-sdk/react/tooltip\"\n\nimport type { TooltipProps } from \"./tooltip.types\"\n\nexport function Tooltip({ delay = 0, ...props }: TooltipProps) {\n  return <TooltipRoot delay={delay} {...props} />\n}\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "src/components/ui/tooltip/tooltip.types.ts",
+      "content": "import type { ComponentProps, ReactNode } from \"react\"\nimport type { Tooltip as TooltipRoot, TooltipContent as TooltipContentPart } from \"@ui-sdk/react/tooltip\"\n\nexport type TooltipProps = ComponentProps<typeof TooltipRoot>\n\nexport type TooltipContentProps = Omit<ComponentProps<typeof TooltipContentPart>, \"className\" | \"children\"> & {\n  className?: string\n  children?: ReactNode\n  /** Draws an arrow pointing at the trigger. Defaults to true. */\n  arrow?: boolean\n}\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "src/components/ui/tooltip/tooltip.variants.ts",
+      "content": "export const tooltipContentClasses = [\n  \"z-50 inline-flex w-fit max-w-xs origin-(--transform-origin) items-center gap-1.5 rounded-md bg-foreground px-3 py-1.5 text-xs text-background\",\n  \"transition-[opacity,scale,translate] duration-150 ease-out data-instant:transition-none\",\n  \"data-starting-style:scale-95 data-starting-style:opacity-0 data-ending-style:scale-95 data-ending-style:opacity-0\",\n  \"data-starting-style:data-[side=top]:translate-y-1 data-starting-style:data-[side=bottom]:-translate-y-1 data-starting-style:data-[side=left]:translate-x-1 data-starting-style:data-[side=right]:-translate-x-1\",\n  \"motion-reduce:data-starting-style:scale-100 motion-reduce:data-starting-style:translate-0 motion-reduce:data-ending-style:scale-100\",\n].join(\" \")\n\nexport const tooltipArrowClasses = [\n  \"size-2.5 rotate-45 rounded-[2px] bg-foreground\",\n  \"data-[side=top]:-bottom-1 data-[side=bottom]:-top-1 data-[side=left]:-right-1 data-[side=right]:-left-1\",\n].join(\" \")\n",
       "type": "registry:ui"
     }
   ],

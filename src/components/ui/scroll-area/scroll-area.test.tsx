@@ -1,17 +1,17 @@
 import { render, screen } from "@testing-library/react"
 import { expect, test } from "vitest"
 
-import { ScrollArea } from "./scroll-area"
+import { ScrollArea } from "."
 
 test("puts content in a named, scrollable viewport", () => {
   render(
-    <ScrollArea viewportProps={{ role: "region", "aria-label": "Notas" }}>
-      <p>Contenido</p>
+    <ScrollArea viewportProps={{ role: "region", "aria-label": "Notes" }}>
+      <p>Content</p>
     </ScrollArea>
   )
-  const viewport = screen.getByRole("region", { name: "Notas" })
+  const viewport = screen.getByRole("region", { name: "Notes" })
   expect(viewport.getAttribute("data-slot")).toBe("scroll-area-viewport")
-  expect(viewport.textContent).toBe("Contenido")
+  expect(viewport.textContent).toBe("Content")
 })
 
 test("renders one scrollbar per requested axis and the corner only for both", () => {

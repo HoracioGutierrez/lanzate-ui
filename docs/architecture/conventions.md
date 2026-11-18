@@ -38,10 +38,10 @@ hold only types.
 ```ts
 // button.types.ts
 import type { ReactNode } from "react"
-import type { SemanticColor } from "@/styles/generated/tokens.types"
+import type { IntentColor } from "@/lib/tokens.types"
 
 export type ButtonVariant = "solid" | "outline" | "ghost" | "soft" | "dashed" | "surface"
-export type ButtonProps = { color?: SemanticColor; variant?: ButtonVariant; children?: ReactNode }
+export type ButtonProps = { color?: IntentColor; variant?: ButtonVariant; children?: ReactNode }
 
 // button.tsx
 import type { ButtonProps } from "./button.types"
@@ -79,7 +79,7 @@ Where the types file goes:
 | --- | --- |
 | One component | `<component>.types.ts` next to it |
 | Several files in a feature | `src/features/<feature>/types/<topic>.types.ts` |
-| Generated from tokens | `src/styles/generated/tokens.types.ts` |
+| Generated from tokens | `src/lib/tokens.types.ts` |
 
 Rule: `lanzate/types-in-types-files`.
 
@@ -120,12 +120,17 @@ Rules: `check-file/filename-naming-convention`,
   (`components/ui/index.ts`): they make bundlers load everything.
 - **Type imports use `import type`** (`@typescript-eslint/consistent-type-imports`).
 - **Inside a component folder, import siblings relatively** (`./button.types`).
-  **Across components or layers, use the `@/` alias** (`@/components/ui/tooltip`),
-  never `../`. The shadcn CLI rewrites alias imports for consumers.
+  **Across components or layers, use the `@/` alias**, never `../`. The
+  shadcn CLI rewrites alias imports for consumers.
+- **Inside the registry, import another component by exact file**
+  (`@/components/ui/tooltip/tooltip-content`), never by folder
+  (`@/components/ui/tooltip`): the CLI rewrites a folder import to
+  `<ui>/tooltip/tooltip` and the other exports disappear. Website code
+  imports from the folder. Evidence: [decision 0003](decisions/0003-registry-imports-and-shipped-types.md).
 
 Rules: `no-restricted-syntax` (default exports, `export *`),
-`@typescript-eslint/consistent-type-imports`. The relative-vs-alias rule is
-not linted yet.
+`@typescript-eslint/consistent-type-imports`, `bun run registry:check` (exact-file
+imports in the registry). The relative-vs-alias rule is not linted yet.
 
 ## React
 

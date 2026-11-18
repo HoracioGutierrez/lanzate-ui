@@ -51,8 +51,9 @@ tooling/tokens/build.js                the build (Style Dictionary reads and res
 
 src/styles/generated/                  OUTPUT — committed, never edited by hand
 ├── tokens.css                         @theme inline + :root + .dark + .theme-*
-├── tokens.types.ts                    ColorToken, IntentColor, TextSize, Radius, Shadow, Ease, FontFamily, ThemeName
 └── tw-merge.config.ts                 token values for tailwind-merge (used by cn)
+src/lib/tokens.types.ts                OUTPUT — ColorToken, IntentColor, TextSize, Radius, Shadow, Ease, FontFamily, ThemeName
+                                       (in lib/ because it ships with the registry; see decision 0003)
 registry.json → item "lanzate-theme"   OUTPUT — the registry:theme item (generated; don't edit it by hand)
 ```
 
@@ -99,7 +100,7 @@ The `IntentColor` type lists them, and components check their color maps
 against it:
 
 ```ts
-import type { IntentColor } from "@/styles/generated/tokens.types"
+import type { IntentColor } from "@/lib/tokens.types"
 const colorClasses = { primary: "…", secondary: "…", /* every intent */ } satisfies Record<IntentColor, string>
 ```
 

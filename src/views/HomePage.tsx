@@ -310,7 +310,7 @@ export function HomePage() {
                       <Button padding="sm">Solid</Button>
                       <Button variant="outline" padding="sm">Outline</Button>
                       <Button variant="ghost" padding="sm">Ghost</Button>
-                      <Button variant="secondary" padding="sm">Secondary</Button>
+                      <Button variant="soft" padding="sm">Soft</Button>
                       <Button variant="dashed" padding="sm">Dashed</Button>
                       <Button variant="surface" padding="sm">Surface</Button>
                       <Button color="info" padding="sm">Info</Button>
@@ -319,9 +319,9 @@ export function HomePage() {
                       <Button color="error" padding="sm">Error</Button>
                       <Button color="muted" padding="sm">Muted</Button>
                       <Button color="success" variant="outline" padding="sm">Success outline</Button>
-                      <Button color="error" variant="secondary" padding="sm">Error secondary</Button>
+                      <Button color="error" variant="soft" padding="sm">Error soft</Button>
                       <Button color="info" variant="ghost" padding="sm">Info ghost</Button>
-                      <Button elevated padding="sm">Elevated</Button>
+                      <Button effect="elevated" padding="sm">Elevated</Button>
                       <Button padding="sm" isLoading loadingText="Loading…" tapAnimation={false}>
                         -
                       </Button>

@@ -48,7 +48,9 @@ Each rule links to its explanation. Most are enforced by `bun run lint`.
    `.constants.ts`, `use-*.ts`, `.test.tsx`, `.demo.tsx`. → `conventions.md#file-naming`
 6. **Named exports only** (`export default` only in `src/app` route files).
    No `export *`. `index.ts` only at a registry component's folder root.
-   `import type` for types. → `conventions.md#exports-and-imports`
+   `import type` for types. Inside the registry, import another component
+   by exact file (`@/components/ui/tooltip/tooltip-content`), never by
+   folder. → `conventions.md#exports-and-imports`
 7. **Route params** use Next's global `PageProps<"/route">` /
    `LayoutProps<"/route">`, not local types.
 8. **Server Components by default**; `"use client"` on the smallest
@@ -72,12 +74,15 @@ non-obvious choices in `docs/architecture/decisions/`. See
 Run `bun run check` before finishing. It runs, in order:
 
 - `bun run tokens:check` — generated token files match `tokens/`
+- `bun run registry:check` — `registry.json` matches `src/components/ui`
 - `bun run test` — Vitest (components, utils and ESLint rules)
 - `bun run typecheck` — `next typegen` + `tsc --noEmit`
 - `bun run lint` — ESLint, architecture rules included
 
 `bun run tokens` after changing anything in `tokens/`.
 `bun run registry:build` after changing a registry component or tokens.
+Public API changes to a registry component bump `package.json` and get a
+`CHANGELOG.md` entry.
 
 ## ui-sdk
 

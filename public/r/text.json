@@ -13,8 +13,23 @@
   ],
   "files": [
     {
-      "path": "src/components/ui/text.tsx",
-      "content": "import { cva, type VariantProps } from \"class-variance-authority\"\nimport { renderElement, type PartProps } from \"@ui-sdk/react/primitive\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst textVariants = cva(\"text-foreground\", {\n  variants: {\n    size: {\n      xs: \"text-xs leading-tight tracking-wide\",\n      sm: \"text-sm leading-snug\",\n      md: \"text-base leading-normal\",\n      lg: \"text-lg leading-relaxed\",\n      xl: \"text-xl leading-relaxed\",\n      \"2xl\": \"text-2xl leading-snug tracking-tight\",\n      display: \"text-display leading-tight tracking-tighter\",\n    },\n    color: {\n      primary:           \"text-primary\",\n      secondary:         \"text-secondary-foreground\",\n      muted:             \"text-muted-foreground\",\n      \"primary-muted\":   \"text-primary/60\",\n      \"secondary-muted\": \"text-secondary-foreground/60\",\n      info:              \"text-info\",\n      warning:           \"text-warning\",\n      success:           \"text-success\",\n      error:             \"text-destructive\",\n    },\n  },\n  defaultVariants: {\n    size: \"md\",\n  },\n})\n\ntype TextProps = {\n  size?: VariantProps<typeof textVariants>[\"size\"]\n  color?: VariantProps<typeof textVariants>[\"color\"]\n  className?: string\n} & Omit<PartProps<\"p\">, \"color\" | \"className\">\n\nfunction Text({ size, color, className, render, ...props }: TextProps) {\n  return renderElement(\n    \"p\",\n    {\n      ...props,\n      \"data-slot\": \"text\",\n      \"data-size\": size,\n      \"data-color\": color,\n      className: cn(textVariants({ size, color, className })),\n    },\n    render\n  )\n}\n\nexport { Text, textVariants }\nexport type { TextProps }\n",
+      "path": "src/components/ui/text/index.ts",
+      "content": "export { Text } from \"./text\"\nexport { textVariants } from \"./text.variants\"\nexport type { TextColor, TextProps, TextSizeStep } from \"./text.types\"\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "src/components/ui/text/text.tsx",
+      "content": "import { renderElement } from \"@ui-sdk/react/primitive\"\n\nimport { cn } from \"@/lib/utils\"\n\nimport type { TextProps } from \"./text.types\"\nimport { textVariants } from \"./text.variants\"\n\nexport function Text({ size, color, className, render, ...props }: TextProps) {\n  return renderElement(\n    \"p\",\n    {\n      ...props,\n      \"data-slot\": \"text\",\n      \"data-size\": size,\n      \"data-color\": color,\n      className: cn(textVariants({ size, color, className })),\n    },\n    render\n  )\n}\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "src/components/ui/text/text.types.ts",
+      "content": "import type { PartProps } from \"@ui-sdk/react/primitive\"\n\nimport type { IntentColor } from \"@/lib/tokens.types\"\n\n/** Type scale steps. `md` is the body size (the `text-base` token). */\nexport type TextSizeStep = \"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"display\"\n\n/** Every intent color from the tokens, plus softer variants of primary and secondary. */\nexport type TextColor = IntentColor | \"primary-muted\" | \"secondary-muted\"\n\nexport type TextProps = {\n  size?: TextSizeStep\n  color?: TextColor\n  className?: string\n} & Omit<PartProps<\"p\">, \"color\" | \"className\">\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "src/components/ui/text/text.variants.ts",
+      "content": "import { cva } from \"class-variance-authority\"\n\nimport type { TextColor, TextSizeStep } from \"./text.types\"\n\nconst sizeClasses = {\n  xs: \"text-xs leading-tight tracking-wide\",\n  sm: \"text-sm leading-snug\",\n  md: \"text-base leading-normal\",\n  lg: \"text-lg leading-relaxed\",\n  xl: \"text-xl leading-relaxed\",\n  \"2xl\": \"text-2xl leading-snug tracking-tight\",\n  display: \"text-display leading-tight tracking-tighter\",\n} satisfies Record<TextSizeStep, string>\n\nconst colorClasses = {\n  primary: \"text-primary\",\n  secondary: \"text-secondary-foreground\",\n  muted: \"text-muted-foreground\",\n  \"primary-muted\": \"text-primary/60\",\n  \"secondary-muted\": \"text-secondary-foreground/60\",\n  info: \"text-info\",\n  warning: \"text-warning\",\n  success: \"text-success\",\n  error: \"text-error\",\n} satisfies Record<TextColor, string>\n\nexport const textVariants = cva(\"text-foreground\", {\n  variants: { size: sizeClasses, color: colorClasses },\n  defaultVariants: { size: \"md\" },\n})\n",
       "type": "registry:ui"
     }
   ],

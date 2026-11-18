@@ -8,6 +8,12 @@
       "type": "registry:theme",
       "title": "Lanzate Theme",
       "description": "Design tokens shared by every Lanzate UI component. Generated from tokens/; do not edit by hand.",
+      "files": [
+        {
+          "path": "src/lib/tokens.types.ts",
+          "type": "registry:lib"
+        }
+      ],
       "cssVars": {
         "theme": {
           "color-primary": "var(--primary)",
@@ -74,7 +80,23 @@
       "description": "Button component with semantic color variants built on CVA and ui-sdk.",
       "files": [
         {
-          "path": "src/components/ui/button.tsx",
+          "path": "src/components/ui/button/button-spinner.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/button/button.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/button/button.types.ts",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/button/button.variants.ts",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/button/index.ts",
           "type": "registry:ui"
         }
       ],
@@ -96,7 +118,19 @@
       "description": "Text component with semantic size variants built on CVA; change its element with the render prop.",
       "files": [
         {
-          "path": "src/components/ui/text.tsx",
+          "path": "src/components/ui/text/index.ts",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/text/text.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/text/text.types.ts",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/text/text.variants.ts",
           "type": "registry:ui"
         }
       ],
@@ -116,7 +150,23 @@
       "description": "Accessible tooltip built on ui-sdk, styled with Tailwind.",
       "files": [
         {
-          "path": "src/components/ui/tooltip.tsx",
+          "path": "src/components/ui/tooltip/index.ts",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/tooltip/tooltip-content.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/tooltip/tooltip.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/tooltip/tooltip.types.ts",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/tooltip/tooltip.variants.ts",
           "type": "registry:ui"
         }
       ],
@@ -133,7 +183,23 @@
       "description": "Scroll area with styled scrollbars built on ui-sdk.",
       "files": [
         {
-          "path": "src/components/ui/scroll-area.tsx",
+          "path": "src/components/ui/scroll-area/index.ts",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/scroll-area/scroll-area.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/scroll-area/scroll-area.types.ts",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/scroll-area/scroll-area.variants.ts",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/scroll-area/scroll-bar.tsx",
           "type": "registry:ui"
         }
       ],

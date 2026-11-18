@@ -36,7 +36,7 @@ export function ButtonSection() {
             <Button>Solid</Button>
             <Button variant="outline">Outline</Button>
             <Button variant="ghost">Ghost</Button>
-            <Button variant="secondary">Secondary</Button>
+            <Button variant="soft">Soft</Button>
             <Button variant="dashed">Dashed</Button>
             <Button variant="surface">Surface</Button>
           </div>
@@ -163,7 +163,7 @@ export function ButtonSection() {
               Loading
             </Button>
             <Button disabled>Disabled</Button>
-            <Button elevated>Elevated</Button>
+            <Button effect="elevated">Elevated</Button>
             <Button color="error">Error</Button>
           </div>
         </PreviewPane>
@@ -176,21 +176,19 @@ export function ButtonSection() {
         </Text>
         <PreviewPane>
           <div className="flex flex-wrap items-center justify-center gap-2.5">
-            <Button glow>Primary</Button>
-            <Button glow color="info">Info</Button>
-            <Button glow color="success">Success</Button>
-            <Button glow color="warning">Warning</Button>
-            <Button glow color="error">Error</Button>
-            <Button glow variant="outline">Outline</Button>
-            <Button glow variant="ghost">Ghost</Button>
-            <Button glow elevated>Elevated + Glow</Button>
+            <Button effect="glow">Primary</Button>
+            <Button effect="glow" color="info">Info</Button>
+            <Button effect="glow" color="success">Success</Button>
+            <Button effect="glow" color="warning">Warning</Button>
+            <Button effect="glow" color="error">Error</Button>
+            <Button effect="glow" variant="outline">Outline</Button>
+            <Button effect="glow" variant="ghost">Ghost</Button>
           </div>
         </PreviewPane>
-        <CodeBlock>{`<Button glow>Primary</Button>
-<Button glow color="info">Info</Button>
-<Button glow color="success">Success</Button>
-<Button glow variant="outline">Outline</Button>
-<Button glow elevated>Elevated + Glow</Button>`}</CodeBlock>
+        <CodeBlock>{`<Button effect="glow">Primary</Button>
+<Button effect="glow" color="info">Info</Button>
+<Button effect="glow" color="success">Success</Button>
+<Button effect="glow" variant="outline">Outline</Button>`}</CodeBlock>
       </div>
 
       {/* Icons */}
@@ -221,13 +219,13 @@ export function ButtonSection() {
             <Button icon={<Plus />} />
             <Button icon={<Star />} variant="outline" />
             <Button icon={<Bell />} variant="ghost" />
-            <Button icon={<Trash2 />} color="error" variant="secondary" />
-            <Button icon={<Download />} elevated />
+            <Button icon={<Trash2 />} color="error" variant="soft" />
+            <Button icon={<Download />} effect="elevated" />
           </div>
         </PreviewPane>
         <CodeBlock>{`<Button icon={<Plus />} />
 <Button icon={<Star />} variant="outline" />
-<Button icon={<Trash2 />} color="error" variant="secondary" />`}</CodeBlock>
+<Button icon={<Trash2 />} color="error" variant="soft" />`}</CodeBlock>
       </div>
 
       {/* Tooltip */}
@@ -307,7 +305,7 @@ export function ButtonSection() {
             >
               Notifications
             </Button>
-            <Button icon={<Download />} iconClassName="text-green-400" variant="secondary" color="success" />
+            <Button icon={<Download />} iconClassName="text-green-400" variant="soft" color="success" />
           </div>
         </PreviewPane>
         <CodeBlock>{`// Icon with different color than text
@@ -370,7 +368,7 @@ export function ButtonSection() {
 </Button>
 
 // Elevated with tooltip
-<Button elevated tooltip="Main action">
+<Button effect="elevated" tooltip="Main action">
   Publish
 </Button>`}</CodeBlock>
       </div>
@@ -384,7 +382,7 @@ export function ButtonSection() {
           rows={[
             {
               prop: "variant",
-              type: '"solid" | "outline" | "ghost" | "secondary" | "dashed" | "surface"',
+              type: '"solid" | "outline" | "ghost" | "soft" | "dashed" | "surface"',
               default: '"solid"',
               description: "Visual style of the button.",
             },
@@ -443,16 +441,10 @@ export function ButtonSection() {
               description: "Centered icon (converts the button to a square).",
             },
             {
-              prop: "elevated",
-              type: "boolean",
-              default: "false",
-              description: "Applies shadow and elevated gradient.",
-            },
-            {
-              prop: "glow",
-              type: "boolean",
-              default: "false",
-              description: "Applies a glow/neon effect using the button's color.",
+              prop: "effect",
+              type: '"none" | "elevated" | "glow"',
+              default: '"none"',
+              description: "Depth treatment: a drop shadow, or a glow in the button's color. One at a time.",
             },
             {
               prop: "tooltip",

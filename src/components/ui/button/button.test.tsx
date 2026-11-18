@@ -4,13 +4,13 @@ import { createAgent } from "@ui-sdk/react/agent"
 import { Trash2 } from "lucide-react"
 import { expect, test, vi } from "vitest"
 
-import { Button } from "./button"
+import { Button } from "."
 
 const agent = createAgent()
 
 test("renders a native button named by its text", () => {
-  render(<Button>Guardar</Button>)
-  const button = screen.getByRole("button", { name: "Guardar" })
+  render(<Button>Save</Button>)
+  const button = screen.getByRole("button", { name: "Save" })
   expect(button.tagName).toBe("BUTTON")
   expect(button).toHaveProperty("type", "button")
   expect(button.getAttribute("data-slot")).toBe("button")
@@ -21,12 +21,12 @@ test("renders a native button named by its text", () => {
 test("click runs onClick; disabled blocks it and leaves the tab order", async () => {
   const user = userEvent.setup()
   const onClick = vi.fn()
-  const { rerender } = render(<Button onClick={onClick}>Guardar</Button>)
-  await user.click(screen.getByRole("button", { name: "Guardar" }))
+  const { rerender } = render(<Button onClick={onClick}>Save</Button>)
+  await user.click(screen.getByRole("button", { name: "Save" }))
   expect(onClick).toHaveBeenCalledTimes(1)
 
-  rerender(<Button onClick={onClick} disabled>Guardar</Button>)
-  const button = screen.getByRole("button", { name: "Guardar" })
+  rerender(<Button onClick={onClick} disabled>Save</Button>)
+  const button = screen.getByRole("button", { name: "Save" })
   expect(button).toHaveProperty("disabled", true)
   expect(button.hasAttribute("data-disabled")).toBe(true)
   await user.click(button)
@@ -34,8 +34,8 @@ test("click runs onClick; disabled blocks it and leaves the tab order", async ()
 })
 
 test("isLoading disables the button, marks it busy and swaps the text", () => {
-  render(<Button isLoading loadingText="Guardando...">Guardar</Button>)
-  const button = screen.getByRole("button", { name: "Guardando..." })
+  render(<Button isLoading loadingText="Saving...">Save</Button>)
+  const button = screen.getByRole("button", { name: "Saving..." })
   expect(button).toHaveProperty("disabled", true)
   expect(button.getAttribute("aria-busy")).toBe("true")
 })
@@ -44,8 +44,8 @@ test("a Promise from onClick keeps the button pending until it settles", async (
   const user = userEvent.setup()
   let finish = () => {}
   const onClick = vi.fn(() => new Promise<void>((resolve) => { finish = resolve }))
-  render(<Button onClick={onClick}>Guardar</Button>)
-  const button = screen.getByRole("button", { name: "Guardar" })
+  render(<Button onClick={onClick}>Save</Button>)
+  const button = screen.getByRole("button", { name: "Save" })
 
   expect(button.querySelector('[data-slot="button-spinner"]')).toBeNull()
 
@@ -63,7 +63,7 @@ test("a Promise from onClick keeps the button pending until it settles", async (
 })
 
 test("the spinner enters through ui-sdk's animateIn starting style", async () => {
-  render(<Button isLoading>Guardar</Button>)
+  render(<Button isLoading>Save</Button>)
   const spinner = screen.getByRole("button").querySelector('[data-slot="button-spinner"]')!
   expect(spinner).not.toBeNull()
   expect(spinner.hasAttribute("data-starting-style")).toBe(true)
@@ -72,23 +72,23 @@ test("the spinner enters through ui-sdk's animateIn starting style", async () =>
 })
 
 test("tap animation is plain CSS, off when tapAnimation is false", () => {
-  const { rerender } = render(<Button>Guardar</Button>)
+  const { rerender } = render(<Button>Save</Button>)
   expect(screen.getByRole("button").className).toContain("active:not-data-disabled:not-data-pending:scale-[0.97]")
-  rerender(<Button tapAnimation={false}>Guardar</Button>)
+  rerender(<Button tapAnimation={false}>Save</Button>)
   expect(screen.getByRole("button").className).not.toContain("scale-[0.97]")
 })
 
 test("an icon-only button is named by its tooltip", async () => {
-  render(<Button icon={<Trash2 aria-hidden="true" />} tooltip="Eliminar registro" />)
+  render(<Button icon={<Trash2 aria-hidden="true" />} tooltip="Delete record" />)
   await act(async () => { await new Promise((r) => setTimeout(r, 0)) })
-  expect(screen.getByRole("button", { name: "Eliminar registro" })).toBeTruthy()
+  expect(screen.getByRole("button", { name: "Delete record" })).toBeTruthy()
 })
 
 test("a disabled button with a tooltip stays focusable through aria-disabled", async () => {
   const user = userEvent.setup()
   const onClick = vi.fn()
-  render(<Button disabled tooltip="Completá el formulario" onClick={onClick}>Enviar</Button>)
-  const button = screen.getByRole("button", { name: "Enviar" })
+  render(<Button disabled tooltip="Fill in the form" onClick={onClick}>Submit</Button>)
+  const button = screen.getByRole("button", { name: "Submit" })
   expect(button).toHaveProperty("disabled", false)
   expect(button.getAttribute("aria-disabled")).toBe("true")
 
@@ -99,8 +99,8 @@ test("a disabled button with a tooltip stays focusable through aria-disabled", a
 })
 
 test("mobile only-icon keeps the text for screen readers", () => {
-  render(<Button mobile="only-icon" startIcon={<Trash2 aria-hidden="true" />}>Buscar</Button>)
-  expect(screen.getByRole("button", { name: "Buscar" })).toBeTruthy()
+  render(<Button mobile="only-icon" startIcon={<Trash2 aria-hidden="true" />}>Search</Button>)
+  expect(screen.getByRole("button", { name: "Search" })).toBeTruthy()
 })
 
 test("render swaps the element, like a link", () => {
@@ -113,8 +113,8 @@ test("an agent can find and press every button by name", async () => {
   const onDelete = vi.fn()
   render(
     <>
-      <Button onClick={onSave}>Guardar cambios</Button>
-      <Button icon={<Trash2 aria-hidden="true" />} tooltip="Eliminar registro" onClick={onDelete} />
+      <Button onClick={onSave}>Save changes</Button>
+      <Button icon={<Trash2 aria-hidden="true" />} tooltip="Delete record" onClick={onDelete} />
     </>
   )
   await act(async () => { await new Promise((r) => setTimeout(r, 0)) })
@@ -124,16 +124,45 @@ test("an agent can find and press every button by name", async () => {
     expect(entry.label, `${entry.component} ${entry.ref} has no name`).toBeTruthy()
   }
   const labels = components.map((entry) => entry.label)
-  expect(labels).toContain("Guardar cambios")
-  expect(labels).toContain("Eliminar registro")
+  expect(labels).toContain("Save changes")
+  expect(labels).toContain("Delete record")
 
   const result = await agent.act({
     steps: [
-      { ref: "Guardar cambios", action: "press" },
-      { ref: "Eliminar registro", action: "press" },
+      { ref: "Save changes", action: "press" },
+      { ref: "Delete record", action: "press" },
     ],
   })
   expect(result.ok, result.error?.message).toBe(true)
   expect(onSave).toHaveBeenCalledTimes(1)
   expect(onDelete).toHaveBeenCalledTimes(1)
+})
+
+test("effect applies one depth treatment at a time", () => {
+  const { rerender } = render(<Button>Save</Button>)
+  const button = () => screen.getByRole("button", { name: "Save" })
+  expect(button().className).not.toContain("shadow-elevated")
+  expect(button().className).not.toContain("shadow-button-glow")
+
+  rerender(<Button effect="elevated">Save</Button>)
+  expect(button().getAttribute("data-effect")).toBe("elevated")
+  expect(button().className).toContain("shadow-elevated")
+
+  rerender(<Button effect="glow">Save</Button>)
+  expect(button().className).toContain("shadow-button-glow")
+  expect(button().className).not.toContain("shadow-elevated")
+})
+
+test("the soft variant tints the background with the accent color", () => {
+  render(<Button variant="soft">Save</Button>)
+  const button = screen.getByRole("button", { name: "Save" })
+  expect(button.getAttribute("data-variant")).toBe("soft")
+  expect(button.className).toContain("bg-(--btn-accent)/15")
+})
+
+test("intent colors read their fill and foreground from tokens", () => {
+  render(<Button color="error">Delete</Button>)
+  const button = screen.getByRole("button", { name: "Delete" })
+  expect(button.className).toContain("[--btn-color:var(--error)]")
+  expect(button.className).toContain("[--btn-fg:var(--error-foreground)]")
 })

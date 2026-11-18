@@ -5,9 +5,6 @@ The registry is the product: components that other projects install with
 
 ## Component anatomy
 
-> **Status:** components move to this layout in phase 3. New components use
-> it from the start.
-
 ```
 src/components/ui/button/
 ├── button.tsx              Button only
@@ -27,18 +24,44 @@ export { buttonVariants } from "./button.variants"
 export type { ButtonProps, ButtonVariant } from "./button.types"
 ```
 
-Internal sub-parts (like `ButtonSpinner`) are not re-exported.
+Internal sub-parts (like `ButtonSpinner`) are not re-exported. Parts that
+come straight from ui-sdk may be re-exported as they are
+(`export { TooltipTrigger } from "@ui-sdk/react/tooltip"`).
+
+Components that keep shadcn's well-known names keep them, even when the file
+name doesn't take the parent's prefix: Scroll Area's scrollbar is `ScrollBar`
+in `scroll-bar.tsx`.
+
+## Imports between components
+
+Inside the registry, import another component **by exact file**, and import
+ui-sdk parts from ui-sdk:
+
+```ts
+// button.tsx
+import { TooltipTrigger } from "@ui-sdk/react/tooltip"
+import { Tooltip } from "@/components/ui/tooltip/tooltip"
+import { TooltipContent } from "@/components/ui/tooltip/tooltip-content"
+```
+
+Never `from "@/components/ui/tooltip"`: the shadcn CLI rewrites a folder
+import to `<ui>/tooltip/tooltip`, and every export not in that file
+disappears. Evidence: [decision 0003](decisions/0003-registry-imports-and-shipped-types.md).
+Website code imports from the folder (`@/components/ui/tooltip`).
 
 ## registry.json
 
+`bun run registry:check` compares `registry.json` with `src/components/ui`
+and fails on any mismatch; `node tooling/registry/check.js --fix` rewrites
+each item's file list from its folder.
+
 - One item per component folder. List **every file** of the folder with
-  `type: "registry:ui"`.
+  `type: "registry:ui"`, except tests and `AGENTS.md`/`CLAUDE.md`.
 - **Never set `target`** on UI files. Without it, the CLI keeps the
   subfolder and maps it under the consumer's `ui` alias. With it, the CLI
   writes to a fixed path and ignores the alias.
   Evidence: [decision 0001](decisions/0001-registry-component-folders.md).
-- A component that imports another lists it in `registryDependencies`, and
-  imports it through `@/components/ui/<other>`.
+- A component that imports another lists it in `registryDependencies`.
 - Component items never declare `cssVars`. CSS variables ship in the
   `lanzate-theme` item.
 - Pin ui-sdk versions in `dependencies` (`@ui-sdk/react@0.1.0-beta.6`).
@@ -58,6 +81,9 @@ scope (see [tokens.md](tokens.md#token-paths-scope-and-kind)). It is
   that only use standard shadcn variables (`background`, `border`, `ring`…)
   don't, so installing them doesn't change a consumer's theme.
 - Today: Button and Text depend on it; Tooltip and Scroll Area don't.
+- It also ships `src/lib/tokens.types.ts` as a `registry:lib` file, so
+  components can type their props with `IntentColor`, `TextSize`… from
+  `@/lib/tokens.types` in consumer projects too.
 - `cssVars` keys have no leading `--`. The CLI adds it, and `--`-prefixed
   keys come out as `var(----name)`. Evidence:
   [decision 0002](decisions/0002-design-token-pipeline.md).
