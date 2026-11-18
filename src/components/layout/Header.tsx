@@ -1,22 +1,35 @@
-import { useState, useEffect } from "react"
+"use client"
+
+import { useState, useEffect, useSyncExternalStore } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Sun, Moon, ArrowRight } from "lucide-react"
 
+// The initial theme is applied to <html> by an inline script in the root
+// layout (before paint), so the Header just mirrors the "dark" class.
+function subscribeToTheme(onChange: () => void) {
+  const observer = new MutationObserver(onChange)
+  observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] })
+  return () => observer.disconnect()
+}
+
+const getThemeSnapshot = () => document.documentElement.classList.contains("dark")
+const getServerThemeSnapshot = () => false
+
+function setDarkTheme(dark: boolean) {
+  document.documentElement.classList.toggle("dark", dark)
+  try {
+    localStorage.setItem("lanzate-theme", dark ? "dark" : "light")
+  } catch {
+    // Storage can be unavailable (private mode, blocked site data)
+  }
+}
+
 export function Header() {
-  const [dark, setDark] = useState(() => {
-    const saved = localStorage.getItem("lanzate-theme")
-    if (saved) return saved === "dark"
-    return window.matchMedia("(prefers-color-scheme: dark)").matches
-  })
+  const dark = useSyncExternalStore(subscribeToTheme, getThemeSnapshot, getServerThemeSnapshot)
   const [floating, setFloating] = useState(false)
   const pathname = usePathname()
-
-  useEffect(() => {
-    document.documentElement.classList.toggle("dark", dark)
-    localStorage.setItem("lanzate-theme", dark ? "dark" : "light")
-  }, [dark])
 
   useEffect(() => {
     const onScroll = () => setFloating(window.scrollY > 80)
@@ -98,7 +111,7 @@ export function Header() {
 
           <div className="flex items-center gap-2 ml-auto">
             <button
-              onClick={() => setDark((d) => !d)}
+              onClick={() => setDarkTheme(!dark)}
               aria-label="Toggle theme"
               className="h-9 w-9 grid place-items-center rounded-md border border-border hover:bg-accent transition shrink-0"
             >
