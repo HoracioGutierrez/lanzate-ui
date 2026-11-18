@@ -1,0 +1,64 @@
+<ComponentBadge number="04" isNew />
+
+# Frame
+
+<Lead>A box with registration marks on its four corners, for anything from a card to a whole page section. An optional header holds a back button, any title content and a three-dot menu, and can fold the content into itself.</Lead>
+
+<DependencyList items={["@ui-sdk/react", "lucide-react"]} />
+
+## Example
+
+<Demo name="frame-basic" />
+
+Press the title, or focus it and press Enter or Space, to fold the content. Back and the menu sit beside the title, so pressing them never folds it.
+
+## Header
+
+`FrameHeader` is optional and takes any children. Put `FrameBack` first for a back button, `FrameTitle` in the middle (it fills the free space and truncates long text), and `FrameMenu` last for a three-dot menu of `FrameMenuItem`, `FrameMenuSeparator` and `FrameSubmenu`. `height` sets its minimum height and defaults to the frame's `size`.
+
+## Collapsing
+
+Add `collapsible` to let the user fold the content into the header by pressing the title. It starts open; use `defaultOpen={false}` to start closed, or `open` with `onOpenChange` to control it. Without `collapsible`, the title is plain text and the content always shows.
+
+<Demo name="frame-cards" />
+
+## Sizes
+
+`size="sm"` fits cards and list items, `"lg"` page sections: it scales the corner marks, the content padding and the header height. A frame without a header is just the box.
+
+<Demo name="frame-plain" />
+
+## Installation
+
+```bash
+npx shadcn@latest add https://lanzate-ui.vercel.app/r/frame.json
+```
+
+## Usage
+
+```tsx
+import {
+  Frame,
+  FrameBack,
+  FrameContent,
+  FrameHeader,
+  FrameMenu,
+  FrameMenuItem,
+  FrameTitle,
+} from "@/components/ui/frame"
+
+<Frame size="lg" collapsible>
+  <FrameHeader>
+    <FrameBack onClick={goBack} />
+    <FrameTitle>Orders</FrameTitle>
+    <FrameMenu label="Order actions" onAction={run}>
+      <FrameMenuItem value="edit">Edit</FrameMenuItem>
+    </FrameMenu>
+  </FrameHeader>
+  <FrameContent>…</FrameContent>
+</Frame>
+```
+
+## API
+
+<ApiTable name="frame" />

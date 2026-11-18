@@ -25,7 +25,7 @@
     },
     {
       "path": "src/components/ui/frame/frame-header.tsx",
-      "content": "import { use } from \"react\"\n\nimport { cn } from \"@/lib/cn\"\n\nimport { FrameContext } from \"./frame.constants\"\nimport type { FrameHeaderProps } from \"./frame.types\"\nimport { frameHeaderClasses, frameHeaderHeightClasses } from \"./frame.variants\"\n\nexport function FrameHeader({ className, height, ...props }: FrameHeaderProps) {\n  const { size } = use(FrameContext)\n\n  return <div data-slot=\"frame-header\" className={cn(frameHeaderClasses, frameHeaderHeightClasses[height ?? size], className)} {...props} />\n}\n",
+      "content": "\"use client\"\n\nimport { use } from \"react\"\n\nimport { cn } from \"@/lib/cn\"\n\nimport { FrameContext } from \"./frame.constants\"\nimport type { FrameHeaderProps } from \"./frame.types\"\nimport { frameHeaderClasses, frameHeaderHeightClasses } from \"./frame.variants\"\n\nexport function FrameHeader({ className, height, ...props }: FrameHeaderProps) {\n  const { size } = use(FrameContext)\n\n  return <div data-slot=\"frame-header\" className={cn(frameHeaderClasses, frameHeaderHeightClasses[height ?? size], className)} {...props} />\n}\n",
       "type": "registry:ui"
     },
     {
