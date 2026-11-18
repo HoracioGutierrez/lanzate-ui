@@ -4,6 +4,19 @@ All notable changes to the Lanzate UI registry. Versions follow
 [Semantic Versioning](https://semver.org); while the version is `0.x`, a
 minor bump may contain breaking changes.
 
+## 0.11.0
+
+### Added
+
+- **Frame** (`frame`): an industrial box with registration marks on all
+  four corners, sized with `size` (`"sm"` for cards, `"md"`, `"lg"` for
+  page sections). `FrameHeader` (optional, `height` `"sm" | "md" | "lg"`)
+  takes free content: `FrameBack` for a back button, `FrameTitle`, and
+  `FrameMenu` for a three-dot menu with `FrameMenuItem`,
+  `FrameMenuSeparator` and `FrameSubmenu`. With `collapsible` (and
+  `open` / `defaultOpen` / `onOpenChange`), pressing the title shows or
+  hides `FrameContent` on ui-sdk's Collapsible.
+
 ## 0.10.0
 
 ### Added
