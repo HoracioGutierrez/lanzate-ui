@@ -16,6 +16,7 @@ import { FloatingToolbarBasicDemo } from "./floating-toolbar/floating-toolbar-ba
 import { FloatingToolbarNumberingDemo } from "./floating-toolbar/floating-toolbar-numbering.demo"
 import { FrameBasicDemo } from "./frame/frame-basic.demo"
 import { FrameCardsDemo } from "./frame/frame-cards.demo"
+import { FrameColorsDemo } from "./frame/frame-colors.demo"
 import { FramePlainDemo } from "./frame/frame-plain.demo"
 import { TextColorsDemo } from "./text/text-colors.demo"
 import { TextCustomizationDemo } from "./text/text-customization.demo"
@@ -50,5 +51,6 @@ export const demoRegistry = {
   "floating-toolbar-numbering": { component: FloatingToolbarNumberingDemo, file: "floating-toolbar/floating-toolbar-numbering.demo.tsx" },
   "frame-basic": { component: FrameBasicDemo, file: "frame/frame-basic.demo.tsx" },
   "frame-cards": { component: FrameCardsDemo, file: "frame/frame-cards.demo.tsx" },
+  "frame-colors": { component: FrameColorsDemo, file: "frame/frame-colors.demo.tsx" },
   "frame-plain": { component: FramePlainDemo, file: "frame/frame-plain.demo.tsx" },
 } satisfies Record<string, DemoEntry>

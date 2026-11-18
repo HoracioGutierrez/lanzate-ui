@@ -11,6 +11,7 @@ export { FrameSubmenuTrigger } from "./frame-submenu-trigger"
 export { FrameTitle } from "./frame-title"
 export type {
   FrameBackProps,
+  FrameColor,
   FrameContentProps,
   FrameHeaderProps,
   FrameMenuItemProps,

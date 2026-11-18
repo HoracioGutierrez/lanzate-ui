@@ -14,6 +14,7 @@ export function FrameTitle({ className, children, ...props }: FrameTitleProps) {
   const { collapsible } = use(FrameContext)
 
   // Only a collapsible frame gets a button: a static title must not look pressable.
+  // The button keeps ui-sdk's data-slot (collapsible-trigger); its behavior reads it.
   if (!collapsible) {
     return (
       <div data-slot="frame-title" className={cn(frameTitleClasses, className)}>
@@ -23,7 +24,7 @@ export function FrameTitle({ className, children, ...props }: FrameTitleProps) {
   }
 
   return (
-    <CollapsibleTrigger data-slot="frame-title" className={cn(frameTitleClasses, frameTitleTriggerClasses, className)} {...props}>
+    <CollapsibleTrigger className={cn(frameTitleClasses, frameTitleTriggerClasses, className)} {...props}>
       <span className={frameTitleLabelClasses}>{children}</span>
       <ChevronDown aria-hidden="true" className={frameTitleChevronClasses} />
     </CollapsibleTrigger>

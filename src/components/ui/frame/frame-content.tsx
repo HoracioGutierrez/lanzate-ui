@@ -11,26 +11,28 @@ import { frameContentPaddingClasses, frameContentPanelClasses } from "./frame.va
 
 export function FrameContent({ className, keepMounted, hiddenUntilFound, children, ...props }: FrameContentProps) {
   const { size, collapsible } = use(FrameContext)
-  // Padding sits on an inner box so the panel's measured height animates to exactly zero.
-  const inner = <div className={cn(frameContentPaddingClasses[size], className)}>{children}</div>
+  const box = cn(frameContentPaddingClasses[size], className)
 
   if (!collapsible) {
     return (
-      <div data-slot="frame-content" {...props}>
-        {inner}
+      <div data-slot="frame-content" className={box} {...props}>
+        {children}
       </div>
     )
   }
 
+  // Padding sits on an inner box so the panel's measured height animates to exactly zero.
+  // The panel keeps ui-sdk's own data-slot; the inner box carries the frame's.
   return (
     <CollapsiblePanel
-      data-slot="frame-content"
       keepMounted={keepMounted}
       hiddenUntilFound={hiddenUntilFound}
       className={frameContentPanelClasses}
       {...props}
     >
-      {inner}
+      <div data-slot="frame-content" className={box}>
+        {children}
+      </div>
     </CollapsiblePanel>
   )
 }

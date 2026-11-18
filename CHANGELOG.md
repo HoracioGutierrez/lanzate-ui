@@ -15,7 +15,9 @@ minor bump may contain breaking changes.
   `FrameMenu` for a three-dot menu with `FrameMenuItem`,
   `FrameMenuSeparator` and `FrameSubmenu`. With `collapsible` (and
   `open` / `defaultOpen` / `onOpenChange`), pressing the title shows or
-  hides `FrameContent` on ui-sdk's Collapsible.
+  hides `FrameContent` on ui-sdk's Collapsible. `color` takes any intent
+  color (`"warning"`, `"error"`, …): it colors the corner marks and, except
+  for the default `"primary"`, tints the background and borders.
 
 ## 0.10.0
 

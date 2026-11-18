@@ -11,7 +11,7 @@ import { frameIconButtonClasses, frameMenuContentClasses } from "./frame.variant
 export function FrameMenu({ label, className, contentClassName, children, ...props }: FrameMenuProps) {
   return (
     <Menu {...props}>
-      <MenuTrigger data-slot="frame-menu-trigger" aria-label={label} className={cn(frameIconButtonClasses, className)}>
+      <MenuTrigger aria-label={label} className={cn(frameIconButtonClasses, className)}>
         <EllipsisVertical aria-hidden="true" />
       </MenuTrigger>
       <MenuContent side="bottom" align="end" sideOffset={6} collisionPadding={12} className={cn(frameMenuContentClasses, contentClassName)}>

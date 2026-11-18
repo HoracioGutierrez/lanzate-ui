@@ -168,3 +168,44 @@ test("an agent can find and run the header controls", async () => {
   expect(onBack).toHaveBeenCalledTimes(1)
   expect(onAction).toHaveBeenCalledWith("edit", expect.anything())
 })
+
+test("color tints the frame and its corners with the intent token", () => {
+  const { container } = render(
+    <Frame color="warning">
+      <FrameContent>Low stock</FrameContent>
+    </Frame>
+  )
+  const frame = container.querySelector('[data-slot="frame"]')
+  expect(frame?.getAttribute("data-color")).toBe("warning")
+  expect(frame?.className).toContain("--frame-accent:var(--warning)")
+  for (const corner of container.querySelectorAll('[data-slot="frame-corner"]')) {
+    expect(corner.className).toContain("border-(--frame-accent)")
+  }
+})
+
+test("the default color keeps the card background with primary corners", () => {
+  const { container } = render(
+    <Frame>
+      <FrameContent>Orders</FrameContent>
+    </Frame>
+  )
+  const frame = container.querySelector('[data-slot="frame"]')
+  expect(frame?.getAttribute("data-color")).toBe("primary")
+  expect(frame?.className).toContain("--frame-accent:var(--primary)")
+  expect(frame?.className).not.toContain("from-(--frame-accent)")
+})
+
+test("a long title ends in an ellipsis: the truncating box is a block, not a flex row", () => {
+  render(<Orders collapsible />)
+  const label = screen.getByText("Orders")
+  expect(label.className).toContain("truncate")
+  expect(label.className.split(" ")).not.toContain("flex")
+})
+
+test("a collapsible frame keeps its own slots for styling", () => {
+  const { container } = render(<Orders collapsible color="error" />)
+  const frame = container.querySelector('[data-slot="frame"]')
+  expect(frame?.getAttribute("data-color")).toBe("error")
+  expect(frame?.querySelectorAll('[data-slot="frame-corner"]')).toHaveLength(4)
+  expect(container.querySelector('[data-slot="frame-content"]')?.textContent).toBe("Order list")
+})

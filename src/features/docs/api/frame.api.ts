@@ -2,6 +2,7 @@ import type { ApiRow } from "../types/docs.types"
 
 export const frameApi: ApiRow[] = [
   { prop: "Frame size", type: '"sm" | "md" | "lg"', default: '"md"', description: "Scales the corner marks, the content padding and the default header height: sm for cards, lg for page sections." },
+  { prop: "Frame color", type: '"primary" | "error" | "warning" | "info" | "success" | "secondary" | "muted"', default: '"primary"', description: "Color of the corner marks. Every color but primary also tints the background and borders." },
   { prop: "Frame collapsible", type: "boolean", default: "false", description: "Makes FrameTitle a button that shows and hides FrameContent." },
   { prop: "Frame open", type: "boolean", description: "Whether the content is shown, when controlled. Pair it with onOpenChange." },
   { prop: "Frame defaultOpen", type: "boolean", default: "true", description: "Whether the content is shown at first, when uncontrolled." },

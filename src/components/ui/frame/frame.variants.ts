@@ -1,11 +1,29 @@
-import type { FrameCorner, FrameSize } from "./frame.types"
+import type { FrameColor, FrameCorner, FrameSize } from "./frame.types"
 
-export const frameClasses = "group/frame relative flex min-w-0 flex-col border border-border bg-card text-card-foreground"
+export const frameClasses = "relative flex min-w-0 flex-col border border-border bg-card text-card-foreground [--frame-divider:var(--border)]"
+
+// The Collapsible root carries data-open / data-closed; `contents` keeps it out of the layout.
+export const frameCollapsibleClasses = "group/frame contents"
+
+// `--frame-accent` drives the corner marks. A tinted frame keeps bg-card underneath and lays a
+// translucent wash of the accent over it, so it reads on any page background.
+const frameTintClasses =
+  "bg-linear-to-b from-(--frame-accent)/10 to-(--frame-accent)/10 border-(--frame-accent)/40 [--frame-divider:--alpha(var(--frame-accent)/30%)]"
+
+export const frameColorClasses = {
+  primary: "[--frame-accent:var(--primary)]",
+  error: `[--frame-accent:var(--error)] ${frameTintClasses}`,
+  warning: `[--frame-accent:var(--warning)] ${frameTintClasses}`,
+  info: `[--frame-accent:var(--info)] ${frameTintClasses}`,
+  success: `[--frame-accent:var(--success)] ${frameTintClasses}`,
+  secondary: `[--frame-accent:var(--secondary-foreground)] ${frameTintClasses}`,
+  muted: `[--frame-accent:var(--muted-foreground)] ${frameTintClasses}`,
+} satisfies Record<FrameColor, string>
 
 export const frameCorners = ["top-start", "top-end", "bottom-start", "bottom-end"] as const satisfies readonly FrameCorner[]
 
 // Registration marks over the border on all four corners, like the sheet corners of a technical drawing.
-const frameCornerBaseClasses = "pointer-events-none absolute z-10 border-primary"
+const frameCornerBaseClasses = "pointer-events-none absolute z-10 border-(--frame-accent)"
 
 export const frameCornerClasses = {
   "top-start": `${frameCornerBaseClasses} -top-px -start-px border-t border-s`,
@@ -34,7 +52,7 @@ export const frameHeaderHeightClasses = {
 
 // The border under the header goes away while the content is hidden, leaving one clean box.
 export const frameHeaderClasses =
-  "flex min-w-0 items-center gap-1 border-b border-border px-1 group-data-closed/frame:border-b-transparent"
+  "flex min-w-0 items-center gap-1 border-b border-(--frame-divider) px-1 group-data-closed/frame:border-b-transparent"
 
 export const frameTitleClasses =
   "flex min-w-0 flex-1 items-center gap-2 self-stretch px-2 text-start font-mono text-xs tracking-wide uppercase"
@@ -45,7 +63,8 @@ export const frameTitleTriggerClasses = [
   "hover:text-primary focus-visible:inset-ring focus-visible:inset-ring-ring",
 ].join(" ")
 
-export const frameTitleLabelClasses = "flex min-w-0 flex-1 items-center gap-2 truncate"
+// A block, not a flex row: text-overflow only draws the ellipsis on block containers.
+export const frameTitleLabelClasses = "block min-w-0 flex-1 truncate"
 
 export const frameTitleChevronClasses =
   "size-4 shrink-0 text-muted-foreground transition-transform duration-200 ease-out motion-reduce:transition-none group-data-closed/frame:-rotate-90 rtl:group-data-closed/frame:rotate-90"

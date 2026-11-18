@@ -1,19 +1,25 @@
 import type { ComponentProps, ReactNode } from "react"
 import type { Button } from "@ui-sdk/react/button"
 import type { Collapsible, CollapsiblePanel, CollapsibleTrigger } from "@ui-sdk/react/collapsible"
+import type { IntentColor } from "@/lib/tokens.types"
 import type { Menu, MenuItem, MenuSeparator, MenuSub, MenuSubContent, MenuSubTrigger } from "@ui-sdk/react/menu"
 
 /** Scale of the frame: `sm` for cards and list items, `lg` for whole page sections. */
 export type FrameSize = "sm" | "md" | "lg"
+
+/** Every intent color defined in the tokens. `primary` is the plain card; the rest tint the background. */
+export type FrameColor = IntentColor
 
 /** Corner of the frame a registration mark sits on, in logical (RTL-aware) terms. */
 export type FrameCorner = "top-start" | "top-end" | "bottom-start" | "bottom-end"
 
 export type FrameOpenChange = ComponentProps<typeof Collapsible>["onOpenChange"]
 
-export type FrameProps = Omit<ComponentProps<"div">, "className" | "children"> & {
+export type FrameProps = Omit<ComponentProps<"div">, "className" | "children" | "color"> & {
   className?: string
   children?: ReactNode
+  /** Color of the corner marks; every color but `primary` also tints the background and borders. Defaults to "primary". */
+  color?: FrameColor
   /** Scales the corner marks and the content padding. Defaults to "md". */
   size?: FrameSize
   /** Lets the user show and hide the content by pressing the header's title. */
