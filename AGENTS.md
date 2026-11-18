@@ -58,9 +58,9 @@ Each rule links to its explanation. Most are enforced by `bun run lint`.
    component that needs it.
 9. **TypeScript is `strict`** with `noUncheckedIndexedAccess`.
 
-`bun run lint` reports zero warnings. Architecture rules are still "warn" until
-phase 5 makes them errors (`docs/architecture/README.md#migration-status`);
-**keep it at zero.**
+Every rule is an error, and `bun run lint` allows zero warnings. CI
+(`.github/workflows/check.yml`) runs `bun run check`, the build, and fails if
+`public/r` wasn't rebuilt after a change. → `linting.md#ci`
 
 ## When you add or change a rule
 
@@ -78,10 +78,11 @@ Run `bun run check` before finishing. It runs, in order:
 - `bun run registry:check` — `registry.json` matches `src/components/ui`
 - `bun run test` — Vitest (components, utils and ESLint rules)
 - `bun run typecheck` — `next typegen` + `tsc --noEmit`
-- `bun run lint` — ESLint, architecture rules included
+- `bun run lint` — ESLint, architecture rules included, zero warnings allowed
 
-`bun run tokens` after changing anything in `tokens/`.
-`bun run registry:build` after changing a registry component or tokens.
+`bun run tokens` after changing anything in `tokens/` (it also rebuilds the
+registry). `bun run registry:build` after changing a registry component, and
+commit `public/r/`.
 Public API changes to a registry component bump `package.json` and get a
 `CHANGELOG.md` entry.
 

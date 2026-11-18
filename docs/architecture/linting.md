@@ -24,10 +24,26 @@ heading that explains them.
 
 ## Severity
 
-Architecture rules use the `ARCHITECTURE` constant in `eslint.config.js`,
-set to `"warn"` during the migration (see
-[README.md](README.md#migration-status)). Phase 5 sets it to `"error"`.
-Correctness rules (TypeScript, hooks, Next) are errors from the start.
+Every rule fails the build. Architecture rules use the `ARCHITECTURE` constant
+in `eslint.config.js`, now `"error"` (it was `"warn"` during the migration; see
+[README.md](README.md#migration-status)). `bun run lint` runs with
+`--max-warnings 0`, so a warning from any other rule (React, hooks, Next)
+fails it too. There is no "warnings are fine" state.
+
+## CI
+
+`.github/workflows/check.yml` runs on pull requests and on pushes to `dev`
+and `main`:
+
+1. `bun install --frozen-lockfile` — the lockfile matches `package.json`.
+2. `bun run check` — tokens, registry, tests, types, lint.
+3. `bun run build` — the site builds.
+4. `bun run registry:build` + `git diff --exit-code -- public/r registry.json`
+   — the published registry matches its source. A component or token change
+   committed without rebuilding `public/r` fails here.
+
+CI pins Bun and Node (22+, for the token build); update them together with
+the local versions.
 
 ## Exceptions
 

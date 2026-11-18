@@ -39,9 +39,8 @@ decision record in [decisions/](decisions/).
 
 ## Migration status
 
-The architecture is being adopted in phases on the `refactor/architecture`
-branch. Until the last phase, architecture lint rules report **warnings**,
-not errors, and some legacy code doesn't follow the rules yet.
+The architecture was adopted in phases on the `refactor/architecture`
+branch. It is complete: every rule is enforced as an error, locally and in CI.
 
 | Phase | Scope | Status |
 | --- | --- | --- |
@@ -51,7 +50,7 @@ not errors, and some legacy code doesn't follow the rules yet.
 | 3 | Registry components moved to per-component folders; Button API 0.7.0 ([0003](decisions/0003-registry-imports-and-shipped-types.md)) | Done |
 | 3b | Registry components ship their own token-aware cn() ([0004](decisions/0004-registry-cn.md)) | Done |
 | 4 | Website moved to `src/features` (shell, docs with MDX, home); lint at zero warnings ([0005](decisions/0005-mdx-docs.md)) | Done |
-| 5 | Architecture rules switched to errors; CI checks | Pending |
+| 5 | Architecture rules switched to errors; CI workflow ([linting.md#ci](linting.md#ci)) | Done |
 
-No legacy code is left: `bun run lint` reports zero warnings. Until phase 5
-flips them to errors, **new code must keep it at zero.**
+No legacy code is left. The table stays as the history of how the
+architecture got here; each decision record explains one step.

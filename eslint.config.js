@@ -10,10 +10,12 @@ import { defineConfig, globalIgnores } from "eslint/config"
 
 import lanzate from "./tooling/eslint/plugin.js"
 
-// Architecture rules start as "warn" while the codebase migrates (see
-// docs/architecture/README.md#migration-status). Flip ARCHITECTURE to "error"
-// once `bun run lint` reports zero warnings.
-const ARCHITECTURE = "warn"
+// Severity of the architecture rules (layers, one component per file, types files,
+// design tokens, naming, exports). They were "warn" during the migration and are
+// errors now that the codebase follows them. `bun run lint` also runs with
+// --max-warnings 0, so a warning from any other rule fails too.
+// See docs/architecture/linting.md#severity
+const ARCHITECTURE = "error"
 
 const NO_DEFAULT_EXPORT = {
   selector: "ExportDefaultDeclaration",
