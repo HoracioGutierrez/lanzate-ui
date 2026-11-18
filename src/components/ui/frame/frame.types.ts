@@ -1,5 +1,7 @@
 import type { ComponentProps, ReactNode } from "react"
+import type { Button } from "@ui-sdk/react/button"
 import type { Collapsible, CollapsiblePanel, CollapsibleTrigger } from "@ui-sdk/react/collapsible"
+import type { Menu, MenuItem, MenuSeparator, MenuSub, MenuSubContent, MenuSubTrigger } from "@ui-sdk/react/menu"
 
 /** Scale of the frame: `sm` for cards and list items, `lg` for whole page sections. */
 export type FrameSize = "sm" | "md" | "lg"
@@ -41,6 +43,47 @@ export type FrameContentProps = Omit<ComponentProps<"div">, "className"> &
     /** Classes for the padded box around the content. */
     className?: string
   }
+
+export type FrameBackProps = Omit<ComponentProps<typeof Button>, "className" | "children"> & {
+  className?: string
+  /** Accessible name of the icon-only button. Defaults to "Back". */
+  label?: string
+}
+
+export type FrameMenuProps = Omit<ComponentProps<typeof Menu>, "children"> & {
+  /** Accessible name of the three-dot button. Required: screen readers and agents find the menu by it. */
+  label: string
+  /** Classes for the three-dot button. */
+  className?: string
+  /** Classes for the panel of items. */
+  contentClassName?: string
+  /** Items, separators and submenus. */
+  children?: ReactNode
+}
+
+export type FrameMenuItemProps = Omit<ComponentProps<typeof MenuItem>, "className" | "children"> & {
+  className?: string
+  children?: ReactNode
+  /** Decorative icon before the text. */
+  icon?: ReactNode
+}
+
+export type FrameMenuSeparatorProps = Omit<ComponentProps<typeof MenuSeparator>, "className"> & {
+  className?: string
+}
+
+export type FrameSubmenuProps = ComponentProps<typeof MenuSub>
+
+export type FrameSubmenuTriggerProps = Omit<ComponentProps<typeof MenuSubTrigger>, "className" | "children"> & {
+  className?: string
+  children?: ReactNode
+  /** Decorative icon before the text. */
+  icon?: ReactNode
+}
+
+export type FrameSubmenuContentProps = Omit<ComponentProps<typeof MenuSubContent>, "className"> & {
+  className?: string
+}
 
 export type FrameContextValue = {
   size: FrameSize

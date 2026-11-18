@@ -55,3 +55,49 @@ export const frameContentPanelClasses = [
   "transition-[height] duration-200 ease-out motion-reduce:transition-none",
   "data-starting-style:h-0 data-ending-style:h-0",
 ].join(" ")
+
+export const frameIconButtonClasses = [
+  "inline-flex size-8 shrink-0 cursor-pointer items-center justify-center text-muted-foreground outline-none",
+  "transition-[background-color,color] duration-150 ease-out motion-reduce:transition-none",
+  "hover:bg-accent hover:text-accent-foreground active:bg-accent/70",
+  "focus-visible:inset-ring focus-visible:inset-ring-ring",
+  "data-open:bg-primary/10 data-open:text-primary",
+  "disabled:pointer-events-none disabled:opacity-50",
+  "[&_svg]:size-4 [&_svg]:shrink-0 [&_svg]:stroke-[1.75]",
+].join(" ")
+
+export const frameBackIconClasses = "rtl:-scale-x-100"
+
+// Menu look duplicated from floating-toolbar on purpose: each registry component installs on its own.
+// Square panels with registration marks on two opposite corners, inside the border so they never overflow.
+const framePanelClasses = [
+  "z-50 flex max-h-(--available-height) min-w-48 flex-col overflow-y-auto overscroll-contain border border-border bg-popover p-1 text-popover-foreground shadow-elevated outline-none",
+  "before:pointer-events-none before:absolute before:top-0 before:left-0 before:size-2 before:border-t before:border-l before:border-primary",
+  "after:pointer-events-none after:absolute after:right-0 after:bottom-0 after:size-2 after:border-r after:border-b after:border-primary",
+  "transition-[opacity,translate] duration-150 ease-out motion-reduce:transition-none",
+  "data-starting-style:opacity-0 data-ending-style:opacity-0",
+].join(" ")
+
+export const frameMenuContentClasses = [
+  framePanelClasses,
+  "data-starting-style:data-[side=bottom]:-translate-y-1 data-starting-style:data-[side=top]:translate-y-1",
+  "motion-reduce:data-starting-style:translate-y-0",
+].join(" ")
+
+export const frameSubmenuContentClasses = framePanelClasses
+
+export const frameMenuItemClasses = [
+  "group/item flex min-h-9 cursor-default items-center gap-2.5 px-2.5 py-1.5 text-sm outline-none select-none",
+  "data-highlighted:bg-accent data-highlighted:text-accent-foreground",
+  "data-disabled:pointer-events-none data-disabled:opacity-50",
+  "data-destructive:text-error data-destructive:data-highlighted:bg-error/10",
+  "[&_svg]:size-4 [&_svg]:shrink-0 [&_svg]:stroke-[1.75]",
+].join(" ")
+
+export const frameMenuItemIconClasses = "inline-flex text-muted-foreground group-data-highlighted/item:text-primary"
+
+export const frameMenuItemLabelClasses = "min-w-0 flex-1"
+
+export const frameSubmenuChevronClasses = "text-muted-foreground rtl:-scale-x-100"
+
+export const frameMenuSeparatorClasses = "-mx-1 my-1 h-px bg-border"
