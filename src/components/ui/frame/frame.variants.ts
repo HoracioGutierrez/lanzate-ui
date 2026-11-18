@@ -3,9 +3,10 @@ import type { FrameColor, FrameCorner, FrameSize } from "./frame.types"
 export const frameClasses = "relative flex min-w-0 flex-col border border-border bg-card text-card-foreground [--frame-control:--spacing(9)] [--frame-divider:var(--border)]"
 
 // The Collapsible root carries data-open / data-closed; `contents` keeps it out of the layout.
-// In a grid or flex row the frame stretches to the tallest item; once folded it opts out so it
-// shrinks to its header instead of keeping an empty box.
-export const frameFoldedClasses = "has-[>[data-slot=collapsible][data-closed]]:self-start"
+// In a grid or flex row the frame stretches to the tallest item; once folded it takes its own
+// height so it shrinks to its header. Only the height: align-self would also drop the width in a
+// flex column, where the cross axis is horizontal.
+export const frameFoldedClasses = "has-[>[data-slot=collapsible][data-closed]]:h-fit"
 
 export const frameCollapsibleClasses = "group/frame contents"
 

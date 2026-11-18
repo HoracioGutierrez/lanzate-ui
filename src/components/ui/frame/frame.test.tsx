@@ -214,7 +214,7 @@ test("a folded frame opts out of row stretching so it shrinks to its header", as
   const user = userEvent.setup()
   const { container } = render(<Orders collapsible />)
   const frame = container.querySelector('[data-slot="frame"]')
-  expect(frame?.className).toContain("has-[>[data-slot=collapsible][data-closed]]:self-start")
+  expect(frame?.className).toContain("has-[>[data-slot=collapsible][data-closed]]:h-fit")
   await user.click(title())
   expect(frame?.querySelector(':scope > [data-slot="collapsible"][data-closed]')).not.toBeNull()
 })
