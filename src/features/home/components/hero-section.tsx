@@ -29,7 +29,7 @@ export function HeroSection() {
             design, accessible, and 100% yours.
           </p>
 
-          <div className="mt-9 flex flex-col items-center gap-3 sm:flex-row">
+          <div className="mt-9 flex max-w-full flex-col items-center gap-3 sm:flex-row">
             <Button
               render={<a href="#docs" />}
               padding="md"
