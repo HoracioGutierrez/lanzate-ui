@@ -4,6 +4,22 @@ All notable changes to the Lanzate UI registry. Versions follow
 [Semantic Versioning](https://semver.org); while the version is `0.x`, a
 minor bump may contain breaking changes.
 
+## 0.12.0
+
+### Added
+
+- **Button Group** (`button-group`): a tray of registry Buttons that lights
+  up the chosen ones with a solid fill and an LED, with registration
+  brackets on two corners. `selection="single"` switches between options on
+  ui-sdk's SegmentedControl: a background slides to the new choice and
+  fades into its fill (`value: string | null`, `name` submits it).
+  `selection="multiple"` toggles several filters at once on ui-sdk's
+  ToggleGroup (`value: string[]`). `ButtonGroupItem` takes text, an icon
+  (`icon` for icon-only, `startIcon`, `endIcon`) and a `tooltip`;
+  `ButtonGroupAll`, optional in both modes, is lit while nothing is chosen
+  and clears the group. `color`, `padding`, `orientation` and `disabled`
+  apply to the whole group.
+
 ## 0.11.0
 
 ### Added

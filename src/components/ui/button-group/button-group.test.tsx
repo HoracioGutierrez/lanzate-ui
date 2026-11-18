@@ -1,5 +1,6 @@
-import { cleanup, render, screen } from "@testing-library/react"
+import { act, cleanup, render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
+import { createAgent } from "@ui-sdk/react/agent"
 import { afterEach, expect, test, vi } from "vitest"
 
 import { ButtonGroup, ButtonGroupAll, ButtonGroupItem } from "."
@@ -156,4 +157,78 @@ test("the LED is lit only on the active item and absent on icon-only items", () 
   expect(led("Paid")?.hasAttribute("data-on")).toBe(true)
   expect(led("Pending")?.hasAttribute("data-on")).toBe(false)
   expect(led("Late")).toBeNull()
+})
+
+const tick = () => act(async () => { await new Promise((r) => setTimeout(r, 0)) })
+
+test("an icon-only item is named by its tooltip", async () => {
+  render(
+    <ButtonGroup selection="multiple" aria-label="Status">
+      <ButtonGroupItem value="paid" icon={<svg />} tooltip="Paid" />
+    </ButtonGroup>
+  )
+  await tick()
+  expect(toggle("Paid")).toBeTruthy()
+})
+
+test("a disabled item with a tooltip stays focusable but can't be chosen", async () => {
+  const user = userEvent.setup()
+  const onValueChange = vi.fn()
+  render(
+    <ButtonGroup selection="multiple" aria-label="Status" onValueChange={onValueChange}>
+      <ButtonGroupItem value="pending">Pending</ButtonGroupItem>
+      <ButtonGroupItem value="paid" disabled tooltip="Only admins can filter by paid">Paid</ButtonGroupItem>
+    </ButtonGroup>
+  )
+  await tick()
+  await user.tab()
+  await user.keyboard("{ArrowRight}")
+  expect(document.activeElement).toBe(toggle("Paid"))
+  await user.click(toggle("Paid"))
+  expect(onValueChange).not.toHaveBeenCalled()
+  expect(toggle("Paid").getAttribute("aria-pressed")).toBe("false")
+})
+
+test("a disabled group chooses nothing", async () => {
+  const user = userEvent.setup()
+  const onValueChange = vi.fn()
+  render(Views({ disabled: true, defaultValue: "list", onValueChange }))
+  await user.click(radio("Grid"))
+  expect(onValueChange).not.toHaveBeenCalled()
+  expect(radio("List").getAttribute("aria-checked")).toBe("true")
+})
+
+const agent = createAgent()
+
+test("an agent can find the groups and choose items", async () => {
+  const onView = vi.fn()
+  const onStatus = vi.fn()
+  render(
+    <>
+      {Views({ defaultValue: "list", onValueChange: onView })}
+      {Filters({ onValueChange: onStatus }, true)}
+    </>
+  )
+  await tick()
+
+  const components = agent.snapshot().filter((entry) => !entry.offPage)
+  for (const entry of components) {
+    expect(entry.label, `${entry.component} ${entry.ref} has no name`).toBeTruthy()
+  }
+  const labels = components.map((entry) => entry.label)
+  // In multiple, each item is both ui-sdk's Toggle and the registry Button (one element, two
+  // components), so a label names two entries; the agent goes through the group's toggle action.
+  for (const label of ["View", "Paid"]) {
+    expect(labels, `${label} is missing from the snapshot`).toContain(label)
+  }
+
+  const result = await agent.act({
+    steps: [
+      { ref: "View", action: "setValue", args: ["grid"] },
+      { ref: "Status", action: "toggle", args: ["paid"] },
+    ],
+  })
+  expect(result.ok, result.error?.message).toBe(true)
+  expect(onView).toHaveBeenLastCalledWith("grid")
+  expect(onStatus).toHaveBeenLastCalledWith(["paid"])
 })
