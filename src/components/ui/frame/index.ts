@@ -1,0 +1,5 @@
+export { Frame } from "./frame"
+export { FrameContent } from "./frame-content"
+export { FrameHeader } from "./frame-header"
+export { FrameTitle } from "./frame-title"
+export type { FrameContentProps, FrameHeaderProps, FrameProps, FrameSize, FrameTitleProps } from "./frame.types"
