@@ -16,6 +16,11 @@ minor bump may contain breaking changes.
   back item. `placement` (`"bottom"`, `"top"`, `"inline"`) pins it to the
   viewport or leaves it in the flow. Options that don't fit scroll
   sideways, with edge fades.
+- **Floating Toolbar:** `numbering` (`"none"`, `"sequential"`,
+  `"hierarchical"`) on `FloatingToolbarMenuContent` and
+  `FloatingToolbarSubmenuContent` numbers panel items like part numbers
+  (01, 02 or 03.1). Off by default; a nested panel inherits its parent's.
+  Exported type: `FloatingToolbarNumbering`.
 
 ## 0.9.0
 

@@ -1,6 +1,6 @@
 "use client"
 
-import { use, useRef, useState } from "react"
+import { use, useMemo, useRef, useState } from "react"
 import { ChevronLeft } from "lucide-react"
 import {
   MenuGroup,
@@ -20,6 +20,7 @@ import {
   floatingToolbarMenuItemClasses,
   floatingToolbarMenuItemIconClasses,
   floatingToolbarMenuSeparatorClasses,
+  floatingToolbarPanelCounterClasses,
   floatingToolbarSubmenuContentClasses,
   floatingToolbarSubmenuTitleClasses,
 } from "./floating-toolbar.variants"
@@ -28,12 +29,18 @@ export function FloatingToolbarSubmenuContent({
   className,
   title,
   backLabel = "Back",
+  numbering,
   children,
   ...props
 }: FloatingToolbarSubmenuContentProps) {
   const submenu = use(FloatingToolbarSubmenuContext)
-  const { side: parentSide } = use(FloatingToolbarMenuContentContext)
-  const opensUp = parentSide === "top"
+  const parent = use(FloatingToolbarMenuContentContext)
+  const opensUp = parent.side === "top"
+  const resolvedNumbering = numbering ?? parent.numbering
+  const context = useMemo(
+    () => ({ side: parent.side, numbering: resolvedNumbering, level: 2 as const }),
+    [parent.side, resolvedNumbering]
+  )
   const selfRef = useRef<HTMLDivElement>(null)
 
   // A zero-height anchor on the parent panel's edge nearest the toolbar, so this panel
@@ -56,7 +63,8 @@ export function FloatingToolbarSubmenuContent({
       align="start"
       sideOffset={0}
       alignOffset={0}
-      className={cn(floatingToolbarSubmenuContentClasses, className)}
+      data-numbering={resolvedNumbering}
+      className={cn(floatingToolbarSubmenuContentClasses, floatingToolbarPanelCounterClasses[2], className)}
       {...props}
     >
       <MenuItem
@@ -73,14 +81,16 @@ export function FloatingToolbarSubmenuContent({
         {backLabel}
       </MenuItem>
       <MenuSeparator className={floatingToolbarMenuSeparatorClasses} />
-      {title ? (
-        <MenuGroup>
-          <MenuGroupLabel className={floatingToolbarSubmenuTitleClasses}>{title}</MenuGroupLabel>
-          {children}
-        </MenuGroup>
-      ) : (
-        children
-      )}
+      <FloatingToolbarMenuContentContext value={context}>
+        {title ? (
+          <MenuGroup>
+            <MenuGroupLabel className={floatingToolbarSubmenuTitleClasses}>{title}</MenuGroupLabel>
+            {children}
+          </MenuGroup>
+        ) : (
+          children
+        )}
+      </FloatingToolbarMenuContentContext>
     </MenuSubContent>
   )
 }

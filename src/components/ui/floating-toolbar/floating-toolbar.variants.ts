@@ -1,4 +1,4 @@
-import type { FloatingToolbarPlacement } from "./floating-toolbar.types"
+import type { FloatingToolbarNumbering, FloatingToolbarPanelLevel, FloatingToolbarPlacement } from "./floating-toolbar.types"
 
 export const floatingToolbarWrapperClasses = {
   bottom: "pointer-events-none fixed inset-x-4 bottom-[max(1rem,env(safe-area-inset-bottom))] z-40 flex justify-center",
@@ -82,7 +82,33 @@ export const floatingToolbarMenuItemClasses = [
 export const floatingToolbarMenuItemIconClasses =
   "inline-flex text-muted-foreground group-data-highlighted/item:text-primary"
 
-export const floatingToolbarSubmenuChevronClasses = "ms-auto text-muted-foreground rtl:-scale-x-100"
+export const floatingToolbarMenuItemLabelClasses = "min-w-0 flex-1"
+
+export const floatingToolbarSubmenuChevronClasses = "text-muted-foreground rtl:-scale-x-100"
+
+// Numbers come from CSS counters, so they follow item order with no bookkeeping. Each panel resets
+// its counter; a nested panel sits after its trigger in the DOM, so it can still read the parent's.
+// The `/ ""` alternative text keeps the number out of the item's accessible name.
+export const floatingToolbarPanelCounterClasses = {
+  1: "[counter-reset:ft-item]",
+  2: "[counter-reset:ft-sub]",
+} satisfies Record<FloatingToolbarPanelLevel, string>
+
+const numberClasses =
+  "after:min-w-[2ch] after:text-end after:font-mono after:text-2xs after:tracking-wide after:text-muted-foreground data-highlighted:after:text-primary"
+
+export const floatingToolbarItemNumberClasses = {
+  1: {
+    none: "",
+    sequential: `[counter-increment:ft-item] after:content-[counter(ft-item,decimal-leading-zero)_/_""] ${numberClasses}`,
+    hierarchical: `[counter-increment:ft-item] after:content-[counter(ft-item,decimal-leading-zero)_/_""] ${numberClasses}`,
+  },
+  2: {
+    none: "",
+    sequential: `[counter-increment:ft-sub] after:content-[counter(ft-sub,decimal-leading-zero)_/_""] ${numberClasses}`,
+    hierarchical: `[counter-increment:ft-sub] after:content-[counter(ft-item,decimal-leading-zero)_"."_counter(ft-sub)_/_""] ${numberClasses}`,
+  },
+} satisfies Record<FloatingToolbarPanelLevel, Record<FloatingToolbarNumbering, string>>
 
 export const floatingToolbarBackItemClasses = "min-h-8 font-mono text-2xs tracking-wide text-muted-foreground uppercase"
 

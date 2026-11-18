@@ -7,12 +7,19 @@ import { cn } from "@/lib/cn"
 
 import { FloatingToolbarContext, FloatingToolbarMenuContentContext } from "./floating-toolbar.constants"
 import type { FloatingToolbarMenuContentProps } from "./floating-toolbar.types"
-import { floatingToolbarMenuContentClasses } from "./floating-toolbar.variants"
+import { floatingToolbarMenuContentClasses, floatingToolbarPanelCounterClasses } from "./floating-toolbar.variants"
 
-export function FloatingToolbarMenuContent({ className, side, sideOffset = 10, collisionPadding = 12, ...props }: FloatingToolbarMenuContentProps) {
+export function FloatingToolbarMenuContent({
+  className,
+  side,
+  numbering = "none",
+  sideOffset = 10,
+  collisionPadding = 12,
+  ...props
+}: FloatingToolbarMenuContentProps) {
   const { placement } = use(FloatingToolbarContext)
   const resolvedSide = side ?? (placement === "top" ? "bottom" : "top")
-  const context = useMemo(() => ({ side: resolvedSide }), [resolvedSide])
+  const context = useMemo(() => ({ side: resolvedSide, numbering, level: 1 as const }), [resolvedSide, numbering])
 
   return (
     <FloatingToolbarMenuContentContext value={context}>
@@ -20,7 +27,8 @@ export function FloatingToolbarMenuContent({ className, side, sideOffset = 10, c
         side={resolvedSide}
         sideOffset={sideOffset}
         collisionPadding={collisionPadding}
-        className={cn(floatingToolbarMenuContentClasses, className)}
+        data-numbering={numbering}
+        className={cn(floatingToolbarMenuContentClasses, floatingToolbarPanelCounterClasses[1], className)}
         {...props}
       />
     </FloatingToolbarMenuContentContext>

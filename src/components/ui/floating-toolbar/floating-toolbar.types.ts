@@ -35,6 +35,8 @@ export type FloatingToolbarMenuContentProps = Omit<ComponentProps<typeof MenuCon
   className?: string
   /** Side of the toolbar the panel opens on. Defaults to "top", or "bottom" for a toolbar placed at the top. */
   side?: FloatingToolbarSide
+  /** Shows a number at the end of each item, like a part number. Defaults to "none". */
+  numbering?: FloatingToolbarNumbering
 }
 
 export type FloatingToolbarMenuItemProps = Omit<ComponentProps<typeof MenuItem>, "className" | "children"> & {
@@ -64,6 +66,8 @@ export type FloatingToolbarSubmenuContentProps = Omit<
   title?: string
   /** Text of the item that closes this panel and returns to the previous one. Defaults to "Back". */
   backLabel?: string
+  /** Numbering for this panel's items. Defaults to the parent panel's. */
+  numbering?: FloatingToolbarNumbering
 }
 
 export type FloatingToolbarSubmenuState = {
@@ -77,6 +81,17 @@ export type FloatingToolbarContextValue = {
   placement: FloatingToolbarPlacement
 }
 
+/**
+ * How panel items are numbered. `sequential`: 01, 02, 03 in every panel.
+ * `hierarchical`: a nested panel prefixes its parent item's number (03.1, 03.2).
+ */
+export type FloatingToolbarNumbering = "none" | "sequential" | "hierarchical"
+
+/** 1 for a panel opened from the toolbar, 2 for a panel opened over it. */
+export type FloatingToolbarPanelLevel = 1 | 2
+
 export type FloatingToolbarMenuContentContextValue = {
   side: FloatingToolbarSide
+  numbering: FloatingToolbarNumbering
+  level: FloatingToolbarPanelLevel
 }

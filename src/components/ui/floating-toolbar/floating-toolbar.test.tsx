@@ -15,6 +15,7 @@ import {
   FloatingToolbarSubmenuContent,
   FloatingToolbarSubmenuTrigger,
 } from "."
+import type { FloatingToolbarMenuContentProps } from "."
 
 const agent = createAgent()
 const tick = () => act(async () => { await new Promise((r) => setTimeout(r, 0)) })
@@ -230,4 +231,42 @@ test("an agent can find every option and run items at both levels", async () => 
   })
   expect(nested.ok, nested.error?.message).toBe(true)
   expect(onAction).toHaveBeenCalledWith("circle", expect.anything())
+})
+
+function NumberedEditor({ numbering }: Pick<FloatingToolbarMenuContentProps, "numbering">) {
+  return (
+    <FloatingToolbar placement="inline" aria-label="Numbered">
+      <FloatingToolbarMenu defaultOpen>
+        <FloatingToolbarMenuTrigger label="Insert">
+          <Plus />
+        </FloatingToolbarMenuTrigger>
+        <FloatingToolbarMenuContent numbering={numbering}>
+          <FloatingToolbarMenuItem value="image">Image</FloatingToolbarMenuItem>
+          <FloatingToolbarSubmenu defaultOpen>
+            <FloatingToolbarSubmenuTrigger>Shape</FloatingToolbarSubmenuTrigger>
+            <FloatingToolbarSubmenuContent>
+              <FloatingToolbarMenuItem value="circle">Circle</FloatingToolbarMenuItem>
+            </FloatingToolbarSubmenuContent>
+          </FloatingToolbarSubmenu>
+        </FloatingToolbarMenuContent>
+      </FloatingToolbarMenu>
+    </FloatingToolbar>
+  )
+}
+
+test("numbering is off by default and counts items per panel when on", async () => {
+  const { rerender } = render(<NumberedEditor />)
+  await tick()
+  const item = (name: string) => screen.getByRole("menuitem", { name })
+  expect(item("Image").className).not.toContain("counter-increment")
+
+  rerender(<NumberedEditor numbering="hierarchical" />)
+  await tick()
+  const panels = [...document.querySelectorAll('[data-slot="menu-content"]')]
+  expect(panels.map((panel) => panel.getAttribute("data-numbering"))).toEqual(["hierarchical", "hierarchical"])
+  expect(item("Image").className).toContain("[counter-increment:ft-item]")
+  expect(item("Shape").className).toContain("[counter-increment:ft-item]")
+  expect(item("Circle").className).toContain("[counter-increment:ft-sub]")
+  expect(item("Circle").className).toContain('counter(ft-item,decimal-leading-zero)_"."_counter(ft-sub)')
+  expect(item("Back").className).not.toContain("counter-increment")
 })

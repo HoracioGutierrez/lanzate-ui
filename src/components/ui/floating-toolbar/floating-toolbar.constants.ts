@@ -8,6 +8,10 @@ import type {
 
 export const FloatingToolbarContext = createContext<FloatingToolbarContextValue>({ placement: "inline" })
 
-export const FloatingToolbarMenuContentContext = createContext<FloatingToolbarMenuContentContextValue>({ side: "top" })
+export const FloatingToolbarMenuContentContext = createContext<FloatingToolbarMenuContentContextValue>({
+  side: "top",
+  numbering: "none",
+  level: 1,
+})
 
 export const FloatingToolbarSubmenuContext = createContext<FloatingToolbarSubmenuState | null>(null)

@@ -14,6 +14,7 @@ export type {
   FloatingToolbarMenuItemProps,
   FloatingToolbarMenuProps,
   FloatingToolbarMenuTriggerProps,
+  FloatingToolbarNumbering,
   FloatingToolbarPlacement,
   FloatingToolbarProps,
   FloatingToolbarSeparatorProps,
