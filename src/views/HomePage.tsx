@@ -72,7 +72,7 @@ export function HomePage() {
 
               <p className="mt-7 max-w-2xl text-lg md:text-xl text-muted-foreground leading-relaxed">
                 Lanzate UI is an open source collection of copy-paste components for React, built
-                on Radix and Tailwind. Clean design, accessible, and 100% yours.
+                on ui-sdk and Tailwind. Clean design, accessible, and 100% yours.
               </p>
 
               <div className="mt-9 flex flex-col sm:flex-row items-center gap-3">
@@ -205,11 +205,13 @@ export function HomePage() {
                         ),
                       },
                       {
-                        name: "Radix UI",
+                        name: "ui-sdk",
                         icon: (
-                          <svg width="15" height="15" viewBox="0 0 25 25" fill="currentColor">
-                            <path d="M12 1a11 11 0 1 0 0 22V1z" />
-                            <circle cx="20.5" cy="20.5" r="4.5" />
+                          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <rect x="3" y="3" width="7" height="7" rx="1.5" />
+                            <rect x="14" y="3" width="7" height="7" rx="1.5" />
+                            <rect x="3" y="14" width="7" height="7" rx="1.5" />
+                            <rect x="14" y="14" width="7" height="7" rx="1.5" />
                           </svg>
                         ),
                       },
@@ -506,7 +508,7 @@ export function HomePage() {
             </div>
 
             <div className="mt-16 pt-6 border-t border-border flex flex-col md:flex-row md:items-center md:justify-between gap-4 text-xs text-muted-foreground">
-              <div>© 2026 Lanzate UI · Built with Radix, Tailwind and coffee.</div>
+              <div>© 2026 Lanzate UI · Built with ui-sdk, Tailwind and coffee.</div>
               <div className="inline-flex items-center gap-2 text-xs font-medium border border-border rounded-full pl-1 pr-3 py-1 bg-card/30">
                 <span className="bg-brand text-brand-foreground rounded-full px-2 py-0.5 text-[10px] font-semibold tracking-wide uppercase">
                   v{pkg.version}

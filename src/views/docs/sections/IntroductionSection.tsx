@@ -47,7 +47,7 @@ export function IntroductionSection() {
             What is Lanzate UI?
           </Text>
           <Text color="muted" className="mt-2 leading-relaxed">
-            A React component library built on Radix UI and Tailwind CSS. It's not installed as a
+            A React component library built on ui-sdk and Tailwind CSS. It's not installed as a
             dependency — components live directly in your repo so you can freely modify them.
           </Text>
         </div>
@@ -71,7 +71,7 @@ export function IntroductionSection() {
               "React 19",
               "TypeScript 6",
               "Tailwind v4",
-              "Radix UI",
+              "ui-sdk",
               "Framer Motion",
               "CVA",
             ].map((tech) => (

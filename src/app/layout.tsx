@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next"
 import "@/index.css"
 
 const description =
-  "Open source collection of copy-paste React components built on Radix and Tailwind. Accessible (WCAG AA), zero runtime dependencies, 100% yours."
+  "Open source collection of copy-paste React components built on ui-sdk and Tailwind. Accessible (WCAG AA), zero runtime dependencies, 100% yours."
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://lanzate-ui.vercel.app"),
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     url: "/",
     title: "Lanzate UI — Accessible React Components",
     description:
-      "Copy-paste React components built on Radix and Tailwind. Accessible, zero runtime, 100% yours.",
+      "Copy-paste React components built on ui-sdk and Tailwind. Accessible, zero runtime, 100% yours.",
   },
   twitter: {
     card: "summary",

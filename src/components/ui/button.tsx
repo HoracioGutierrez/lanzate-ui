@@ -4,9 +4,10 @@ import * as React from "react"
 import { motion, type HTMLMotionProps } from "framer-motion"
 import { cva, type VariantProps } from "class-variance-authority"
 import { Loader2 } from "lucide-react"
+import { Button as ButtonPart } from "@ui-sdk/react/button"
 
 import { cn } from "@/lib/utils"
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 
 const ELEVATED_CLASSES =
   "shadow-[0_4px_12px_rgba(0,0,0,0.15)] hover:shadow-[0_6px_20px_rgba(0,0,0,0.2)] active:shadow-[0_2px_6px_rgba(0,0,0,0.12)] transition-shadow duration-150"
@@ -15,7 +16,7 @@ const GLOW_CLASSES =
   "shadow-[0_0_8px_2px_color-mix(in_oklch,var(--btn-color)_50%,transparent),0_0_24px_6px_color-mix(in_oklch,var(--btn-color)_22%,transparent)] hover:shadow-[0_0_12px_4px_color-mix(in_oklch,var(--btn-color)_65%,transparent),0_0_36px_10px_color-mix(in_oklch,var(--btn-color)_30%,transparent)] active:shadow-[0_0_5px_1px_color-mix(in_oklch,var(--btn-color)_40%,transparent),0_0_14px_3px_color-mix(in_oklch,var(--btn-color)_18%,transparent)] transition-shadow duration-200"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 font-medium transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:size-[1em] [&_svg]:shrink-0",
+  "inline-flex items-center justify-center gap-2 font-medium transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none data-disabled:opacity-50 aria-disabled:cursor-not-allowed data-pending:cursor-wait [&_svg]:size-[1em] [&_svg]:shrink-0",
   {
     variants: {
       color: {
@@ -121,7 +122,8 @@ type ButtonProps = {
   loadingText?:  string
   tooltip?:      React.ReactNode
   tapAnimation?: boolean
-} & HTMLMotionProps<"button">
+  className?:    string
+} & Omit<React.ComponentProps<typeof ButtonPart>, "color" | "className">
 
 function Button({
   color, variant, padding = "base", radius, textSize, iconSize, mobile,
@@ -134,25 +136,10 @@ function Button({
   tapAnimation = true,
   className, children,
   disabled,
+  focusableWhenDisabled,
   ...props
 }: ButtonProps) {
   const effectiveDisabled = disabled || isLoading
-
-  const spinnerEl = (
-    <motion.span
-      initial={{ scale: 0, opacity: 0 }}
-      animate={{ scale: 1, opacity: 1 }}
-      transition={{ duration: 0.18, ease: "easeOut" }}
-    >
-      <Loader2 className="animate-spin" />
-    </motion.span>
-  )
-
-  const effectiveStartIcon = isLoading ? spinnerEl : startIcon
-  const effectiveIcon      = isLoading && icon != null ? spinnerEl : icon
-  const effectiveChildren: React.ReactNode = isLoading && loadingText != null ? loadingText : children as React.ReactNode
-
-  const shouldAnimate = tapAnimation && !effectiveDisabled
 
   const wrapIcon = (node: React.ReactNode) =>
     node == null
@@ -161,15 +148,32 @@ function Button({
         ? <span className={iconClassName}>{node}</span>
         : node
 
-  const wrappedStartIcon = wrapIcon(effectiveStartIcon)
-  const wrappedEndIcon   = wrapIcon(endIcon)
-  const wrappedIcon      = wrapIcon(effectiveIcon)
+  // isLoading drives the spinner from props; a Promise returned by onClick drives it through data-pending.
+  const loadingSpinner = (
+    <motion.span
+      className="inline-flex"
+      initial={{ scale: 0, opacity: 0 }}
+      animate={{ scale: 1, opacity: 1 }}
+      transition={{ duration: 0.18, ease: "easeOut" }}
+    >
+      <Loader2 className="animate-spin" aria-hidden="true" />
+    </motion.span>
+  )
+  const pendingSpinner = (
+    <span className="hidden in-data-pending:inline-flex">
+      <Loader2 className="animate-spin" aria-hidden="true" />
+    </span>
+  )
+  const idleOnly = (node: React.ReactNode) =>
+    node == null ? null : <span className="inline-flex in-data-pending:hidden">{node}</span>
+
+  const leading = (node: React.ReactNode) =>
+    isLoading ? wrapIcon(loadingSpinner) : <>{idleOnly(wrapIcon(node))}{wrapIcon(pendingSpinner)}</>
+
+  const label: React.ReactNode = isLoading && loadingText != null ? loadingText : children as React.ReactNode
 
   const buttonEl = (
-    <motion.button
-      whileTap={shouldAnimate ? { scale: 0.97 } : undefined}
-      transition={{ type: "spring", stiffness: 400, damping: 20 }}
-      data-slot="button"
+    <ButtonPart
       data-color={color}
       data-variant={variant}
       data-padding={padding}
@@ -179,53 +183,50 @@ function Button({
       data-mobile={mobile}
       data-elevated={elevated || undefined}
       data-glow={glow || undefined}
+      aria-busy={isLoading || undefined}
       disabled={effectiveDisabled}
+      focusableWhenDisabled={focusableWhenDisabled ?? (tooltip != null)}
       className={cn(
         buttonVariants({ color, variant, padding, radius, textSize, iconSize, mobile }),
-        effectiveIcon != null && squarePaddingMap[padding ?? "base"],
+        icon != null && squarePaddingMap[padding ?? "base"],
         elevated && ELEVATED_CLASSES,
         glow && GLOW_CLASSES,
         className,
       )}
+      render={(partProps, state) => (
+        <motion.button
+          {...(partProps as HTMLMotionProps<"button">)}
+          whileTap={tapAnimation && !state.disabled && !state.pending ? { scale: 0.97 } : undefined}
+          transition={{ type: "spring", stiffness: 400, damping: 20 }}
+        />
+      )}
       {...props}
     >
-      {wrappedIcon != null ? (
-        wrappedIcon
-      ) : mobile === "only-icon" ? (
-        <>
-          {wrappedStartIcon}
-          {effectiveChildren != null && (
-            <span className={cn("hidden sm:inline", textClassName)}>{effectiveChildren}</span>
-          )}
-          {wrappedEndIcon}
-        </>
+      {icon != null ? (
+        leading(icon)
       ) : (
         <>
-          {wrappedStartIcon}
-          {textClassName
-            ? <span className={textClassName}>{effectiveChildren}</span>
-            : effectiveChildren}
-          {wrappedEndIcon}
+          {leading(startIcon)}
+          {mobile === "only-icon" ? (
+            label != null && <span className={cn("max-sm:sr-only", textClassName)}>{label}</span>
+          ) : textClassName ? (
+            <span className={textClassName}>{label}</span>
+          ) : (
+            label
+          )}
+          {wrapIcon(endIcon)}
         </>
       )}
-    </motion.button>
+    </ButtonPart>
   )
 
-  if (!tooltip) return buttonEl
+  if (tooltip == null) return buttonEl
 
   return (
-    <TooltipProvider>
-      <Tooltip>
-        <TooltipTrigger asChild>
-          {effectiveDisabled ? (
-            <span tabIndex={-1} className="inline-flex">{buttonEl}</span>
-          ) : (
-            buttonEl
-          )}
-        </TooltipTrigger>
-        <TooltipContent>{tooltip}</TooltipContent>
-      </Tooltip>
-    </TooltipProvider>
+    <Tooltip>
+      <TooltipTrigger render={buttonEl} />
+      <TooltipContent>{tooltip}</TooltipContent>
+    </Tooltip>
   )
 }
 

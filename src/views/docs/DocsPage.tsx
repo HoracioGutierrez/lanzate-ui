@@ -83,7 +83,7 @@ export function DocsPage({ section }: { section: string }) {
 
           {/* ===== SIDEBAR ===== */}
           <aside className="hidden md:block w-60 shrink-0 sticky top-14 self-start h-[calc(100vh-3.5rem)] py-8 pr-3">
-            <ScrollArea className="h-full">
+            <ScrollArea className="h-full" viewportProps={{ role: "region", "aria-label": "Components" }}>
               <div className="mb-5">
                 <input
                   type="text"

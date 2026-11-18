@@ -1,18 +1,19 @@
 # lanzate-ui
 
-Componentes para proyectos React + Tailwind CSS v4, instalables via shadcn CLI.
+Componentes para proyectos React + Tailwind CSS v4, instalables via shadcn CLI. El comportamiento (foco, teclado, popups, ARIA) viene de [ui-sdk](https://ui-sdk.dev) (`@ui-sdk/react` + `@ui-sdk/core`); los estilos son tuyos.
 
 ## Requisitos
 
-- React 18+
+- React 19+ (requisito de ui-sdk)
 - Tailwind CSS v4
 - shadcn configurado en el proyecto (`components.json` presente)
+- `@layer ui-sdk;` al principio de tu CSS global, antes de `@import "tailwindcss"`, para que tus estilos le ganen a los de ui-sdk
 
 ## Componentes
 
 ### Button
 
-Componente de botón con variantes de color semántico, padding, íconos, estados de carga y tooltips integrados, construido sobre [CVA](https://cva.style).
+Componente de botón con variantes de color semántico, padding, íconos, estados de carga y tooltips integrados, construido sobre [CVA](https://cva.style) y el `Button` de [ui-sdk](https://ui-sdk.dev/docs/components/button).
 
 **Instalación:**
 
@@ -27,7 +28,7 @@ import { Button, buttonVariants } from "@/components/ui/button"
 import type { ButtonProps } from "@/components/ui/button"
 ```
 
-Instala automáticamente el componente `tooltip` de shadcn como dependencia.
+Instala automáticamente el componente `tooltip` de este registry y los paquetes `@ui-sdk/react` y `@ui-sdk/core`.
 
 **Configuración CSS requerida:**
 
@@ -63,9 +64,9 @@ import { Button } from "@/components/ui/button"
 | `tapAnimation` | `boolean` | `true` | Animación de scale (spring) al hacer click/tap. Se desactiva automáticamente cuando el botón está `disabled` o `isLoading` |
 | `className` | `string` | — | Clases adicionales para el elemento `<button>` raíz |
 | `iconClassName` | `string` | — | Clases aplicadas al wrapper de todos los íconos (`startIcon`, `endIcon`, `icon`). Útil para cambiar color, tamaño o spacing de los íconos de forma independiente al texto |
-| `textClassName` | `string` | — | Clases aplicadas al wrapper del texto (`children`/`loadingText`). Compatibles con `mobile="only-icon"` — se mergean con `hidden sm:inline` automáticamente |
+| `textClassName` | `string` | — | Clases aplicadas al wrapper del texto (`children`/`loadingText`). Compatibles con `mobile="only-icon"` — se mergean con `max-sm:sr-only` automáticamente |
 
-Acepta además todos los atributos nativos de `<button>` (`onClick`, `disabled`, `type`, etc.) y props de Framer Motion (`whileHover`, `animate`, `variants`, etc.).
+Acepta además todos los atributos nativos de `<button>` (`onClick`, `disabled`, `type`, etc.) y las props del `Button` de ui-sdk: `focusableWhenDisabled`, `pendingAnnouncement` y `render` (por ejemplo `render={<Link href="/docs" />}` para renderizarlo como link). Si `onClick` devuelve una Promise, el botón queda *pending* (spinner, `aria-busy`, ignora clicks) hasta que se resuelva, sin necesidad de `isLoading`.
 
 **Colores disponibles (`color`):**
 
@@ -106,7 +107,7 @@ Acepta además todos los atributos nativos de `<button>` (`onClick`, `disabled`,
 
 | Valor | Comportamiento |
 |---|---|
-| `only-icon` | Oculta el texto en mobile (`< 640px`), solo muestra el `startIcon`. Requiere `startIcon`. |
+| `only-icon` | Oculta visualmente el texto en mobile (`< 640px`), solo muestra el `startIcon`. El texto sigue disponible para lectores de pantalla. Requiere `startIcon`. |
 | `full-width` | El botón ocupa el ancho completo en mobile, `auto` en `sm+`. |
 | `hidden` | Oculta el botón completamente en mobile, visible en `sm+`. |
 
@@ -116,8 +117,8 @@ Acepta además todos los atributos nativos de `<button>` (`onClick`, `disabled`,
 - `isLoading` reemplaza el `startIcon` (o el `icon`) por un spinner con animación de entrada (scale + fade). Si también hay `icon`, el spinner se muestra como botón cuadrado.
 - `loadingText` solo tiene efecto cuando `isLoading` es `true`.
 - `mobile="only-icon"` requiere `startIcon` — sin él, el botón queda visualmente vacío en mobile.
-- Botones con `icon` o `mobile="only-icon"` deberían incluir `tooltip` o `aria-label` para accesibilidad con lectores de pantalla.
-- Cuando el botón está deshabilitado (`disabled` o `isLoading`), el tooltip sigue funcionando gracias a un `<span>` wrapper interno.
+- Botones con `icon` deberían incluir `tooltip` o `aria-label`: sin nombre propio, el tooltip pasa a ser el nombre accesible del botón (lo usan lectores de pantalla y agentes).
+- Con `tooltip`, un botón deshabilitado (`disabled` o `isLoading`) usa `aria-disabled` en vez de `disabled` nativo (`focusableWhenDisabled`), así sigue recibiendo foco y el tooltip puede explicar por qué no está disponible.
 
 **Ejemplos:**
 
@@ -172,6 +173,58 @@ type SaveButtonProps = ButtonProps & { onSave: () => void }
   Especial
 </Button>
 ```
+
+---
+
+### Tooltip
+
+Tooltip accesible construido sobre el [Tooltip de ui-sdk](https://ui-sdk.dev/docs/components/tooltip). No necesita provider: los tooltips se agrupan solos (al pasar de uno a otro, el siguiente abre al instante).
+
+```bash
+npx shadcn@latest add https://lanzate-ui.vercel.app/r/tooltip.json
+```
+
+```tsx
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
+
+<Tooltip>
+  <TooltipTrigger>Guardar</TooltipTrigger>
+  <TooltipContent side="bottom">Guarda los cambios</TooltipContent>
+</Tooltip>
+
+// Usar otro elemento como trigger (reemplaza a asChild de Radix)
+<Tooltip>
+  <TooltipTrigger render={<a href="/docs" />}>Docs</TooltipTrigger>
+  <TooltipContent>Abrir la documentación</TooltipContent>
+</Tooltip>
+```
+
+- `Tooltip`: `delay` (default `0`), `closeDelay`, `open` / `defaultOpen` / `onOpenChange`, `disabled`, `toggleable`, `shortcut`.
+- `TooltipContent`: `side`, `align`, `sideOffset` (default `6`), `arrow` (default `true`).
+- `TooltipShortcut`: muestra el atajo de `shortcut` formateado para la plataforma (`⌘S` / `Ctrl+S`).
+
+---
+
+### Scroll Area
+
+Área con scroll nativo y scrollbars propias, construida sobre el [Scroll Area de ui-sdk](https://ui-sdk.dev/docs/components/scroll-area).
+
+```bash
+npx shadcn@latest add https://lanzate-ui.vercel.app/r/scroll-area.json
+```
+
+```tsx
+import { ScrollArea } from "@/components/ui/scroll-area"
+
+<ScrollArea className="h-72" viewportProps={{ role: "region", "aria-label": "Notas" }}>
+  {/* contenido */}
+</ScrollArea>
+```
+
+- `orientation`: `vertical` (default), `horizontal` o `both`.
+- `type`: cuándo se ven las scrollbars (`hover` default, `scroll`, `auto`, `always`).
+- `stickToEnd`: mantiene el final a la vista mientras crece el contenido (chats, logs).
+- `viewportProps`: props del viewport, que es el elemento que scrollea. Dale `role="region"` + `aria-label` si vale la pena encontrarlo.
 
 ---
 
