@@ -22,6 +22,9 @@ minor bump may contain breaking changes.
 
 ### Added
 
+- `lanzate-utils` registry item: a `cn()` (`lib/cn.ts`) that knows the
+  design-token class names. Every component installs and uses it; your own
+  `lib/utils.ts` is left untouched.
 - `lanzate-theme` registry item with every shared design token, including
   `lib/tokens.types.ts` (types such as `IntentColor` and `TextSize`). Button
   and Text install it automatically.
@@ -44,5 +47,9 @@ minor bump may contain breaking changes.
 
 ### Fixed
 
+- Text and Button lost token classes in projects using shadcn's stock
+  `cn()`: `<Text size="display" color="primary">` rendered without its size,
+  because stock tailwind-merge reads `text-display` as a color. Components
+  now merge classes with Lanzate's own `cn()`.
 - Registry CSS variables were declared with a leading `--`, which the shadcn
   CLI turned into invalid `var(----name)` references.

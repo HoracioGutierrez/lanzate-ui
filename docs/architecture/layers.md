@@ -7,7 +7,7 @@ src/
 ├── features/            the website, one folder per feature
 ├── components/ui/       the registry: components shipped to consumers
 ├── hooks/               hooks shipped with the registry
-├── lib/                 utilities shipped with the registry (cn, generated tokens.types.ts, …)
+├── lib/                 code shipped with the registry: cn.ts and generated tokens.types.ts, tw-merge.config.ts
 ├── styles/              global CSS and generated token files
 └── test/                test setup
 tooling/                 ESLint rules and the token build (Node, not shipped)

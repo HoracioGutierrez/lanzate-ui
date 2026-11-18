@@ -48,6 +48,7 @@ not errors, and some legacy code doesn't follow the rules yet.
 | 1 | Lint rules, TypeScript `strict`, these docs | Done |
 | 2 | Design tokens: DTCG source, Style Dictionary, generated CSS and types ([0002](decisions/0002-design-token-pipeline.md)) | Done |
 | 3 | Registry components moved to per-component folders; Button API 0.7.0 ([0003](decisions/0003-registry-imports-and-shipped-types.md)) | Done |
+| 3b | Registry components ship their own token-aware cn() ([0004](decisions/0004-registry-cn.md)) | Done |
 | 4 | Website moved to `src/features` (shell, docs with MDX, home) | Pending |
 | 5 | Architecture rules switched to errors; CI checks | Pending |
 

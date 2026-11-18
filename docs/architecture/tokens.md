@@ -50,10 +50,11 @@ tokens/                                source of truth (DTCG JSON — W3C Design
 tooling/tokens/build.js                the build (Style Dictionary reads and resolves; the script formats)
 
 src/styles/generated/                  OUTPUT — committed, never edited by hand
-├── tokens.css                         @theme inline + :root + .dark + .theme-*
-└── tw-merge.config.ts                 token values for tailwind-merge (used by cn)
+└── tokens.css                         @theme inline + :root + .dark + .theme-*
 src/lib/tokens.types.ts                OUTPUT — ColorToken, IntentColor, TextSize, Radius, Shadow, Ease, FontFamily, ThemeName
-                                       (in lib/ because it ships with the registry; see decision 0003)
+                                       (ships in lanzate-theme; see decision 0003)
+src/lib/tw-merge.config.ts             OUTPUT — token names per Tailwind namespace, read by src/lib/cn.ts
+                                       (ships in lanzate-utils; see decision 0004)
 registry.json → item "lanzate-theme"   OUTPUT — the registry:theme item (generated; don't edit it by hand)
 ```
 

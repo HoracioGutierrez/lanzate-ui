@@ -9,6 +9,9 @@
 // - registry:ui items declare no cssVars (they come from the lanzate-theme item)
 // - importing another component (@/components/ui/<name>/<file>) requires it in registryDependencies,
 //   and the import names the exact file, never the folder (see decision 0003)
+// - importing @/lib/<file> requires the registry item that ships src/lib/<file>.ts in
+//   registryDependencies; @/lib/utils is forbidden: use @/lib/cn (see decision 0004)
+// - every file a registry:lib or registry:theme item lists exists
 
 import { readdir, readFile, writeFile } from "node:fs/promises"
 import path from "node:path"
@@ -23,6 +26,18 @@ const EXCLUDED = [/\.test\.tsx?$/, /^AGENTS\.md$/, /^CLAUDE\.md$/]
 const fix = process.argv.includes("--fix")
 const registry = JSON.parse(await readFile(REGISTRY_JSON, "utf8"))
 const problems = []
+
+// src/lib/<file>.ts → the item that ships it
+const libShippers = new Map()
+for (const item of registry.items) {
+  if (item.type === "registry:ui") continue
+  for (const f of item.files ?? []) {
+    const exists = await readFile(path.join(ROOT, f.path), "utf8").then(() => true, () => false)
+    if (!exists) problems.push(`item "${item.name}" lists ${f.path}, which doesn't exist`)
+    const lib = f.path.match(/^src\/lib\/(.+)\.tsx?$/)
+    if (lib) libShippers.set(lib[1], item.name)
+  }
+}
 
 const folders = (await readdir(path.join(ROOT, UI_DIR), { withFileTypes: true }))
   .filter((entry) => entry.isDirectory())
@@ -64,6 +79,19 @@ for (const folder of folders) {
           `${file}: import "@/components/ui/${other}" by exact file (e.g. "@/components/ui/${other}/${other}"); the shadcn CLI rewrites a folder import to <ui>/${other}/${other} and drops the other exports`
         )
       }
+    }
+    for (const [, lib] of source.matchAll(/from\s+["']@\/lib\/([\w./-]+)["']/g)) {
+      if (lib === "utils") {
+        problems.push(`${file}: import cn from "@/lib/cn", not "@/lib/utils" (a consumer's own cn() mangles token classes; see decision 0004)`)
+        continue
+      }
+      const shipper = libShippers.get(lib)
+      if (!shipper) {
+        problems.push(`${file}: imports "@/lib/${lib}", which no registry item ships`)
+        continue
+      }
+      const url = `${REGISTRY_URL}/${shipper}.json`
+      if (!deps.includes(url)) problems.push(`${folder}: imports "@/lib/${lib}"; add "${url}" to registryDependencies`)
     }
   }
 }

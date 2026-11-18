@@ -55,4 +55,5 @@ Installing `lanzate-theme` with shadcn 4.7.0 into a test project:
 - Consumers' own `cn()` (shadcn's `lib/utils`) doesn't know our custom
   token classes, such as `text-display` or `shadow-elevated`. A conflicting
   class passed through `className` may not override them in a consumer
-  project. To revisit when components are migrated (phase 3).
+  project. **Update:** it was worse (our own classes dropped each other);
+  resolved by [0004](0004-registry-cn.md).

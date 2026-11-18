@@ -74,6 +74,26 @@
       }
     },
     {
+      "name": "lanzate-utils",
+      "type": "registry:lib",
+      "title": "Lanzate Utils",
+      "description": "cn() for Lanzate UI components: tailwind-merge configured with the design-token class names. Leaves the project's own lib/utils untouched.",
+      "dependencies": [
+        "clsx@^2.1.1",
+        "tailwind-merge@^3.5.0"
+      ],
+      "files": [
+        {
+          "path": "src/lib/cn.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "src/lib/tw-merge.config.ts",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
       "name": "button",
       "type": "registry:ui",
       "title": "Button",
@@ -108,7 +128,8 @@
       ],
       "registryDependencies": [
         "https://lanzate-ui.vercel.app/r/lanzate-theme.json",
-        "https://lanzate-ui.vercel.app/r/tooltip.json"
+        "https://lanzate-ui.vercel.app/r/tooltip.json",
+        "https://lanzate-ui.vercel.app/r/lanzate-utils.json"
       ]
     },
     {
@@ -140,7 +161,8 @@
         "@ui-sdk/core@0.1.0-beta.6"
       ],
       "registryDependencies": [
-        "https://lanzate-ui.vercel.app/r/lanzate-theme.json"
+        "https://lanzate-ui.vercel.app/r/lanzate-theme.json",
+        "https://lanzate-ui.vercel.app/r/lanzate-utils.json"
       ]
     },
     {
@@ -174,7 +196,9 @@
         "@ui-sdk/react@0.1.0-beta.6",
         "@ui-sdk/core@0.1.0-beta.6"
       ],
-      "registryDependencies": []
+      "registryDependencies": [
+        "https://lanzate-ui.vercel.app/r/lanzate-utils.json"
+      ]
     },
     {
       "name": "scroll-area",
@@ -207,7 +231,9 @@
         "@ui-sdk/react@0.1.0-beta.6",
         "@ui-sdk/core@0.1.0-beta.6"
       ],
-      "registryDependencies": []
+      "registryDependencies": [
+        "https://lanzate-ui.vercel.app/r/lanzate-utils.json"
+      ]
     }
   ]
 }

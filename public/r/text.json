@@ -9,7 +9,8 @@
     "@ui-sdk/core@0.1.0-beta.6"
   ],
   "registryDependencies": [
-    "https://lanzate-ui.vercel.app/r/lanzate-theme.json"
+    "https://lanzate-ui.vercel.app/r/lanzate-theme.json",
+    "https://lanzate-ui.vercel.app/r/lanzate-utils.json"
   ],
   "files": [
     {
@@ -19,7 +20,7 @@
     },
     {
       "path": "src/components/ui/text/text.tsx",
-      "content": "import { renderElement } from \"@ui-sdk/react/primitive\"\n\nimport { cn } from \"@/lib/utils\"\n\nimport type { TextProps } from \"./text.types\"\nimport { textVariants } from \"./text.variants\"\n\nexport function Text({ size, color, className, render, ...props }: TextProps) {\n  return renderElement(\n    \"p\",\n    {\n      ...props,\n      \"data-slot\": \"text\",\n      \"data-size\": size,\n      \"data-color\": color,\n      className: cn(textVariants({ size, color, className })),\n    },\n    render\n  )\n}\n",
+      "content": "import { renderElement } from \"@ui-sdk/react/primitive\"\n\nimport { cn } from \"@/lib/cn\"\n\nimport type { TextProps } from \"./text.types\"\nimport { textVariants } from \"./text.variants\"\n\nexport function Text({ size, color, className, render, ...props }: TextProps) {\n  return renderElement(\n    \"p\",\n    {\n      ...props,\n      \"data-slot\": \"text\",\n      \"data-size\": size,\n      \"data-color\": color,\n      className: cn(textVariants({ size, color, className })),\n    },\n    render\n  )\n}\n",
       "type": "registry:ui"
     },
     {

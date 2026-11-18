@@ -2,7 +2,7 @@
 
 import { ScrollAreaScrollbar, ScrollAreaThumb } from "@ui-sdk/react/scroll-area"
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/cn"
 
 import type { ScrollBarProps } from "./scroll-area.types"
 import { scrollBarClasses, scrollBarThumbClasses } from "./scroll-area.variants"

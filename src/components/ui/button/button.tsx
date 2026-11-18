@@ -8,7 +8,7 @@ import { TooltipTrigger } from "@ui-sdk/react/tooltip"
 // the shadcn CLI rewrites `@/components/ui/tooltip` to `<ui>/tooltip/tooltip`.
 import { Tooltip } from "@/components/ui/tooltip/tooltip"
 import { TooltipContent } from "@/components/ui/tooltip/tooltip-content"
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/cn"
 
 import { ButtonSpinner } from "./button-spinner"
 import type { ButtonProps } from "./button.types"

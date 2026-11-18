@@ -7,7 +7,9 @@
     "@ui-sdk/react@0.1.0-beta.6",
     "@ui-sdk/core@0.1.0-beta.6"
   ],
-  "registryDependencies": [],
+  "registryDependencies": [
+    "https://lanzate-ui.vercel.app/r/lanzate-utils.json"
+  ],
   "files": [
     {
       "path": "src/components/ui/tooltip/index.ts",
@@ -16,7 +18,7 @@
     },
     {
       "path": "src/components/ui/tooltip/tooltip-content.tsx",
-      "content": "\"use client\"\n\nimport { TooltipArrow, TooltipContent as TooltipContentPart } from \"@ui-sdk/react/tooltip\"\n\nimport { cn } from \"@/lib/utils\"\n\nimport type { TooltipContentProps } from \"./tooltip.types\"\nimport { tooltipArrowClasses, tooltipContentClasses } from \"./tooltip.variants\"\n\nexport function TooltipContent({ className, sideOffset = 6, arrow = true, children, ...props }: TooltipContentProps) {\n  return (\n    <TooltipContentPart sideOffset={sideOffset} className={cn(tooltipContentClasses, className)} {...props}>\n      {children}\n      {arrow && <TooltipArrow className={tooltipArrowClasses} />}\n    </TooltipContentPart>\n  )\n}\n",
+      "content": "\"use client\"\n\nimport { TooltipArrow, TooltipContent as TooltipContentPart } from \"@ui-sdk/react/tooltip\"\n\nimport { cn } from \"@/lib/cn\"\n\nimport type { TooltipContentProps } from \"./tooltip.types\"\nimport { tooltipArrowClasses, tooltipContentClasses } from \"./tooltip.variants\"\n\nexport function TooltipContent({ className, sideOffset = 6, arrow = true, children, ...props }: TooltipContentProps) {\n  return (\n    <TooltipContentPart sideOffset={sideOffset} className={cn(tooltipContentClasses, className)} {...props}>\n      {children}\n      {arrow && <TooltipArrow className={tooltipArrowClasses} />}\n    </TooltipContentPart>\n  )\n}\n",
       "type": "registry:ui"
     },
     {

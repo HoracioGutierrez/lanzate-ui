@@ -14,8 +14,14 @@ reference example of every rule below.
   `@/components/ui/tooltip/tooltip-content`, never `@/components/ui/tooltip`
   (the shadcn CLI breaks folder imports; see decision 0003). Import ui-sdk
   parts from ui-sdk. Never `../tooltip`.
+- Merge classes with `cn` from `@/lib/cn`, **never `@/lib/utils`**: a
+  consumer's stock `cn` drops token classes (`text-display` vs
+  `text-primary`; decision 0004). Every component lists
+  `https://lanzate-ui.vercel.app/r/lanzate-utils.json` in
+  `registryDependencies`.
 - Never import from `@/features`, `@/app` or anything website-specific.
-  Only `ui`, `hooks`, `lib` and `styles`.
+  Only `ui`, `hooks`, `lib` and `styles`. Every `@/lib/<file>` you import
+  must ship in a registry item you depend on.
 - Public prop types are a contract in `<name>.types.ts`. Variant maps check
   themselves against it with `satisfies Record<Union, string>`. Don't export
   `VariantProps<typeof cva>` as the public type. Colors and sizes come from

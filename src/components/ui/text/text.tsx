@@ -1,6 +1,6 @@
 import { renderElement } from "@ui-sdk/react/primitive"
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/cn"
 
 import type { TextProps } from "./text.types"
 import { textVariants } from "./text.variants"

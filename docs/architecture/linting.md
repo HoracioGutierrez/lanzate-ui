@@ -16,7 +16,7 @@ heading that explains them.
 | `import type` | `@typescript-eslint/consistent-type-imports` | typescript-eslint |
 | React correctness | `@eslint-react/*`, `react-hooks/*` | `@eslint-react/eslint-plugin`, `eslint-plugin-react-hooks` |
 | Next.js | `@next/next/*` (core-web-vitals) | `@next/eslint-plugin-next` |
-| Registry file lists, exact-file imports, no `target`/`cssVars` | `bun run registry:check` (not ESLint) | `tooling/registry/check.js` |
+| Registry file lists, exact-file imports, `@/lib/cn` not `@/lib/utils`, shipped `@/lib` deps, no `target`/`cssVars` | `bun run registry:check` (not ESLint) | `tooling/registry/check.js` |
 | Generated token files up to date | `bun run tokens:check` (not ESLint) | `tooling/tokens/build.js` |
 
 `eslint-plugin-react` is not used: it doesn't support ESLint 10.

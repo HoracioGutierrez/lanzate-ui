@@ -7,7 +7,7 @@ import {
   ScrollAreaViewport,
 } from "@ui-sdk/react/scroll-area"
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/cn"
 
 import { ScrollBar } from "./scroll-bar"
 import type { ScrollAreaProps } from "./scroll-area.types"

@@ -2,7 +2,7 @@
 
 import { TooltipArrow, TooltipContent as TooltipContentPart } from "@ui-sdk/react/tooltip"
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/cn"
 
 import type { TooltipContentProps } from "./tooltip.types"
 import { tooltipArrowClasses, tooltipContentClasses } from "./tooltip.variants"
