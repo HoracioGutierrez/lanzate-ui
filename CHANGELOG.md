@@ -21,6 +21,12 @@ minor bump may contain breaking changes.
   The back and three-dot buttons are the registry's `Button` (square,
   ghost), so `button` installs with it and `FrameBack` takes its props.
 
+### Changed
+
+- **Floating Toolbar**: options and menu triggers are drawn with the
+  registry's `Button` (ghost, icon only), so `button` now installs with
+  `floating-toolbar`. Same props, size, focus ring and open state.
+
 ## 0.10.0
 
 ### Added

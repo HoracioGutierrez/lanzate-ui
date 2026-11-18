@@ -33,15 +33,13 @@ export const floatingToolbarClasses = [
   "data-disabled:opacity-60",
 ].join(" ")
 
-export const floatingToolbarButtonClasses = [
-  "inline-flex size-10 shrink-0 items-center justify-center rounded-xs text-muted-foreground outline-none",
-  "transition-[background-color,color,box-shadow] duration-150 ease-out motion-reduce:transition-none",
-  "hover:bg-accent hover:text-accent-foreground active:bg-accent/70",
-  "focus-visible:inset-ring focus-visible:inset-ring-ring",
-  "data-open:bg-primary/10 data-open:text-primary data-open:inset-ring data-open:inset-ring-primary/50",
-  "data-disabled:pointer-events-none data-disabled:opacity-50",
-  "[&_svg]:size-5 [&_svg]:shrink-0 [&_svg]:stroke-[1.75]",
-].join(" ")
+// Options and menu triggers are the registry's Button (ghost, icon only); the toolbar only sizes
+// them and keeps the focus ring inside, since the row scrolls and would clip an outer ring.
+export const floatingToolbarControlClasses =
+  "size-10 shrink-0 rounded-xs focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:inset-ring focus-visible:inset-ring-ring [&_svg]:size-5"
+
+// A menu trigger stays marked while its panel is open.
+export const floatingToolbarMenuTriggerClasses = "data-open:bg-primary/10 data-open:text-primary data-open:inset-ring data-open:inset-ring-primary/50"
 
 export const floatingToolbarSeparatorClasses = "mx-1 h-6 w-px shrink-0 bg-border"
 

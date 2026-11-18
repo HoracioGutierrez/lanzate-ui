@@ -309,6 +309,7 @@
         "@ui-sdk/core@0.1.0-beta.6"
       ],
       "registryDependencies": [
+        "https://lanzate-ui.vercel.app/r/button.json",
         "https://lanzate-ui.vercel.app/r/lanzate-theme.json",
         "https://lanzate-ui.vercel.app/r/lanzate-utils.json"
       ]

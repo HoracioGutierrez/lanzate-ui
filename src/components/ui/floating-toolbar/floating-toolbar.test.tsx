@@ -76,6 +76,16 @@ test("renders a named toolbar of icon-only options, each named by its label", ()
   expect(undo.closest("[data-slot=\"toolbar\"]")).not.toBeNull()
 })
 
+test("options and menu triggers are the registry's ghost Button, sized by the toolbar", () => {
+  render(<Editor />)
+  for (const name of ["Undo", "Insert"]) {
+    const button = screen.getByRole("button", { name })
+    expect(button.getAttribute("data-variant")).toBe("ghost")
+    expect(button.className).toContain("size-10")
+    expect(button.className).toContain("rounded-xs")
+  }
+})
+
 test("an option without a submenu runs its action", async () => {
   const user = userEvent.setup()
   render(<Editor />)
