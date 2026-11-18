@@ -10,7 +10,7 @@ export function FramePlainDemo() {
       </Frame>
       <Frame size="sm">
         <FrameHeader height="lg">
-          <FrameTitle>Taller header, static title</FrameTitle>
+          <FrameTitle size="sm">Taller header, larger title</FrameTitle>
         </FrameHeader>
         <FrameContent>
           <p className="text-sm">Without collapsible, the title is plain text.</p>

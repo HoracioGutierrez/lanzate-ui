@@ -12,14 +12,14 @@ import { FrameContext } from "./frame.constants"
 import type { FrameTitleProps } from "./frame.types"
 import { frameTitleChevronClasses, frameTitleClasses, frameTitleLabelClasses, frameTitleTriggerClasses } from "./frame.variants"
 
-export function FrameTitle({ className, children, ...props }: FrameTitleProps) {
+export function FrameTitle({ className, size = "xs", children, ...props }: FrameTitleProps) {
   const { collapsible } = use(FrameContext)
 
   // Only a collapsible frame gets a button: a static title must not look pressable.
   // The button keeps ui-sdk's data-slot (collapsible-trigger); its behavior reads it.
   // Text's overline sets the type; `inherit` keeps the title's own color and its hover.
   const label = (
-    <Text render={<span />} variant="overline" size="xs" color="inherit" className={frameTitleLabelClasses}>
+    <Text render={<span />} variant="overline" size={size} color="inherit" className={frameTitleLabelClasses}>
       {children}
     </Text>
   )

@@ -227,6 +227,27 @@ test("a long title ends in an ellipsis: the truncating box is a block, not a fle
   expect(label.className.split(" ")).not.toContain("flex")
 })
 
+test("the title is Text's xs by default and takes any Text size", () => {
+  const { rerender } = render(
+    <Frame>
+      <FrameHeader>
+        <FrameTitle>Orders</FrameTitle>
+      </FrameHeader>
+    </Frame>
+  )
+  expect(screen.getByText("Orders").getAttribute("data-size")).toBe("xs")
+
+  rerender(
+    <Frame>
+      <FrameHeader>
+        <FrameTitle size="lg">Orders</FrameTitle>
+      </FrameHeader>
+    </Frame>
+  )
+  expect(screen.getByText("Orders").getAttribute("data-size")).toBe("lg")
+  expect(screen.getByText("Orders").className).toContain("text-lg")
+})
+
 test("a collapsible frame keeps its own slots for styling", () => {
   const { container } = render(<Orders collapsible color="error" />)
   const frame = container.querySelector('[data-slot="frame"]')

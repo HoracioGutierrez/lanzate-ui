@@ -1,5 +1,6 @@
 import type { ComponentProps, ReactNode } from "react"
 import type { ButtonProps } from "@/components/ui/button/button.types"
+import type { TextSizeStep } from "@/components/ui/text/text.types"
 import type { Collapsible, CollapsiblePanel, CollapsibleTrigger } from "@ui-sdk/react/collapsible"
 import type { IntentColor } from "@/lib/tokens.types"
 import type { Menu, MenuItem, MenuSeparator, MenuSub, MenuSubContent, MenuSubTrigger } from "@ui-sdk/react/menu"
@@ -42,6 +43,8 @@ export type FrameTitleProps = Omit<ComponentProps<typeof CollapsibleTrigger>, "c
   className?: string
   /** Free content: text, icons, badges. */
   children?: ReactNode
+  /** Text size of the title, from Text's scale. Defaults to "xs". Pair a large size with a taller header `height`. */
+  size?: TextSizeStep
 }
 
 export type FrameContentProps = Omit<ComponentProps<"div">, "className"> &
