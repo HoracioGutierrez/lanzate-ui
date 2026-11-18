@@ -351,8 +351,8 @@ export function HomePage() {
                 >
                   <ScrollArea className="h-full w-full scroll-fade">
                     <div className="w-full px-6 py-8 space-y-2">
-                      <Text as="h1" size="display" className="leading-none">Display</Text>
-                      <Text as="h2" size="2xl">2XL — Heading</Text>
+                      <Text render={<h1 />} size="display" className="leading-none">Display</Text>
+                      <Text render={<h2 />} size="2xl">2XL — Heading</Text>
                       <Text size="xl">XL — Subheading</Text>
                       <Text size="lg">LG — Body large</Text>
                       <Text size="md">MD — Body default</Text>

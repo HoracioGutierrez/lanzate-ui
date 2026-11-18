@@ -1,5 +1,5 @@
-import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
+import { renderElement, type PartProps } from "@ui-sdk/react/primitive"
 
 import { cn } from "@/lib/utils"
 
@@ -31,25 +31,23 @@ const textVariants = cva("text-foreground", {
   },
 })
 
-type TextTag = "p" | "span" | "label" | "h1" | "h2" | "h3" | "h4"
-
 type TextProps = {
-  as?: TextTag
   size?: VariantProps<typeof textVariants>["size"]
   color?: VariantProps<typeof textVariants>["color"]
-} & React.HTMLAttributes<HTMLElement>
+  className?: string
+} & Omit<PartProps<"p">, "color" | "className">
 
-function Text({ as: Tag = "p", size, color, className, children, ...props }: TextProps) {
-  return (
-    <Tag
-      data-slot="text"
-      data-size={size}
-      data-color={color}
-      className={cn(textVariants({ size, color, className }))}
-      {...props}
-    >
-      {children}
-    </Tag>
+function Text({ size, color, className, render, ...props }: TextProps) {
+  return renderElement(
+    "p",
+    {
+      ...props,
+      "data-slot": "text",
+      "data-size": size,
+      "data-color": color,
+      className: cn(textVariants({ size, color, className })),
+    },
+    render
   )
 }
 

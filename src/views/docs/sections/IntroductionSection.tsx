@@ -5,7 +5,7 @@ import { Text } from "@/components/ui/text"
 export function IntroductionSection() {
   return (
     <div>
-      <Text as="h1" size="display" className="tracking-tight">
+      <Text render={<h1 />} size="display" className="tracking-tight">
         Introduction
       </Text>
       <Text size="lg" color="muted" className="mt-3 max-w-2xl leading-relaxed">
@@ -43,7 +43,7 @@ export function IntroductionSection() {
 
       <div className="mt-14 space-y-6 max-w-2xl">
         <div>
-          <Text as="h2" size="2xl" className="tracking-tight">
+          <Text render={<h2 />} size="2xl" className="tracking-tight">
             What is Lanzate UI?
           </Text>
           <Text color="muted" className="mt-2 leading-relaxed">
@@ -53,7 +53,7 @@ export function IntroductionSection() {
         </div>
 
         <div>
-          <Text as="h2" size="2xl" className="tracking-tight">
+          <Text render={<h2 />} size="2xl" className="tracking-tight">
             Philosophy
           </Text>
           <Text color="muted" className="mt-2 leading-relaxed">
@@ -63,7 +63,7 @@ export function IntroductionSection() {
         </div>
 
         <div>
-          <Text as="h2" size="2xl" className="tracking-tight">
+          <Text render={<h2 />} size="2xl" className="tracking-tight">
             Stack
           </Text>
           <div className="mt-3 flex flex-wrap gap-2">
@@ -72,7 +72,6 @@ export function IntroductionSection() {
               "TypeScript 6",
               "Tailwind v4",
               "ui-sdk",
-              "Framer Motion",
               "CVA",
             ].map((tech) => (
               <span

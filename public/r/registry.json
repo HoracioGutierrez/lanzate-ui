@@ -17,7 +17,6 @@
       "dependencies": [
         "class-variance-authority",
         "lucide-react",
-        "framer-motion",
         "@ui-sdk/react@0.1.0-beta.6",
         "@ui-sdk/core@0.1.0-beta.6"
       ],
@@ -57,7 +56,7 @@
       "name": "text",
       "type": "registry:ui",
       "title": "Text",
-      "description": "Polymorphic text component with semantic size variants built on CVA.",
+      "description": "Text component with semantic size variants built on CVA; change its element with the render prop.",
       "files": [
         {
           "path": "src/components/ui/text.tsx",
@@ -65,7 +64,9 @@
         }
       ],
       "dependencies": [
-        "class-variance-authority"
+        "class-variance-authority",
+        "@ui-sdk/react@0.1.0-beta.6",
+        "@ui-sdk/core@0.1.0-beta.6"
       ],
       "registryDependencies": [],
       "cssVars": {

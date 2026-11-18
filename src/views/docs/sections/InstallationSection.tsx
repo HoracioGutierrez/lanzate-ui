@@ -4,7 +4,7 @@ import { CodeBlock } from "../DocComponents"
 export function InstallationSection() {
   return (
     <div>
-      <Text as="h1" size="display" className="tracking-tight">
+      <Text render={<h1 />} size="display" className="tracking-tight">
         Installation
       </Text>
       <Text size="lg" color="muted" className="mt-3 max-w-2xl leading-relaxed">
@@ -14,7 +14,7 @@ export function InstallationSection() {
 
       <div className="mt-10 space-y-10 max-w-2xl">
         <div>
-          <Text as="h2" size="2xl" className="tracking-tight">
+          <Text render={<h2 />} size="2xl" className="tracking-tight">
             1. Set up shadcn/ui
           </Text>
           <Text color="muted" className="mt-2 leading-relaxed">
@@ -28,7 +28,7 @@ export function InstallationSection() {
         </div>
 
         <div>
-          <Text as="h2" size="2xl" className="tracking-tight">
+          <Text render={<h2 />} size="2xl" className="tracking-tight">
             2. Add a component
           </Text>
           <Text color="muted" className="mt-2 leading-relaxed">
@@ -47,7 +47,7 @@ $ npx shadcn@latest add \\
         </div>
 
         <div>
-          <Text as="h2" size="2xl" className="tracking-tight">
+          <Text render={<h2 />} size="2xl" className="tracking-tight">
             3. Import and use
           </Text>
           <Text color="muted" className="mt-2 leading-relaxed">
@@ -64,7 +64,7 @@ import { Text } from "@/components/ui/text";
 export default function Page() {
   return (
     <div>
-      <Text as="h1" size="2xl">Taking off!</Text>
+      <Text render={<h1 />} size="2xl">Taking off!</Text>
       <Button>Get Started</Button>
     </div>
   );
@@ -72,7 +72,7 @@ export default function Page() {
         </div>
 
         <div>
-          <Text as="h2" size="2xl" className="tracking-tight">
+          <Text render={<h2 />} size="2xl" className="tracking-tight">
             Requirements
           </Text>
           <div className="mt-3 grid sm:grid-cols-2 gap-3">

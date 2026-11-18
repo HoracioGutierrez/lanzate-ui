@@ -47,15 +47,35 @@ test("a Promise from onClick keeps the button pending until it settles", async (
   render(<Button onClick={onClick}>Guardar</Button>)
   const button = screen.getByRole("button", { name: "Guardar" })
 
+  expect(button.querySelector('[data-slot="button-spinner"]')).toBeNull()
+
   await user.click(button)
   expect(button.hasAttribute("data-pending")).toBe(true)
   expect(button.getAttribute("aria-busy")).toBe("true")
+  expect(button.querySelector('[data-slot="button-spinner"]')).not.toBeNull()
 
   await user.click(button)
   expect(onClick).toHaveBeenCalledTimes(1)
 
   await act(async () => finish())
   expect(button.hasAttribute("data-pending")).toBe(false)
+  expect(button.querySelector('[data-slot="button-spinner"]')).toBeNull()
+})
+
+test("the spinner enters through ui-sdk's animateIn starting style", async () => {
+  render(<Button isLoading>Guardar</Button>)
+  const spinner = screen.getByRole("button").querySelector('[data-slot="button-spinner"]')!
+  expect(spinner).not.toBeNull()
+  expect(spinner.hasAttribute("data-starting-style")).toBe(true)
+  await act(async () => { await new Promise((r) => setTimeout(r, 100)) })
+  expect(spinner.hasAttribute("data-starting-style")).toBe(false)
+})
+
+test("tap animation is plain CSS, off when tapAnimation is false", () => {
+  const { rerender } = render(<Button>Guardar</Button>)
+  expect(screen.getByRole("button").className).toContain("active:not-data-disabled:not-data-pending:scale-[0.97]")
+  rerender(<Button tapAnimation={false}>Guardar</Button>)
+  expect(screen.getByRole("button").className).not.toContain("scale-[0.97]")
 })
 
 test("an icon-only button is named by its tooltip", async () => {

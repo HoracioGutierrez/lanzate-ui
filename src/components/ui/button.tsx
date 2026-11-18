@@ -1,22 +1,25 @@
 "use client"
 
 import * as React from "react"
-import { motion, type HTMLMotionProps } from "framer-motion"
 import { cva, type VariantProps } from "class-variance-authority"
 import { Loader2 } from "lucide-react"
+import { animateIn } from "@ui-sdk/core"
 import { Button as ButtonPart } from "@ui-sdk/react/button"
 
 import { cn } from "@/lib/utils"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 
 const ELEVATED_CLASSES =
-  "shadow-[0_4px_12px_rgba(0,0,0,0.15)] hover:shadow-[0_6px_20px_rgba(0,0,0,0.2)] active:shadow-[0_2px_6px_rgba(0,0,0,0.12)] transition-shadow duration-150"
+  "shadow-[0_4px_12px_rgba(0,0,0,0.15)] hover:shadow-[0_6px_20px_rgba(0,0,0,0.2)] active:shadow-[0_2px_6px_rgba(0,0,0,0.12)]"
 
 const GLOW_CLASSES =
-  "shadow-[0_0_8px_2px_color-mix(in_oklch,var(--btn-color)_50%,transparent),0_0_24px_6px_color-mix(in_oklch,var(--btn-color)_22%,transparent)] hover:shadow-[0_0_12px_4px_color-mix(in_oklch,var(--btn-color)_65%,transparent),0_0_36px_10px_color-mix(in_oklch,var(--btn-color)_30%,transparent)] active:shadow-[0_0_5px_1px_color-mix(in_oklch,var(--btn-color)_40%,transparent),0_0_14px_3px_color-mix(in_oklch,var(--btn-color)_18%,transparent)] transition-shadow duration-200"
+  "shadow-[0_0_8px_2px_color-mix(in_oklch,var(--btn-color)_50%,transparent),0_0_24px_6px_color-mix(in_oklch,var(--btn-color)_22%,transparent)] hover:shadow-[0_0_12px_4px_color-mix(in_oklch,var(--btn-color)_65%,transparent),0_0_36px_10px_color-mix(in_oklch,var(--btn-color)_30%,transparent)] active:shadow-[0_0_5px_1px_color-mix(in_oklch,var(--btn-color)_40%,transparent),0_0_14px_3px_color-mix(in_oklch,var(--btn-color)_18%,transparent)]"
+
+const TAP_CLASSES =
+  "ease-[cubic-bezier(0.34,1.56,0.64,1)] motion-safe:active:not-data-disabled:not-data-pending:scale-[0.97]"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 font-medium transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none data-disabled:opacity-50 aria-disabled:cursor-not-allowed data-pending:cursor-wait [&_svg]:size-[1em] [&_svg]:shrink-0",
+  "inline-flex items-center justify-center gap-2 font-medium transition-[color,background-color,border-color,box-shadow,scale,translate] duration-150 ease-out motion-reduce:transition-none cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none data-disabled:opacity-50 aria-disabled:cursor-not-allowed data-pending:cursor-wait [&_svg]:size-[1em] [&_svg]:shrink-0",
   {
     variants: {
       color: {
@@ -41,7 +44,6 @@ const buttonVariants = cva(
           "active:bg-[linear-gradient(to_bottom,rgba(0,0,0,0.08),rgba(255,255,255,0.04))]",
           "active:shadow-[inset_0_2px_1px_rgba(0,0,0,0.15),inset_0_-1px_0_rgba(255,255,255,0.08)]",
           "active:translate-y-px",
-          "[transition:box-shadow_0.15s_ease,transform_0.15s_ease,background-color_0.15s_ease,color_0.15s_ease,border-color_0.15s_ease]",
         ].join(" "),
       },
       padding: {
@@ -148,29 +150,25 @@ function Button({
         ? <span className={iconClassName}>{node}</span>
         : node
 
-  // isLoading drives the spinner from props; a Promise returned by onClick drives it through data-pending.
-  const loadingSpinner = (
-    <motion.span
-      className="inline-flex"
-      initial={{ scale: 0, opacity: 0 }}
-      animate={{ scale: 1, opacity: 1 }}
-      transition={{ duration: 0.18, ease: "easeOut" }}
-    >
-      <Loader2 className="animate-spin" aria-hidden="true" />
-    </motion.span>
-  )
-  const pendingSpinner = (
-    <span className="hidden in-data-pending:inline-flex">
-      <Loader2 className="animate-spin" aria-hidden="true" />
-    </span>
-  )
-  const idleOnly = (node: React.ReactNode) =>
-    node == null ? null : <span className="inline-flex in-data-pending:hidden">{node}</span>
-
-  const leading = (node: React.ReactNode) =>
-    isLoading ? wrapIcon(loadingSpinner) : <>{idleOnly(wrapIcon(node))}{wrapIcon(pendingSpinner)}</>
-
   const label: React.ReactNode = isLoading && loadingText != null ? loadingText : children as React.ReactNode
+
+  const content = (busy: boolean) => {
+    const leading = (node: React.ReactNode) => wrapIcon(busy ? <ButtonSpinner /> : node)
+    if (icon != null) return leading(icon)
+    return (
+      <>
+        {leading(startIcon)}
+        {mobile === "only-icon" ? (
+          label != null && <span className={cn("max-sm:sr-only", textClassName)}>{label}</span>
+        ) : textClassName ? (
+          <span className={textClassName}>{label}</span>
+        ) : (
+          label
+        )}
+        {wrapIcon(endIcon)}
+      </>
+    )
+  }
 
   const buttonEl = (
     <ButtonPart
@@ -191,32 +189,12 @@ function Button({
         icon != null && squarePaddingMap[padding ?? "base"],
         elevated && ELEVATED_CLASSES,
         glow && GLOW_CLASSES,
+        tapAnimation && TAP_CLASSES,
         className,
-      )}
-      render={(partProps, state) => (
-        <motion.button
-          {...(partProps as HTMLMotionProps<"button">)}
-          whileTap={tapAnimation && !state.disabled && !state.pending ? { scale: 0.97 } : undefined}
-          transition={{ type: "spring", stiffness: 400, damping: 20 }}
-        />
       )}
       {...props}
     >
-      {icon != null ? (
-        leading(icon)
-      ) : (
-        <>
-          {leading(startIcon)}
-          {mobile === "only-icon" ? (
-            label != null && <span className={cn("max-sm:sr-only", textClassName)}>{label}</span>
-          ) : textClassName ? (
-            <span className={textClassName}>{label}</span>
-          ) : (
-            label
-          )}
-          {wrapIcon(endIcon)}
-        </>
-      )}
+      {(state) => content(Boolean(isLoading || state.pending))}
     </ButtonPart>
   )
 
@@ -227,6 +205,18 @@ function Button({
       <TooltipTrigger render={buttonEl} />
       <TooltipContent>{tooltip}</TooltipContent>
     </Tooltip>
+  )
+}
+
+function ButtonSpinner() {
+  return (
+    <span
+      ref={(el) => (el ? animateIn(el) : undefined)}
+      data-slot="button-spinner"
+      className="inline-flex transition-[scale,opacity] duration-200 ease-out data-starting-style:scale-0 data-starting-style:opacity-0 motion-reduce:transition-none"
+    >
+      <Loader2 className="animate-spin motion-reduce:animate-none" aria-hidden="true" />
+    </span>
   )
 }
 

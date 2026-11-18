@@ -4,7 +4,7 @@ import { CodeBlock } from "../DocComponents"
 export function ThemingSection() {
   return (
     <div>
-      <Text as="h1" size="display" className="tracking-tight">
+      <Text render={<h1 />} size="display" className="tracking-tight">
         Theming
       </Text>
       <Text size="lg" color="muted" className="mt-3 max-w-2xl leading-relaxed">
@@ -16,7 +16,7 @@ export function ThemingSection() {
 
       <div className="mt-10 space-y-10 max-w-2xl">
         <div>
-          <Text as="h2" size="2xl" className="tracking-tight">
+          <Text render={<h2 />} size="2xl" className="tracking-tight">
             CSS Variables
           </Text>
           <Text color="muted" className="mt-2 leading-relaxed">
@@ -67,7 +67,7 @@ export function ThemingSection() {
         </div>
 
         <div>
-          <Text as="h2" size="2xl" className="tracking-tight">
+          <Text render={<h2 />} size="2xl" className="tracking-tight">
             Fluid Typography
           </Text>
           <Text color="muted" className="mt-2 leading-relaxed">
@@ -87,7 +87,7 @@ export function ThemingSection() {
         </div>
 
         <div>
-          <Text as="h2" size="2xl" className="tracking-tight">
+          <Text render={<h2 />} size="2xl" className="tracking-tight">
             Tailwind Color Mappings
           </Text>
           <Text color="muted" className="mt-2 leading-relaxed">
@@ -109,7 +109,7 @@ export function ThemingSection() {
         </div>
 
         <div>
-          <Text as="h2" size="2xl" className="tracking-tight">
+          <Text render={<h2 />} size="2xl" className="tracking-tight">
             Customize Colors
           </Text>
           <Text color="muted" className="mt-2 leading-relaxed">
@@ -122,7 +122,7 @@ export function ThemingSection() {
         </div>
 
         <div>
-          <Text as="h2" size="2xl" className="tracking-tight">
+          <Text render={<h2 />} size="2xl" className="tracking-tight">
             Dark mode
           </Text>
           <Text color="muted" className="mt-2 leading-relaxed">

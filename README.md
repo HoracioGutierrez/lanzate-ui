@@ -61,7 +61,7 @@ import { Button } from "@/components/ui/button"
 | `isLoading` | `boolean` | — | Muestra spinner animado en lugar del `startIcon` y deshabilita el botón |
 | `loadingText` | `string` | — | Reemplaza el texto del botón cuando `isLoading` es `true` |
 | `tooltip` | `ReactNode` | — | Contenido del tooltip que aparece al hacer hover |
-| `tapAnimation` | `boolean` | `true` | Animación de scale (spring) al hacer click/tap. Se desactiva automáticamente cuando el botón está `disabled` o `isLoading` |
+| `tapAnimation` | `boolean` | `true` | Escala el botón al presionarlo (transición CSS con easing tipo spring). No corre si el botón está deshabilitado o *pending*, ni con `prefers-reduced-motion` |
 | `className` | `string` | — | Clases adicionales para el elemento `<button>` raíz |
 | `iconClassName` | `string` | — | Clases aplicadas al wrapper de todos los íconos (`startIcon`, `endIcon`, `icon`). Útil para cambiar color, tamaño o spacing de los íconos de forma independiente al texto |
 | `textClassName` | `string` | — | Clases aplicadas al wrapper del texto (`children`/`loadingText`). Compatibles con `mobile="only-icon"` — se mergean con `max-sm:sr-only` automáticamente |
@@ -230,7 +230,7 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 
 ### Text
 
-Componente de texto polimórfico con variantes de tamaño y color, construido sobre [CVA](https://cva.style).
+Componente de texto con variantes de tamaño y color, construido sobre [CVA](https://cva.style). Renderiza un `<p>`; para otro elemento usá `render`, igual que en los parts de ui-sdk (`renderElement` de `@ui-sdk/react/primitive`). Funciona en Server Components.
 
 **Instalación:**
 
@@ -324,7 +324,7 @@ import { Text } from "@/components/ui/text"
 
 | Prop | Tipo | Default | Descripción |
 |---|---|---|---|
-| `as` | `p \| span \| label \| h1 \| h2 \| h3 \| h4` | `p` | Elemento HTML que se renderiza |
+| `render` | `ReactElement \| (props) => ReactElement` | `<p />` | Elemento que se renderiza en lugar del `<p>`, por ejemplo `render={<h1 />}` |
 | `size` | ver abajo | `md` | Tamaño tipográfico |
 | `color` | ver abajo | — | Color semántico del texto |
 | `className` | `string` | — | Clases de Tailwind adicionales. Se mergean después de las clases de variante, por lo que pueden sobreescribir o extender cualquier estilo base del componente |
@@ -363,10 +363,10 @@ Sin `color`, hereda `--foreground`.
 
 ```tsx
 // Heading semántico en tamaño display
-<Text as="h1" size="display">Bienvenido</Text>
+<Text render={<h1 />} size="display">Bienvenido</Text>
 
 // Label muted
-<Text as="label" size="sm" color="muted">Correo electrónico</Text>
+<Text render={<label />} size="sm" color="muted">Correo electrónico</Text>
 
 // Texto de estado
 <Text size="sm" color="success">Guardado correctamente</Text>

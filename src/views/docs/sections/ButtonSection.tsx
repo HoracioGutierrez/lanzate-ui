@@ -7,7 +7,7 @@ export function ButtonSection() {
   return (
     <div>
       <SectionBadge number="01" />
-      <Text as="h1" size="display" className="tracking-tight">
+      <Text render={<h1 />} size="display" className="tracking-tight">
         Button
       </Text>
       <Text size="lg" color="muted" className="mt-3 max-w-2xl leading-relaxed">
@@ -16,7 +16,7 @@ export function ButtonSection() {
       </Text>
 
       <div className="mt-6 flex items-center gap-2 text-xs">
-        {["framer-motion", "class-variance-authority", "lucide-react"].map((dep) => (
+        {["@ui-sdk/react", "class-variance-authority", "lucide-react"].map((dep) => (
           <span
             key={dep}
             className="px-2 py-1 rounded border border-border bg-card font-mono text-muted-foreground"
@@ -28,7 +28,7 @@ export function ButtonSection() {
 
       {/* Preview */}
       <div id="vista-previa" className="mt-8 scroll-mt-20">
-        <Text as="h2" size="2xl" className="tracking-tight">
+        <Text render={<h2 />} size="2xl" className="tracking-tight">
           Preview
         </Text>
         <PreviewPane>
@@ -45,7 +45,7 @@ export function ButtonSection() {
 
       {/* Colors */}
       <div id="colores" className="mt-10 scroll-mt-20">
-        <Text as="h2" size="2xl" className="tracking-tight">
+        <Text render={<h2 />} size="2xl" className="tracking-tight">
           Colors
         </Text>
         <PreviewPane>
@@ -63,7 +63,7 @@ export function ButtonSection() {
 
       {/* Sizes */}
       <div id="tamanos" className="mt-10 scroll-mt-20">
-        <Text as="h2" size="2xl" className="tracking-tight">
+        <Text render={<h2 />} size="2xl" className="tracking-tight">
           Sizes
         </Text>
         <PreviewPane>
@@ -81,7 +81,7 @@ export function ButtonSection() {
 
       {/* Radius */}
       <div id="redondeado" className="mt-10 scroll-mt-20">
-        <Text as="h2" size="2xl" className="tracking-tight">
+        <Text render={<h2 />} size="2xl" className="tracking-tight">
           Radius
         </Text>
         <PreviewPane>
@@ -106,7 +106,7 @@ export function ButtonSection() {
 
       {/* Text Size */}
       <div id="tamano-de-texto" className="mt-10 scroll-mt-20">
-        <Text as="h2" size="2xl" className="tracking-tight">
+        <Text render={<h2 />} size="2xl" className="tracking-tight">
           Text Size
         </Text>
         <PreviewPane>
@@ -131,7 +131,7 @@ export function ButtonSection() {
 
       {/* Icon Size */}
       <div id="tamano-de-icono" className="mt-10 scroll-mt-20">
-        <Text as="h2" size="2xl" className="tracking-tight">
+        <Text render={<h2 />} size="2xl" className="tracking-tight">
           Icon Size
         </Text>
         <PreviewPane>
@@ -154,7 +154,7 @@ export function ButtonSection() {
 
       {/* States */}
       <div id="estados" className="mt-10 scroll-mt-20">
-        <Text as="h2" size="2xl" className="tracking-tight">
+        <Text render={<h2 />} size="2xl" className="tracking-tight">
           States
         </Text>
         <PreviewPane>
@@ -171,7 +171,7 @@ export function ButtonSection() {
 
       {/* Glow */}
       <div id="glow" className="mt-10 scroll-mt-20">
-        <Text as="h2" size="2xl" className="tracking-tight">
+        <Text render={<h2 />} size="2xl" className="tracking-tight">
           Glow
         </Text>
         <PreviewPane>
@@ -195,7 +195,7 @@ export function ButtonSection() {
 
       {/* Icons */}
       <div id="iconos" className="mt-10 scroll-mt-20">
-        <Text as="h2" size="2xl" className="tracking-tight">
+        <Text render={<h2 />} size="2xl" className="tracking-tight">
           Icons
         </Text>
         <PreviewPane>
@@ -213,7 +213,7 @@ export function ButtonSection() {
 
       {/* Only icon */}
       <div id="solo-icono" className="mt-10 scroll-mt-20">
-        <Text as="h2" size="2xl" className="tracking-tight">
+        <Text render={<h2 />} size="2xl" className="tracking-tight">
           Icon Only
         </Text>
         <PreviewPane>
@@ -232,7 +232,7 @@ export function ButtonSection() {
 
       {/* Tooltip */}
       <div id="con-tooltip" className="mt-10 scroll-mt-20">
-        <Text as="h2" size="2xl" className="tracking-tight">
+        <Text render={<h2 />} size="2xl" className="tracking-tight">
           With Tooltip
         </Text>
         <PreviewPane>
@@ -254,7 +254,7 @@ export function ButtonSection() {
 
       {/* Mobile */}
       <div id="responsive" className="mt-10 scroll-mt-20">
-        <Text as="h2" size="2xl" className="tracking-tight">
+        <Text render={<h2 />} size="2xl" className="tracking-tight">
           Responsive
         </Text>
         <Text size="sm" color="muted" className="mt-1">
@@ -279,7 +279,7 @@ export function ButtonSection() {
 
       {/* Custom class props */}
       <div id="estilos-personalizados" className="mt-10 scroll-mt-20">
-        <Text as="h2" size="2xl" className="tracking-tight">
+        <Text render={<h2 />} size="2xl" className="tracking-tight">
           Custom Styles
         </Text>
         <Text size="sm" color="muted" className="mt-1">
@@ -339,7 +339,7 @@ export function ButtonSection() {
 
       {/* Installation */}
       <div id="instalacion" className="mt-12 scroll-mt-20">
-        <Text as="h2" size="2xl" className="tracking-tight">
+        <Text render={<h2 />} size="2xl" className="tracking-tight">
           Installation
         </Text>
         <CodeBlock>{`$ npx shadcn@latest add https://lanzate-ui.vercel.app/r/button.json`}</CodeBlock>
@@ -347,7 +347,7 @@ export function ButtonSection() {
 
       {/* Usage */}
       <div id="uso" className="mt-10 scroll-mt-20">
-        <Text as="h2" size="2xl" className="tracking-tight">
+        <Text render={<h2 />} size="2xl" className="tracking-tight">
           Usage
         </Text>
         <CodeBlock>{`import { Button } from "@/components/ui/button";
@@ -377,7 +377,7 @@ export function ButtonSection() {
 
       {/* API */}
       <div id="api" className="mt-10 scroll-mt-20">
-        <Text as="h2" size="2xl" className="tracking-tight">
+        <Text render={<h2 />} size="2xl" className="tracking-tight">
           API
         </Text>
         <ApiTable
