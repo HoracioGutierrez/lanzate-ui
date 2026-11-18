@@ -1,6 +1,7 @@
 import { ChevronRight } from "lucide-react"
 import Link from "next/link"
 
+import { Text } from "@/components/ui/text"
 import { SITE_NAME } from "@/features/shell/shell.constants"
 
 import type { DocsBreadcrumbProps } from "../types/docs.types"
@@ -8,7 +9,7 @@ import type { DocsBreadcrumbProps } from "../types/docs.types"
 export function DocsBreadcrumb({ title }: DocsBreadcrumbProps) {
   return (
     <nav aria-label="Breadcrumb" className="mb-6">
-      <ol className="flex items-center gap-1.5 text-xs text-muted-foreground">
+      <Text render={<ol />} size="xs" color="muted" className="flex items-center gap-1.5">
         <li>
           <Link href="/" className="transition hover:text-foreground">
             {SITE_NAME}
@@ -25,10 +26,10 @@ export function DocsBreadcrumb({ title }: DocsBreadcrumbProps) {
         <li aria-hidden="true">
           <ChevronRight size={12} />
         </li>
-        <li aria-current="page" className="font-medium text-foreground">
+        <Text render={<li aria-current="page" />} size="inherit" weight="medium">
           {title}
-        </li>
-      </ol>
+        </Text>
+      </Text>
     </nav>
   )
 }

@@ -3,6 +3,7 @@
 import { useState } from "react"
 
 import { ScrollArea } from "@/components/ui/scroll-area"
+import { Text } from "@/components/ui/text"
 
 import { docsNav } from "../config/docs-nav"
 import type { DocsSidebarProps } from "../types/docs.types"
@@ -36,9 +37,9 @@ export function DocsSidebar({ current }: DocsSidebarProps) {
           <DocsSidebarGroup key={group.group} group={group} current={current} showCount={query !== ""} />
         ))}
         {query && groups.length === 0 && (
-          <p role="status" className="px-2 text-xs text-muted-foreground">
+          <Text role="status" size="xs" color="muted" className="px-2">
             No results for &ldquo;{filter}&rdquo;.
-          </p>
+          </Text>
         )}
       </nav>
     </ScrollArea>

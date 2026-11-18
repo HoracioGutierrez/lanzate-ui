@@ -1,3 +1,5 @@
+import { Text } from "@/components/ui/text"
+
 import type { DocsSidebarGroupProps } from "../types/docs.types"
 import { DocsSidebarLink } from "./docs-sidebar-link"
 
@@ -7,10 +9,14 @@ export function DocsSidebarGroup({ group, current, showCount }: DocsSidebarGroup
   return (
     <div>
       <div className="mb-2 flex items-center justify-between px-2">
-        <h2 id={headingId} className="font-mono text-2xs tracking-wider text-muted-foreground/70 uppercase">
+        <Text render={<h2 id={headingId} />} variant="overline" size="2xs">
           {group.group}
-        </h2>
-        {showCount && <span className="font-mono text-3xs text-muted-foreground">{group.items.length}</span>}
+        </Text>
+        {showCount && (
+          <Text render={<span />} size="2xs" font="mono" color="muted">
+            {group.items.length}
+          </Text>
+        )}
       </div>
       <ul aria-labelledby={headingId} className="space-y-0.5">
         {group.items.map((item) => (

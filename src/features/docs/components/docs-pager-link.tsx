@@ -1,5 +1,6 @@
 import Link from "next/link"
 
+import { Text } from "@/components/ui/text"
 import { cn } from "@/lib/utils"
 
 import type { DocsPagerLinkProps } from "../types/docs.types"
@@ -16,8 +17,12 @@ export function DocsPagerLink({ item, direction }: DocsPagerLinkProps) {
         isNext && "ml-auto text-right"
       )}
     >
-      <span className="block text-2xs text-muted-foreground">{isNext ? "Next →" : "← Previous"}</span>
-      <span className="mt-0.5 block text-sm font-medium">{item.label}</span>
+      <Text render={<span />} size="2xs" color="muted" className="block">
+        {isNext ? "Next →" : "← Previous"}
+      </Text>
+      <Text render={<span />} size="sm" weight="medium" className="mt-0.5 block">
+        {item.label}
+      </Text>
     </Link>
   )
 }
