@@ -6,10 +6,14 @@ export const floatingToolbarWrapperClasses = {
   inline: "flex w-full min-w-0 justify-center",
 } satisfies Record<FloatingToolbarPlacement, string>
 
+// The surface carries the background, so the edge fades on the scroller inside only fade the options.
+export const floatingToolbarSurfaceClasses =
+  "pointer-events-auto flex max-w-full min-w-0 rounded-full border border-border bg-popover text-popover-foreground shadow-elevated"
+
 // The toolbar is its own horizontal scroller: on narrow screens a finger drags it sideways,
 // and roving focus scrolls the focused item into view.
 export const floatingToolbarClasses = [
-  "pointer-events-auto flex max-w-full min-w-0 items-center gap-1 overflow-x-auto overscroll-x-contain rounded-full border border-border bg-popover p-1.5 text-popover-foreground shadow-elevated",
+  "flex max-w-full min-w-0 items-center gap-1 overflow-x-auto overscroll-x-contain rounded-full p-1.5",
   "scroll-px-10 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden",
   // With the scrollbar hidden, these fades are the only cue that more items exist past an edge.
   "data-more-start:mask-l-from-[calc(100%-2.5rem)] data-more-end:mask-r-from-[calc(100%-2.5rem)]",

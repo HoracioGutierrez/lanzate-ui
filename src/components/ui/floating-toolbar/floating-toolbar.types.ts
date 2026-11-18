@@ -6,6 +6,7 @@ import type { Toolbar, ToolbarButton, ToolbarSeparator } from "@ui-sdk/react/too
 export type FloatingToolbarPlacement = "bottom" | "top" | "inline"
 
 export type FloatingToolbarProps = Omit<ComponentProps<typeof Toolbar>, "className" | "orientation" | "children"> & {
+  /** Classes for the visible pill (background, border, shadow) around the scrolling options. */
   className?: string
   children?: ReactNode
   /** Defaults to "bottom". */
