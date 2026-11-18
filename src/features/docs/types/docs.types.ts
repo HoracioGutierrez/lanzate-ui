@@ -4,7 +4,7 @@ import type { apiTables } from "../api/api-tables"
 import type { demoRegistry } from "../demos/demo-registry"
 
 /** Every docs page. Adding one means: a value here, an entry in docs-nav.ts, an MDX file and a loader in docs-content.ts. */
-export type DocId = "introduction" | "installation" | "theming" | "button" | "text"
+export type DocId = "introduction" | "installation" | "theming" | "button" | "text" | "floating-toolbar"
 
 export type DocItem = {
   id: DocId

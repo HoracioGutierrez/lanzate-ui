@@ -12,6 +12,7 @@ import { ButtonStatesDemo } from "./button/button-states.demo"
 import { ButtonTextSizeDemo } from "./button/button-text-size.demo"
 import { ButtonTooltipDemo } from "./button/button-tooltip.demo"
 import { ButtonVariantsDemo } from "./button/button-variants.demo"
+import { FloatingToolbarBasicDemo } from "./floating-toolbar/floating-toolbar-basic.demo"
 import { TextColorsDemo } from "./text/text-colors.demo"
 import { TextCustomizationDemo } from "./text/text-customization.demo"
 import { TextElementDemo } from "./text/text-element.demo"
@@ -41,4 +42,5 @@ export const demoRegistry = {
   "text-variants": { component: TextVariantsDemo, file: "text/text-variants.demo.tsx", layout: "stack" },
   "text-element": { component: TextElementDemo, file: "text/text-element.demo.tsx", layout: "stack" },
   "text-customization": { component: TextCustomizationDemo, file: "text/text-customization.demo.tsx", layout: "stack" },
+  "floating-toolbar-basic": { component: FloatingToolbarBasicDemo, file: "floating-toolbar/floating-toolbar-basic.demo.tsx" },
 } satisfies Record<string, DemoEntry>
