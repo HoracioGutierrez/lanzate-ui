@@ -235,6 +235,83 @@
       "registryDependencies": [
         "https://lanzate-ui.vercel.app/r/lanzate-utils.json"
       ]
+    },
+    {
+      "name": "floating-toolbar",
+      "type": "registry:ui",
+      "title": "Floating Toolbar",
+      "description": "Floating, horizontally scrollable toolbar of icon options built on ui-sdk; options can open a panel, and panel items can open a second panel over the first with a back item.",
+      "files": [
+        {
+          "path": "src/components/ui/floating-toolbar/floating-toolbar-button.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/floating-toolbar/floating-toolbar-menu-content.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/floating-toolbar/floating-toolbar-menu-item.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/floating-toolbar/floating-toolbar-menu-trigger.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/floating-toolbar/floating-toolbar-menu.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/floating-toolbar/floating-toolbar-separator.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/floating-toolbar/floating-toolbar-submenu-content.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/floating-toolbar/floating-toolbar-submenu-trigger.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/floating-toolbar/floating-toolbar-submenu.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/floating-toolbar/floating-toolbar.constants.ts",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/floating-toolbar/floating-toolbar.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/floating-toolbar/floating-toolbar.types.ts",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/floating-toolbar/floating-toolbar.variants.ts",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/floating-toolbar/index.ts",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/floating-toolbar/use-scroll-edges.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": [
+        "lucide-react",
+        "@ui-sdk/react@0.1.0-beta.6",
+        "@ui-sdk/core@0.1.0-beta.6"
+      ],
+      "registryDependencies": [
+        "https://lanzate-ui.vercel.app/r/lanzate-theme.json",
+        "https://lanzate-ui.vercel.app/r/lanzate-utils.json"
+      ]
     }
   ]
 }
