@@ -34,7 +34,7 @@ export type FrameProps = Omit<ComponentProps<"div">, "className" | "children" | 
 
 export type FrameHeaderProps = Omit<ComponentProps<"div">, "className"> & {
   className?: string
-  /** Minimum height of the header. Defaults to the frame's `size`. */
+  /** Height of the header; its buttons scale with it. Defaults to the frame's `size`. */
   height?: FrameSize
 }
 

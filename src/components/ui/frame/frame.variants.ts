@@ -1,8 +1,12 @@
 import type { FrameColor, FrameCorner, FrameSize } from "./frame.types"
 
-export const frameClasses = "relative flex min-w-0 flex-col border border-border bg-card text-card-foreground [--frame-divider:var(--border)]"
+export const frameClasses = "relative flex min-w-0 flex-col border border-border bg-card text-card-foreground [--frame-control:--spacing(9)] [--frame-divider:var(--border)]"
 
 // The Collapsible root carries data-open / data-closed; `contents` keeps it out of the layout.
+// In a grid or flex row the frame stretches to the tallest item; once folded it opts out so it
+// shrinks to its header instead of keeping an empty box.
+export const frameFoldedClasses = "has-[>[data-slot=collapsible][data-closed]]:self-start"
+
 export const frameCollapsibleClasses = "group/frame contents"
 
 // `--frame-accent` drives the corner marks. A tinted frame keeps bg-card underneath and lays a
@@ -44,18 +48,20 @@ export const frameContentPaddingClasses = {
   lg: "p-6 md:p-10",
 } satisfies Record<FrameSize, string>
 
+// --frame-control sizes the header buttons and the title row; the header adds even padding around
+// it, so the gap is the same above, below and at the ends. Header heights: 37, 45 and 57px.
 export const frameHeaderHeightClasses = {
-  sm: "min-h-9",
-  md: "min-h-11",
-  lg: "min-h-14",
+  sm: "[--frame-control:--spacing(7)]",
+  md: "[--frame-control:--spacing(9)]",
+  lg: "[--frame-control:--spacing(12)]",
 } satisfies Record<FrameSize, string>
 
 // The border under the header goes away while the content is hidden, leaving one clean box.
 export const frameHeaderClasses =
-  "flex min-w-0 items-center gap-1 border-b border-(--frame-divider) px-1 group-data-closed/frame:border-b-transparent"
+  "flex min-w-0 items-center gap-1 border-b border-(--frame-divider) p-1 group-data-closed/frame:border-b-transparent"
 
 export const frameTitleClasses =
-  "flex min-w-0 flex-1 items-center gap-2 self-stretch px-2 text-start font-mono text-xs tracking-wide uppercase"
+  "flex min-h-(--frame-control) min-w-0 flex-1 items-center gap-2 px-2 text-start font-mono text-xs tracking-wide uppercase"
 
 export const frameTitleTriggerClasses = [
   "cursor-pointer outline-none select-none",
@@ -76,7 +82,7 @@ export const frameContentPanelClasses = [
 ].join(" ")
 
 export const frameIconButtonClasses = [
-  "inline-flex size-8 shrink-0 cursor-pointer items-center justify-center text-muted-foreground outline-none",
+  "inline-flex size-(--frame-control) shrink-0 cursor-pointer items-center justify-center text-muted-foreground outline-none",
   "transition-[background-color,color] duration-150 ease-out motion-reduce:transition-none",
   "hover:bg-accent hover:text-accent-foreground active:bg-accent/70",
   "focus-visible:inset-ring focus-visible:inset-ring-ring",

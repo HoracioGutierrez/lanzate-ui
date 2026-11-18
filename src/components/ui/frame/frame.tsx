@@ -14,6 +14,7 @@ import {
   frameCornerClasses,
   frameCorners,
   frameCornerSizeClasses,
+  frameFoldedClasses,
 } from "./frame.variants"
 
 export function Frame({
@@ -33,7 +34,7 @@ export function Frame({
   // sits inside as a layout-free box that only carries the open state for the parts below it.
   return (
     <FrameContext value={context}>
-      <div data-slot="frame" data-size={size} data-color={color} className={cn(frameClasses, frameColorClasses[color], className)} {...props}>
+      <div data-slot="frame" data-size={size} data-color={color} className={cn(frameClasses, frameColorClasses[color], collapsible && frameFoldedClasses, className)} {...props}>
         {frameCorners.map((corner) => (
           <span key={corner} aria-hidden="true" data-slot="frame-corner" className={cn(frameCornerClasses[corner], frameCornerSizeClasses[size])} />
         ))}

@@ -209,3 +209,12 @@ test("a collapsible frame keeps its own slots for styling", () => {
   expect(frame?.querySelectorAll('[data-slot="frame-corner"]')).toHaveLength(4)
   expect(container.querySelector('[data-slot="frame-content"]')?.textContent).toBe("Order list")
 })
+
+test("a folded frame opts out of row stretching so it shrinks to its header", async () => {
+  const user = userEvent.setup()
+  const { container } = render(<Orders collapsible />)
+  const frame = container.querySelector('[data-slot="frame"]')
+  expect(frame?.className).toContain("has-[>[data-slot=collapsible][data-closed]]:self-start")
+  await user.click(title())
+  expect(frame?.querySelector(':scope > [data-slot="collapsible"][data-closed]')).not.toBeNull()
+})
