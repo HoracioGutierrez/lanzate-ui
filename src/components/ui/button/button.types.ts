@@ -15,8 +15,8 @@ export type ButtonPadding = "none" | "xs" | "sm" | "base" | "md" | "lg" | "xl"
 
 export type ButtonRadius = "none" | "sm" | "md" | "lg" | "xl" | "full"
 
-/** The type scale from the tokens, minus the sizes too small for a control. */
-export type ButtonTextSize = Exclude<TextSize, "3xs" | "2xs">
+/** The type scale from the tokens, minus sizes too small for a control and the site-only hero size. */
+export type ButtonTextSize = Exclude<TextSize, "3xs" | "2xs" | "hero">
 
 export type ButtonIconSize = "xs" | "sm" | "base" | "md" | "lg" | "xl"
 

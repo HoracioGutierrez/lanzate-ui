@@ -10,6 +10,7 @@ and edge cases.
 | [conventions.md](conventions.md) | One component per file, types in `*.types.ts`, naming, exports, imports |
 | [tokens.md](tokens.md) | Design tokens: the single source of colors, sizes, shadows and motion |
 | [registry.md](registry.md) | How a component is laid out and shipped through the shadcn registry |
+| [docs-site.md](docs-site.md) | How the `/docs` pages are built: MDX, demos, prop tables, table of contents |
 | [linting.md](linting.md) | Which ESLint rule enforces which convention, and how to add a rule |
 | [decisions/](decisions/) | Decision records: why a choice was made, with the evidence |
 
@@ -49,10 +50,8 @@ not errors, and some legacy code doesn't follow the rules yet.
 | 2 | Design tokens: DTCG source, Style Dictionary, generated CSS and types ([0002](decisions/0002-design-token-pipeline.md)) | Done |
 | 3 | Registry components moved to per-component folders; Button API 0.7.0 ([0003](decisions/0003-registry-imports-and-shipped-types.md)) | Done |
 | 3b | Registry components ship their own token-aware cn() ([0004](decisions/0004-registry-cn.md)) | Done |
-| 4 | Website moved to `src/features` (shell, docs with MDX, home) | Pending |
+| 4 | Website moved to `src/features` (shell, docs with MDX, home); lint at zero warnings ([0005](decisions/0005-mdx-docs.md)) | Done |
 | 5 | Architecture rules switched to errors; CI checks | Pending |
 
-Legacy locations that still exist until phase 4: `src/views/` and
-`src/components/layout/` (both count as the `features` layer).
-
-**New code follows the target architecture even before its phase lands.**
+No legacy code is left: `bun run lint` reports zero warnings. Until phase 5
+flips them to errors, **new code must keep it at zero.**

@@ -102,6 +102,7 @@ runtime code.
 | `use-*.ts` | One hook |
 | `.test.tsx` / `.test.ts` | Tests, next to the code they test |
 | `.demo.tsx` | One documentation demo |
+| `.api.ts` | A prop table as typed data (docs) |
 | `index.ts` | A component folder's public API |
 
 Rules: `check-file/filename-naming-convention`,

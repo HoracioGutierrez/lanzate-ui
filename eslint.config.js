@@ -61,9 +61,6 @@ export default defineConfig([
       "boundaries/elements": [
         { type: "app", pattern: "src/app" },
         { type: "features", pattern: "src/features/*", capture: ["feature"] },
-        // Legacy site folders, migrating into src/features in phase 4.
-        { type: "features", pattern: "src/views" },
-        { type: "features", pattern: "src/components/layout" },
         { type: "ui", pattern: "src/components/ui" },
         { type: "hooks", pattern: "src/hooks" },
         { type: "lib", pattern: "src/lib" },

@@ -3,52 +3,174 @@
   "registry": {
     "color": {
       "$type": "color",
-      "primary": { "$value": "{primitive.color.orange.400}", "$extensions": { "lanzate": { "intent": true } } },
-      "primary-foreground": { "$value": "{primitive.color.cream.50}" },
-      "error": { "$value": "{primitive.color.red.400}", "$extensions": { "lanzate": { "intent": true } } },
-      "error-foreground": { "$value": "{primitive.color.neutral.0}" },
-      "info": { "$value": "{primitive.color.blue.400}", "$extensions": { "lanzate": { "intent": true } } },
-      "info-foreground": { "$value": "{primitive.color.neutral.0}" },
-      "warning": { "$value": "{primitive.color.yellow.400}", "$extensions": { "lanzate": { "intent": true } } },
-      "warning-foreground": { "$value": "{primitive.color.neutral.1000}" },
-      "success": { "$value": "{primitive.color.green.500}", "$extensions": { "lanzate": { "intent": true } } },
-      "success-foreground": { "$value": "{primitive.color.neutral.0}" }
+      "primary": {
+        "$value": "{primitive.color.orange.400}",
+        "$extensions": {
+          "lanzate": {
+            "intent": true
+          }
+        }
+      },
+      "primary-foreground": {
+        "$value": "{primitive.color.cream.50}"
+      },
+      "error": {
+        "$value": "{primitive.color.red.400}",
+        "$extensions": {
+          "lanzate": {
+            "intent": true
+          }
+        }
+      },
+      "error-foreground": {
+        "$value": "{primitive.color.neutral.0}"
+      },
+      "info": {
+        "$value": "{primitive.color.blue.400}",
+        "$extensions": {
+          "lanzate": {
+            "intent": true
+          }
+        }
+      },
+      "info-foreground": {
+        "$value": "{primitive.color.neutral.0}"
+      },
+      "warning": {
+        "$value": "{primitive.color.yellow.400}",
+        "$extensions": {
+          "lanzate": {
+            "intent": true
+          }
+        }
+      },
+      "warning-foreground": {
+        "$value": "{primitive.color.neutral.1000}"
+      },
+      "success": {
+        "$value": "{primitive.color.green.500}",
+        "$extensions": {
+          "lanzate": {
+            "intent": true
+          }
+        }
+      },
+      "success-foreground": {
+        "$value": "{primitive.color.neutral.0}"
+      }
     }
   },
   "site": {
     "color": {
       "$type": "color",
-      "background": { "$value": "{primitive.color.neutral.950}" },
-      "foreground": { "$value": "{primitive.color.neutral.50}" },
-      "card": { "$value": "{primitive.color.neutral.900}" },
-      "card-foreground": { "$value": "{primitive.color.neutral.50}" },
-      "popover": { "$value": "{primitive.color.neutral.900}" },
-      "popover-foreground": { "$value": "{primitive.color.neutral.50}" },
-      "secondary": { "$value": "{primitive.color.neutral.800}", "$extensions": { "lanzate": { "intent": true } } },
-      "secondary-foreground": { "$value": "{primitive.color.neutral.50}" },
-      "muted": { "$value": "{primitive.color.neutral.800}", "$extensions": { "lanzate": { "intent": true } } },
-      "muted-foreground": { "$value": "{primitive.color.neutral.400}" },
-      "accent": { "$value": "{primitive.color.neutral.800}" },
-      "accent-foreground": { "$value": "{primitive.color.neutral.50}" },
-      "destructive": { "$value": "{registry.color.error}", "$description": "shadcn name for error; kept so shadcn components keep working." },
-      "border": { "$value": "{primitive.color.white-alpha.10}" },
-      "input": { "$value": "{primitive.color.white-alpha.15}" },
-      "ring": { "$value": "{primitive.color.neutral.500}" },
-      "brand": { "$value": "{primitive.color.orange.400}" },
-      "brand-foreground": { "$value": "{primitive.color.cream.50}" },
-      "chart-1": { "$value": "{primitive.color.neutral.300}" },
-      "chart-2": { "$value": "{primitive.color.neutral.500}" },
-      "chart-3": { "$value": "{primitive.color.neutral.600}" },
-      "chart-4": { "$value": "{primitive.color.neutral.700}" },
-      "chart-5": { "$value": "{primitive.color.neutral.800}" },
-      "sidebar": { "$value": "{primitive.color.neutral.900}" },
-      "sidebar-foreground": { "$value": "{primitive.color.neutral.50}" },
-      "sidebar-primary": { "$value": "{primitive.color.orange.400}" },
-      "sidebar-primary-foreground": { "$value": "{primitive.color.cream.50}" },
-      "sidebar-accent": { "$value": "{primitive.color.neutral.800}" },
-      "sidebar-accent-foreground": { "$value": "{primitive.color.neutral.50}" },
-      "sidebar-border": { "$value": "{primitive.color.white-alpha.10}" },
-      "sidebar-ring": { "$value": "{primitive.color.neutral.500}" }
+      "background": {
+        "$value": "{primitive.color.neutral.950}"
+      },
+      "foreground": {
+        "$value": "{primitive.color.neutral.50}"
+      },
+      "card": {
+        "$value": "{primitive.color.neutral.900}"
+      },
+      "card-foreground": {
+        "$value": "{primitive.color.neutral.50}"
+      },
+      "popover": {
+        "$value": "{primitive.color.neutral.900}"
+      },
+      "popover-foreground": {
+        "$value": "{primitive.color.neutral.50}"
+      },
+      "secondary": {
+        "$value": "{primitive.color.neutral.800}",
+        "$extensions": {
+          "lanzate": {
+            "intent": true
+          }
+        }
+      },
+      "secondary-foreground": {
+        "$value": "{primitive.color.neutral.50}"
+      },
+      "muted": {
+        "$value": "{primitive.color.neutral.800}",
+        "$extensions": {
+          "lanzate": {
+            "intent": true
+          }
+        }
+      },
+      "muted-foreground": {
+        "$value": "{primitive.color.neutral.400}"
+      },
+      "accent": {
+        "$value": "{primitive.color.neutral.800}"
+      },
+      "accent-foreground": {
+        "$value": "{primitive.color.neutral.50}"
+      },
+      "destructive": {
+        "$value": "{registry.color.error}",
+        "$description": "shadcn name for error; kept so shadcn components keep working."
+      },
+      "border": {
+        "$value": "{primitive.color.white-alpha.10}"
+      },
+      "input": {
+        "$value": "{primitive.color.white-alpha.15}"
+      },
+      "ring": {
+        "$value": "{primitive.color.neutral.500}"
+      },
+      "brand": {
+        "$value": "{primitive.color.orange.400}"
+      },
+      "brand-foreground": {
+        "$value": "{primitive.color.cream.50}"
+      },
+      "chart-1": {
+        "$value": "{primitive.color.neutral.300}"
+      },
+      "chart-2": {
+        "$value": "{primitive.color.neutral.500}"
+      },
+      "chart-3": {
+        "$value": "{primitive.color.neutral.600}"
+      },
+      "chart-4": {
+        "$value": "{primitive.color.neutral.700}"
+      },
+      "chart-5": {
+        "$value": "{primitive.color.neutral.800}"
+      },
+      "sidebar": {
+        "$value": "{primitive.color.neutral.900}"
+      },
+      "sidebar-foreground": {
+        "$value": "{primitive.color.neutral.50}"
+      },
+      "sidebar-primary": {
+        "$value": "{primitive.color.orange.400}"
+      },
+      "sidebar-primary-foreground": {
+        "$value": "{primitive.color.cream.50}"
+      },
+      "sidebar-accent": {
+        "$value": "{primitive.color.neutral.800}"
+      },
+      "sidebar-accent-foreground": {
+        "$value": "{primitive.color.neutral.50}"
+      },
+      "sidebar-border": {
+        "$value": "{primitive.color.white-alpha.10}"
+      },
+      "sidebar-ring": {
+        "$value": "{primitive.color.neutral.500}"
+      },
+      "hero-glow": {
+        "$value": "oklch(0.65 0.22 28 / 0.15)",
+        "$description": "Soft brand-colored glow behind the home page hero."
+      }
     }
   }
 }

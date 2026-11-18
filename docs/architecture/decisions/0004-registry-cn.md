@@ -52,8 +52,8 @@ Button kept `text-display`, `text-(--btn-fg)`, `shadow-elevated` and
 
 - A consumer's own `cn` still doesn't know our token classes. Passing
   `className="text-display"` to *their* components through *their* `cn` has
-  the same problem; our components are safe. The website's theming page
-  should explain it, with the fix (extend their `cn` with `twMergeTheme`);
-  pending, with the docs rewrite in phase 4.
+  the same problem; our components are safe. The docs' Theming page
+  ("Merging classes") explains it and shows the fix: re-export Lanzate's
+  `cn` from their `lib/utils.ts`.
 - `src/lib/cn.test.ts` keeps a baseline test that reproduces the stock
   behavior, so a tailwind-merge upgrade that changes it is noticed.

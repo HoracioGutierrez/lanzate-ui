@@ -1,0 +1,108 @@
+<ComponentBadge number="01" />
+
+# Button
+
+<Lead>6 style variants, 7 intent colors, elevated and glow effects, a loading state with spinner, icons, and tooltip.</Lead>
+
+<DependencyList items={["@ui-sdk/react", "class-variance-authority", "lucide-react"]} />
+
+## Preview
+
+<Demo name="button-variants" />
+
+## Colors
+
+<Demo name="button-colors" />
+
+## Sizes
+
+`padding` sets the padding and a matching text size.
+
+<Demo name="button-sizes" />
+
+## Radius
+
+<Demo name="button-radius" />
+
+## Text size
+
+`textSize` changes the text size on its own, keeping the padding.
+
+<Demo name="button-text-size" />
+
+## Icon size
+
+<Demo name="button-icon-size" />
+
+## States
+
+<Demo name="button-states" />
+
+## Glow
+
+`effect="glow"` adds a glow in the button's own color. Use one `effect` at a time.
+
+<Demo name="button-glow" />
+
+## Icons
+
+<Demo name="button-icons" />
+
+## Icon only
+
+An icon-only button has no visible text, so give it a name with `aria-label` or `tooltip`.
+
+<Demo name="button-icon-only" />
+
+## With tooltip
+
+<Demo name="button-tooltip" />
+
+## Responsive
+
+Resize the window below 640px to see the effect.
+
+<Demo name="button-responsive" />
+
+## Custom styles
+
+`iconClassName` and `textClassName` style the icon and the text separately, without losing the variant.
+
+<Demo name="button-custom-styles" />
+
+## Installation
+
+```bash
+npx shadcn@latest add https://lanzate-ui.vercel.app/r/button.json
+```
+
+## Usage
+
+```tsx
+import { Button } from "@/components/ui/button"
+
+// Default
+<Button>Take off</Button>
+
+// Variant and color
+<Button variant="outline" color="success">
+  Confirmed
+</Button>
+
+// Icon and loading state
+<Button isLoading={isPending} loadingText="Saving..." startIcon={<Save />}>
+  Save
+</Button>
+
+// Elevated, with a tooltip
+<Button effect="elevated" tooltip="Main action">
+  Publish
+</Button>
+
+// As a link
+<Button render={<a href="/docs" />}>Read the docs</Button>
+```
+
+## API
+
+<ApiTable name="button" />

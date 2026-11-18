@@ -64,20 +64,38 @@ component. No markup beyond that, no styling, no local components.
 
 ### `src/features/<feature>/`
 
-One folder per area of the website (`shell`, `docs`, `home`). Inside:
+One folder per area of the website:
+
+| Feature | Holds |
+| --- | --- |
+| `shell` | What every page shares: the header, theme (store, hook, pre-paint script), copy button, brand icons, site constants |
+| `docs` | The `/docs` pages: layout, MDX content, demos, prop tables, table of contents. See [docs-site.md](docs-site.md) |
+| `home` | The landing page, split into sections |
+
+Inside a feature, create only the subfolders it needs:
 
 ```
 src/features/docs/
-├── components/     one component per file
-├── hooks/          use-*.ts
-├── config/         static data (navigation, …)
-├── types/          *.types.ts shared across the feature
-├── content/        MDX pages
-└── demos/          one demo per file, rendered and shown as source
+├── components/      one component per file
+├── hooks/           use-*.ts
+├── config/          static data (navigation, content loaders)
+├── lib/             plain functions (navigation helpers, toc extraction)
+├── types/           *.types.ts shared across the feature
+├── content/         MDX pages
+├── demos/           one demo per file, rendered and shown as source
+├── api/             prop tables as typed data (*.api.ts)
+└── mdx/             components that render Markdown elements
+src/features/shell/
+├── shell.types.ts   types for a small feature can sit at its root…
+└── shell.constants.ts  …and so can its constants
 ```
 
-Create only the subfolders a feature needs. A feature may import another
-feature's public pieces, but prefer moving shared pieces to `shell`.
+Pieces used by more than one feature move to `shell`; other features don't
+import each other.
+
+Two Next.js files sit at the `src/` root because Next requires them there:
+`mdx-components.tsx` (hands MDX the docs components) and `mdx.d.ts` (types
+for `.mdx` imports).
 
 ### `src/components/ui/<component>/`
 

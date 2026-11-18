@@ -16,12 +16,13 @@ product; the website consumes it. Everything in this repo is in English.
 
 Architecture docs: `docs/architecture/README.md`. Read the doc for the area
 you touch before changing it. Folders with their own `AGENTS.md` add rules
-for that folder (`src/components/ui/AGENTS.md`, `tokens/AGENTS.md`).
+for that folder (`src/components/ui/AGENTS.md`, `src/features/AGENTS.md`,
+`tokens/AGENTS.md`).
 
 ```
 tokens/              design tokens source (DTCG JSON); generated into src/styles/generated
 src/app/             Next.js routes only: read params, render one feature component
-src/features/        the website, one folder per feature (legacy: src/views, src/components/layout)
+src/features/        the website: shell (shared), docs (MDX), home
 src/components/ui/   the registry, one folder per component
 src/hooks/, src/lib/ shipped with the registry
 src/styles/          global CSS, generated token files
@@ -57,9 +58,9 @@ Each rule links to its explanation. Most are enforced by `bun run lint`.
    component that needs it.
 9. **TypeScript is `strict`** with `noUncheckedIndexedAccess`.
 
-Architecture lint rules are warnings while the migration runs (status in
-`docs/architecture/README.md#migration-status`). **New code must not add
-warnings.**
+`bun run lint` reports zero warnings. Architecture rules are still "warn" until
+phase 5 makes them errors (`docs/architecture/README.md#migration-status`);
+**keep it at zero.**
 
 ## When you add or change a rule
 

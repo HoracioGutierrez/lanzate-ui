@@ -11,7 +11,8 @@ export const twMergeTheme = {
     "lg",
     "xl",
     "2xl",
-    "display"
+    "display",
+    "hero"
   ],
   "radius": [
     "sm",

@@ -24,7 +24,29 @@
     mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 80%);
   }
 
+  /* Dotted backdrop for component previews. */
+  .dot-grid {
+    background:
+      radial-gradient(circle at 1px 1px, var(--border) 1px, transparent 0) 0 0 / 16px 16px,
+      var(--muted);
+  }
+
+  /* Soft glow behind the home hero. */
+  .hero-glow {
+    background: radial-gradient(closest-side, var(--hero-glow), transparent 70%);
+  }
+
+  /* Text that fades from the foreground color to 65% of it. */
+  .text-fade {
+    background: linear-gradient(180deg, var(--foreground) 0%, oklch(from var(--foreground) l c h / 0.65) 100%);
+    background-clip: text;
+    color: transparent;
+  }
+
   .marquee-track { animation: marquee 40s linear infinite; }
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track { animation: none; }
+  }
 
   .scroll-fade {
     mask-image: linear-gradient(
@@ -51,5 +73,11 @@
   }
   html {
     @apply font-sans;
+  }
+  /* In-page links (the docs table of contents) scroll smoothly, unless motion is reduced. */
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
   }
 }

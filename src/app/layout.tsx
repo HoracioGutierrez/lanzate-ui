@@ -1,47 +1,49 @@
 import type { Metadata, Viewport } from "next"
+
+import { SiteHeader } from "@/features/shell/components/site-header"
+import { BROWSER_THEME_COLORS, SITE_NAME, SITE_URL } from "@/features/shell/shell.constants"
+import { ThemeScript } from "@/features/shell/theme/theme-script"
 import "@/styles/globals.css"
 
-const description =
-  "Open source collection of copy-paste React components built on ui-sdk and Tailwind. Accessible (WCAG AA), zero runtime dependencies, 100% yours."
+const title = `${SITE_NAME} — Accessible React Components`
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://lanzate-ui.vercel.app"),
-  title: {
-    default: "Lanzate UI — Accessible React Components",
-    template: "%s · Lanzate UI",
-  },
-  description,
-  authors: [{ name: "Lanzate UI" }],
+  metadataBase: new URL(SITE_URL),
+  title: { default: title, template: `%s · ${SITE_NAME}` },
+  description:
+    "Open source collection of copy-paste React components built on ui-sdk and Tailwind. Accessible (WCAG AA), zero runtime dependencies, 100% yours.",
+  authors: [{ name: SITE_NAME }],
   icons: { icon: "/favicon.svg" },
   openGraph: {
     type: "website",
     url: "/",
-    title: "Lanzate UI — Accessible React Components",
-    description:
-      "Copy-paste React components built on ui-sdk and Tailwind. Accessible, zero runtime, 100% yours.",
+    title,
+    description: "Copy-paste React components built on ui-sdk and Tailwind. Accessible, zero runtime, 100% yours.",
   },
   twitter: {
     card: "summary",
-    title: "Lanzate UI — Accessible React Components",
+    title,
     description: "Accessible React components ready to copy. shadcn CLI · Tailwind v4 · React 19.",
   },
 }
 
 export const viewport: Viewport = {
-  themeColor: "#7c3aed",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: BROWSER_THEME_COLORS.light },
+    { media: "(prefers-color-scheme: dark)", color: BROWSER_THEME_COLORS.dark },
+  ],
 }
-
-// Applies the saved (or system) theme before first paint to avoid a flash.
-const themeScript = `(function(){try{var t=localStorage.getItem("lanzate-theme");var d=t?t==="dark":window.matchMedia("(prefers-color-scheme: dark)").matches;document.documentElement.classList.toggle("dark",d)}catch(e){}})()`
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        {/* eslint-disable-next-line @eslint-react/dom-no-dangerously-set-innerhtml -- static, trusted script: applies the theme before first paint */}
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <ThemeScript />
       </head>
-      <body>{children}</body>
+      <body>
+        <SiteHeader />
+        {children}
+      </body>
     </html>
   )
 }
