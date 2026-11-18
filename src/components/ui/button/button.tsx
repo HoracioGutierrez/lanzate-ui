@@ -45,7 +45,8 @@ export function Button({
 
   const content = (busy: boolean) => {
     const leading = (node: ReactNode) => wrapIcon(busy ? <ButtonSpinner /> : node)
-    if (icon != null) return leading(icon)
+    // A line-tall box, like a text label's, so icon-only buttons match text buttons of the same padding.
+    if (icon != null) return <span className="grid min-h-lh min-w-[1lh] place-items-center">{leading(icon)}</span>
     return (
       <>
         {leading(startIcon)}

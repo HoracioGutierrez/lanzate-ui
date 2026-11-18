@@ -1,4 +1,5 @@
 import { ScrollArea } from "@/components/ui/scroll-area"
+import { Text } from "@/components/ui/text"
 
 import type { ShowcaseCardProps } from "../home.types"
 
@@ -13,12 +14,16 @@ export function ShowcaseCard({ title, description, number, children }: ShowcaseC
       </div>
       <div className="flex items-center justify-between border-t border-border px-5 py-4">
         <div>
-          <h3 className="text-sm font-medium">{title}</h3>
-          <p className="mt-0.5 text-xs text-muted-foreground">{description}</p>
+          <Text render={<h3 />} size="sm" weight="medium">
+            {title}
+          </Text>
+          <Text size="xs" color="muted" className="mt-0.5">
+            {description}
+          </Text>
         </div>
-        <span aria-hidden="true" className="font-mono text-3xs text-muted-foreground">
+        <Text render={<span aria-hidden="true" />} size="2xs" font="mono" color="muted">
           {number}
-        </span>
+        </Text>
       </div>
     </article>
   )

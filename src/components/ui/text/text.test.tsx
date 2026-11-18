@@ -39,3 +39,61 @@ test("the error color reads the error token", () => {
   render(<Text color="error">Required</Text>)
   expect(screen.getByText("Required").className).toContain("text-error")
 })
+
+test("heading variant is semibold with tight tracking; weight overrides it", () => {
+  const { rerender } = render(<Text variant="heading" size="display">Title</Text>)
+  const el = () => screen.getByText("Title")
+  expect(el().getAttribute("data-variant")).toBe("heading")
+  expect(el().className).toContain("font-heading")
+  expect(el().className).toContain("font-semibold")
+  expect(el().className).toContain("tracking-tight")
+  expect(el().className).not.toContain("tracking-tighter")
+
+  rerender(<Text variant="heading" weight="medium">Title</Text>)
+  expect(el().className).toContain("font-medium")
+  expect(el().className).not.toContain("font-semibold")
+})
+
+test("overline variant is mono caps and muted, and color overrides the muted", () => {
+  const { rerender } = render(<Text variant="overline" size="2xs">Label</Text>)
+  const el = () => screen.getByText("Label")
+  expect(el().className).toContain("font-mono")
+  expect(el().className).toContain("uppercase")
+  expect(el().className).toContain("tracking-wider")
+  expect(el().className).not.toContain("tracking-wide ")
+  expect(el().className).toContain("text-muted-foreground")
+  expect(el().className).toContain("text-2xs")
+
+  rerender(<Text variant="overline" color="primary">Label</Text>)
+  expect(el().className).toContain("text-primary")
+  expect(el().className).not.toContain("text-muted-foreground")
+})
+
+test("leading overrides the size's line height", () => {
+  render(<Text size="lg" leading="none">Tight</Text>)
+  const el = screen.getByText("Tight")
+  expect(el.className).toContain("leading-none")
+  expect(el.className).not.toContain("leading-relaxed")
+})
+
+test("font overrides the heading variant's family", () => {
+  render(<Text variant="heading" font="mono">Title</Text>)
+  const el = screen.getByText("Title")
+  expect(el.className).toContain("font-mono")
+  expect(el.className).not.toContain("font-heading")
+})
+
+test("font and weight set the family and weight", () => {
+  render(<Text font="mono" weight="medium">Code</Text>)
+  const el = screen.getByText("Code")
+  expect(el.className).toContain("font-mono")
+  expect(el.className).toContain("font-medium")
+})
+
+test("size inherit adds no size or line-height class, for inline text", () => {
+  render(<Text render={<span />} size="inherit" color="muted">UI</Text>)
+  const el = screen.getByText("UI")
+  expect(el.tagName).toBe("SPAN")
+  expect(el.className).not.toMatch(/\btext-(base|sm|xs|lg)\b/)
+  expect(el.className).not.toContain("leading-")
+})

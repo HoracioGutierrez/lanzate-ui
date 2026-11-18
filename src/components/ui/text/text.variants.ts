@@ -1,8 +1,9 @@
 import { cva } from "class-variance-authority"
 
-import type { TextColor, TextSizeStep } from "./text.types"
+import type { TextColor, TextFont, TextLeading, TextSizeStep, TextVariant, TextWeight } from "./text.types"
 
 const sizeClasses = {
+  "2xs": "text-2xs leading-tight tracking-wide",
   xs: "text-xs leading-tight tracking-wide",
   sm: "text-sm leading-snug",
   md: "text-base leading-normal",
@@ -10,7 +11,33 @@ const sizeClasses = {
   xl: "text-xl leading-relaxed",
   "2xl": "text-2xl leading-snug tracking-tight",
   display: "text-display leading-tight tracking-tighter",
+  inherit: "",
 } satisfies Record<TextSizeStep, string>
+
+const variantClasses = {
+  body: "",
+  heading: "font-heading font-semibold tracking-tight",
+  overline: "font-mono uppercase tracking-wider text-muted-foreground",
+} satisfies Record<TextVariant, string>
+
+const weightClasses = {
+  normal: "font-normal",
+  medium: "font-medium",
+  semibold: "font-semibold",
+} satisfies Record<TextWeight, string>
+
+const fontClasses = {
+  sans: "font-sans",
+  mono: "font-mono",
+} satisfies Record<TextFont, string>
+
+const leadingClasses = {
+  none: "leading-none",
+  tight: "leading-tight",
+  snug: "leading-snug",
+  normal: "leading-normal",
+  relaxed: "leading-relaxed",
+} satisfies Record<TextLeading, string>
 
 const colorClasses = {
   primary: "text-primary",
@@ -24,7 +51,16 @@ const colorClasses = {
   error: "text-error",
 } satisfies Record<TextColor, string>
 
+// Order matters: later groups win conflicts (cn runs tailwind-merge), so
+// variant beats the size's tracking, and weight, font, leading and color beat the variant.
 export const textVariants = cva("text-foreground", {
-  variants: { size: sizeClasses, color: colorClasses },
-  defaultVariants: { size: "md" },
+  variants: {
+    size: sizeClasses,
+    variant: variantClasses,
+    weight: weightClasses,
+    font: fontClasses,
+    leading: leadingClasses,
+    color: colorClasses,
+  },
+  defaultVariants: { size: "md", variant: "body" },
 })

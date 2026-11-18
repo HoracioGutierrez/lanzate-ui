@@ -1,5 +1,7 @@
 import Link from "next/link"
 
+import { Text } from "@/components/ui/text"
+
 import { SITE_NAME } from "../shell.constants"
 
 export function SiteLogo() {
@@ -11,9 +13,12 @@ export function SiteLogo() {
       >
         L
       </span>
-      <span aria-hidden="true" className="text-sm font-semibold tracking-tight">
-        Lanzate <span className="font-normal text-muted-foreground">UI</span>
-      </span>
+      <Text render={<span aria-hidden="true" />} variant="heading" size="sm">
+        Lanzate{" "}
+        <Text render={<span />} size="inherit" weight="normal" color="muted">
+          UI
+        </Text>
+      </Text>
     </Link>
   )
 }

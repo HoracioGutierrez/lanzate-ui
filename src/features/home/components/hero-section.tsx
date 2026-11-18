@@ -1,5 +1,8 @@
 import { ArrowRight } from "lucide-react"
 
+import { Button } from "@/components/ui/button"
+import { Text } from "@/components/ui/text"
+
 import { INSTALL_COMMAND } from "../home.constants"
 import { HeroBadge } from "./hero-badge"
 import { InstallCommandButton } from "./install-command-button"
@@ -16,25 +19,33 @@ export function HeroSection() {
         <div className="flex flex-col items-center text-center">
           <HeroBadge />
 
-          <h1 className="text-fade mt-6 max-w-5xl text-5xl leading-[0.95] font-semibold tracking-tight md:text-7xl lg:text-hero">
-            Components <em className="font-serif font-normal italic">that take off</em>
+          {/* The hero title keeps the site-only hero scale; the registry's type scale stops at display. */}
+          <Text
+            render={<h1 />}
+            variant="heading"
+            leading="none"
+            className="text-fade mt-6 max-w-5xl text-5xl md:text-7xl lg:text-hero"
+          >
+            Components <em className="pr-3 font-serif font-normal italic">that take off</em>
             <br />
             your next interface.
-          </h1>
+          </Text>
 
-          <p className="mt-7 max-w-2xl text-lg leading-relaxed text-muted-foreground md:text-xl">
+          <Text size="lg" color="muted" className="mt-7 max-w-2xl">
             Lanzate UI is an open source collection of copy-paste components for React, built on ui-sdk and Tailwind. Clean
             design, accessible, and 100% yours.
-          </p>
+          </Text>
 
-          <div className="mt-9 flex flex-col items-center gap-3 sm:flex-row">
-            <a
-              href="#docs"
-              className="inline-flex h-11 items-center gap-2 rounded-md bg-primary px-5 font-medium text-primary-foreground shadow-soft transition hover:opacity-90"
+          <div className="mt-9 flex max-w-full flex-col items-center gap-3 sm:flex-row">
+            <Button
+              render={<a href="#docs" />}
+              padding="md"
+              effect="elevated"
+              className="shrink-0"
+              endIcon={<ArrowRight aria-hidden="true" />}
             >
               Get Started Now
-              <ArrowRight size={14} aria-hidden="true" />
-            </a>
+            </Button>
             <InstallCommandButton command={INSTALL_COMMAND} />
           </div>
 

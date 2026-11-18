@@ -2,7 +2,7 @@
 
 # Text
 
-<Lead>Typography with 7 fluid sizes and 9 intent colors. It renders a paragraph by default; pick another element, like a heading, with `render`.</Lead>
+<Lead>Typography with 8 sizes, 9 intent colors, heading and overline presets, and weight, font and line-height props. It renders a paragraph by default; pick another element, like a heading, with `render`.</Lead>
 
 <DependencyList items={["@ui-sdk/react", "class-variance-authority"]} />
 
@@ -13,6 +13,12 @@
 ## Colors
 
 <Demo name="text-colors" />
+
+## Variants and type props
+
+`variant` sets a role preset; `weight`, `font`, `leading` and `color` adjust it. Reach for `className` only for layout, like margins.
+
+<Demo name="text-variants" />
 
 ## HTML element
 
@@ -46,6 +52,14 @@ import { Text } from "@/components/ui/text"
 // Caption with an intent color
 <Text render={<span />} size="xs" color="muted">
   Last updated: 2 min ago
+</Text>
+
+// Section label
+<Text variant="overline" size="xs">Installation</Text>
+
+// Section title
+<Text render={<h2 />} variant="heading" size="display">
+  One command and you're in orbit
 </Text>
 
 // Error message

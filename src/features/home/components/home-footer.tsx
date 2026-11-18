@@ -1,3 +1,4 @@
+import { Text } from "@/components/ui/text"
 import { SiteLogo } from "@/features/shell/components/site-logo"
 import { GithubIcon } from "@/features/shell/icons/github-icon"
 import { XIcon } from "@/features/shell/icons/x-icon"
@@ -12,13 +13,15 @@ export function HomeFooter() {
         <div className="grid grid-cols-2 gap-10 md:grid-cols-3">
           <div className="col-span-2">
             <SiteLogo />
-            <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted-foreground">
+            <Text size="sm" color="muted" leading="relaxed" className="mt-4 max-w-xs">
               Copy-paste components to build interfaces that take off. Open source under MIT license.
-            </p>
+            </Text>
           </div>
 
           <div>
-            <h2 className="mb-3 font-mono text-xs tracking-wide text-muted-foreground uppercase">Community</h2>
+            <Text render={<h2 />} variant="overline" size="xs" className="mb-3">
+              Community
+            </Text>
             <ul className="space-y-2 text-sm">
               <li>
                 <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 transition hover:text-brand">
@@ -37,7 +40,9 @@ export function HomeFooter() {
         </div>
 
         <div className="mt-16 flex flex-col gap-4 border-t border-border pt-6 text-xs text-muted-foreground md:flex-row md:items-center md:justify-between">
-          <p>© 2026 Lanzate UI · Built with ui-sdk, Tailwind and coffee.</p>
+          <Text size="xs" color="muted">
+            © 2026 Lanzate UI · Built with ui-sdk, Tailwind and coffee.
+          </Text>
           <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card/30 py-1 pr-3 pl-1 font-medium">
             <span className="rounded-full bg-brand px-2 py-0.5 text-3xs font-semibold tracking-wide text-brand-foreground uppercase">v{VERSION}</span>
             <span className="flex items-center gap-1.5">

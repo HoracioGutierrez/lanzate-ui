@@ -160,6 +160,16 @@ test("the soft variant tints the background with the accent color", () => {
   expect(button.className).toContain("bg-(--btn-accent)/15")
 })
 
+test("the subtle variant is neutral: theme border, card fill, accent hover", () => {
+  render(<Button variant="subtle" color="error">Copy</Button>)
+  const button = screen.getByRole("button", { name: "Copy" })
+  expect(button.getAttribute("data-variant")).toBe("subtle")
+  expect(button.className).toContain("border-border")
+  expect(button.className).toContain("bg-card")
+  expect(button.className).toContain("hover:bg-accent")
+  expect(button.className).not.toContain("bg-(--btn-color)")
+})
+
 test("intent colors read their fill and foreground from tokens", () => {
   render(<Button color="error">Delete</Button>)
   const button = screen.getByRole("button", { name: "Delete" })

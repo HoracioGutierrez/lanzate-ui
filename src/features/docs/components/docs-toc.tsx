@@ -1,5 +1,6 @@
 "use client"
 
+import { Text } from "@/components/ui/text"
 import { cn } from "@/lib/utils"
 
 import { useScrollSpy } from "../hooks/use-scroll-spy"
@@ -13,9 +14,9 @@ export function DocsToc({ items }: DocsTocProps) {
 
   return (
     <nav aria-labelledby="docs-toc-title">
-      <h2 id="docs-toc-title" className="mb-3 px-1 font-mono text-2xs tracking-wider text-muted-foreground/70 uppercase">
+      <Text render={<h2 id="docs-toc-title" />} variant="overline" size="2xs" className="mb-3 px-1">
         On this page
-      </h2>
+      </Text>
       <ul className="space-y-px">
         {items.map((item) => {
           const isActive = item.id === active

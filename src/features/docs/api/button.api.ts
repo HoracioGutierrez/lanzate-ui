@@ -1,7 +1,7 @@
 import type { ApiRow } from "../types/docs.types"
 
 export const buttonApi: ApiRow[] = [
-  { prop: "variant", type: '"solid" | "outline" | "ghost" | "soft" | "dashed" | "surface"', default: '"solid"', description: "Visual style." },
+  { prop: "variant", type: '"solid" | "outline" | "ghost" | "soft" | "dashed" | "subtle" | "surface"', default: '"solid"', description: "Visual style." },
   { prop: "color", type: '"primary" | "secondary" | "muted" | "info" | "warning" | "success" | "error"', default: '"primary"', description: "Intent color, from the design tokens." },
   { prop: "effect", type: '"none" | "elevated" | "glow"', default: '"none"', description: "Depth treatment: a drop shadow, or a glow in the button's color. One at a time." },
   { prop: "padding", type: '"none" | "xs" | "sm" | "base" | "md" | "lg" | "xl"', default: '"base"', description: "Padding and text size." },

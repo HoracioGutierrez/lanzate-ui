@@ -40,7 +40,7 @@ hold only types.
 import type { ReactNode } from "react"
 import type { IntentColor } from "@/lib/tokens.types"
 
-export type ButtonVariant = "solid" | "outline" | "ghost" | "soft" | "dashed" | "surface"
+export type ButtonVariant = "solid" | "outline" | "ghost" | "soft" | "dashed" | "subtle" | "surface"
 export type ButtonProps = { color?: IntentColor; variant?: ButtonVariant; children?: ReactNode }
 
 // button.tsx
@@ -65,7 +65,7 @@ themselves against the types with `satisfies`:
 // button.variants.ts
 import type { ButtonVariant } from "./button.types"
 export const variantClasses = {
-  solid: "…", outline: "…", ghost: "…", soft: "…", dashed: "…", surface: "…",
+  solid: "…", outline: "…", ghost: "…", soft: "…", dashed: "…", subtle: "…", surface: "…",
 } satisfies Record<ButtonVariant, string>
 ```
 

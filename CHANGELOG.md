@@ -4,6 +4,42 @@ All notable changes to the Lanzate UI registry. Versions follow
 [Semantic Versioning](https://semver.org); while the version is `0.x`, a
 minor bump may contain breaking changes.
 
+## 0.9.0
+
+### Added
+
+- **Text:** `variant` (`"body"`, `"heading"`, `"overline"`): role presets.
+  `heading` uses the heading font, semibold with tight tracking; `overline` is a small mono,
+  uppercase, muted label.
+- **Text:** `weight` (`"normal"`, `"medium"`, `"semibold"`), `font`
+  (`"sans"`, `"mono"`) and `leading` (`"none"` … `"relaxed"`), so common
+  type adjustments don't need `className`.
+- `--font-heading` theme token in `lanzate-theme` (`font-heading`
+  utility). It defaults to `var(--font-sans)`; set it to give headings
+  their own family.
+- **Text:** `size="2xs"`, and `size="inherit"` for inline text that keeps its
+  parent's size.
+- Exported types: `TextVariant`, `TextWeight`, `TextFont`, `TextLeading`.
+
+## 0.8.0
+
+### Added
+
+- **Button:** `variant="subtle"`, a neutral bordered button (theme border,
+  card fill, accent on hover). It ignores `color`, for toolbar and utility
+  actions like copy or theme toggles.
+
+### Changed
+
+- **Button:** every variant has a 1px border (transparent on `solid`,
+  `ghost`, `soft` and `surface`), so buttons with the same `padding` are the
+  same size whatever the variant. Unbordered buttons grow by 2px.
+- **Button:** an icon-only button (`icon`) sizes its icon box to the text's
+  line height, so it is square and exactly as tall as a text button with the
+  same `padding`. Icon-only buttons grow a few pixels.
+- **Button:** `opacity` is now part of the transition, so a button shown or
+  hidden by changing its opacity fades instead of popping.
+
 ## 0.7.0
 
 ### Breaking

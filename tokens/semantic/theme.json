@@ -47,6 +47,12 @@
           "$value": "cubic-bezier(0.34, 1.56, 0.64, 1)",
           "$description": "Overshoots slightly, then settles. For press and pop feedback."
         }
+      },
+      "font": {
+        "heading": {
+          "$value": "var(--font-sans)",
+          "$description": "Headings (Text variant=\"heading\"). Defaults to the project's sans font; set it to give headings their own family."
+        }
       }
     }
   },
@@ -62,8 +68,12 @@
         "sans": {
           "$value": "'Geist Variable', sans-serif"
         },
-        "heading": {
-          "$value": "var(--font-sans)"
+        "mono": {
+          "$value": "'Geist Mono Variable', ui-monospace, monospace"
+        },
+        "serif": {
+          "$value": "'Instrument Serif', ui-serif, Georgia, serif",
+          "$description": "Accent serif, italic only: the home page hero."
         }
       },
       "radius": {

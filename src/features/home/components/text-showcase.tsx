@@ -4,9 +4,11 @@ import { ShowcaseCard } from "./showcase-card"
 
 export function TextShowcase() {
   return (
-    <ShowcaseCard title="Text" description="7 fluid sizes, 9 colors." number="02">
+    <ShowcaseCard title="Text" description="8 sizes, 9 colors, 3 variants." number="02">
       <div className="w-full space-y-2 px-6 py-8">
-        <Text size="display" className="leading-none">Display</Text>
+        <Text size="display" leading="none">Display</Text>
+        <Text variant="overline" size="xs">Overline · section label</Text>
+        <Text variant="heading" size="2xl">Heading variant</Text>
         <Text size="2xl">2XL — Heading</Text>
         <Text size="xl">XL — Subheading</Text>
         <Text size="lg">LG — Body large</Text>

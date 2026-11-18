@@ -5,7 +5,7 @@ import { cn } from "@/lib/cn"
 import type { TextProps } from "./text.types"
 import { textVariants } from "./text.variants"
 
-export function Text({ size, color, className, render, ...props }: TextProps) {
+export function Text({ size, color, variant, weight, font, leading, className, render, ...props }: TextProps) {
   return renderElement(
     "p",
     {
@@ -13,7 +13,8 @@ export function Text({ size, color, className, render, ...props }: TextProps) {
       "data-slot": "text",
       "data-size": size,
       "data-color": color,
-      className: cn(textVariants({ size, color, className })),
+      "data-variant": variant,
+      className: cn(textVariants({ size, color, variant, weight, font, leading, className })),
     },
     render
   )
