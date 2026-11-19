@@ -78,7 +78,7 @@ export type TimelineMarkerProps = Omit<ComponentProps<typeof TimelineMarkerPart>
   shape?: TimelineMarkerShape
   /** Defaults from the event's status: `complete` solid, `current` soft, `upcoming` outline, none solid. */
   variant?: TimelineMarkerVariant
-  /** Frames the marker with brackets that pulse outward, for a live step. Off when the person prefers reduced motion. */
+  /** Sends a square ring out from the marker, like a tile LED's pulse, for a live step. Off when the person prefers reduced motion. */
   pulse?: boolean
   /**
    * Extra info in a tooltip. The marker becomes a focusable button; Tab reaches it after its event,

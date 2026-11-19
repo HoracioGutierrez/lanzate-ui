@@ -182,25 +182,9 @@ const timelineMarkerStatusClasses = [
   "data-upcoming:border-dashed data-upcoming:border-(--timeline-accent)/60 data-upcoming:bg-background data-upcoming:text-(--timeline-accent)",
 ].join(" ")
 
-// The current step is framed by registration brackets on two opposite corners, a small reticle like
-// the marks on Frame and Button Group. One pseudo-element draws both brackets with background bars, so
-// the other can carry a copy that pings: Tailwind's ping scales it up from the marker's center as it
-// fades, which moves both corners outward. `pulse` frames any marker and sends out that echo.
-const timelineReticleVarClasses = [
-  "[--timeline-reticle-size:max(--spacing(1.5),calc(var(--timeline-marker)/3))]",
-  "[--timeline-reticle:linear-gradient(var(--timeline-accent),var(--timeline-accent))_top_left/var(--timeline-reticle-size)_1px_no-repeat,linear-gradient(var(--timeline-accent),var(--timeline-accent))_top_left/1px_var(--timeline-reticle-size)_no-repeat,linear-gradient(var(--timeline-accent),var(--timeline-accent))_bottom_right/var(--timeline-reticle-size)_1px_no-repeat,linear-gradient(var(--timeline-accent),var(--timeline-accent))_bottom_right/1px_var(--timeline-reticle-size)_no-repeat]",
-].join(" ")
-
-const timelineReticleCurrentClasses = [
-  "data-current:before:pointer-events-none data-current:before:absolute data-current:before:-inset-1 data-current:before:[background:var(--timeline-reticle)]",
-  "rtl:data-current:before:-scale-x-100",
-].join(" ")
-
-const timelineReticlePulseClasses = [
-  "before:pointer-events-none before:absolute before:-inset-1 before:[background:var(--timeline-reticle)] rtl:before:-scale-x-100",
-  "after:pointer-events-none after:absolute after:-inset-1 after:[background:var(--timeline-reticle)] rtl:after:-scale-x-100",
-  "after:opacity-0 motion-safe:after:opacity-100 motion-safe:after:animate-ping",
-].join(" ")
+// `pulse` sends a 1px square ring out from the marker with Tailwind's ping, the same pulse as a tile's LED.
+const timelinePulseRingClasses =
+  "before:pointer-events-none before:absolute before:-inset-0.5 before:rounded-[inherit] before:border before:border-(--timeline-accent) motion-safe:before:animate-ping"
 
 export const timelineMarkerClasses = (shape: TimelineMarkerShape, variant: TimelineMarkerVariant | undefined, pulse: boolean) =>
   [
@@ -211,8 +195,7 @@ export const timelineMarkerClasses = (shape: TimelineMarkerShape, variant: Timel
     "group-data-[variant=line]/timeline:in-data-starting-style:scale-50 motion-reduce:in-data-starting-style:scale-100",
     timelineMarkerShapeClasses[shape],
     variant ? timelineMarkerVariantClasses[variant] : timelineMarkerStatusClasses,
-    timelineReticleVarClasses,
-    pulse ? timelineReticlePulseClasses : timelineReticleCurrentClasses,
+    pulse ? timelinePulseRingClasses : "",
   ].join(" ")
 
 // In a tile the button covers the whole card, so hovering anywhere on it shows the tooltip.

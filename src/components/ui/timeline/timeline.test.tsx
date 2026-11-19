@@ -156,7 +156,7 @@ test("markers are decorative, take a shape and follow the status unless a varian
   expect(first!.hasAttribute("data-current")).toBe(true)
   expect(first!.className).toContain("data-current:border-(--timeline-accent)")
   expect(first!.className).toContain("rounded-none")
-  expect(first!.className).toContain("motion-safe:after:animate-ping")
+  expect(first!.className).toContain("before:border-(--timeline-accent) motion-safe:before:animate-ping")
   expect(second!.className).not.toContain("data-upcoming:")
   expect(second!.className).toContain("bg-(--timeline-color)")
 })
