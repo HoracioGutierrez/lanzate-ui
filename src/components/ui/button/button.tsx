@@ -12,7 +12,13 @@ import { cn } from "@/lib/cn"
 
 import { ButtonSpinner } from "./button-spinner"
 import type { ButtonProps } from "./button.types"
-import { buttonVariants, squarePaddingClasses, tapClasses } from "./button.variants"
+import {
+  buttonVariants,
+  mobileIconBoxClasses,
+  mobileSquarePaddingClasses,
+  squarePaddingClasses,
+  tapClasses,
+} from "./button.variants"
 
 export function Button({
   color,
@@ -47,9 +53,12 @@ export function Button({
     const leading = (node: ReactNode) => wrapIcon(busy ? <ButtonSpinner /> : node)
     // A line-tall box, like a text label's, so icon-only buttons match text buttons of the same padding.
     if (icon != null) return <span className="grid min-h-lh min-w-[1lh] place-items-center">{leading(icon)}</span>
+    // Below `sm`, only-icon shows just its icons: give them the icon-only box, so the button is square.
+    const side = (node: ReactNode) =>
+      mobile === "only-icon" && node != null ? <span className={mobileIconBoxClasses}>{node}</span> : node
     return (
       <>
-        {leading(startIcon)}
+        {side(leading(startIcon))}
         {mobile === "only-icon" ? (
           label != null && <span className={cn("max-sm:sr-only", textClassName)}>{label}</span>
         ) : textClassName ? (
@@ -57,7 +66,7 @@ export function Button({
         ) : (
           label
         )}
-        {wrapIcon(endIcon)}
+        {side(wrapIcon(endIcon))}
       </>
     )
   }
@@ -78,6 +87,7 @@ export function Button({
       className={cn(
         buttonVariants({ color, variant, effect, padding, radius, textSize, iconSize, mobile }),
         icon != null && squarePaddingClasses[padding],
+        icon == null && mobile === "only-icon" && mobileSquarePaddingClasses[padding],
         tapAnimation && tapClasses,
         className
       )}

@@ -103,6 +103,24 @@ test("mobile only-icon keeps the text for screen readers", () => {
   expect(screen.getByRole("button", { name: "Search" })).toBeTruthy()
 })
 
+test.each([
+  ["startIcon", "sm", "max-sm:p-1.5"],
+  ["endIcon", "base", "max-sm:p-2"],
+] as const)("mobile only-icon with %s is square on phones, like an icon-only button", (slot, padding, square) => {
+  const icon = <Trash2 aria-hidden="true" />
+  render(
+    <Button mobile="only-icon" padding={padding} {...{ [slot]: icon }}>
+      Search
+    </Button>
+  )
+  const button = screen.getByRole("button", { name: "Search" })
+  expect(button.className.split(" ")).toContain(square)
+  // A line-tall box around the icon, as icon-only buttons have, so the height matches too.
+  const svg = button.querySelector("svg")
+  expect(svg?.parentElement?.className).toContain("max-sm:min-h-lh")
+  expect(svg?.parentElement?.className).toContain("max-sm:min-w-[1lh]")
+})
+
 test("render swaps the element, like a link", () => {
   render(<Button render={<a href="/docs" />}>Docs</Button>)
   expect(screen.getByRole("link", { name: "Docs" }).getAttribute("href")).toBe("/docs")

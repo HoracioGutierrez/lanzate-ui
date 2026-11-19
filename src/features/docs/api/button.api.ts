@@ -15,7 +15,7 @@ export const buttonApi: ApiRow[] = [
   { prop: "loadingText", type: "string", description: "Replaces the label while loading." },
   { prop: "tooltip", type: "ReactNode", description: "Wraps the button in a Tooltip. A disabled button with a tooltip stays focusable." },
   { prop: "tapAnimation", type: "boolean", default: "true", description: "Scales down slightly on press." },
-  { prop: "mobile", type: '"only-icon" | "full-width" | "hidden"', description: "Behavior below the `sm` breakpoint." },
+  { prop: "mobile", type: '"only-icon" | "full-width" | "hidden"', description: "Behavior below the `sm` breakpoint. `only-icon` hides the label (kept for screen readers) and makes the button square, like an icon-only one." },
   { prop: "render", type: "ReactElement", description: "Renders another element, like a link: render={<a href=\"/docs\" />}." },
   { prop: "className", type: "string", description: "Classes for the root element, merged after the variants." },
   { prop: "iconClassName", type: "string", description: "Classes for the icon wrapper (startIcon, endIcon, icon)." },

@@ -23,6 +23,12 @@ minor bump may contain breaking changes.
   whole group. In both modes one hover fill slides between items and
   stays on the last one until the pointer leaves the tray.
 
+### Fixed
+
+- **Button** (`button`): `mobile="only-icon"` is now square on phones, with
+  the icon-only button's padding and line-tall icon box. It used to keep the
+  text padding, which left a short, wide button around the icon.
+
 ## 0.11.0
 
 ### Added
