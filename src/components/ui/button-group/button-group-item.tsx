@@ -29,6 +29,8 @@ export function ButtonGroupItem({
   const context = use(ButtonGroupContext)
   if (context == null) throw new Error("ButtonGroupItem must be inside a ButtonGroup.")
   const { selection, color, padding } = context
+  // An icon already marks the item, so the LED only shows on text-only items.
+  const hasIcon = startIcon != null || endIcon != null
 
   const draw = (partProps: object, on: boolean) => (
     <Button
@@ -48,7 +50,7 @@ export function ButtonGroupItem({
     >
       {icon == null && (
         <>
-          <ButtonGroupLed on={on} />
+          {!hasIcon && <ButtonGroupLed on={on} />}
           {children}
         </>
       )}

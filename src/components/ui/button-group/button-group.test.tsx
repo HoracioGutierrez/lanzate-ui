@@ -145,18 +145,22 @@ test("items are the registry Button: solid in the group color when lit, muted gh
   expect(toggle("Pending").getAttribute("data-color")).toBe("muted")
 })
 
-test("the LED is lit only on the active item and absent on icon-only items", () => {
+test("the LED is lit only on the active item and absent on items with an icon", () => {
   render(
     <ButtonGroup selection="multiple" aria-label="Status" defaultValue={["paid"]}>
       <ButtonGroupItem value="pending">Pending</ButtonGroupItem>
       <ButtonGroupItem value="paid">Paid</ButtonGroupItem>
       <ButtonGroupItem value="late" icon={<svg />} aria-label="Late" />
+      <ButtonGroupItem value="draft" startIcon={<svg />}>Draft</ButtonGroupItem>
+      <ButtonGroupItem value="void" endIcon={<svg />}>Void</ButtonGroupItem>
     </ButtonGroup>
   )
   const led = (name: string) => toggle(name).querySelector('[data-slot="button-group-led"]')
   expect(led("Paid")?.hasAttribute("data-on")).toBe(true)
   expect(led("Pending")?.hasAttribute("data-on")).toBe(false)
   expect(led("Late")).toBeNull()
+  expect(led("Draft")).toBeNull()
+  expect(led("Void")).toBeNull()
 })
 
 const tick = () => act(async () => { await new Promise((r) => setTimeout(r, 0)) })

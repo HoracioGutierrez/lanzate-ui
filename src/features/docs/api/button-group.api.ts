@@ -14,7 +14,7 @@ export const buttonGroupApi: ApiRow[] = [
   { prop: "ButtonGroup required", type: "boolean", default: "false", description: "single only. Blocks form submission until an item is chosen. With ButtonGroupAll it has no effect: All is a valid choice." },
   { prop: "ButtonGroupItem value", type: "string", description: "Required. What the group's value holds when this item is chosen." },
   { prop: "ButtonGroupItem icon", type: "ReactNode", description: "Renders an icon-only item. Name it with tooltip or aria-label." },
-  { prop: "ButtonGroupItem startIcon / endIcon", type: "ReactNode", description: "Icons beside the label." },
+  { prop: "ButtonGroupItem startIcon / endIcon", type: "ReactNode", description: "Icons beside the label. An item with an icon has no LED." },
   { prop: "ButtonGroupItem tooltip", type: "ReactNode", description: "Wraps the item in a Tooltip. A disabled item keeps its tooltip on hover; in multiple it also stays focusable with the arrow keys, in single the keyboard skips it." },
   { prop: "ButtonGroupItem disabled", type: "boolean", default: "false", description: "Keeps the item from being chosen." },
   { prop: "ButtonGroupAll", type: "ButtonGroupItem props, without value", description: "Optional, in both modes. Lit while nothing is chosen; choosing it clears the group." },

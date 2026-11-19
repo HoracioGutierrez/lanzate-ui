@@ -15,7 +15,8 @@ minor bump may contain breaking changes.
   fades into its fill (`value: string | null`, `name` submits it).
   `selection="multiple"` toggles several filters at once on ui-sdk's
   ToggleGroup (`value: string[]`). `ButtonGroupItem` takes text, an icon
-  (`icon` for icon-only, `startIcon`, `endIcon`) and a `tooltip`;
+  (`icon` for icon-only, `startIcon`, `endIcon`; an item with an icon has
+  no LED) and a `tooltip`;
   `ButtonGroupAll`, optional in both modes, is lit while nothing is chosen
   and clears the group. `color`, `padding`, `orientation` and `disabled`
   apply to the whole group.
