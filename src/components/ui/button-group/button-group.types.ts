@@ -57,6 +57,29 @@ export type ButtonGroupItemProps = Pick<
 /** What ButtonGroup passes to its single-selection body. */
 export type ButtonGroupSingleInternalProps = Omit<ButtonGroupSingleProps, "color" | "size"> & {
   hasAll: boolean
+  /** The hover highlight, rendered first so it sits under the selection indicator. */
+  highlight: ReactNode
+}
+
+/** What ButtonGroup passes to its multiple-selection body. */
+export type ButtonGroupMultipleInternalProps = Omit<ButtonGroupMultipleProps, "color" | "size"> & {
+  highlight: ReactNode
+}
+
+/** Where the hover highlight sits, in px from the group's padding box. */
+export type ButtonGroupHighlightState = {
+  left: number
+  top: number
+  width: number
+  height: number
+  /** A mouse is over an item of the group (touch has no hover). */
+  visible: boolean
+  /** Just appeared: placed without sliding from where it last was. */
+  instant: boolean
+}
+
+export type ButtonGroupHighlightProps = {
+  state: ButtonGroupHighlightState
 }
 
 export type ButtonGroupAllProps = Omit<ButtonGroupItemProps, "value">

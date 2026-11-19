@@ -47,7 +47,9 @@ export function ButtonGroupItem({
       tooltip={tooltip}
       aria-label={ariaLabel}
       tapAnimation={false}
-      className={cn(buttonGroupItemClasses[selection], className)}
+      data-button-group-item=""
+      // The group's sliding highlight is the hover fill of unlit items.
+      className={cn(buttonGroupItemClasses[selection], !on && "hover:bg-transparent", className)}
     >
       {icon == null && (
         <>

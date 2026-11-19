@@ -14,6 +14,7 @@ export function ButtonGroupSingle({
   defaultValue = null,
   onValueChange,
   hasAll,
+  highlight,
   name,
   required,
   children,
@@ -49,6 +50,7 @@ export function ButtonGroupSingle({
       required={ownInput ? undefined : required}
       {...props}
     >
+      {highlight}
       <SegmentedControlIndicator className={buttonGroupIndicatorClasses} />
       {children}
       {ownInput && value != null && <input type="hidden" name={name} value={value} />}

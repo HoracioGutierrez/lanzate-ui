@@ -1,4 +1,4 @@
-import { act, cleanup, render, screen } from "@testing-library/react"
+import { act, cleanup, fireEvent, render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { createAgent } from "@ui-sdk/react/agent"
 import { afterEach, expect, test, vi } from "vitest"
@@ -364,4 +364,50 @@ test("an item can shrink and break a word longer than the tray", () => {
   const classes = toggle("Paid").className.split(" ")
   expect(classes).toContain("min-w-0")
   expect(classes).toContain("wrap-anywhere")
+})
+
+const highlight = (group: HTMLElement) => group.querySelector('[data-slot="button-group-highlight"]')
+
+// user-event leaves relatedTarget unset, which React reads as leaving the whole group, so these
+// events carry it as a browser's do.
+function movePointer(from: Element | null, to: Element | null) {
+  if (from != null) fireEvent.pointerOut(from, { pointerType: "mouse", relatedTarget: to })
+  if (from != null) fireEvent.pointerLeave(from, { pointerType: "mouse", relatedTarget: to })
+  if (to != null) fireEvent.pointerOver(to, { pointerType: "mouse", relatedTarget: from })
+}
+
+test.each(["single", "multiple"] as const)("%s: one hover highlight follows the pointer between items", (selection) => {
+  render(selection === "single" ? Views({ defaultValue: "list" }) : Filters({}))
+  const group = screen.getByRole(selection === "single" ? "radiogroup" : "group")
+  const [first, second] = selection === "single" ? [radio("List"), radio("Grid")] : [toggle("Pending"), toggle("Paid")]
+  const visible = () => highlight(group)?.hasAttribute("data-visible")
+  const instant = () => highlight(group)?.hasAttribute("data-instant")
+  expect(visible()).toBe(false)
+
+  movePointer(document.body, first)
+  // Entering the group, it appears in place instead of sliding in from its last spot.
+  expect(visible()).toBe(true)
+  expect(instant()).toBe(true)
+
+  // Through the gap between items (the group itself), it stays on the last item.
+  movePointer(first, group)
+  expect(visible()).toBe(true)
+  movePointer(group, second)
+  expect(visible()).toBe(true)
+  expect(instant()).toBe(false)
+
+  movePointer(second, document.body)
+  expect(visible()).toBe(false)
+})
+
+test("the hover highlight replaces the unlit items' own hover fill, not the lit one's", () => {
+  render(Filters({ defaultValue: ["paid"] }))
+  expect(toggle("Pending").className.split(" ")).toContain("hover:bg-transparent")
+  expect(toggle("Paid").className.split(" ")).not.toContain("hover:bg-transparent")
+})
+
+test("a touch doesn't light the hover highlight", () => {
+  render(Filters({}))
+  fireEvent.pointerOver(toggle("Paid"), { pointerType: "touch", relatedTarget: document.body })
+  expect(highlight(screen.getByRole("group", { name: "Status" }))?.hasAttribute("data-visible")).toBe(false)
 })

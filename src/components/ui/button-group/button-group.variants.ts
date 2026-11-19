@@ -82,3 +82,15 @@ export const buttonGroupLedSizeClasses = {
   md: "size-1.5",
   lg: "size-2",
 } satisfies Record<ButtonGroupSize, string>
+
+// Slides between items like the selection indicator, filled like an unlit item's hover. It fades in
+// and out in place: only moves between items slide. Forced colors drop backgrounds, so it gets an
+// outline there.
+export const buttonGroupHighlightClasses = [
+  "pointer-events-none absolute -z-10",
+  "top-(--button-group-highlight-top) left-(--button-group-highlight-left)",
+  "w-(--button-group-highlight-width) h-(--button-group-highlight-height)",
+  "bg-muted-foreground/10 opacity-0 data-visible:opacity-100 forced-colors:outline forced-colors:outline-1",
+  "transition-[left,top,width,height,opacity] duration-200 ease-spring data-instant:transition-opacity",
+  "motion-reduce:transition-none",
+].join(" ")

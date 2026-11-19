@@ -157,6 +157,30 @@ are hand-rolled (no keyboard model) and split across two components.
 3. `motion-reduce`: no slide, no delay; the fill just swaps.
 4. Nothing checked → indicator has no box (ui-sdk behavior).
 
+### Hover (both modes)
+
+Added 2026-11-19. One highlight (`ButtonGroupHighlight`, `data-slot="button-group-highlight"`)
+is the hover fill of every unlit item, so it slides from item to item instead of one
+fill turning off and the next turning on.
+
+1. `useButtonGroupHighlight` listens to `pointerover` on the group, finds the item
+   (`data-button-group-item`) and stores its `offsetLeft/Top/Width/Height`, which the
+   highlight reads as `--button-group-highlight-{left,top,width,height}`.
+2. Sticky: crossing the gap between items keeps it on the last item; only leaving
+   the group fades it out (`data-visible`). Disabled items don't move it.
+3. Entering the group, it fades in on the item without sliding from its last spot
+   (`data-instant` limits the transition to `opacity`).
+4. Touch is ignored (a tap has no hover). Mouse and pen hover.
+5. Look: `bg-muted-foreground/10`, the ghost item's own hover; unlit items get
+   `hover:bg-transparent` so the two don't stack. Lit items keep their solid hover.
+   `forced-colors:outline`, since forced colors drop backgrounds.
+6. Same `duration-200 ease-spring` as the indicator; `motion-reduce`: no slide.
+7. Rendered first, so it sits under the selection indicator and the items.
+
+Not CSS anchor positioning: it needs Chrome 157 / Safari 27 (no Firefox), and CSS
+alone can't keep the highlight on the last item across the gaps or skip the slide on
+entry.
+
 Durations use Tailwind duration utilities as `Button` does; easing uses the
 `ease-spring` token. No literal cubic-bezier.
 

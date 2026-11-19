@@ -20,7 +20,8 @@ minor bump may contain breaking changes.
   `ButtonGroupAll`, optional in both modes, is lit while nothing is chosen
   and clears the group. `color`, `size` (`"xs" | "md" | "lg"`, scaling
   the tray, items and LEDs), `orientation` and `disabled` apply to the
-  whole group.
+  whole group. In both modes one hover fill slides between items and
+  stays on the last one until the pointer leaves the tray.
 
 ## 0.11.0
 

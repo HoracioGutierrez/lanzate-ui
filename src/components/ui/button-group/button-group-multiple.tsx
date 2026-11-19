@@ -2,7 +2,7 @@
 
 import { ToggleGroup } from "@ui-sdk/react/toggle"
 
-import type { ButtonGroupMultipleProps } from "./button-group.types"
+import type { ButtonGroupMultipleInternalProps } from "./button-group.types"
 import { fromSdkMultiple, toSdkMultiple, useControllableValue } from "./use-button-group-value"
 
 /** `selection="multiple"`: ui-sdk's toggle group, several items pressed at once. */
@@ -11,8 +11,10 @@ export function ButtonGroupMultiple({
   value: valueProp,
   defaultValue = [],
   onValueChange,
+  highlight,
+  children,
   ...props
-}: Omit<ButtonGroupMultipleProps, "color" | "size">) {
+}: ButtonGroupMultipleInternalProps) {
   const [value, setValue] = useControllableValue({ value: valueProp, defaultValue, onValueChange })
 
   return (
@@ -26,6 +28,9 @@ export function ButtonGroupMultiple({
         else setValue(mapped)
       }}
       {...props}
-    />
+    >
+      {highlight}
+      {children}
+    </ToggleGroup>
   )
 }
