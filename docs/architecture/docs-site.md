@@ -43,9 +43,19 @@ section (`hooks/use-scroll-spy.ts`).
 
 A demo is a component file under `demos/<component>/`, with a `.demo.tsx`
 suffix, registered by name. `<Demo name="button-colors" />` renders the
-component on a preview pane and, below it, the file's own source. Write
-demos as real usage examples: import from `@/components/ui/…`, name every
-control, no headings.
+component and the file's own source behind a Preview / Code switch
+(`components/demo-tabs.tsx`); both stay mounted, so the demo keeps its state.
+Write demos as real usage examples: import from `@/components/ui/…`, name
+every control, no headings.
+
+## Install commands
+
+Write install commands with `npx` in a ```` ```bash ```` fence. `MdxPre`
+gives any shell block with a line starting `npx ` a `bun · npm · pnpm`
+picker (`components/package-manager-code.tsx`) that rewrites those lines
+(`npx` → `bunx --bun` / `pnpm dlx`). The choice is shared by every block
+and remembered in `localStorage` (`lib/package-manager-store.ts`, read with
+`useSyncExternalStore`); the server and a first visit show npm.
 
 ## Reading files at build time
 

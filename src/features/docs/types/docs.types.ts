@@ -62,6 +62,10 @@ export type DemoProps = { name: DemoName }
 /** Which half of a demo is showing: the live component or its source. */
 export type DemoView = "preview" | "code"
 export type DemoTabsProps = { preview: ReactNode; code: ReactNode }
+
+/** The package managers the install blocks can show commands for. */
+export type PackageManager = "bun" | "npm" | "pnpm"
+export type PackageManagerCodeProps = { code: string }
 export type ApiTableProps = { name: ApiTableName }
 export type ComponentBadgeProps = { number: string; isNew?: boolean }
 export type DependencyListProps = { items: string[] }
