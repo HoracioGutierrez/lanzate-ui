@@ -1,0 +1,106 @@
+<ComponentBadge number="07" isNew />
+
+# Timeline
+
+<Lead>Events in order, vertical or horizontal: an order's status, a checkout, a roadmap, an activity log. Built on ui-sdk's Timeline, so it's a named list with one tab stop and arrow keys between events. Every part is optional: markers with icons and tooltips, lines that fill as steps complete, and a collapsible mode that opens from a stacked summary with an animated, staggered entrance.</Lead>
+
+<DependencyList items={["@ui-sdk/react"]} />
+
+## Order status
+
+Give each `TimelineItem` a `status`. The current step gets `aria-current="step"` and takes the tab stop; the marker's fill follows the status unless you set `variant`. A finished step fills its line, so moving the current step animates the progress. `tooltip` on a marker adds extra info.
+
+## Status colors
+
+Each status has one color, so a timeline reads the same everywhere:
+
+| Status | Meaning | Color |
+| --- | --- | --- |
+| `complete` | Happened and went well | `success` |
+| `failed` | Happened, with an error | `error` |
+| `current` | Happening now | `warning` |
+| `upcoming` | Still to come | `muted` |
+
+`failed` counts as done (its line fills, in red) and shows as `data-status="failed"`. `color` overrides the status color for one event, when a domain needs it.
+
+<Demo name="timeline-order-status" />
+
+## Horizontal
+
+`orientation="horizontal"` lays the events out in equal columns, and Left and Right move between them (swapped in right-to-left text). `size="sm"` gives small dots for dense rows.
+
+<Demo name="timeline-horizontal" />
+
+## Tiles
+
+`variant="tiles"` makes each event a card with its content inside, in the same industrial style as Frame: square edges, a border and wash in the status color, registration marks on two opposite corners, the title as a mono overline label, the time as a mono readout, and the marker as a square LED. In a horizontal timeline the cards share the row equally, with a gap between them, and wrap onto more rows when they'd get too narrow (on phones, say). Titles and times stay on one line, truncated, so they line up across the row. The marker sits in the corner, and with a `tooltip` the whole card shows it on hover. `appear` grows each card out of a dot, one after another. The `TimelineStackItem`s of a collapsible summary use the same colors as the tiles.
+
+<Demo name="timeline-tiles" />
+
+## Collapsible
+
+For a list item that unfolds its history. `TimelineCollapsible` holds the open state, `TimelineCollapsibleTrigger` is the button, and `TimelineCollapsiblePanel` animates its height. Inside the trigger, a `TimelineLeader` draws the dotted line and a `TimelineStack` summarizes the events as overlapping dots. As it opens, each dot leaves and its event grows out of a dot below, in turn: the first dot, then the first tile, and so on. Keep the `TimelineStackItem`s in the same order as the events. The summary is decorative, so the trigger is named by its text.
+
+Tune the rhythm with two CSS variables on any ancestor: `--timeline-stagger` (time between events, `80ms`) and `--timeline-handoff` (from a dot leaving to its tile appearing, `150ms`).
+
+The example walks one purchase through four stages, with one order for every combination that can happen: **payment** (pending, accepted, declined), **order** (pending, processing order, order created), **delivery** (pending, awaiting delivery, shipped or ready for pickup) and **finish** (pending, completed, refunded, cancelled). Green is done, yellow is in progress, red is declined, refunded or cancelled, and gray is still pending. Each tile names its state in text, and its tooltip holds the details: card, amount, tracking, store.
+
+<Demo name="timeline-collapsible" />
+
+`TimelineLeader` works in any key and value row too, like the price and name above.
+
+## Steps and entrance
+
+Markers take a number or an icon as children, and `TimelineContent` groups the text. `appear` staggers the events in on first paint; change the status and the lines fill or empty in place.
+
+<Demo name="timeline-progress" />
+
+## Markers
+
+Three sizes and three fills, with 1px edges like Frame. Markers are square by default; `shape="circle"` softens them. `pulse` sends a square ring out from a live step's marker, the same pulse as a tile's LED, and the line between events is a dashed track that fills solid as each step completes.
+
+<Demo name="timeline-markers" />
+
+## Accessibility
+
+- The timeline is a `list` of `listitem`s named by `aria-label`; each event is named by its title and described by its time and description.
+- One tab stop: Tab lands on the current event, then on the buttons inside it (a marker with a tooltip), then leaves. Arrow keys follow the orientation; Home and End jump to the ends.
+- Markers, connectors, leaders and stacks are hidden from screen readers. A marker only shows status to sighted people, so say it in the title too ("Shipped, in transit").
+- Animations turn off under reduced motion.
+
+## Installation
+
+```bash
+npx shadcn@latest add https://lanzate-ui.vercel.app/r/timeline.json
+```
+
+## Usage
+
+```tsx
+import {
+  Timeline,
+  TimelineConnector,
+  TimelineItem,
+  TimelineMarker,
+  TimelineTime,
+  TimelineTitle,
+} from "@/components/ui/timeline"
+
+<Timeline aria-label="Order status">
+  <TimelineItem status="complete">
+    <TimelineMarker tooltip="Card ending 4242" />
+    <TimelineConnector />
+    <TimelineTitle>Paid</TimelineTitle>
+    <TimelineTime dateTime="2026-11-19T09:05">9:05 AM</TimelineTime>
+  </TimelineItem>
+  <TimelineItem status="current">
+    <TimelineMarker pulse />
+    <TimelineConnector />
+    <TimelineTitle>Shipped, in transit</TimelineTitle>
+  </TimelineItem>
+</Timeline>
+```
+
+## API
+
+<ApiTable name="timeline" />

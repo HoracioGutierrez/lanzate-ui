@@ -35,6 +35,12 @@ import { TextCustomizationDemo } from "./text/text-customization.demo"
 import { TextElementDemo } from "./text/text-element.demo"
 import { TextSizesDemo } from "./text/text-sizes.demo"
 import { TextVariantsDemo } from "./text/text-variants.demo"
+import { TimelineCollapsibleDemo } from "./timeline/timeline-collapsible.demo"
+import { TimelineHorizontalDemo } from "./timeline/timeline-horizontal.demo"
+import { TimelineMarkersDemo } from "./timeline/timeline-markers.demo"
+import { TimelineOrderStatusDemo } from "./timeline/timeline-order-status.demo"
+import { TimelineProgressDemo } from "./timeline/timeline-progress.demo"
+import { TimelineTilesDemo } from "./timeline/timeline-tiles.demo"
 
 /**
  * Every demo MDX can show with <Demo name="…" />. The Demo renders the component
@@ -77,4 +83,10 @@ export const demoRegistry = {
   "badge-composition": { component: BadgeCompositionDemo, file: "badge/badge-composition.demo.tsx" },
   "badge-dot": { component: BadgeDotDemo, file: "badge/badge-dot.demo.tsx" },
   "badge-tooltip": { component: BadgeTooltipDemo, file: "badge/badge-tooltip.demo.tsx" },
+  "timeline-order-status": { component: TimelineOrderStatusDemo, file: "timeline/timeline-order-status.demo.tsx" },
+  "timeline-horizontal": { component: TimelineHorizontalDemo, file: "timeline/timeline-horizontal.demo.tsx" },
+  "timeline-tiles": { component: TimelineTilesDemo, file: "timeline/timeline-tiles.demo.tsx" },
+  "timeline-collapsible": { component: TimelineCollapsibleDemo, file: "timeline/timeline-collapsible.demo.tsx" },
+  "timeline-markers": { component: TimelineMarkersDemo, file: "timeline/timeline-markers.demo.tsx" },
+  "timeline-progress": { component: TimelineProgressDemo, file: "timeline/timeline-progress.demo.tsx" },
 } satisfies Record<string, DemoEntry>

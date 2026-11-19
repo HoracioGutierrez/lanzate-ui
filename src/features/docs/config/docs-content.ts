@@ -11,6 +11,7 @@ export const docsContent = {
   frame: () => import("../content/frame.mdx"),
   "button-group": () => import("../content/button-group.mdx"),
   badge: () => import("../content/badge.mdx"),
+  timeline: () => import("../content/timeline.mdx"),
 } satisfies Record<DocId, () => Promise<MdxModule>>
 
 /** Folder with the MDX sources, relative to the project root (read for the table of contents). */
