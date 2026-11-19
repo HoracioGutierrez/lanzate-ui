@@ -32,7 +32,6 @@ export function ButtonGroupItem({
 
   const draw = (partProps: object, on: boolean) => (
     <Button
-      data-slot="button-group-item"
       {...partProps}
       {...props}
       variant={on ? "solid" : "ghost"}

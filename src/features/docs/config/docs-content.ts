@@ -9,6 +9,7 @@ export const docsContent = {
   text: () => import("../content/text.mdx"),
   "floating-toolbar": () => import("../content/floating-toolbar.mdx"),
   frame: () => import("../content/frame.mdx"),
+  "button-group": () => import("../content/button-group.mdx"),
 } satisfies Record<DocId, () => Promise<MdxModule>>
 
 /** Folder with the MDX sources, relative to the project root (read for the table of contents). */

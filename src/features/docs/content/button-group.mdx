@@ -1,0 +1,63 @@
+<ComponentBadge number="05" isNew />
+
+# Button Group
+
+<Lead>A tray of buttons that lights up the chosen ones. Switch between a few options, with a background that slides to the new choice, or turn several filters on and off at once.</Lead>
+
+<DependencyList items={["@ui-sdk/react"]} />
+
+## Example
+
+<Demo name="button-group-filters" />
+
+Press Pending and Paid to show both; press All to clear them. Each lit item gets a solid fill and its LED turns on.
+
+## Filters
+
+`selection="multiple"` lets several items stay pressed, and its value is an array of their values. Add `ButtonGroupAll` to give the user a way back to "no filter": it is lit while the value is empty, and pressing it clears the value. Leave it out and an empty value just lights nothing. Counters and other extras go in the item's children.
+
+## Switching
+
+`selection="single"` keeps one item checked, like radios: the arrow keys move the choice, and a background slides to the new item and fades into its fill. Its value is a string, or `null` when nothing is checked, which checks `ButtonGroupAll` if there is one.
+
+<Demo name="button-group-switch" />
+
+## Icons and tooltips
+
+`icon` renders an icon-only item; name it with `tooltip` (or `aria-label`). `startIcon` and `endIcon` sit beside a label. Items are the registry `Button`, so their tooltip is the Button's.
+
+<Demo name="button-group-icons" />
+
+## Vertical
+
+`orientation="vertical"` stacks the items.
+
+<Demo name="button-group-vertical" />
+
+## States
+
+`disabled` works on one item or the whole group. A disabled item with a tooltip stays focusable, so its tooltip can say why.
+
+<Demo name="button-group-states" />
+
+## Installation
+
+```bash
+npx shadcn@latest add https://lanzate-ui.vercel.app/r/button-group.json
+```
+
+## Usage
+
+```tsx
+import { ButtonGroup, ButtonGroupAll, ButtonGroupItem } from "@/components/ui/button-group"
+
+<ButtonGroup selection="multiple" aria-label="Status" value={status} onValueChange={setStatus}>
+  <ButtonGroupAll>All</ButtonGroupAll>
+  <ButtonGroupItem value="pending">Pending</ButtonGroupItem>
+  <ButtonGroupItem value="paid">Paid</ButtonGroupItem>
+</ButtonGroup>
+```
+
+## API
+
+<ApiTable name="button-group" />

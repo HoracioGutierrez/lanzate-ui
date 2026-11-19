@@ -22,9 +22,9 @@ export function ButtonGroup({ color = "primary", padding = "sm", className, ...p
   return (
     <ButtonGroupContext value={context}>
       {props.selection === "single" ? (
-        <ButtonGroupSingle data-slot="button-group" className={classes} {...props} />
+        <ButtonGroupSingle className={classes} {...props} />
       ) : (
-        <ButtonGroupMultiple data-slot="button-group" className={classes} {...props} />
+        <ButtonGroupMultiple className={classes} {...props} />
       )}
     </ButtonGroupContext>
   )

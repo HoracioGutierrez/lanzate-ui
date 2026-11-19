@@ -1,4 +1,9 @@
 import type { DemoEntry } from "../types/docs.types"
+import { ButtonGroupFiltersDemo } from "./button-group/button-group-filters.demo"
+import { ButtonGroupIconsDemo } from "./button-group/button-group-icons.demo"
+import { ButtonGroupStatesDemo } from "./button-group/button-group-states.demo"
+import { ButtonGroupSwitchDemo } from "./button-group/button-group-switch.demo"
+import { ButtonGroupVerticalDemo } from "./button-group/button-group-vertical.demo"
 import { ButtonColorsDemo } from "./button/button-colors.demo"
 import { ButtonCustomStylesDemo } from "./button/button-custom-styles.demo"
 import { ButtonGlowDemo } from "./button/button-glow.demo"
@@ -53,4 +58,9 @@ export const demoRegistry = {
   "frame-cards": { component: FrameCardsDemo, file: "frame/frame-cards.demo.tsx" },
   "frame-colors": { component: FrameColorsDemo, file: "frame/frame-colors.demo.tsx" },
   "frame-plain": { component: FramePlainDemo, file: "frame/frame-plain.demo.tsx" },
+  "button-group-filters": { component: ButtonGroupFiltersDemo, file: "button-group/button-group-filters.demo.tsx" },
+  "button-group-switch": { component: ButtonGroupSwitchDemo, file: "button-group/button-group-switch.demo.tsx" },
+  "button-group-icons": { component: ButtonGroupIconsDemo, file: "button-group/button-group-icons.demo.tsx" },
+  "button-group-vertical": { component: ButtonGroupVerticalDemo, file: "button-group/button-group-vertical.demo.tsx" },
+  "button-group-states": { component: ButtonGroupStatesDemo, file: "button-group/button-group-states.demo.tsx" },
 } satisfies Record<string, DemoEntry>
