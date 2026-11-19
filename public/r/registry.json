@@ -18,14 +18,21 @@
         "theme": {
           "color-primary": "var(--primary)",
           "color-primary-foreground": "var(--primary-foreground)",
+          "color-primary-text": "var(--primary-text)",
           "color-error": "var(--error)",
           "color-error-foreground": "var(--error-foreground)",
+          "color-error-text": "var(--error-text)",
           "color-info": "var(--info)",
           "color-info-foreground": "var(--info-foreground)",
+          "color-info-text": "var(--info-text)",
           "color-warning": "var(--warning)",
           "color-warning-foreground": "var(--warning-foreground)",
+          "color-warning-text": "var(--warning-text)",
           "color-success": "var(--success)",
           "color-success-foreground": "var(--success-foreground)",
+          "color-success-text": "var(--success-text)",
+          "color-secondary-text": "var(--secondary-text)",
+          "color-muted-text": "var(--muted-text)",
           "text-3xs": "0.625rem",
           "text-2xs": "0.6875rem",
           "text-xs": "clamp(0.75rem, calc(0.708rem + 0.208vw), 0.875rem)",
@@ -47,30 +54,44 @@
           "font-heading": "var(--font-sans)"
         },
         "light": {
-          "primary": "oklch(0.62 0.18 35)",
-          "primary-foreground": "oklch(0.985 0 0)",
+          "primary": "oklch(0.575 0.18 35)",
+          "primary-foreground": "oklch(1 0 0)",
+          "primary-text": "oklch(0.50 0.18 35)",
           "error": "oklch(0.577 0.245 27.325)",
           "error-foreground": "oklch(1 0 0)",
-          "info": "oklch(0.60 0.15 240)",
+          "error-text": "oklch(0.46 0.245 27.325)",
+          "info": "oklch(0.555 0.15 240)",
           "info-foreground": "oklch(1 0 0)",
+          "info-text": "oklch(0.47 0.15 240)",
           "warning": "oklch(0.70 0.15 85)",
           "warning-foreground": "oklch(0 0 0)",
+          "warning-text": "oklch(0.485 0.15 85)",
           "success": "oklch(0.55 0.15 142)",
           "success-foreground": "oklch(1 0 0)",
+          "success-text": "oklch(0.47 0.15 142)",
+          "secondary-text": "oklch(0.205 0 0)",
+          "muted-text": "oklch(0.49 0 0)",
           "button-surface-gradient": "linear-gradient(to bottom, oklch(1 0 0 / 0.12), oklch(0 0 0 / 0.1))",
           "button-surface-gradient-active": "linear-gradient(to bottom, oklch(0 0 0 / 0.08), oklch(1 0 0 / 0.04))"
         },
         "dark": {
           "primary": "oklch(0.66 0.18 35)",
-          "primary-foreground": "oklch(0.98 0.01 80)",
+          "primary-foreground": "oklch(0.145 0 0)",
+          "primary-text": "oklch(0.74 0.18 35)",
           "error": "oklch(0.704 0.191 22.216)",
-          "error-foreground": "oklch(1 0 0)",
+          "error-foreground": "oklch(0.145 0 0)",
+          "error-text": "oklch(0.765 0.191 22.216)",
           "info": "oklch(0.70 0.15 240)",
-          "info-foreground": "oklch(1 0 0)",
+          "info-foreground": "oklch(0.145 0 0)",
+          "info-text": "oklch(0.70 0.15 240)",
           "warning": "oklch(0.75 0.14 85)",
           "warning-foreground": "oklch(0 0 0)",
+          "warning-text": "oklch(0.75 0.14 85)",
           "success": "oklch(0.65 0.14 142)",
-          "success-foreground": "oklch(1 0 0)"
+          "success-foreground": "oklch(0.145 0 0)",
+          "success-text": "oklch(0.70 0.14 142)",
+          "secondary-text": "oklch(0.985 0 0)",
+          "muted-text": "oklch(0.708 0 0)"
         }
       }
     },
@@ -233,6 +254,48 @@
         "@ui-sdk/core@0.1.0-beta.6"
       ],
       "registryDependencies": [
+        "https://lanzate-ui.vercel.app/r/lanzate-utils.json"
+      ]
+    },
+    {
+      "name": "badge",
+      "type": "registry:ui",
+      "title": "Badge",
+      "description": "Badge built from parts: a pill or chip in four variants and seven intent colors, with an optional leading tag, status dot and tooltip.",
+      "files": [
+        {
+          "path": "src/components/ui/badge/badge-dot.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/badge/badge-tag.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/badge/badge.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/badge/badge.types.ts",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/badge/badge.variants.ts",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/badge/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": [
+        "class-variance-authority",
+        "@ui-sdk/react@0.1.0-beta.6",
+        "@ui-sdk/core@0.1.0-beta.6"
+      ],
+      "registryDependencies": [
+        "https://lanzate-ui.vercel.app/r/lanzate-theme.json",
+        "https://lanzate-ui.vercel.app/r/tooltip.json",
         "https://lanzate-ui.vercel.app/r/lanzate-utils.json"
       ]
     },

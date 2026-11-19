@@ -37,13 +37,13 @@ export const buttonGroupOrientationClasses = {
 // The indicator sits on the group, outside any Button, so the group sets the same --btn-* variables
 // the Button's color does. Values duplicated from button.variants.ts.
 export const buttonGroupColorClasses = {
-  primary: "[--btn-color:var(--primary)] [--btn-accent:var(--primary)]",
-  secondary: "[--btn-color:var(--secondary)] [--btn-accent:var(--secondary-foreground)]",
-  muted: "[--btn-color:var(--muted)] [--btn-accent:var(--muted-foreground)]",
-  info: "[--btn-color:var(--info)] [--btn-accent:var(--info)]",
-  warning: "[--btn-color:var(--warning)] [--btn-accent:var(--warning)]",
-  success: "[--btn-color:var(--success)] [--btn-accent:var(--success)]",
-  error: "[--btn-color:var(--error)] [--btn-accent:var(--error)]",
+  primary: "[--btn-color:var(--primary)] [--btn-accent:var(--primary-text)]",
+  secondary: "[--btn-color:var(--secondary)] [--btn-accent:var(--secondary-text)]",
+  muted: "[--btn-color:var(--muted)] [--btn-accent:var(--muted-text)]",
+  info: "[--btn-color:var(--info)] [--btn-accent:var(--info-text)]",
+  warning: "[--btn-color:var(--warning)] [--btn-accent:var(--warning-text)]",
+  success: "[--btn-color:var(--success)] [--btn-accent:var(--success-text)]",
+  error: "[--btn-color:var(--error)] [--btn-accent:var(--error-text)]",
 } satisfies Record<ButtonColor, string>
 
 // Slides to the chosen item with ui-sdk's measurements; marked like an open menu trigger on the

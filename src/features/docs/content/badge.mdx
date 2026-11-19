@@ -1,0 +1,77 @@
+<ComponentBadge number="06" isNew />
+
+# Badge
+
+<Lead>A status chip or pill built from parts: a `Badge`, an optional `BadgeTag` chip in front, an optional `BadgeDot`, text and icons. Variant, color, size, radius and font are props; the tag and the dot pick their own colors. An optional tooltip makes it focusable.</Lead>
+
+<DependencyList items={["@ui-sdk/react", "class-variance-authority"]} />
+
+## Variants
+
+<Demo name="badge-variants" />
+
+## Colors
+
+`color` takes every intent color. A `BadgeTag` has its own `color` and `variant`, so the chip and the badge can differ.
+
+<Demo name="badge-colors" />
+
+## Shape and size
+
+`radius` goes from square corners to a pill, and a `BadgeTag` inside follows it. `size="sm"` is the compact chip the docs use next to new components; `font="mono"` suits versions and codes.
+
+<Demo name="badge-shape" />
+
+## Composition
+
+Put a `BadgeTag` first and the badge tightens its start padding around it. Text, a `BadgeDot` and icons go in any order; icons are sized for you. `render` turns the whole badge into a link.
+
+<Demo name="badge-composition" />
+
+## Status dot
+
+`pulse` rings the dot for live states, like a deploy in progress. The ring is off when the person prefers reduced motion, and the dot is always decorative: the text says the state.
+
+<Demo name="badge-dot" />
+
+## Tooltip
+
+`tooltip` wraps the badge in the registry Tooltip, and `tooltipOptions` sets its side, alignment, offset, arrow and delay. A tooltip needs something focusable, so a badge without `render` becomes a button, and pressing it also shows the tip on touch screens. A link badge stays a link and is its own trigger.
+
+<Demo name="badge-tooltip" />
+
+For full control, compose the parts: `<TooltipTrigger render={<Badge render={<button type="button" />} />}>`.
+
+## Installation
+
+```bash
+npx shadcn@latest add https://lanzate-ui.vercel.app/r/badge.json
+```
+
+## Usage
+
+```tsx
+import { Badge, BadgeDot, BadgeTag } from "@/components/ui/badge"
+
+// Compact chip
+<Badge size="sm" radius="sm" font="mono">NEW</Badge>
+
+// Announcement pill that links somewhere
+<Badge variant="surface" color="muted" render={<a href="/changelog" />}>
+  <BadgeTag>New</BadgeTag>
+  v0.13.0 · Badge is here
+</Badge>
+
+// Live status
+<Badge color="error">
+  <BadgeDot color="error" pulse />
+  Live
+</Badge>
+
+// With a tooltip
+<Badge color="warning" tooltip="May change before 1.0">Beta</Badge>
+```
+
+## API
+
+<ApiTable name="badge" />

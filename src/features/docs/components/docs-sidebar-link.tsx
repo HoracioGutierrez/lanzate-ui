@@ -1,5 +1,6 @@
 import Link from "next/link"
 
+import { Badge } from "@/components/ui/badge"
 import { cn } from "@/lib/utils"
 
 import type { DocsSidebarLinkProps } from "../types/docs.types"
@@ -16,7 +17,11 @@ export function DocsSidebarLink({ item, active }: DocsSidebarLinkProps) {
     >
       <span aria-hidden="true" className={cn("size-1.5 shrink-0 rounded-full transition-colors", active ? "bg-brand" : "bg-border")} />
       {item.label}
-      {item.badge && <span className="ml-auto rounded bg-brand/15 px-1 py-0.5 font-mono text-3xs text-brand">{item.badge}</span>}
+      {item.badge && (
+        <Badge size="sm" radius="sm" font="mono" className="ms-auto">
+          {item.badge}
+        </Badge>
+      )}
     </Link>
   )
 }

@@ -1,3 +1,4 @@
+import { Badge, BadgeDot, BadgeTag } from "@/components/ui/badge"
 import { Text } from "@/components/ui/text"
 import { SiteLogo } from "@/features/shell/components/site-logo"
 import { GithubIcon } from "@/features/shell/icons/github-icon"
@@ -43,13 +44,13 @@ export function HomeFooter() {
           <Text size="xs" color="muted">
             © 2026 Lanzate UI · Built with ui-sdk, Tailwind and coffee.
           </Text>
-          <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card/30 py-1 pr-3 pl-1 font-medium">
-            <span className="rounded-full bg-brand px-2 py-0.5 text-3xs font-semibold tracking-wide text-brand-foreground uppercase">v{VERSION}</span>
+          <Badge variant="surface" color="muted" className="bg-card/30 shadow-none backdrop-blur-none">
+            <BadgeTag>v{VERSION}</BadgeTag>
             <span className="flex items-center gap-1.5">
-              <span aria-hidden="true" className="size-1.5 rounded-full bg-brand" />
+              <BadgeDot />
               All operating systems
             </span>
-          </div>
+          </Badge>
         </div>
       </div>
     </footer>

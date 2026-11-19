@@ -4,7 +4,7 @@
     "color": {
       "$type": "color",
       "primary": {
-        "$value": "{primitive.color.orange.500}",
+        "$value": "{primitive.color.orange.550}",
         "$extensions": {
           "lanzate": {
             "intent": true
@@ -12,7 +12,11 @@
         }
       },
       "primary-foreground": {
-        "$value": "{primitive.color.neutral.50}"
+        "$value": "{primitive.color.neutral.0}"
+      },
+      "primary-text": {
+        "$value": "{primitive.color.orange.650}",
+        "$description": "Text, icons and borders in this intent on the page or on its own soft tint (15%). Meets 4.5:1 there, also over a muted surface, where the fill may not."
       },
       "error": {
         "$value": "{primitive.color.red.600}",
@@ -25,8 +29,12 @@
       "error-foreground": {
         "$value": "{primitive.color.neutral.0}"
       },
+      "error-text": {
+        "$value": "{primitive.color.red.700}",
+        "$description": "Text, icons and borders in this intent on the page or on its own soft tint (15%). Meets 4.5:1 there, also over a muted surface, where the fill may not."
+      },
       "info": {
-        "$value": "{primitive.color.blue.500}",
+        "$value": "{primitive.color.blue.550}",
         "$extensions": {
           "lanzate": {
             "intent": true
@@ -35,6 +43,10 @@
       },
       "info-foreground": {
         "$value": "{primitive.color.neutral.0}"
+      },
+      "info-text": {
+        "$value": "{primitive.color.blue.650}",
+        "$description": "Text, icons and borders in this intent on the page or on its own soft tint (15%). Meets 4.5:1 there, also over a muted surface, where the fill may not."
       },
       "warning": {
         "$value": "{primitive.color.yellow.500}",
@@ -47,6 +59,10 @@
       "warning-foreground": {
         "$value": "{primitive.color.neutral.1000}"
       },
+      "warning-text": {
+        "$value": "{primitive.color.yellow.700}",
+        "$description": "Text, icons and borders in this intent on the page or on its own soft tint (15%). Meets 4.5:1 there, also over a muted surface, where the fill may not."
+      },
       "success": {
         "$value": "{primitive.color.green.600}",
         "$extensions": {
@@ -57,6 +73,18 @@
       },
       "success-foreground": {
         "$value": "{primitive.color.neutral.0}"
+      },
+      "success-text": {
+        "$value": "{primitive.color.green.700}",
+        "$description": "Text, icons and borders in this intent on the page or on its own soft tint (15%). Meets 4.5:1 there, also over a muted surface, where the fill may not."
+      },
+      "secondary-text": {
+        "$value": "{primitive.color.neutral.900}",
+        "$description": "Text, icons and borders in this intent on the page or on its own soft tint (15%). Meets 4.5:1 there, also over a muted surface, where the fill may not."
+      },
+      "muted-text": {
+        "$value": "{primitive.color.neutral.550}",
+        "$description": "Text, icons and borders in this intent on the page or on its own soft tint (15%). Meets 4.5:1 there, also over a muted surface, where the fill may not."
       }
     }
   },
@@ -123,7 +151,7 @@
         "$value": "{primitive.color.neutral.400}"
       },
       "brand": {
-        "$value": "{primitive.color.orange.500}"
+        "$value": "{primitive.color.orange.550}"
       },
       "brand-foreground": {
         "$value": "{primitive.color.neutral.0}"
@@ -150,10 +178,10 @@
         "$value": "{primitive.color.neutral.950}"
       },
       "sidebar-primary": {
-        "$value": "{primitive.color.orange.500}"
+        "$value": "{primitive.color.orange.550}"
       },
       "sidebar-primary-foreground": {
-        "$value": "{primitive.color.neutral.50}"
+        "$value": "{primitive.color.neutral.0}"
       },
       "sidebar-accent": {
         "$value": "{primitive.color.neutral.100}"

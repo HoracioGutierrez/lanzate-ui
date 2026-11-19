@@ -11,7 +11,7 @@ test("renders a paragraph with its variant attributes by default", () => {
   expect(el.getAttribute("data-slot")).toBe("text")
   expect(el.getAttribute("data-size")).toBe("sm")
   expect(el.getAttribute("data-color")).toBe("muted")
-  expect(el.className).toContain("text-muted-foreground")
+  expect(el.className).toContain("text-muted-text")
 })
 
 test("render swaps the element and keeps the variant classes", () => {
@@ -61,12 +61,12 @@ test("overline variant is mono caps and muted, and color overrides the muted", (
   expect(el().className).toContain("uppercase")
   expect(el().className).toContain("tracking-wider")
   expect(el().className).not.toContain("tracking-wide ")
-  expect(el().className).toContain("text-muted-foreground")
+  expect(el().className).toContain("text-muted-text")
   expect(el().className).toContain("text-2xs")
 
   rerender(<Text variant="overline" color="primary">Label</Text>)
-  expect(el().className).toContain("text-primary")
-  expect(el().className).not.toContain("text-muted-foreground")
+  expect(el().className).toContain("text-primary-text")
+  expect(el().className).not.toContain("text-muted-text")
 })
 
 test("color inherit takes the parent's color, for text inside a control that sets its own", () => {
@@ -74,7 +74,7 @@ test("color inherit takes the parent's color, for text inside a control that set
   const el = screen.getByText("Label")
   expect(el.className).toContain("text-inherit")
   expect(el.className).not.toContain("text-foreground")
-  expect(el.className).not.toContain("text-muted-foreground")
+  expect(el.className).not.toContain("text-muted-text")
 })
 
 test("leading overrides the size's line height", () => {

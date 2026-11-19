@@ -4,7 +4,10 @@
     "color": {
       "$type": "color",
       "primary": { "$value": "oklch(0.52 0.21 30)" },
-      "primary-foreground": { "$value": "oklch(0.98 0 0)" }
+      "primary-foreground": { "$value": "oklch(0.98 0 0)" },
+      "primary-text": { "$value": "oklch(0.47 0.21 30)" },
+      "secondary-text": { "$value": "oklch(0.3 0.1 30)" },
+      "muted-text": { "$value": "oklch(0.42 0.08 35)" }
     }
   },
   "site": {

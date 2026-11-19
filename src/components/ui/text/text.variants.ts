@@ -17,7 +17,7 @@ const sizeClasses = {
 const variantClasses = {
   body: "",
   heading: "font-heading font-semibold tracking-tight",
-  overline: "font-mono uppercase tracking-wider text-muted-foreground",
+  overline: "font-mono uppercase tracking-wider text-muted-text",
 } satisfies Record<TextVariant, string>
 
 const weightClasses = {
@@ -40,15 +40,15 @@ const leadingClasses = {
 } satisfies Record<TextLeading, string>
 
 const colorClasses = {
-  primary: "text-primary",
-  secondary: "text-secondary-foreground",
-  muted: "text-muted-foreground",
-  "primary-muted": "text-primary/60",
+  primary: "text-primary-text",
+  secondary: "text-secondary-text",
+  muted: "text-muted-text",
+  "primary-muted": "text-primary-text/60",
   "secondary-muted": "text-secondary-foreground/60",
-  info: "text-info",
-  warning: "text-warning",
-  success: "text-success",
-  error: "text-error",
+  info: "text-info-text",
+  warning: "text-warning-text",
+  success: "text-success-text",
+  error: "text-error-text",
   inherit: "text-inherit",
 } satisfies Record<TextColor, string>
 

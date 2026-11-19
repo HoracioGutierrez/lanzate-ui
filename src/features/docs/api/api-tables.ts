@@ -1,4 +1,5 @@
 import type { ApiRow } from "../types/docs.types"
+import { badgeApi } from "./badge.api"
 import { buttonApi } from "./button.api"
 import { buttonGroupApi } from "./button-group.api"
 import { floatingToolbarApi } from "./floating-toolbar.api"
@@ -12,4 +13,5 @@ export const apiTables = {
   "floating-toolbar": floatingToolbarApi,
   frame: frameApi,
   "button-group": buttonGroupApi,
+  badge: badgeApi,
 } satisfies Record<string, ApiRow[]>

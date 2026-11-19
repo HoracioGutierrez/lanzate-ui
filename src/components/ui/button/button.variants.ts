@@ -15,15 +15,16 @@ import type {
 // variants with the same padding are the same size.
 
 // Each color sets three local variables the variants read:
-// --btn-color (fill), --btn-fg (text on the fill), --btn-accent (text and borders on transparent variants).
+// --btn-color (fill), --btn-fg (text on the fill), --btn-accent (text and borders on transparent and
+// soft variants: the intent's -text token, which keeps 4.5:1 where the fill color wouldn't).
 const colorClasses = {
-  primary: "[--btn-color:var(--primary)] [--btn-fg:var(--primary-foreground)] [--btn-accent:var(--primary)]",
-  secondary: "[--btn-color:var(--secondary)] [--btn-fg:var(--secondary-foreground)] [--btn-accent:var(--secondary-foreground)]",
-  muted: "[--btn-color:var(--muted)] [--btn-fg:var(--muted-foreground)] [--btn-accent:var(--muted-foreground)]",
-  info: "[--btn-color:var(--info)] [--btn-fg:var(--info-foreground)] [--btn-accent:var(--info)]",
-  warning: "[--btn-color:var(--warning)] [--btn-fg:var(--warning-foreground)] [--btn-accent:var(--warning)]",
-  success: "[--btn-color:var(--success)] [--btn-fg:var(--success-foreground)] [--btn-accent:var(--success)]",
-  error: "[--btn-color:var(--error)] [--btn-fg:var(--error-foreground)] [--btn-accent:var(--error)]",
+  primary: "[--btn-color:var(--primary)] [--btn-fg:var(--primary-foreground)] [--btn-accent:var(--primary-text)]",
+  secondary: "[--btn-color:var(--secondary)] [--btn-fg:var(--secondary-foreground)] [--btn-accent:var(--secondary-text)]",
+  muted: "[--btn-color:var(--muted)] [--btn-fg:var(--muted-text)] [--btn-accent:var(--muted-text)]",
+  info: "[--btn-color:var(--info)] [--btn-fg:var(--info-foreground)] [--btn-accent:var(--info-text)]",
+  warning: "[--btn-color:var(--warning)] [--btn-fg:var(--warning-foreground)] [--btn-accent:var(--warning-text)]",
+  success: "[--btn-color:var(--success)] [--btn-fg:var(--success-foreground)] [--btn-accent:var(--success-text)]",
+  error: "[--btn-color:var(--error)] [--btn-fg:var(--error-foreground)] [--btn-accent:var(--error-text)]",
 } satisfies Record<ButtonColor, string>
 
 const variantClasses = {

@@ -8,32 +8,47 @@ The first Lanzate component that needs tokens also installs `lanzate-theme`. It 
 
 ```css
 :root {
-  --primary: oklch(0.62 0.18 35);
-  --primary-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.575 0.18 35);
+  --primary-foreground: oklch(1 0 0);
+  --primary-text: oklch(0.50 0.18 35);
   --error: oklch(0.577 0.245 27.325);
   --error-foreground: oklch(1 0 0);
-  --info: oklch(0.60 0.15 240);
+  --error-text: oklch(0.46 0.245 27.325);
+  --info: oklch(0.555 0.15 240);
   --info-foreground: oklch(1 0 0);
+  --info-text: oklch(0.47 0.15 240);
   --warning: oklch(0.70 0.15 85);
   --warning-foreground: oklch(0 0 0);
+  --warning-text: oklch(0.485 0.15 85);
   --success: oklch(0.55 0.15 142);
   --success-foreground: oklch(1 0 0);
+  --success-text: oklch(0.47 0.15 142);
+  --secondary-text: oklch(0.205 0 0);
+  --muted-text: oklch(0.49 0 0);
 }
 
 .dark {
   --primary: oklch(0.66 0.18 35);
-  --primary-foreground: oklch(0.98 0.01 80);
+  --primary-foreground: oklch(0.145 0 0);
+  --primary-text: oklch(0.74 0.18 35);
   --error: oklch(0.704 0.191 22.216);
+  --error-text: oklch(0.765 0.191 22.216);
   --info: oklch(0.70 0.15 240);
   --warning: oklch(0.75 0.14 85);
   --success: oklch(0.65 0.14 142);
-  /* …foregrounds as in :root */
+  --success-text: oklch(0.70 0.14 142);
+  /* …the rest follow the same pattern */
 }
 ```
 
 ## Intent colors
 
-Components' `color` prop takes an intent: `primary`, `secondary`, `muted`, `info`, `warning`, `success` or `error`. Each intent has a `-foreground` partner for text on top of it, so contrast is decided once, in the tokens.
+Components' `color` prop takes an intent: `primary`, `secondary`, `muted`, `info`, `warning`, `success` or `error`. Each intent has two partners, so contrast is decided once, in the tokens:
+
+- `-foreground` is text on a solid fill, like a solid Button's label.
+- `-text` is text, icons and borders in the intent's color on the page or on its own light tint, like a soft Badge or `Text color="info"`. It's darker than the fill in light mode and lighter in dark, so it stays readable (4.5:1) where the fill color wouldn't.
+
+Use `text-info-text` for colored text in your own components, and keep `bg-info` for fills.
 
 ## Fluid typography
 
@@ -57,12 +72,13 @@ Override any token after the installed ones. For example, a blue primary:
 
 ```css
 :root {
-  --primary: oklch(0.6 0.2 240);
+  --primary: oklch(0.55 0.2 240);
   --primary-foreground: oklch(1 0 0);
+  --primary-text: oklch(0.47 0.2 240);
 }
 ```
 
-Check contrast after a change: text needs 4.5:1 against what's behind it.
+Override an intent's `-foreground` and `-text` with it. Check contrast after a change: text needs 4.5:1 against what's behind it, including `-text` on a 15% tint of itself.
 
 ## Merging classes
 

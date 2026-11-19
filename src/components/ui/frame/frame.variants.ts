@@ -67,7 +67,7 @@ export const frameTitleClasses =
 export const frameTitleTriggerClasses = [
   "cursor-pointer outline-none select-none",
   "transition-colors duration-150 ease-out motion-reduce:transition-none",
-  "hover:text-primary focus-visible:inset-ring focus-visible:inset-ring-ring",
+  "hover:text-primary-text focus-visible:inset-ring focus-visible:inset-ring-ring",
 ].join(" ")
 
 // A block, not a flex row: text-overflow only draws the ellipsis on block containers.
@@ -87,7 +87,7 @@ export const frameContentPanelClasses = [
 export const frameControlClasses = "size-(--frame-control) shrink-0 focus-visible:ring-offset-0 [&_svg]:size-4"
 
 // The three-dot button stays marked while its menu is open.
-export const frameMenuTriggerClasses = "data-open:bg-primary/10 data-open:text-primary"
+export const frameMenuTriggerClasses = "data-open:bg-primary/10 data-open:text-primary-text"
 
 export const frameBackIconClasses = "rtl:-scale-x-100"
 
@@ -113,11 +113,11 @@ export const frameMenuItemClasses = [
   "group/item flex min-h-9 cursor-default items-center gap-2.5 px-2.5 py-1.5 outline-none select-none",
   "data-highlighted:bg-accent data-highlighted:text-accent-foreground",
   "data-disabled:pointer-events-none data-disabled:opacity-50",
-  "data-destructive:text-error data-destructive:data-highlighted:bg-error/10",
+  "data-destructive:text-error-text data-destructive:data-highlighted:bg-error/10",
   "[&_svg]:size-4 [&_svg]:shrink-0 [&_svg]:stroke-[1.75]",
 ].join(" ")
 
-export const frameMenuItemIconClasses = "inline-flex text-muted-foreground group-data-highlighted/item:text-primary"
+export const frameMenuItemIconClasses = "inline-flex text-muted-foreground group-data-highlighted/item:text-primary-text"
 
 export const frameMenuItemLabelClasses = "min-w-0 flex-1"
 

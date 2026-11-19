@@ -4,6 +4,34 @@ All notable changes to the Lanzate UI registry. Versions follow
 [Semantic Versioning](https://semver.org); while the version is `0.x`, a
 minor bump may contain breaking changes.
 
+## 0.13.0
+
+### Added
+
+- **Badge** (`badge`): a core component for status chips and pills, built
+  from parts. `Badge` takes `variant` (`solid`, `soft`, `outline`,
+  `surface`), `color` (every intent), `size` (`sm` chip, `md` pill),
+  `radius` (`none`, `sm`, `md`, `full`) and `font`, and changes its element
+  with `render` (a link, say). `BadgeTag` is the small chip in front, with
+  its own `color` and `variant`; `BadgeDot` is a status dot whose `pulse`
+  rings for live states (off under reduced motion). `tooltip` and
+  `tooltipOptions` wrap it in the registry Tooltip: a badge with no
+  `render` becomes a focusable button whose tip also toggles on press, for
+  touch screens. Server Component friendly.
+
+### Changed
+
+- **Intent colors meet WCAG AA (4.5:1)** in light and dark mode. Each intent
+  gets a `<intent>-text` token (`primary-text`, `info-text`, `muted-text`…)
+  for text, icons and borders on the page or on its own soft tint; Button,
+  Button Group, Badge, Text, Frame and Floating Toolbar use it wherever the
+  intent was text (soft, outline, ghost and dashed variants, colored text,
+  menu items). `Text`'s `muted` color and overline use `muted-text`. Light
+  `primary` (0.62 → 0.575) and `info` (0.60 → 0.555) are slightly darker so
+  white text on them passes; in dark mode every intent's `-foreground` is
+  dark ink. Themes that override an intent must override its `-text` too.
+  If you override `--primary`, also set `--primary-text`. See decision 0007.
+
 ## 0.12.0
 
 ### Added
