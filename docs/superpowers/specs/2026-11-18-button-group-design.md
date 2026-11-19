@@ -96,8 +96,10 @@ are hand-rolled (no keyboard model) and split across two components.
 
 - **`ButtonGroup`** — root. Props: `selection`, `value`, `defaultValue`,
   `onValueChange`, `color` (`ButtonColor`, default `primary`), `size`
-  (`"xs" | "md" | "lg"`, default `md`; maps to Button padding `xs` / `sm` / `md`), `radius`, `orientation`, `disabled`,
+  (`"xs" | "md" | "lg"`, default `md`; maps to Button padding `xs` / `sm` / `md`), `orientation`, `disabled`,
   `aria-label`, `className`, `children`. `single` adds `name`, `required`.
+  No `radius`: the tray is always `rounded-sm` and items `radius="none"`,
+  part of the industrial look (dropped 2026-11-19).
   Renders the industrial tray (see Look). Provides a context:
   `{ selection, color, size }`. In `single` it renders
   `SegmentedControlIndicator` first.
@@ -132,11 +134,14 @@ are hand-rolled (no keyboard model) and split across two components.
 - "Lit" = an LED: a small square (`size-1.5 bg-current`) before the label of
   the active item, as in `lanzate`'s `ToggleGroup`, plus the solid fill.
   Inactive items show the LED off (`bg-current/25` or `bg-border`), so
-  items don't shift when they light up. Icon-only items have no LED.
+  items don't shift when they light up. Items with any icon (`icon`, `startIcon`, `endIcon`) have no LED.
   Replaces the earlier `effect="glow"` idea.
-- Single indicator: `bg-(--btn-color)/15` + `inset-ring` in the color at
+- Single indicator: `bg-(--btn-accent)/15` + `inset-ring` in the accent at
   50%, the same "marked" look the toolbar and frame menu triggers use while
-  open.
+  open. `--btn-accent`, not `--btn-color`: for `secondary` and `muted` the
+  fill color is a near-background neutral that disappears at 15%, while
+  the accent (their foreground) stays visible. For the other colors the two
+  are the same value.
 - Labels keep the Button's type; no mono/uppercase forced (consumers can
   pass `textClassName`). *Open for the user to change.*
 
@@ -144,10 +149,10 @@ are hand-rolled (no keyboard model) and split across two components.
 
 1. Indicator: absolute, `z-index: -1`, position/size from the ui-sdk CSS
    variables, `transition-[left,top,width,height]` on `ease-spring`, filled
-   with the group color at low opacity (`bg-(--btn-color)/20` or
-   equivalent token-based color).
+   with the group accent at low opacity (`bg-(--btn-accent)/15`, see Look).
 2. Checked item: its solid fill fades in with a `transition-delay` equal to
-   the slide duration, so the moving highlight "lands" and melts into the
+   the slide duration, on `color` and `background-color` only (the focus
+   ring, opacity and press keep their own timing), so the moving highlight "lands" and melts into the
    active button. Unchecked → ghost fades out immediately.
 3. `motion-reduce`: no slide, no delay; the fill just swaps.
 4. Nothing checked → indicator has no box (ui-sdk behavior).

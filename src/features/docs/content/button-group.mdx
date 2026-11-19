@@ -46,6 +46,19 @@ Press Pending and Paid to show both; press All to clear them. Each lit item gets
 
 <Demo name="button-group-states" />
 
+## Agents
+
+The group is ready for ui-sdk agents (`createAgent` from `@ui-sdk/react/agent`); find it by its `aria-label`. In `single`, use the group's `setValue` action. In `multiple`, use the group's `toggle` action with the item's value, not the item's label: each item is both ui-sdk's toggle and the registry `Button`, so its label names two entries in the snapshot and pressing it by label is ambiguous.
+
+```ts
+await agent.act({
+  steps: [
+    { ref: "View", action: "setValue", args: ["grid"] },
+    { ref: "Status", action: "toggle", args: ["paid"] },
+  ],
+})
+```
+
 ## Installation
 
 ```bash

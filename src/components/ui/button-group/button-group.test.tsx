@@ -310,3 +310,58 @@ test("a disabled group is dimmed once, by its items", () => {
   render(Views({ disabled: true, defaultValue: "list" }))
   expect(screen.getByRole("radiogroup", { name: "View" }).className).not.toContain("data-disabled:opacity")
 })
+
+test("single: only the fill waits for the indicator, not the focus ring or the press", () => {
+  render(Views({ defaultValue: "list" }))
+  const classes = radio("List").className.split(" ")
+  // A blanket delay would hold back every transition of the checked item.
+  expect(classes.some((name) => /(^|:)delay-\d/.test(name) && !name.startsWith("motion-reduce:"))).toBe(false)
+  expect(classes.some((name) => name.includes("transition-delay"))).toBe(true)
+})
+
+test("ui-sdk's item props win over the consumer's", () => {
+  // The types only let data-* through; this forces the rest to prove the spread order.
+  const override = { role: "link", "aria-checked": "mixed", tabIndex: 5 } as Record<string, unknown>
+  render(
+    <ButtonGroup selection="single" aria-label="View" defaultValue="list">
+      <ButtonGroupItem value="list" {...override}>List</ButtonGroupItem>
+      <ButtonGroupItem value="grid">Grid</ButtonGroupItem>
+    </ButtonGroup>
+  )
+  const item = radio("List")
+  expect(item.getAttribute("aria-checked")).toBe("true")
+  expect(item.getAttribute("tabindex")).toBe("0")
+})
+
+test("going from controlled to uncontrolled keeps the last value", () => {
+  const { rerender } = render(Views({ value: "grid", defaultValue: "list" }))
+  expect(radio("Grid").getAttribute("aria-checked")).toBe("true")
+  rerender(Views({ value: undefined, defaultValue: "list" }))
+  expect(radio("Grid").getAttribute("aria-checked")).toBe("true")
+})
+
+test.each(["single", "multiple"] as const)("%s: a form reset reports the reset value once", async (selection) => {
+  const user = userEvent.setup()
+  const onValueChange = vi.fn()
+  render(
+    <form aria-label="Filters">
+      {selection === "single"
+        ? Views({ defaultValue: "list", onValueChange, name: "view" })
+        : Filters({ defaultValue: ["pending"], onValueChange })}
+      <button type="reset">Reset</button>
+    </form>
+  )
+  await user.click(selection === "single" ? radio("Grid") : toggle("Paid"))
+  onValueChange.mockClear()
+  await user.click(screen.getByRole("button", { name: "Reset" }))
+  await tick()
+  // ToggleGroup doesn't take part in forms, so multiple has nothing to reset.
+  expect(onValueChange.mock.calls).toEqual(selection === "single" ? [["list"]] : [])
+})
+
+test("an item can shrink and break a word longer than the tray", () => {
+  render(Filters({}))
+  const classes = toggle("Paid").className.split(" ")
+  expect(classes).toContain("min-w-0")
+  expect(classes).toContain("wrap-anywhere")
+})

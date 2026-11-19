@@ -33,9 +33,10 @@ export function ButtonGroupItem({
   const hasIcon = startIcon != null || endIcon != null
 
   const draw = (partProps: object, on: boolean) => (
+    // ui-sdk's part props (role, aria-checked, handlers, tabIndex) go last so the consumer's can't replace them.
     <Button
-      {...partProps}
       {...props}
+      {...partProps}
       variant={on ? "solid" : "ghost"}
       color={on ? color : "muted"}
       padding={buttonGroupItemPadding[size]}

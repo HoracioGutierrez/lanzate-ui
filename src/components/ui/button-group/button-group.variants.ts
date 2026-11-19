@@ -55,13 +55,21 @@ export const buttonGroupIndicatorClasses = [
   "transition-[left,top,width,height] duration-200 ease-spring motion-reduce:transition-none",
 ].join(" ")
 
-// The tray clips an outer ring, so the focus ring goes inside.
+// The tray clips an outer ring, so the focus ring goes inside. A word wider than the tray (a narrow
+// phone) breaks inside its item instead of pushing the tray past its container.
 const itemBaseClasses =
-  "group/item focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:inset-ring focus-visible:inset-ring-ring"
+  "group/item min-w-0 wrap-anywhere focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:inset-ring focus-visible:inset-ring-ring"
 
 // In single, the checked item waits for the indicator to land, then its fill fades in over it.
+// Only the fill and text wait: the focus ring, opacity and press keep their timing. The property
+// list is restated here (same as the Button's) so the per-property delays line up with it.
+const singleItemClasses = [
+  "transition-[color,background-color,border-color,box-shadow,opacity,scale,translate]",
+  "motion-safe:data-checked:[transition-delay:200ms,200ms,0s,0s,0s,0s,0s]",
+].join(" ")
+
 export const buttonGroupItemClasses = {
-  single: `${itemBaseClasses} data-checked:delay-200 motion-reduce:data-checked:delay-0`,
+  single: `${itemBaseClasses} ${singleItemClasses}`,
   multiple: itemBaseClasses,
 } satisfies Record<ButtonGroupSelection, string>
 
