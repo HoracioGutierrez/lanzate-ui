@@ -59,6 +59,9 @@ export type DocsPagerLinkProps = { item: DocItem; direction: "previous" | "next"
 export type PreviewPaneProps = { children: ReactNode; layout?: DemoLayout }
 export type CodeBlockProps = { code: string }
 export type DemoProps = { name: DemoName }
+/** Which half of a demo is showing: the live component or its source. */
+export type DemoView = "preview" | "code"
+export type DemoTabsProps = { preview: ReactNode; code: ReactNode }
 export type ApiTableProps = { name: ApiTableName }
 export type ComponentBadgeProps = { number: string; isNew?: boolean }
 export type DependencyListProps = { items: string[] }
