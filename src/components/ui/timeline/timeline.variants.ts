@@ -183,16 +183,23 @@ const timelineMarkerStatusClasses = [
 ].join(" ")
 
 // The current step is framed by registration brackets on two opposite corners, a small reticle like
-// the marks on Frame and Button Group. `pulse` frames any marker and makes the brackets blink.
+// the marks on Frame and Button Group. One pseudo-element draws both brackets with background bars, so
+// the other can carry a copy that pings: Tailwind's ping scales it up from the marker's center as it
+// fades, which moves both corners outward. `pulse` frames any marker and sends out that echo.
+const timelineReticleVarClasses = [
+  "[--timeline-reticle-size:max(--spacing(1.5),calc(var(--timeline-marker)/3))]",
+  "[--timeline-reticle:linear-gradient(var(--timeline-accent),var(--timeline-accent))_top_left/var(--timeline-reticle-size)_1px_no-repeat,linear-gradient(var(--timeline-accent),var(--timeline-accent))_top_left/1px_var(--timeline-reticle-size)_no-repeat,linear-gradient(var(--timeline-accent),var(--timeline-accent))_bottom_right/var(--timeline-reticle-size)_1px_no-repeat,linear-gradient(var(--timeline-accent),var(--timeline-accent))_bottom_right/1px_var(--timeline-reticle-size)_no-repeat]",
+].join(" ")
+
 const timelineReticleCurrentClasses = [
-  "data-current:before:pointer-events-none data-current:before:absolute data-current:before:-start-1 data-current:before:-top-1 data-current:before:size-[max(--spacing(1.5),calc(var(--timeline-marker)/3))] data-current:before:border-s data-current:before:border-t data-current:before:border-(--timeline-accent)",
-  "data-current:after:pointer-events-none data-current:after:absolute data-current:after:-end-1 data-current:after:-bottom-1 data-current:after:size-[max(--spacing(1.5),calc(var(--timeline-marker)/3))] data-current:after:border-e data-current:after:border-b data-current:after:border-(--timeline-accent)",
+  "data-current:before:pointer-events-none data-current:before:absolute data-current:before:-inset-1 data-current:before:[background:var(--timeline-reticle)]",
+  "rtl:data-current:before:-scale-x-100",
 ].join(" ")
 
 const timelineReticlePulseClasses = [
-  "before:pointer-events-none before:absolute before:-start-1 before:-top-1 before:size-[max(--spacing(1.5),calc(var(--timeline-marker)/3))] before:border-s before:border-t before:border-(--timeline-accent)",
-  "after:pointer-events-none after:absolute after:-end-1 after:-bottom-1 after:size-[max(--spacing(1.5),calc(var(--timeline-marker)/3))] after:border-e after:border-b after:border-(--timeline-accent)",
-  "motion-safe:before:animate-pulse motion-safe:after:animate-pulse",
+  "before:pointer-events-none before:absolute before:-inset-1 before:[background:var(--timeline-reticle)] rtl:before:-scale-x-100",
+  "after:pointer-events-none after:absolute after:-inset-1 after:[background:var(--timeline-reticle)] rtl:after:-scale-x-100",
+  "after:opacity-0 motion-safe:after:opacity-100 motion-safe:after:animate-ping",
 ].join(" ")
 
 export const timelineMarkerClasses = (shape: TimelineMarkerShape, variant: TimelineMarkerVariant | undefined, pulse: boolean) =>
@@ -204,6 +211,7 @@ export const timelineMarkerClasses = (shape: TimelineMarkerShape, variant: Timel
     "group-data-[variant=line]/timeline:in-data-starting-style:scale-50 motion-reduce:in-data-starting-style:scale-100",
     timelineMarkerShapeClasses[shape],
     variant ? timelineMarkerVariantClasses[variant] : timelineMarkerStatusClasses,
+    timelineReticleVarClasses,
     pulse ? timelineReticlePulseClasses : timelineReticleCurrentClasses,
   ].join(" ")
 

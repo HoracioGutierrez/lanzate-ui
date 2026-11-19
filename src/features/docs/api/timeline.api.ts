@@ -17,7 +17,7 @@ export const timelineApi: ApiRow[] = [
   { prop: "TimelineItem value", type: "string", description: "Names the event for the controller's focus()." },
   { prop: "TimelineMarker shape", type: '"circle" | "square"', default: '"square"', description: "Square for the industrial look, circle for a softer one. Children (an icon or a number) are decorative." },
   { prop: "TimelineMarker variant", type: '"solid" | "soft" | "outline"', description: "Fill style. Without it the marker follows the status: complete solid, current soft, upcoming outline." },
-  { prop: "TimelineMarker pulse", type: "boolean", default: "false", description: "Frames the marker with blinking registration brackets, for a live step. The current step is framed even without it. Off under reduced motion." },
+  { prop: "TimelineMarker pulse", type: "boolean", default: "false", description: "Frames the marker with registration brackets and sends an echo of them outward as it fades, like a pulse, for a live step. The current step is framed even without it. The echo is off under reduced motion." },
   { prop: "TimelineMarker tooltip", type: "ReactNode", description: "Extra info in a tooltip. The marker becomes a button Tab reaches after its event; a press toggles it on touch screens." },
   { prop: "TimelineMarker tooltipLabel", type: "string", description: "Name of the marker's button. Without it the tooltip names it; pass one when the tooltip isn't plain text." },
   { prop: "TimelineMarker tooltipOptions", type: "{ side, align, sideOffset, arrow, delay, toggleable, className }", description: "Settings passed to the Tooltip and its content." },
