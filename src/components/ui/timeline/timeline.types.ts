@@ -29,7 +29,7 @@ export type TimelineVariant = "line" | "tiles"
 /** `sm`: small dots or compact tiles. `md`: markers with room for an icon. `lg`: big markers or tall tiles. */
 export type TimelineSize = "sm" | "md" | "lg"
 
-/** `circle` for dots and steps; `square` for tiles. */
+/** `square` (the default) for the industrial look; `circle` for a softer one. */
 export type TimelineMarkerShape = "circle" | "square"
 
 /** `solid` fills the marker, `soft` tints it with a colored edge, `outline` draws only the edge. */
@@ -74,11 +74,11 @@ export type TimelineMarkerProps = Omit<ComponentProps<typeof TimelineMarkerPart>
   className?: string
   /** An icon or a short label inside the marker. Decorative: say the status in the title too. */
   children?: ReactNode
-  /** Defaults to "circle". */
+  /** Defaults to "square", the edge of the registry's industrial look. */
   shape?: TimelineMarkerShape
   /** Defaults from the event's status: `complete` solid, `current` soft, `upcoming` outline, none solid. */
   variant?: TimelineMarkerVariant
-  /** Rings the marker, for a live step. Off when the person prefers reduced motion. */
+  /** Frames the marker with blinking brackets, for a live step. Off when the person prefers reduced motion. */
   pulse?: boolean
   /**
    * Extra info in a tooltip. The marker becomes a focusable button; Tab reaches it after its event,

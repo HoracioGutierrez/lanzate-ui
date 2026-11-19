@@ -20,7 +20,7 @@ import {
 } from "./timeline.variants"
 
 export function TimelineMarker({
-  shape = "circle",
+  shape = "square",
   variant,
   pulse = false,
   tooltip,

@@ -10,12 +10,12 @@ import { TimelineContext } from "./timeline.constants"
 import type { TimelineTimeProps } from "./timeline.types"
 import { timelineTimeClasses } from "./timeline.variants"
 
-// In a tile the time reads like a readout: mono, at the foot of the card.
+// The time reads like a readout: mono, and in a tile at the foot of the card.
 export function TimelineTime({ className, children, ...props }: TimelineTimeProps) {
   const { variant } = use(TimelineContext)
   return (
     <TimelineTimePart className={cn(timelineTimeClasses, className)} {...props}>
-      <Text render={<span />} size={variant === "tiles" ? "2xs" : "xs"} font={variant === "tiles" ? "mono" : undefined} color="muted">
+      <Text render={<span />} size={variant === "tiles" ? "2xs" : "xs"} font="mono" color="muted">
         {children}
       </Text>
     </TimelineTimePart>

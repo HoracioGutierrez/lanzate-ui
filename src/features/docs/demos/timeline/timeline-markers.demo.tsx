@@ -10,7 +10,7 @@ export function TimelineMarkersDemo() {
         <Timeline key={size} aria-label={`Markers, ${size}`} size={size}>
           {variants.map((variant) => (
             <TimelineItem key={variant} color="info">
-              <TimelineMarker variant={variant} shape={size === "lg" ? "square" : "circle"} />
+              <TimelineMarker variant={variant} />
               <TimelineTitle>
                 {size} · {variant}
               </TimelineTitle>

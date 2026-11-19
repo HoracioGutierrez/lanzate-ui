@@ -20,7 +20,10 @@ minor bump may contain breaking changes.
   `square`), `variant` (`solid`, `soft`, `outline`, defaulting from the
   status), `pulse` and `tooltip` / `tooltipLabel` / `tooltipOptions`, which
   turn it into a button carrying the registry Tooltip (over the whole card
-  in a tile). `TimelineConnector` fills as its step completes.
+  in a tile). In a line, markers are square by default with 1px edges, the
+  current one framed by registration brackets, and `TimelineConnector` is a
+  dashed track that fills solid as its step completes. Times read as a
+  mono readout.
   `TimelineTitle`, `TimelineTime`, `TimelineDescription` and
   `TimelineContent` hold the text. The collapsible mode
   (`TimelineCollapsible`, `TimelineCollapsibleTrigger`,

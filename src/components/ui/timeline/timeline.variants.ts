@@ -76,7 +76,7 @@ const timelineItemEntranceClasses = [
 // or under it (horizontal). In a vertical timeline the smaller of marker and title line is centered on
 // the other through --timeline-marker-top and the content's top padding.
 const timelineLineItemClasses = [
-  "group/timeline-item relative min-w-0 rounded-md outline-none",
+  "group/timeline-item relative min-w-0 outline-none",
   "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring",
   "data-[orientation=vertical]:[--timeline-marker-top:max(0px,calc((var(--timeline-line)-var(--timeline-marker))/2))]",
   "data-[orientation=vertical]:min-h-[calc(var(--timeline-marker)+var(--timeline-gap))] data-[orientation=vertical]:last:min-h-(--timeline-marker) data-[orientation=vertical]:data-last:min-h-(--timeline-marker)",
@@ -153,17 +153,20 @@ export const timelineTileMarkerClasses = (pulse: boolean) =>
       : "",
   ].join(" ")
 
+// Square by default, the edge of Frame's cards; circle for a softer timeline.
 const timelineMarkerShapeClasses = {
   circle: "rounded-full",
-  square: "rounded-[calc(var(--timeline-marker)/4)]",
+  square: "rounded-none",
 } satisfies Record<TimelineMarkerShape, string>
 
 export const timelineMarkerRadiusClasses = timelineMarkerShapeClasses
 
+// 1px edges, like Frame. Done steps light up solid, the current one is a tinted square, and a
+// pending one is a dashed outline. Soft and outline paint over the page background first, so the
+// connector never shows through.
 const solid = "border-(--timeline-color) bg-(--timeline-color) text-(--timeline-fg)"
-// Soft and outline paint over the page background first, so the connector never shows through.
 const soft = "border-(--timeline-accent) bg-background bg-linear-to-b from-(--timeline-accent)/15 to-(--timeline-accent)/15 text-(--timeline-accent)"
-const outline = "border-(--timeline-accent)/50 bg-background text-(--timeline-accent)"
+const outline = "border-dashed border-(--timeline-accent)/60 bg-background text-(--timeline-accent)"
 
 const timelineMarkerVariantClasses = {
   solid,
@@ -176,24 +179,32 @@ const timelineMarkerVariantClasses = {
 const timelineMarkerStatusClasses = [
   solid,
   "data-current:border-(--timeline-accent) data-current:bg-linear-to-b data-current:from-(--timeline-accent)/15 data-current:to-(--timeline-accent)/15 data-current:bg-background data-current:text-(--timeline-accent)",
-  "data-upcoming:border-(--timeline-accent)/50 data-upcoming:bg-background data-upcoming:text-(--timeline-accent)",
+  "data-upcoming:border-dashed data-upcoming:border-(--timeline-accent)/60 data-upcoming:bg-background data-upcoming:text-(--timeline-accent)",
 ].join(" ")
 
-// A circle stays round; a square morphs from a radius of half its size, a length that interpolates
-// smoothly (rounded-full's huge radius would snap at the end).
+// The current step is framed by registration brackets on two opposite corners, a small reticle like
+// the marks on Frame and Button Group. `pulse` frames any marker and makes the brackets blink.
+const timelineReticleCurrentClasses = [
+  "data-current:before:pointer-events-none data-current:before:absolute data-current:before:-start-1 data-current:before:-top-1 data-current:before:size-[max(--spacing(1.5),calc(var(--timeline-marker)/3))] data-current:before:border-s data-current:before:border-t data-current:before:border-(--timeline-accent)",
+  "data-current:after:pointer-events-none data-current:after:absolute data-current:after:-end-1 data-current:after:-bottom-1 data-current:after:size-[max(--spacing(1.5),calc(var(--timeline-marker)/3))] data-current:after:border-e data-current:after:border-b data-current:after:border-(--timeline-accent)",
+].join(" ")
+
+const timelineReticlePulseClasses = [
+  "before:pointer-events-none before:absolute before:-start-1 before:-top-1 before:size-[max(--spacing(1.5),calc(var(--timeline-marker)/3))] before:border-s before:border-t before:border-(--timeline-accent)",
+  "after:pointer-events-none after:absolute after:-end-1 after:-bottom-1 after:size-[max(--spacing(1.5),calc(var(--timeline-marker)/3))] after:border-e after:border-b after:border-(--timeline-accent)",
+  "motion-safe:before:animate-pulse motion-safe:after:animate-pulse",
+].join(" ")
+
 export const timelineMarkerClasses = (shape: TimelineMarkerShape, variant: TimelineMarkerVariant | undefined, pulse: boolean) =>
   [
-    "inline-flex size-(--timeline-marker) shrink-0 items-center justify-center border-2 text-2xs font-semibold",
-    "[&_svg]:size-3/5 [&_svg]:shrink-0 group-data-[size=sm]/timeline:[&_svg]:hidden",
-    "transition-[background-color,border-color,color,scale,border-radius] duration-500 ease-out motion-reduce:transition-none",
+    "inline-flex size-(--timeline-marker) shrink-0 items-center justify-center border text-2xs font-semibold",
+    "[&_svg]:size-1/2 [&_svg]:shrink-0 group-data-[size=sm]/timeline:[&_svg]:hidden",
+    "transition-[background-color,border-color,color,scale] duration-500 ease-out motion-reduce:transition-none",
     "in-data-[slot=collapsible-panel]:delay-(--timeline-delay) in-data-ending-style:delay-0",
     "group-data-[variant=line]/timeline:in-data-starting-style:scale-50 motion-reduce:in-data-starting-style:scale-100",
     timelineMarkerShapeClasses[shape],
-    shape === "square" ? "in-data-starting-style:rounded-[calc(var(--timeline-marker)/2)]" : "",
     variant ? timelineMarkerVariantClasses[variant] : timelineMarkerStatusClasses,
-    pulse
-      ? "before:pointer-events-none before:absolute before:-inset-0.5 before:rounded-[inherit] before:border-2 before:border-(--timeline-accent) motion-safe:before:animate-ping"
-      : "",
+    pulse ? timelineReticlePulseClasses : timelineReticleCurrentClasses,
   ].join(" ")
 
 // In a tile the button covers the whole card, so hovering anywhere on it shows the tooltip.
@@ -211,18 +222,20 @@ export const timelineMarkerTriggerClasses = {
   ].join(" "),
 } satisfies Record<TimelineVariant, string>
 
-// A track in the border color with the accent drawn over it; a done event fills its line, so moving
-// the current step animates the progress along the timeline.
+// A 1px dashed track, like a measuring rule, with the status color drawn over it solid; a done
+// event fills its line, so moving the current step animates the progress along the timeline.
 export const timelineConnectorClasses = [
-  "pointer-events-none absolute overflow-hidden rounded-full bg-border",
+  "pointer-events-none absolute overflow-hidden",
   "after:absolute after:inset-0 after:bg-(--timeline-accent) after:transition-transform after:duration-500 after:ease-out motion-reduce:after:transition-none",
   "group-last/timeline-item:hidden group-data-last/timeline-item:hidden group-data-[variant=tiles]/timeline:hidden",
-  "data-[orientation=vertical]:start-[calc(var(--timeline-marker)/2)] data-[orientation=vertical]:w-0.5 data-[orientation=vertical]:-translate-x-1/2 rtl:data-[orientation=vertical]:translate-x-1/2",
-  "data-[orientation=vertical]:top-[calc(var(--timeline-marker-top)+var(--timeline-marker)+--spacing(1))]",
-  "data-[orientation=vertical]:bottom-[calc(--spacing(1)-var(--timeline-marker-top))]",
+  "data-[orientation=vertical]:start-[calc(var(--timeline-marker)/2)] data-[orientation=vertical]:w-px data-[orientation=vertical]:-translate-x-1/2 rtl:data-[orientation=vertical]:translate-x-1/2",
+  "data-[orientation=vertical]:bg-[repeating-linear-gradient(to_bottom,color-mix(in_oklab,var(--muted-foreground)_45%,transparent)_0_3px,transparent_3px_6px)]",
+  "data-[orientation=vertical]:top-[calc(var(--timeline-marker-top)+var(--timeline-marker)+--spacing(1.5))]",
+  "data-[orientation=vertical]:bottom-[calc(--spacing(1.5)-var(--timeline-marker-top))]",
   "data-[orientation=vertical]:after:origin-top data-[orientation=vertical]:after:scale-y-0 data-[orientation=vertical]:data-complete:after:scale-y-100",
-  "data-[orientation=horizontal]:top-[calc(var(--timeline-marker)/2)] data-[orientation=horizontal]:h-0.5 data-[orientation=horizontal]:-translate-y-1/2",
-  "data-[orientation=horizontal]:start-[calc(var(--timeline-marker)+--spacing(1))] data-[orientation=horizontal]:end-1",
+  "data-[orientation=horizontal]:top-[calc(var(--timeline-marker)/2)] data-[orientation=horizontal]:h-px data-[orientation=horizontal]:-translate-y-1/2",
+  "data-[orientation=horizontal]:bg-[repeating-linear-gradient(to_right,color-mix(in_oklab,var(--muted-foreground)_45%,transparent)_0_3px,transparent_3px_6px)]",
+  "data-[orientation=horizontal]:start-[calc(var(--timeline-marker)+--spacing(1.5))] data-[orientation=horizontal]:end-1.5",
   "data-[orientation=horizontal]:after:origin-left rtl:data-[orientation=horizontal]:after:origin-right",
   "data-[orientation=horizontal]:after:scale-x-0 data-[orientation=horizontal]:data-complete:after:scale-x-100",
 ].join(" ")

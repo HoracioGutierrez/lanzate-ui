@@ -140,7 +140,7 @@ test("markers are decorative, take a shape and follow the status unless a varian
   render(
     <Timeline aria-label="Steps">
       <TimelineItem status="current">
-        <TimelineMarker shape="square" pulse />
+        <TimelineMarker pulse />
         <TimelineTitle>Now</TimelineTitle>
       </TimelineItem>
       <TimelineItem status="upcoming">
@@ -155,7 +155,8 @@ test("markers are decorative, take a shape and follow the status unless a varian
   expect(first!.getAttribute("data-shape")).toBe("square")
   expect(first!.hasAttribute("data-current")).toBe(true)
   expect(first!.className).toContain("data-current:border-(--timeline-accent)")
-  expect(first!.className).toContain("motion-safe:before:animate-ping")
+  expect(first!.className).toContain("rounded-none")
+  expect(first!.className).toContain("motion-safe:before:animate-pulse")
   expect(second!.className).not.toContain("data-upcoming:")
   expect(second!.className).toContain("bg-(--timeline-color)")
 })
