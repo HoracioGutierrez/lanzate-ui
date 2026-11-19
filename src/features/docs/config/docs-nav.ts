@@ -19,6 +19,7 @@ export const docsNav: DocGroup[] = [
       { id: "frame", label: "Frame", badge: "New" },
       { id: "button-group", label: "Button Group", badge: "New" },
       { id: "badge", label: "Badge", badge: "New" },
+      { id: "timeline", label: "Timeline", badge: "New" },
     ],
   },
 ]

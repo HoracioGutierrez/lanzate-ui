@@ -4,6 +4,30 @@ All notable changes to the Lanzate UI registry. Versions follow
 [Semantic Versioning](https://semver.org); while the version is `0.x`, a
 minor bump may contain breaking changes.
 
+## 0.14.0
+
+### Added
+
+- **Timeline** (`timeline`): events in order, built on ui-sdk's Timeline (a
+  named list, one tab stop, arrow keys by orientation). `Timeline` takes
+  `orientation`, `variant` (`line`: markers joined by a line; `tiles`:
+  each event is a card with its content inside, sharing the row equally),
+  `size` and `appear` (staggered entrance). `TimelineItem` takes `status`
+  (`complete` success, `failed` error, `current` info, `upcoming` muted)
+  and `color` to override it; `TimelineMarker` takes `shape` (`circle`,
+  `square`), `variant` (`solid`, `soft`, `outline`, defaulting from the
+  status), `pulse` and `tooltip` / `tooltipLabel` / `tooltipOptions`, which
+  turn it into a button carrying the registry Tooltip (over the whole card
+  in a tile). `TimelineConnector` fills as its step completes.
+  `TimelineTitle`, `TimelineTime`, `TimelineDescription` and
+  `TimelineContent` hold the text. The collapsible mode
+  (`TimelineCollapsible`, `TimelineCollapsibleTrigger`,
+  `TimelineCollapsiblePanel`) opens from a decorative summary
+  (`TimelineStack`, `TimelineStackItem`, `TimelineLeader`): each dot
+  leaves and its event grows out of a dot below, in turn, timed by
+  `--timeline-stagger` and `--timeline-handoff`. Animations are off under
+  reduced motion.
+
 ## 0.13.0
 
 ### Added

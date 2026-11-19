@@ -300,6 +300,96 @@
       ]
     },
     {
+      "name": "timeline",
+      "type": "registry:ui",
+      "title": "Timeline",
+      "description": "Timeline built from parts on ui-sdk: vertical or horizontal events with status, colored markers, filling lines and tooltips, plus a collapsible mode that opens from a stacked summary with a staggered entrance.",
+      "files": [
+        {
+          "path": "src/components/ui/timeline/index.ts",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/timeline/timeline-collapsible-panel.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/timeline/timeline-collapsible-trigger.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/timeline/timeline-collapsible.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/timeline/timeline-connector.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/timeline/timeline-content.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/timeline/timeline-description.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/timeline/timeline-item.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/timeline/timeline-leader.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/timeline/timeline-marker.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/timeline/timeline-stack-item.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/timeline/timeline-stack.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/timeline/timeline-time.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/timeline/timeline-title.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/timeline/timeline.constants.ts",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/timeline/timeline.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/timeline/timeline.types.ts",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/timeline/timeline.variants.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": [
+        "@ui-sdk/react@0.1.0-beta.6",
+        "@ui-sdk/core@0.1.0-beta.6"
+      ],
+      "registryDependencies": [
+        "https://lanzate-ui.vercel.app/r/lanzate-theme.json",
+        "https://lanzate-ui.vercel.app/r/text.json",
+        "https://lanzate-ui.vercel.app/r/tooltip.json",
+        "https://lanzate-ui.vercel.app/r/lanzate-utils.json"
+      ]
+    },
+    {
       "name": "floating-toolbar",
       "type": "registry:ui",
       "title": "Floating Toolbar",
