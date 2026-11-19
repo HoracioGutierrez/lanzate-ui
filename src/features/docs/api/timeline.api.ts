@@ -12,7 +12,7 @@ export const timelineApi: ApiRow[] = [
   { prop: "Timeline loop", type: "boolean", default: "true", description: "Whether arrow keys wrap from the last event to the first." },
   { prop: "Timeline controller", type: "TimelineController", description: "Focuses an event by its value from anywhere. Create one with createTimelineController()." },
   { prop: "Timeline feed / busy", type: "boolean", description: "Turns the list into a WAI-ARIA feed of articles; busy sets aria-busy while it loads." },
-  { prop: "TimelineItem status", type: status, description: 'Where the event stands, and its color: complete success, failed error, current info, upcoming muted. current sets aria-current="step" and takes the tab stop; failed counts as done and shows as data-status="failed".' },
+  { prop: "TimelineItem status", type: status, description: 'Where the event stands, and its color: complete success, failed error, current warning, upcoming muted. current sets aria-current="step" and takes the tab stop; failed counts as done and shows as data-status="failed".' },
   { prop: "TimelineItem color", type: colors, description: "Overrides the status color for this event. Without a status it defaults to primary." },
   { prop: "TimelineItem value", type: "string", description: "Names the event for the controller's focus()." },
   { prop: "TimelineMarker shape", type: '"circle" | "square"', default: '"circle"', description: "Dot or tile. Children (an icon or a number) are decorative." },

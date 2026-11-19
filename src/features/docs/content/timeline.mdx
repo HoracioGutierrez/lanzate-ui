@@ -18,7 +18,7 @@ Each status has one color, so a timeline reads the same everywhere:
 | --- | --- | --- |
 | `complete` | Happened and went well | `success` |
 | `failed` | Happened, with an error | `error` |
-| `current` | Happening now | `info` |
+| `current` | Happening now | `warning` |
 | `upcoming` | Still to come | `muted` |
 
 `failed` counts as done (its line fills, in red) and shows as `data-status="failed"`. `color` overrides the status color for one event, when a domain needs it.
@@ -42,6 +42,8 @@ Each status has one color, so a timeline reads the same everywhere:
 For a list item that unfolds its history. `TimelineCollapsible` holds the open state, `TimelineCollapsibleTrigger` is the button, and `TimelineCollapsiblePanel` animates its height. Inside the trigger, a `TimelineLeader` draws the dotted line and a `TimelineStack` summarizes the events as overlapping dots. As it opens, each dot leaves and its event grows out of a dot below, in turn: the first dot, then the first tile, and so on. Keep the `TimelineStackItem`s in the same order as the events. The summary is decorative, so the trigger is named by its text.
 
 Tune the rhythm with two CSS variables on any ancestor: `--timeline-stagger` (time between events, `80ms`) and `--timeline-handoff` (from a dot leaving to its tile appearing, `150ms`).
+
+The example walks one purchase through four stages, with one order for every combination that can happen: **payment** (pending, accepted, declined), **order** (pending, processing order, order created), **delivery** (pending, awaiting delivery, shipped or ready for pickup) and **finish** (pending, completed, refunded, cancelled). Green is done, yellow is in progress, red is declined, refunded or cancelled, and gray is still pending. Each tile names its state in text, and its tooltip holds the details: card, amount, tracking, store.
 
 <Demo name="timeline-collapsible" />
 

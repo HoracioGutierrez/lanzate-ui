@@ -62,7 +62,7 @@ test("an item's color defaults from its status, and color overrides it", async (
   const { rerender } = render(<OrderStatus />)
   await tick()
   expect(screen.getByRole("listitem", { name: "Order placed" }).getAttribute("data-color")).toBe("success")
-  expect(screen.getByRole("listitem", { name: "Shipped" }).getAttribute("data-color")).toBe("info")
+  expect(screen.getByRole("listitem", { name: "Shipped" }).getAttribute("data-color")).toBe("warning")
   expect(screen.getByRole("listitem", { name: "Delivered" }).getAttribute("data-color")).toBe("muted")
 
   rerender(
@@ -230,7 +230,7 @@ test("a collapsible timeline opens from a trigger named by its text, the summary
   expect(document.querySelector('[data-slot="timeline-stack"]')!.getAttribute("aria-hidden")).toBe("true")
   expect(document.querySelector('[data-slot="timeline-leader"]')!.getAttribute("aria-hidden")).toBe("true")
   const stackItems = [...document.querySelectorAll<HTMLElement>('[data-slot="timeline-stack-item"]')]
-  expect(stackItems.map((item) => item.getAttribute("data-color"))).toEqual(["success", "info", "muted"])
+  expect(stackItems.map((item) => item.getAttribute("data-color"))).toEqual(["success", "warning", "muted"])
   expect(document.querySelector('[data-slot="timeline-stack"]')!.className).toContain("[&>:nth-child(2)]:[--timeline-index:1]")
 
   await user.click(trigger)

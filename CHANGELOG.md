@@ -13,7 +13,7 @@ minor bump may contain breaking changes.
   `orientation`, `variant` (`line`: markers joined by a line; `tiles`:
   each event is a card with its content inside, sharing the row equally),
   `size` and `appear` (staggered entrance). `TimelineItem` takes `status`
-  (`complete` success, `failed` error, `current` info, `upcoming` muted)
+  (`complete` success, `failed` error, `current` warning, `upcoming` muted)
   and `color` to override it; `TimelineMarker` takes `shape` (`circle`,
   `square`), `variant` (`solid`, `soft`, `outline`, defaulting from the
   status), `pulse` and `tooltip` / `tooltipLabel` / `tooltipOptions`, which

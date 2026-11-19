@@ -62,7 +62,7 @@ export type TimelineItemProps = Omit<ComponentProps<typeof TimelineItemPart>, "c
   status?: TimelineStatus
   /**
    * Overrides the status color. Defaults from `status`: `complete` success, `failed` error,
-   * `current` info, `upcoming` muted, none primary.
+   * `current` warning, `upcoming` muted, none primary.
    */
   color?: TimelineColor
 }

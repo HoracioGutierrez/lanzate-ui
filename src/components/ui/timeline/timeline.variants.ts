@@ -24,7 +24,7 @@ export const timelineColorClasses = {
 export const timelineStatusColors = {
   complete: "success",
   failed: "error",
-  current: "info",
+  current: "warning",
   upcoming: "muted",
 } satisfies Record<TimelineStatus, TimelineColor>
 
@@ -115,9 +115,8 @@ const timelineTileItemClasses = [
   "rounded-xl",
   timelineTileSurfaceClasses,
   "group-data-[size=sm]/timeline:rounded-lg",
-  // Padding without the end side, which reserves room for the corner marker so text never runs under it.
-  "group-data-[size=sm]/timeline:ps-2 group-data-[size=sm]/timeline:py-2 group-data-[size=md]/timeline:ps-3 group-data-[size=md]/timeline:py-3",
-  "group-data-[size=lg]/timeline:ps-4 group-data-[size=lg]/timeline:py-4 pe-[calc(var(--timeline-marker)+--spacing(4))]",
+  // The title reserves room for the corner marker itself, so the lines under it get the full width.
+  "group-data-[size=sm]/timeline:p-2 group-data-[size=md]/timeline:p-3 group-data-[size=lg]/timeline:p-4",
   "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring",
   "before:absolute before:inset-0 before:-z-10 before:rounded-[inherit] before:bg-(--timeline-accent) before:opacity-0",
   "before:transition-opacity before:duration-500 before:ease-out before:delay-(--timeline-delay) motion-reduce:before:transition-none",
@@ -218,11 +217,12 @@ export const timelineContentClasses = "flex min-w-0 flex-col gap-0.5"
 
 // In a tile every line is one line, truncated, so titles and times start at the same height across
 // the row. The full title still names the event for screen readers.
-export const timelineTitleClasses = "block min-w-0 text-foreground data-upcoming:text-muted-text group-data-[variant=tiles]/timeline:truncate"
+export const timelineTitleClasses =
+  "block min-w-0 text-foreground data-upcoming:text-muted-text group-data-[variant=tiles]/timeline:truncate group-data-[variant=tiles]/timeline:pe-[calc(var(--timeline-marker)+--spacing(1))]"
 
 export const timelineTimeClasses = "block min-w-0 tabular-nums group-data-[variant=tiles]/timeline:truncate"
 
-export const timelineDescriptionClasses = "block min-w-0 group-data-[variant=tiles]/timeline:line-clamp-2"
+export const timelineDescriptionClasses = "block min-w-0 group-data-[variant=tiles]/timeline:truncate"
 
 export const timelineCollapsibleClasses = "group/timeline-collapsible flex min-w-0 flex-col"
 
@@ -257,6 +257,8 @@ export const timelineStackItemClasses = (shape: TimelineMarkerShape) =>
   [
     "relative inline-block size-4 shrink-0 ring-2 ring-background",
     timelineTileSurfaceClasses,
+    // Same gray as an upcoming tile, but a solid edge: dashes break up into noise on an overlapping 16px dot.
+    "data-[status=upcoming]:border-solid",
     "[--timeline-delay:calc(var(--timeline-index,0)*var(--timeline-stagger,80ms))]",
     "transition-[opacity,scale,translate] duration-200 ease-out delay-(--timeline-delay) motion-reduce:transition-none",
     "[[data-slot=collapsible-trigger][data-open]_&]:translate-y-2 [[data-slot=collapsible-trigger][data-open]_&]:scale-50 [[data-slot=collapsible-trigger][data-open]_&]:opacity-0",
