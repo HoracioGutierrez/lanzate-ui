@@ -51,6 +51,7 @@ branch. It is complete: every rule is enforced as an error, locally and in CI.
 | 3b | Registry components ship their own token-aware cn() ([0004](decisions/0004-registry-cn.md)) | Done |
 | 4 | Website moved to `src/features` (shell, docs with MDX, home); lint at zero warnings ([0005](decisions/0005-mdx-docs.md)) | Done |
 | 5 | Architecture rules switched to errors; CI workflow ([linting.md#ci](linting.md#ci)) | Done |
+| 6 | Intent `-text` tokens: every intent color meets 4.5:1 ([0007](decisions/0007-intent-text-tokens.md)) | Done |
 
 No legacy code is left. The table stays as the history of how the
 architecture got here; each decision record explains one step.

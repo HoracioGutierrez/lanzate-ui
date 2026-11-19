@@ -95,8 +95,16 @@ only exist on the element, like Button's `--btn-color`.
 
 A color with `"$extensions": { "lanzate": { "intent": true } }` is an
 **intent**: a value of components' `color` prop (`primary`, `secondary`,
-`muted`, `info`, `warning`, `success`, `error`). Every intent needs a
-`<name>-foreground` token for text on top of it; the build fails otherwise.
+`muted`, `info`, `warning`, `success`, `error`). Every intent needs two
+partners, and the build fails without them:
+
+- `<name>-foreground`: text on a solid fill of the intent.
+- `<name>-text`: text, icons and borders in the intent's color on the page
+  or on its own soft tint. It's darker than the fill in light mode (lighter
+  in dark) so it keeps 4.5:1 where the fill color wouldn't. Use
+  `text-info-text`, never `text-info`, for colored text. A theme that
+  overrides an intent must override its `-text` too.
+  ([0007](decisions/0007-intent-text-tokens.md))
 The `IntentColor` type lists them, and components check their color maps
 against it:
 

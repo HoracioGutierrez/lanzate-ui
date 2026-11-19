@@ -52,7 +52,7 @@ Website code imports from the folder (`@/components/ui/tooltip`).
 ## Building on core components
 
 **Core components** are the registry's building blocks: today `button`,
-`text`, `tooltip` and `scroll-area`. Everything else is a **composite**
+`text`, `tooltip`, `scroll-area` and `badge`. Everything else is a **composite**
 built from them and from ui-sdk parts (`frame`, `floating-toolbar`).
 The rule has two sides.
 
@@ -60,7 +60,8 @@ The rule has two sides.
 
 - a button is the registry `Button`;
 - typography is `Text`;
-- a hint is `Tooltip`.
+- a hint is `Tooltip`;
+- a status chip or pill is `Badge`.
 
 Don't re-create a core component's look with a class string: a copy doesn't
 follow when the core component changes.

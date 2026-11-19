@@ -1,4 +1,10 @@
 import type { DemoEntry } from "../types/docs.types"
+import { BadgeColorsDemo } from "./badge/badge-colors.demo"
+import { BadgeCompositionDemo } from "./badge/badge-composition.demo"
+import { BadgeDotDemo } from "./badge/badge-dot.demo"
+import { BadgeShapeDemo } from "./badge/badge-shape.demo"
+import { BadgeTooltipDemo } from "./badge/badge-tooltip.demo"
+import { BadgeVariantsDemo } from "./badge/badge-variants.demo"
 import { ButtonGroupFiltersDemo } from "./button-group/button-group-filters.demo"
 import { ButtonGroupIconsDemo } from "./button-group/button-group-icons.demo"
 import { ButtonGroupSizesDemo } from "./button-group/button-group-sizes.demo"
@@ -65,4 +71,10 @@ export const demoRegistry = {
   "button-group-vertical": { component: ButtonGroupVerticalDemo, file: "button-group/button-group-vertical.demo.tsx" },
   "button-group-sizes": { component: ButtonGroupSizesDemo, file: "button-group/button-group-sizes.demo.tsx" },
   "button-group-states": { component: ButtonGroupStatesDemo, file: "button-group/button-group-states.demo.tsx" },
+  "badge-variants": { component: BadgeVariantsDemo, file: "badge/badge-variants.demo.tsx" },
+  "badge-colors": { component: BadgeColorsDemo, file: "badge/badge-colors.demo.tsx" },
+  "badge-shape": { component: BadgeShapeDemo, file: "badge/badge-shape.demo.tsx" },
+  "badge-composition": { component: BadgeCompositionDemo, file: "badge/badge-composition.demo.tsx" },
+  "badge-dot": { component: BadgeDotDemo, file: "badge/badge-dot.demo.tsx" },
+  "badge-tooltip": { component: BadgeTooltipDemo, file: "badge/badge-tooltip.demo.tsx" },
 } satisfies Record<string, DemoEntry>

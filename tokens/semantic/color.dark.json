@@ -12,7 +12,11 @@
         }
       },
       "primary-foreground": {
-        "$value": "{primitive.color.cream.50}"
+        "$value": "{primitive.color.neutral.950}"
+      },
+      "primary-text": {
+        "$value": "{primitive.color.orange.300}",
+        "$description": "Text, icons and borders in this intent on the page or on its own soft tint (15%). Meets 4.5:1 there, also over a muted surface, where the fill may not."
       },
       "error": {
         "$value": "{primitive.color.red.400}",
@@ -23,7 +27,11 @@
         }
       },
       "error-foreground": {
-        "$value": "{primitive.color.neutral.0}"
+        "$value": "{primitive.color.neutral.950}"
+      },
+      "error-text": {
+        "$value": "{primitive.color.red.300}",
+        "$description": "Text, icons and borders in this intent on the page or on its own soft tint (15%). Meets 4.5:1 there, also over a muted surface, where the fill may not."
       },
       "info": {
         "$value": "{primitive.color.blue.400}",
@@ -34,7 +42,11 @@
         }
       },
       "info-foreground": {
-        "$value": "{primitive.color.neutral.0}"
+        "$value": "{primitive.color.neutral.950}"
+      },
+      "info-text": {
+        "$value": "{primitive.color.blue.400}",
+        "$description": "Text, icons and borders in this intent on the page or on its own soft tint (15%). Meets 4.5:1 there, also over a muted surface, where the fill may not."
       },
       "warning": {
         "$value": "{primitive.color.yellow.400}",
@@ -47,6 +59,10 @@
       "warning-foreground": {
         "$value": "{primitive.color.neutral.1000}"
       },
+      "warning-text": {
+        "$value": "{primitive.color.yellow.400}",
+        "$description": "Text, icons and borders in this intent on the page or on its own soft tint (15%). Meets 4.5:1 there, also over a muted surface, where the fill may not."
+      },
       "success": {
         "$value": "{primitive.color.green.500}",
         "$extensions": {
@@ -56,7 +72,19 @@
         }
       },
       "success-foreground": {
-        "$value": "{primitive.color.neutral.0}"
+        "$value": "{primitive.color.neutral.950}"
+      },
+      "success-text": {
+        "$value": "{primitive.color.green.400}",
+        "$description": "Text, icons and borders in this intent on the page or on its own soft tint (15%). Meets 4.5:1 there, also over a muted surface, where the fill may not."
+      },
+      "secondary-text": {
+        "$value": "{primitive.color.neutral.50}",
+        "$description": "Text, icons and borders in this intent on the page or on its own soft tint (15%). Meets 4.5:1 there, also over a muted surface, where the fill may not."
+      },
+      "muted-text": {
+        "$value": "{primitive.color.neutral.400}",
+        "$description": "Text, icons and borders in this intent on the page or on its own soft tint (15%). Meets 4.5:1 there, also over a muted surface, where the fill may not."
       }
     }
   },
@@ -126,7 +154,7 @@
         "$value": "{primitive.color.orange.400}"
       },
       "brand-foreground": {
-        "$value": "{primitive.color.cream.50}"
+        "$value": "{primitive.color.neutral.950}"
       },
       "chart-1": {
         "$value": "{primitive.color.neutral.300}"
@@ -153,7 +181,7 @@
         "$value": "{primitive.color.orange.400}"
       },
       "sidebar-primary-foreground": {
-        "$value": "{primitive.color.cream.50}"
+        "$value": "{primitive.color.neutral.950}"
       },
       "sidebar-accent": {
         "$value": "{primitive.color.neutral.800}"

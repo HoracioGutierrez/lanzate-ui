@@ -18,6 +18,7 @@ export const docsNav: DocGroup[] = [
       { id: "floating-toolbar", label: "Floating Toolbar", badge: "New" },
       { id: "frame", label: "Frame", badge: "New" },
       { id: "button-group", label: "Button Group", badge: "New" },
+      { id: "badge", label: "Badge", badge: "New" },
     ],
   },
 ]

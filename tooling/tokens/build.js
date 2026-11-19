@@ -88,8 +88,16 @@ for (const theme of themes) {
     if (t.kind !== "color" || !lightNames.has(t.name)) fail(`theme '${theme.name}' overrides unknown color '${t.name}'`)
   }
 }
-for (const t of colors.filter((c) => c.intent)) {
-  if (!lightNames.has(`${t.name}-foreground`)) fail(`intent color '${t.name}' needs a '${t.name}-foreground' token`)
+const intentNames = new Set(colors.filter((c) => c.intent).map((c) => c.name))
+for (const name of intentNames) {
+  if (!lightNames.has(`${name}-foreground`)) fail(`intent color '${name}' needs a '${name}-foreground' token`)
+  if (!lightNames.has(`${name}-text`)) fail(`intent color '${name}' needs a '${name}-text' token (text on the page and on its soft tint)`)
+}
+for (const theme of themes) {
+  const overridden = new Set(theme.tokens.map((t) => t.name))
+  for (const name of overridden) {
+    if (intentNames.has(name) && !overridden.has(`${name}-text`)) fail(`theme '${theme.name}' overrides '${name}' but not '${name}-text'`)
+  }
 }
 const allVarNames = [...colors, ...themeVars, ...rootVars].map((t) => (t.kind === "color" ? t.name : t.name))
 const duplicates = allVarNames.filter((n, i) => allVarNames.indexOf(n) !== i)

@@ -15,7 +15,7 @@ reference example of every rule below.
   (the shadcn CLI breaks folder imports; see decision 0003). Import ui-sdk
   parts from ui-sdk. Never `../tooltip`.
 - **Build on core components** (`button`, `text`, `tooltip`,
-  `scroll-area`). A composite uses them for what they already cover instead
+  `scroll-area`, `badge`). A composite uses them for what they already cover instead
   of re-creating their look with classes: a button is `Button`, typography
   is `Text`.
   - Core components stay composable: forward props and the ref, merge
