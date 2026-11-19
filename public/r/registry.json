@@ -393,6 +393,67 @@
         "https://lanzate-ui.vercel.app/r/lanzate-theme.json",
         "https://lanzate-ui.vercel.app/r/lanzate-utils.json"
       ]
+    },
+    {
+      "name": "button-group",
+      "type": "registry:ui",
+      "title": "Button Group",
+      "description": "Tray of buttons that lights up the chosen ones, built on ui-sdk: switch between options with a sliding indicator, or toggle several filters at once with an optional All button that clears them.",
+      "files": [
+        {
+          "path": "src/components/ui/button-group/button-group-all.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/button-group/button-group-item.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/button-group/button-group-led.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/button-group/button-group-multiple.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/button-group/button-group-single.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/button-group/button-group.constants.ts",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/button-group/button-group.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/button-group/button-group.types.ts",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/button-group/button-group.variants.ts",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/button-group/index.ts",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/button-group/use-button-group-value.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": [
+        "@ui-sdk/react@0.1.0-beta.6",
+        "@ui-sdk/core@0.1.0-beta.6"
+      ],
+      "registryDependencies": [
+        "https://lanzate-ui.vercel.app/r/button.json",
+        "https://lanzate-ui.vercel.app/r/lanzate-theme.json",
+        "https://lanzate-ui.vercel.app/r/lanzate-utils.json"
+      ]
     }
   ]
 }
