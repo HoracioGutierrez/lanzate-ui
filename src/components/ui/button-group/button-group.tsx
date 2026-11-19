@@ -1,6 +1,6 @@
 "use client"
 
-import { useMemo } from "react"
+import { useCallback, useMemo, useState } from "react"
 
 import { cn } from "@/lib/cn"
 
@@ -11,7 +11,16 @@ import { ButtonGroupMultiple } from "./button-group-multiple"
 import { ButtonGroupSingle } from "./button-group-single"
 
 export function ButtonGroup({ color = "primary", padding = "sm", className, ...props }: ButtonGroupProps) {
-  const context = useMemo(() => ({ selection: props.selection, color, padding }), [props.selection, color, padding])
+  // ButtonGroupAll registers itself, so single knows whether "nothing chosen" is a real choice.
+  const [hasAll, setHasAll] = useState(false)
+  const registerAll = useCallback(() => {
+    setHasAll(true)
+    return () => setHasAll(false)
+  }, [])
+  const context = useMemo(
+    () => ({ selection: props.selection, color, padding, registerAll }),
+    [props.selection, color, padding, registerAll]
+  )
   const classes = cn(
     buttonGroupClasses,
     buttonGroupOrientationClasses[props.orientation ?? "horizontal"],
@@ -22,7 +31,7 @@ export function ButtonGroup({ color = "primary", padding = "sm", className, ...p
   return (
     <ButtonGroupContext value={context}>
       {props.selection === "single" ? (
-        <ButtonGroupSingle className={classes} {...props} />
+        <ButtonGroupSingle className={classes} hasAll={hasAll} {...props} />
       ) : (
         <ButtonGroupMultiple className={classes} {...props} />
       )}

@@ -55,8 +55,15 @@ export function ButtonGroupItem({
     </Button>
   )
 
+  // A disabled radio leaves ui-sdk's roving focus, but the Button keeps a disabled item with a
+  // tooltip focusable (aria-disabled), which would add a second tab stop to the radio group.
+  // tabIndex -1 keeps it out; its tooltip still opens on hover.
   return selection === "single" ? (
-    <SegmentedControlItem value={value} disabled={disabled} render={(partProps, state) => draw(partProps, state.checked)} />
+    <SegmentedControlItem
+      value={value}
+      disabled={disabled}
+      render={(partProps, state) => draw(disabled ? { ...partProps, tabIndex: -1 } : partProps, state.checked)}
+    />
   ) : (
     <Toggle value={value} disabled={disabled} render={(partProps, state) => draw(partProps, state.pressed)} />
   )

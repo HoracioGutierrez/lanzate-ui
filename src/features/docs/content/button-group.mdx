@@ -18,7 +18,7 @@ Press Pending and Paid to show both; press All to clear them. Each lit item gets
 
 ## Switching
 
-`selection="single"` keeps one item checked, like radios: the arrow keys move the choice, and a background slides to the new item and fades into its fill. Its value is a string, or `null` when nothing is checked, which checks `ButtonGroupAll` if there is one.
+`selection="single"` keeps one item checked, like radios: the arrow keys move the choice, and a background slides to the new item and fades into its fill. Its value is a string, or `null` when nothing is checked, which checks `ButtonGroupAll` if there is one. Set `name` to submit it with a form; with `ButtonGroupAll`, nothing chosen submits nothing and `required` has no effect.
 
 <Demo name="button-group-switch" />
 
@@ -36,7 +36,7 @@ Press Pending and Paid to show both; press All to clear them. Each lit item gets
 
 ## States
 
-`disabled` works on one item or the whole group. A disabled item with a tooltip stays focusable, so its tooltip can say why.
+`disabled` works on one item or the whole group. A disabled item still shows its tooltip on hover, so it can say why. In `multiple` the arrow keys still reach it; in `single` the keyboard skips it, like a disabled radio.
 
 <Demo name="button-group-states" />
 

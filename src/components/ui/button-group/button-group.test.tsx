@@ -232,3 +232,59 @@ test("an agent can find the groups and choose items", async () => {
   expect(onView).toHaveBeenLastCalledWith("grid")
   expect(onStatus).toHaveBeenLastCalledWith(["paid"])
 })
+
+test("single: a disabled item with a tooltip is skipped by Tab and the arrow keys", async () => {
+  const user = userEvent.setup()
+  render(
+    <>
+      <ButtonGroup selection="single" aria-label="Period" defaultValue="monthly">
+        <ButtonGroupItem value="monthly">Monthly</ButtonGroupItem>
+        <ButtonGroupItem value="lifetime" disabled tooltip="Coming soon">Lifetime</ButtonGroupItem>
+        <ButtonGroupItem value="yearly">Yearly</ButtonGroupItem>
+      </ButtonGroup>
+      <button type="button">After</button>
+    </>
+  )
+  await tick()
+  await user.tab()
+  expect(document.activeElement).toBe(radio("Monthly"))
+  await user.tab()
+  expect(document.activeElement).toBe(screen.getByRole("button", { name: "After" }))
+  await user.tab({ shift: true })
+  await user.keyboard("{ArrowRight}")
+  expect(document.activeElement).toBe(radio("Yearly"))
+})
+
+test("single with All and a name: nothing chosen submits nothing, a choice submits its value", async () => {
+  const user = userEvent.setup()
+  render(
+    <form aria-label="Filters">
+      <ButtonGroup selection="single" aria-label="Warehouse" name="warehouse" defaultValue={null}>
+        <ButtonGroupAll>All</ButtonGroupAll>
+        <ButtonGroupItem value="north">North</ButtonGroupItem>
+      </ButtonGroup>
+    </form>
+  )
+  await tick()
+  const form = screen.getByRole("form", { name: "Filters" }) as HTMLFormElement
+  expect(new FormData(form).getAll("warehouse")).toEqual([])
+  await user.click(radio("North"))
+  expect(new FormData(form).getAll("warehouse")).toEqual(["north"])
+})
+
+test("single without All keeps ui-sdk's required", async () => {
+  render(
+    <form aria-label="Filters">
+      <ButtonGroup selection="single" aria-label="Warehouse" name="warehouse" required defaultValue={null}>
+        <ButtonGroupItem value="north">North</ButtonGroupItem>
+      </ButtonGroup>
+    </form>
+  )
+  await tick()
+  expect((screen.getByRole("form", { name: "Filters" }) as HTMLFormElement).checkValidity()).toBe(false)
+})
+
+test("a disabled group is dimmed once, by its items", () => {
+  render(Views({ disabled: true, defaultValue: "list" }))
+  expect(screen.getByRole("radiogroup", { name: "View" }).className).not.toContain("data-disabled:opacity")
+})

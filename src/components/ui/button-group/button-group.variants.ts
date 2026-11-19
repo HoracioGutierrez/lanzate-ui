@@ -11,7 +11,6 @@ const cornerMarkClasses = [
 
 export const buttonGroupClasses = [
   "relative isolate inline-flex max-w-full flex-wrap items-center gap-1 rounded-sm border border-border bg-card p-1",
-  "data-disabled:opacity-60",
   cornerMarkClasses,
 ].join(" ")
 

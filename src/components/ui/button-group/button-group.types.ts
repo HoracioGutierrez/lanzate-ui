@@ -51,6 +51,11 @@ export type ButtonGroupItemProps = Pick<
   value: string
 }
 
+/** What ButtonGroup passes to its single-selection body. */
+export type ButtonGroupSingleInternalProps = Omit<ButtonGroupSingleProps, "color" | "padding"> & {
+  hasAll: boolean
+}
+
 export type ButtonGroupAllProps = Omit<ButtonGroupItemProps, "value">
 
 export type ButtonGroupLedProps = {
@@ -61,6 +66,8 @@ export type ButtonGroupContextValue = {
   selection: ButtonGroupSelection
   color: ButtonColor
   padding: ButtonPadding
+  /** Called by ButtonGroupAll on mount; returns its unregister. */
+  registerAll: () => () => void
 }
 
 export type UseControllableValueOptions<T> = {
