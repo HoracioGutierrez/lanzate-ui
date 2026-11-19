@@ -46,6 +46,7 @@ export function SiteHeader() {
             <Button
               render={<Link href="/docs" />}
               endIcon={<ArrowRight aria-hidden="true" />}
+              padding="sm"
               // On phones the theme picker needs the room: the arrow stays, the label goes to screen readers.
               mobile="only-icon"
               className="shrink-0 whitespace-nowrap"

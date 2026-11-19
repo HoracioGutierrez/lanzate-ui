@@ -8,6 +8,7 @@ export function HeaderGithubLink({ hidden }: HiddenWhenFloatingProps) {
   return (
     <Button
       variant="subtle"
+      padding="sm"
       mobile="hidden"
       render={<a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" />}
       inert={hidden}
