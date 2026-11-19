@@ -1,5 +1,6 @@
 "use client"
 
+import { useEffect, useRef } from "react"
 import { SegmentedControl, SegmentedControlIndicator } from "@ui-sdk/react/segmented-control"
 
 import type { ButtonGroupSingleInternalProps } from "./button-group.types"
@@ -13,12 +14,20 @@ export function ButtonGroupSingle({
   defaultValue = null,
   onValueChange,
   hasAll,
+  highlight,
   name,
   required,
   children,
   ...props
 }: ButtonGroupSingleInternalProps) {
   const [value, setValue] = useControllableValue({ value: valueProp, defaultValue, onValueChange })
+
+  // ui-sdk resets once per item (each has its own hidden input), before React re-renders with the
+  // new value. Report the reset value once; the next render forgets it.
+  const resetValueRef = useRef<{ value: string | null } | null>(null)
+  useEffect(() => {
+    resetValueRef.current = null
+  })
 
   // With an All item, its hidden radio would submit the reserved value and always satisfy
   // `required`. So the group submits its own input instead: nothing while nothing is chosen.
@@ -29,11 +38,19 @@ export function ButtonGroupSingle({
     <SegmentedControl
       data-selection={selection}
       value={toSdkSingle(value)}
-      onValueChange={(next) => setValue(fromSdkSingle(next))}
+      onValueChange={(next, details) => {
+        const mapped = fromSdkSingle(next)
+        if (details.reason === "reset") {
+          if (resetValueRef.current?.value === mapped) return
+          resetValueRef.current = { value: mapped }
+        }
+        setValue(mapped)
+      }}
       name={ownInput ? undefined : name}
       required={ownInput ? undefined : required}
       {...props}
     >
+      {highlight}
       <SegmentedControlIndicator className={buttonGroupIndicatorClasses} />
       {children}
       {ownInput && value != null && <input type="hidden" name={name} value={value} />}

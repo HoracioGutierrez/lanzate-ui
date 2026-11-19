@@ -26,6 +26,11 @@ export function fromSdkSingle(next: string | null): string | null {
   return next === BUTTON_GROUP_ALL ? null : next
 }
 
+function isSameValue(a: unknown, b: unknown): boolean {
+  if (Array.isArray(a) && Array.isArray(b)) return a.length === b.length && a.every((item, i) => item === b[i])
+  return Object.is(a, b)
+}
+
 /** Controlled when `value` is defined, uncontrolled from `defaultValue` otherwise. */
 export function useControllableValue<T>({
   value,
@@ -34,12 +39,18 @@ export function useControllableValue<T>({
 }: UseControllableValueOptions<T>): [T, (next: T) => void] {
   const [internal, setInternal] = useState(defaultValue)
   const controlled = value !== undefined
+  // Track the controlled value, so a group that stops being controlled keeps its last value
+  // instead of jumping back to defaultValue.
+  if (controlled && !isSameValue(internal, value)) setInternal(value)
+  const current = controlled ? value : internal
+
   const setValue = useCallback(
     (next: T) => {
+      if (isSameValue(next, current)) return
       if (!controlled) setInternal(next)
       onValueChange?.(next)
     },
-    [controlled, onValueChange]
+    [controlled, current, onValueChange]
   )
-  return [controlled ? value : internal, setValue]
+  return [current, setValue]
 }

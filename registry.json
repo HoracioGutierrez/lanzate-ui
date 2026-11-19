@@ -405,6 +405,10 @@
           "type": "registry:ui"
         },
         {
+          "path": "src/components/ui/button-group/button-group-highlight.tsx",
+          "type": "registry:ui"
+        },
+        {
           "path": "src/components/ui/button-group/button-group-item.tsx",
           "type": "registry:ui"
         },
@@ -438,6 +442,10 @@
         },
         {
           "path": "src/components/ui/button-group/index.ts",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/ui/button-group/use-button-group-highlight.ts",
           "type": "registry:ui"
         },
         {

@@ -11,7 +11,7 @@ import { HEADER_FLOAT_THRESHOLD } from "../shell.constants"
 import { HeaderGithubLink } from "./header-github-link"
 import { HeaderNav } from "./header-nav"
 import { SiteLogo } from "./site-logo"
-import { ThemeToggle } from "./theme-toggle"
+import { ThemePicker } from "./theme-picker"
 
 /** Full-width bar at the top; after scrolling it shrinks into a floating pill. Pure CSS transitions. */
 export function SiteHeader() {
@@ -41,11 +41,14 @@ export function SiteHeader() {
           <SiteLogo />
           <HeaderNav hidden={floating} />
           <div className="ml-auto flex items-center gap-2">
-            <ThemeToggle />
+            <ThemePicker />
             <HeaderGithubLink hidden={floating} />
             <Button
               render={<Link href="/docs" />}
               endIcon={<ArrowRight aria-hidden="true" />}
+              padding="sm"
+              // On phones the theme picker needs the room: the arrow stays, the label goes to screen readers.
+              mobile="only-icon"
               className="shrink-0 whitespace-nowrap"
             >
               Get Started

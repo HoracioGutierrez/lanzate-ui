@@ -95,11 +95,13 @@ are hand-rolled (no keyboard model) and split across two components.
 ### Parts
 
 - **`ButtonGroup`** — root. Props: `selection`, `value`, `defaultValue`,
-  `onValueChange`, `color` (`ButtonColor`, default `primary`), `padding`
-  (`ButtonPadding`, default `sm`), `radius`, `orientation`, `disabled`,
+  `onValueChange`, `color` (`ButtonColor`, default `primary`), `size`
+  (`"xs" | "md" | "lg"`, default `md`; maps to Button padding `xs` / `sm` / `md`), `orientation`, `disabled`,
   `aria-label`, `className`, `children`. `single` adds `name`, `required`.
+  No `radius`: the tray is always `rounded-sm` and items `radius="none"`,
+  part of the industrial look (dropped 2026-11-19).
   Renders the industrial tray (see Look). Provides a context:
-  `{ selection, color, padding }`. In `single` it renders
+  `{ selection, color, size }`. In `single` it renders
   `SegmentedControlIndicator` first.
 - **`ButtonGroupItem`** — `value` + the Button's content props (`icon`,
   `startIcon`, `endIcon`, `tooltip`, `disabled`, `children`, `aria-label`,
@@ -132,11 +134,14 @@ are hand-rolled (no keyboard model) and split across two components.
 - "Lit" = an LED: a small square (`size-1.5 bg-current`) before the label of
   the active item, as in `lanzate`'s `ToggleGroup`, plus the solid fill.
   Inactive items show the LED off (`bg-current/25` or `bg-border`), so
-  items don't shift when they light up. Icon-only items have no LED.
+  items don't shift when they light up. Items with any icon (`icon`, `startIcon`, `endIcon`) have no LED.
   Replaces the earlier `effect="glow"` idea.
-- Single indicator: `bg-(--btn-color)/15` + `inset-ring` in the color at
+- Single indicator: `bg-(--btn-accent)/15` + `inset-ring` in the accent at
   50%, the same "marked" look the toolbar and frame menu triggers use while
-  open.
+  open. `--btn-accent`, not `--btn-color`: for `secondary` and `muted` the
+  fill color is a near-background neutral that disappears at 15%, while
+  the accent (their foreground) stays visible. For the other colors the two
+  are the same value.
 - Labels keep the Button's type; no mono/uppercase forced (consumers can
   pass `textClassName`). *Open for the user to change.*
 
@@ -144,13 +149,37 @@ are hand-rolled (no keyboard model) and split across two components.
 
 1. Indicator: absolute, `z-index: -1`, position/size from the ui-sdk CSS
    variables, `transition-[left,top,width,height]` on `ease-spring`, filled
-   with the group color at low opacity (`bg-(--btn-color)/20` or
-   equivalent token-based color).
+   with the group accent at low opacity (`bg-(--btn-accent)/15`, see Look).
 2. Checked item: its solid fill fades in with a `transition-delay` equal to
-   the slide duration, so the moving highlight "lands" and melts into the
+   the slide duration, on `color` and `background-color` only (the focus
+   ring, opacity and press keep their own timing), so the moving highlight "lands" and melts into the
    active button. Unchecked → ghost fades out immediately.
 3. `motion-reduce`: no slide, no delay; the fill just swaps.
 4. Nothing checked → indicator has no box (ui-sdk behavior).
+
+### Hover (both modes)
+
+Added 2026-11-19. One highlight (`ButtonGroupHighlight`, `data-slot="button-group-highlight"`)
+is the hover fill of every unlit item, so it slides from item to item instead of one
+fill turning off and the next turning on.
+
+1. `useButtonGroupHighlight` listens to `pointerover` on the group, finds the item
+   (`data-button-group-item`) and stores its `offsetLeft/Top/Width/Height`, which the
+   highlight reads as `--button-group-highlight-{left,top,width,height}`.
+2. Sticky: crossing the gap between items keeps it on the last item; only leaving
+   the group fades it out (`data-visible`). Disabled items don't move it.
+3. Entering the group, it fades in on the item without sliding from its last spot
+   (`data-instant` limits the transition to `opacity`).
+4. Touch is ignored (a tap has no hover). Mouse and pen hover.
+5. Look: `bg-muted-foreground/10`, the ghost item's own hover; unlit items get
+   `hover:bg-transparent` so the two don't stack. Lit items keep their solid hover.
+   `forced-colors:outline`, since forced colors drop backgrounds.
+6. Same `duration-200 ease-spring` as the indicator; `motion-reduce`: no slide.
+7. Rendered first, so it sits under the selection indicator and the items.
+
+Not CSS anchor positioning: it needs Chrome 157 / Safari 27 (no Firefox), and CSS
+alone can't keep the highlight on the last item across the gaps or skip the slide on
+entry.
 
 Durations use Tailwind duration utilities as `Button` does; easing uses the
 `ease-spring` token. No literal cubic-bezier.

@@ -10,7 +10,7 @@ import { cn } from "@/lib/cn"
 
 import { ButtonGroupContext } from "./button-group.constants"
 import type { ButtonGroupItemProps } from "./button-group.types"
-import { buttonGroupItemClasses } from "./button-group.variants"
+import { buttonGroupItemClasses, buttonGroupItemPadding } from "./button-group.variants"
 import { ButtonGroupLed } from "./button-group-led"
 
 // ui-sdk's item keeps the behavior (radio or pressed toggle, arrow keys); the registry Button draws it.
@@ -28,15 +28,18 @@ export function ButtonGroupItem({
 }: ButtonGroupItemProps) {
   const context = use(ButtonGroupContext)
   if (context == null) throw new Error("ButtonGroupItem must be inside a ButtonGroup.")
-  const { selection, color, padding } = context
+  const { selection, color, size } = context
+  // An icon already marks the item, so the LED only shows on text-only items.
+  const hasIcon = startIcon != null || endIcon != null
 
   const draw = (partProps: object, on: boolean) => (
+    // ui-sdk's part props (role, aria-checked, handlers, tabIndex) go last so the consumer's can't replace them.
     <Button
-      {...partProps}
       {...props}
+      {...partProps}
       variant={on ? "solid" : "ghost"}
       color={on ? color : "muted"}
-      padding={padding}
+      padding={buttonGroupItemPadding[size]}
       radius="none"
       icon={icon}
       startIcon={startIcon}
@@ -44,11 +47,13 @@ export function ButtonGroupItem({
       tooltip={tooltip}
       aria-label={ariaLabel}
       tapAnimation={false}
-      className={cn(buttonGroupItemClasses[selection], className)}
+      data-button-group-item=""
+      // The group's sliding highlight is the hover fill of unlit items.
+      className={cn(buttonGroupItemClasses[selection], !on && "hover:bg-transparent", className)}
     >
       {icon == null && (
         <>
-          <ButtonGroupLed on={on} />
+          {!hasIcon && <ButtonGroupLed on={on} size={size} />}
           {children}
         </>
       )}

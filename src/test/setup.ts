@@ -15,6 +15,15 @@ Element.prototype.checkVisibility = () => true
 Element.prototype.getClientRects = () => [] as unknown as DOMRectList
 document.elementFromPoint = () => null
 document.elementsFromPoint = () => []
+// Without PointerEvent, jsdom builds pointer events as plain Events, dropping relatedTarget (React
+// reads it to tell leaving an item from leaving the group) and pointerType.
+globalThis.PointerEvent ??= class extends MouseEvent {
+  readonly pointerType: string
+  constructor(type: string, init: PointerEventInit = {}) {
+    super(type, init)
+    this.pointerType = init.pointerType ?? ""
+  }
+} as unknown as typeof PointerEvent
 globalThis.ResizeObserver ??= class {
   observe() {}
   unobserve() {}

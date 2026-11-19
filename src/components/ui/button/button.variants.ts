@@ -68,6 +68,20 @@ export const squarePaddingClasses = {
   xl: "p-4",
 } satisfies Record<ButtonPadding, string>
 
+/** `mobile="only-icon"` below `sm`: the label is hidden, so the button takes icon-only padding. */
+export const mobileSquarePaddingClasses = {
+  none: "max-sm:p-0",
+  xs: "max-sm:p-1",
+  sm: "max-sm:p-1.5",
+  base: "max-sm:p-2",
+  md: "max-sm:p-2.5",
+  lg: "max-sm:p-3",
+  xl: "max-sm:p-4",
+} satisfies Record<ButtonPadding, string>
+
+/** `mobile="only-icon"` below `sm`: the icon-only button's line-tall box; above `sm` it lays out as if absent. */
+export const mobileIconBoxClasses = "max-sm:grid max-sm:min-h-lh max-sm:min-w-[1lh] max-sm:place-items-center sm:contents"
+
 const radiusClasses = {
   none: "rounded-none",
   sm: "rounded-sm",

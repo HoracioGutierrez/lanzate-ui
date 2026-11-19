@@ -1,11 +1,14 @@
 import type { ComponentProps, ReactNode } from "react"
 
-import type { ButtonColor, ButtonPadding, ButtonProps } from "@/components/ui/button/button.types"
+import type { ButtonColor, ButtonProps } from "@/components/ui/button/button.types"
 
 /** `single` switches between options (one value, sliding indicator); `multiple` toggles filters. */
 export type ButtonGroupSelection = "single" | "multiple"
 
 export type ButtonGroupOrientation = "horizontal" | "vertical"
+
+/** Scales the tray, its items (text, icons, padding) and the LEDs together. */
+export type ButtonGroupSize = "xs" | "md" | "lg"
 
 export type ButtonGroupBaseProps = Omit<
   ComponentProps<"div">,
@@ -17,8 +20,8 @@ export type ButtonGroupBaseProps = Omit<
   children?: ReactNode
   /** Color of the lit items and the indicator. Defaults to `"primary"`. */
   color?: ButtonColor
-  /** Size of every item, as the Button's `padding`. Defaults to `"sm"`. */
-  padding?: ButtonPadding
+  /** Size of the tray and every item. Defaults to `"md"`. */
+  size?: ButtonGroupSize
   orientation?: ButtonGroupOrientation
   disabled?: boolean
 }
@@ -52,20 +55,44 @@ export type ButtonGroupItemProps = Pick<
 }
 
 /** What ButtonGroup passes to its single-selection body. */
-export type ButtonGroupSingleInternalProps = Omit<ButtonGroupSingleProps, "color" | "padding"> & {
+export type ButtonGroupSingleInternalProps = Omit<ButtonGroupSingleProps, "color" | "size"> & {
   hasAll: boolean
+  /** The hover highlight, rendered first so it sits under the selection indicator. */
+  highlight: ReactNode
+}
+
+/** What ButtonGroup passes to its multiple-selection body. */
+export type ButtonGroupMultipleInternalProps = Omit<ButtonGroupMultipleProps, "color" | "size"> & {
+  highlight: ReactNode
+}
+
+/** Where the hover highlight sits, in px from the group's padding box. */
+export type ButtonGroupHighlightState = {
+  left: number
+  top: number
+  width: number
+  height: number
+  /** A mouse is over an item of the group (touch has no hover). */
+  visible: boolean
+  /** Just appeared: placed without sliding from where it last was. */
+  instant: boolean
+}
+
+export type ButtonGroupHighlightProps = {
+  state: ButtonGroupHighlightState
 }
 
 export type ButtonGroupAllProps = Omit<ButtonGroupItemProps, "value">
 
 export type ButtonGroupLedProps = {
   on: boolean
+  size: ButtonGroupSize
 }
 
 export type ButtonGroupContextValue = {
   selection: ButtonGroupSelection
   color: ButtonColor
-  padding: ButtonPadding
+  size: ButtonGroupSize
   /** Called by ButtonGroupAll on mount; returns its unregister. */
   registerAll: () => () => void
 }

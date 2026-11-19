@@ -10,7 +10,7 @@
 
 <Demo name="button-group-filters" />
 
-Press Pending and Paid to show both; press All to clear them. Each lit item gets a solid fill and its LED turns on.
+Press Pending and Paid to show both; press All to clear them. Each lit item gets a solid fill and its LED turns on. Move the pointer along the tray: one hover fill slides from item to item and stays on the last one until the pointer leaves the tray.
 
 ## Filters
 
@@ -24,9 +24,15 @@ Press Pending and Paid to show both; press All to clear them. Each lit item gets
 
 ## Icons and tooltips
 
-`icon` renders an icon-only item; name it with `tooltip` (or `aria-label`). `startIcon` and `endIcon` sit beside a label. Items are the registry `Button`, so their tooltip is the Button's.
+`icon` renders an icon-only item; name it with `tooltip` (or `aria-label`). `startIcon` and `endIcon` sit beside a label. The LED shows only on text-only items: an icon already marks the item. Items are the registry `Button`, so their tooltip is the Button's.
 
 <Demo name="button-group-icons" />
+
+## Sizes
+
+`size` scales the tray and everything in it: padding, text, icons and LEDs. `"xs"` fits dense toolbars and table headers, `"md"` is the default, and `"lg"` suits a main view switch.
+
+<Demo name="button-group-sizes" />
 
 ## Vertical
 
@@ -39,6 +45,19 @@ Press Pending and Paid to show both; press All to clear them. Each lit item gets
 `disabled` works on one item or the whole group. A disabled item still shows its tooltip on hover, so it can say why. In `multiple` the arrow keys still reach it; in `single` the keyboard skips it, like a disabled radio.
 
 <Demo name="button-group-states" />
+
+## Agents
+
+The group is ready for ui-sdk agents (`createAgent` from `@ui-sdk/react/agent`); find it by its `aria-label`. In `single`, use the group's `setValue` action. In `multiple`, use the group's `toggle` action with the item's value, not the item's label: each item is both ui-sdk's toggle and the registry `Button`, so its label names two entries in the snapshot and pressing it by label is ambiguous.
+
+```ts
+await agent.act({
+  steps: [
+    { ref: "View", action: "setValue", args: ["grid"] },
+    { ref: "Status", action: "toggle", args: ["paid"] },
+  ],
+})
+```
 
 ## Installation
 
