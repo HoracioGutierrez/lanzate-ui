@@ -16,6 +16,7 @@ import {
   timelineMarkerPositionClasses,
   timelineMarkerRadiusClasses,
   timelineMarkerTriggerClasses,
+  timelineTileMarkerClasses,
 } from "./timeline.variants"
 
 export function TimelineMarker({
@@ -32,7 +33,8 @@ export function TimelineMarker({
   // In a line the button is placed and the marker sits in it; in a tile the button covers the card
   // and the marker keeps its corner.
   const position = tooltip == null || layout === "tiles" ? timelineMarkerPositionClasses[layout] : "relative"
-  const classes = cn(position, timelineMarkerClasses(shape, variant, pulse), className)
+  const look = layout === "tiles" ? timelineTileMarkerClasses(pulse) : timelineMarkerClasses(shape, variant, pulse)
+  const classes = cn(position, look, className)
 
   if (tooltip == null) {
     return <TimelineMarkerPart data-shape={shape} className={classes} {...props} />

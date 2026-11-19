@@ -140,7 +140,7 @@ export type TimelineStackItemProps = {
   /** Defaults from `status`, like a `TimelineItem`. */
   color?: TimelineColor
   status?: TimelineStatus
-  /** Defaults to "circle". */
+  /** Defaults to "square", like the tiles it summarizes. */
   shape?: TimelineMarkerShape
   className?: string
 } & Omit<PartProps<"span">, "className" | "color" | "children">

@@ -39,9 +39,9 @@ const timelineLineSizeClasses = {
 // --timeline-tile is a tile's least height, --timeline-tile-width the narrowest it gets before the
 // row wraps.
 const timelineTileSizeClasses = {
-  sm: "gap-1.5 [--timeline-marker:--spacing(3.5)] [--timeline-tile:--spacing(14)] [--timeline-tile-width:--spacing(26)]",
-  md: "gap-2 [--timeline-marker:--spacing(4)] [--timeline-tile:--spacing(20)] [--timeline-tile-width:--spacing(28)]",
-  lg: "gap-3 [--timeline-marker:--spacing(5)] [--timeline-tile:--spacing(28)] [--timeline-tile-width:--spacing(36)]",
+  sm: "gap-1.5 [--timeline-marker:--spacing(1.5)] [--timeline-pad:--spacing(2.5)] [--timeline-tile:--spacing(14)] [--timeline-tile-width:--spacing(26)]",
+  md: "gap-2 [--timeline-marker:--spacing(2)] [--timeline-pad:--spacing(3)] [--timeline-tile:--spacing(20)] [--timeline-tile-width:--spacing(28)]",
+  lg: "gap-3 [--timeline-marker:--spacing(2.5)] [--timeline-pad:--spacing(4)] [--timeline-tile:--spacing(28)] [--timeline-tile-width:--spacing(36)]",
 } satisfies Record<TimelineSize, string>
 
 const timelineBaseClasses = "group/timeline relative min-w-0 [--timeline-line:--spacing(5)]"
@@ -97,36 +97,38 @@ const timelineLineItemClasses = [
   "motion-reduce:in-data-starting-style:translate-0",
 ].join(" ")
 
-// A tile's look by status, shared with the stack dots that summarize it: a colored edge over a
-// tint (stronger for the current event), and a dashed, empty edge for one still to come.
-// Keyed on data-status, which both the item and the stack dot carry.
+// The tile follows Frame's industrial look: square edges, a 1px border in the status color at 40%
+// over a card with a 10% wash of it, and registration marks in the full color on two opposite
+// corners, like the crop marks of a technical drawing. The current event is a little brighter; an
+// upcoming one is a plain dashed card. Keyed on data-status, which the item carries.
+// Duplicated from Frame and Button Group on purpose: each registry component installs on its own.
 const timelineTileSurfaceClasses = [
-  "border-2 border-(--timeline-accent) bg-background bg-linear-to-b from-(--timeline-accent)/10 to-(--timeline-accent)/10",
-  "data-[status=current]:from-(--timeline-accent)/25 data-[status=current]:to-(--timeline-accent)/25",
-  "data-[status=upcoming]:border-dashed data-[status=upcoming]:border-(--timeline-accent)/60 data-[status=upcoming]:from-transparent data-[status=upcoming]:to-transparent",
+  "border border-(--timeline-accent)/40 bg-card bg-linear-to-b from-(--timeline-accent)/10 to-(--timeline-accent)/10",
+  "data-[status=current]:border-(--timeline-accent)/70 data-[status=current]:from-(--timeline-accent)/20 data-[status=current]:to-(--timeline-accent)/20",
+  "data-[status=upcoming]:border-dashed data-[status=upcoming]:border-border data-[status=upcoming]:from-transparent data-[status=upcoming]:to-transparent",
 ].join(" ")
 
-// The event is the tile: a tinted card with its content inside. It grows out of a dot by animating
-// clip-path between two inset() shapes, which interpolate smoothly (a border-radius from "full" to a
-// few pixels doesn't). The ::before wash starts as a solid dot and fades to the tint as it opens.
-// The inset is negative at rest so the focus ring isn't clipped.
+const timelineTileCornerClasses = [
+  "before:pointer-events-none before:absolute before:-start-px before:-top-px before:size-2 before:border-s before:border-t before:border-(--timeline-accent)",
+  "after:pointer-events-none after:absolute after:-end-px after:-bottom-px after:size-2 after:border-e after:border-b after:border-(--timeline-accent)",
+  "group-data-[size=lg]/timeline:before:size-3 group-data-[size=lg]/timeline:after:size-3",
+].join(" ")
+
+// The tile grows out of a square dot by animating clip-path between two inset() shapes, which
+// interpolate smoothly. Its background starts as the solid status color and settles on the card,
+// so the dot reads as the stack's dot. The inset is negative at rest so the focus ring isn't clipped.
 const timelineTileItemClasses = [
-  "group/timeline-item relative isolate flex min-h-(--timeline-tile) min-w-0 flex-col justify-start gap-0.5 outline-none",
-  "rounded-xl",
+  "group/timeline-item relative isolate flex min-h-(--timeline-tile) min-w-0 flex-col justify-start gap-0.5 p-(--timeline-pad) outline-none",
   timelineTileSurfaceClasses,
-  "group-data-[size=sm]/timeline:rounded-lg",
-  // The title reserves room for the corner marker itself, so the lines under it get the full width.
-  "group-data-[size=sm]/timeline:p-2 group-data-[size=md]/timeline:p-3 group-data-[size=lg]/timeline:p-4",
+  timelineTileCornerClasses,
   "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring",
-  "before:absolute before:inset-0 before:-z-10 before:rounded-[inherit] before:bg-(--timeline-accent) before:opacity-0",
-  "before:transition-opacity before:duration-500 before:ease-out before:delay-(--timeline-delay) motion-reduce:before:transition-none",
-  "[clip-path:inset(-8px_round_calc(var(--radius-xl)+8px))]",
+  "[clip-path:inset(-8px)]",
   timelineItemEntranceClasses,
-  "transition-[clip-path,translate,opacity] duration-500 ease-out",
-  "in-data-starting-style:[clip-path:inset(calc(50%-8px)_calc(50%-8px)_round_8px)] in-data-starting-style:-translate-y-3 in-data-starting-style:before:opacity-100",
-  "in-data-ending-style:[clip-path:inset(calc(50%-8px)_calc(50%-8px)_round_8px)] in-data-ending-style:opacity-0 in-data-ending-style:duration-200",
-  "group-data-appear/timeline:starting:[clip-path:inset(calc(50%-8px)_calc(50%-8px)_round_8px)] group-data-appear/timeline:starting:before:opacity-100",
-  "motion-reduce:in-data-starting-style:[clip-path:inset(-8px_round_calc(var(--radius-xl)+8px))] motion-reduce:in-data-starting-style:translate-0",
+  "transition-[clip-path,translate,opacity,background-color] duration-500 ease-out",
+  "in-data-starting-style:[clip-path:inset(calc(50%-8px))] in-data-starting-style:-translate-y-3 in-data-starting-style:bg-(--timeline-accent)",
+  "in-data-ending-style:[clip-path:inset(calc(50%-8px))] in-data-ending-style:opacity-0 in-data-ending-style:duration-200",
+  "group-data-appear/timeline:starting:[clip-path:inset(calc(50%-8px))] group-data-appear/timeline:starting:bg-(--timeline-accent)",
+  "motion-reduce:in-data-starting-style:[clip-path:inset(-8px)] motion-reduce:in-data-starting-style:translate-0 motion-reduce:in-data-starting-style:bg-card",
 ].join(" ")
 
 export const timelineItemClasses = {
@@ -134,10 +136,22 @@ export const timelineItemClasses = {
   tiles: timelineTileItemClasses,
 } satisfies Record<TimelineVariant, string>
 
+// In a tile the LED sits in the top-end corner, centered on the overline title's first line.
 export const timelineMarkerPositionClasses = {
   line: "absolute start-0 top-(--timeline-marker-top) z-10",
-  tiles: "absolute end-2.5 top-2.5",
+  tiles: "absolute end-(--timeline-pad) top-[calc(var(--timeline-pad)+(--spacing(4)-var(--timeline-marker))/2)]",
 } satisfies Record<TimelineVariant, string>
+
+// In a tile the marker is a square LED, like Button Group's: lit in the status color, dim while
+// upcoming. Icons and labels inside it don't fit, so they're hidden.
+export const timelineTileMarkerClasses = (pulse: boolean) =>
+  [
+    "inline-block size-(--timeline-marker) shrink-0 bg-(--timeline-color) *:hidden",
+    "data-upcoming:bg-(--timeline-accent) data-upcoming:opacity-30",
+    pulse
+      ? "before:pointer-events-none before:absolute before:-inset-0.5 before:border before:border-(--timeline-accent) motion-safe:before:animate-ping"
+      : "",
+  ].join(" ")
 
 const timelineMarkerShapeClasses = {
   circle: "rounded-full",
@@ -217,12 +231,15 @@ export const timelineContentClasses = "flex min-w-0 flex-col gap-0.5"
 
 // In a tile every line is one line, truncated, so titles and times start at the same height across
 // the row. The full title still names the event for screen readers.
-export const timelineTitleClasses =
-  "block min-w-0 text-foreground data-upcoming:text-muted-text group-data-[variant=tiles]/timeline:truncate group-data-[variant=tiles]/timeline:pe-[calc(var(--timeline-marker)+--spacing(1))]"
+export const timelineTitleClasses = [
+  "block min-w-0 text-foreground data-upcoming:text-muted-text group-data-[variant=tiles]/timeline:truncate group-data-[variant=tiles]/timeline:pe-[calc(var(--timeline-marker)+--spacing(2))]",
+  "group-data-[variant=tiles]/timeline:text-(--timeline-accent) group-data-[variant=tiles]/timeline:data-upcoming:text-muted-text",
+].join(" ")
 
-export const timelineTimeClasses = "block min-w-0 tabular-nums group-data-[variant=tiles]/timeline:truncate"
+export const timelineTimeClasses = "block min-w-0 tabular-nums group-data-[variant=tiles]/timeline:mt-auto group-data-[variant=tiles]/timeline:truncate"
 
-export const timelineDescriptionClasses = "block min-w-0 group-data-[variant=tiles]/timeline:truncate"
+export const timelineDescriptionClasses =
+  "block min-w-0 group-data-[variant=tiles]/timeline:truncate group-data-[variant=tiles]/timeline:text-foreground group-data-[variant=tiles]/timeline:data-upcoming:text-muted-text"
 
 export const timelineCollapsibleClasses = "group/timeline-collapsible flex min-w-0 flex-col"
 
@@ -255,14 +272,16 @@ export const timelineStackClasses = [
 
 export const timelineStackItemClasses = (shape: TimelineMarkerShape) =>
   [
-    "relative inline-block size-4 shrink-0 ring-2 ring-background",
-    timelineTileSurfaceClasses,
-    // Same gray as an upcoming tile, but a solid edge: dashes break up into noise on an overlapping 16px dot.
-    "data-[status=upcoming]:border-solid",
+    // A tile in miniature: its edge in the full status color, since 40% would vanish at this size,
+    // over the same wash. An upcoming dot keeps a solid gray edge: dashes turn to noise at 16px.
+    "relative inline-block size-4 shrink-0 border border-(--timeline-accent) bg-card ring-2 ring-background",
+    "bg-linear-to-b from-(--timeline-accent)/20 to-(--timeline-accent)/20",
+    "data-[status=current]:from-(--timeline-accent)/35 data-[status=current]:to-(--timeline-accent)/35",
+    "data-[status=upcoming]:border-(--timeline-accent)/60 data-[status=upcoming]:from-transparent data-[status=upcoming]:to-transparent",
     "[--timeline-delay:calc(var(--timeline-index,0)*var(--timeline-stagger,80ms))]",
     "transition-[opacity,scale,translate] duration-200 ease-out delay-(--timeline-delay) motion-reduce:transition-none",
     "[[data-slot=collapsible-trigger][data-open]_&]:translate-y-2 [[data-slot=collapsible-trigger][data-open]_&]:scale-50 [[data-slot=collapsible-trigger][data-open]_&]:opacity-0",
-    shape === "circle" ? "rounded-full" : "rounded-sm",
+    shape === "circle" ? "rounded-full" : "rounded-none",
   ].join(" ")
 
 export const timelineLeaderClasses = [

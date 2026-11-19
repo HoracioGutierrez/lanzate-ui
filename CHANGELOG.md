@@ -12,7 +12,9 @@ minor bump may contain breaking changes.
   named list, one tab stop, arrow keys by orientation). `Timeline` takes
   `orientation`, `variant` (`line`: markers joined by a line; `tiles`:
   each event is a card with its content inside, sharing the row equally),
-  `size` and `appear` (staggered entrance). `TimelineItem` takes `status`
+  `size` and `appear` (staggered entrance). Tiles share Frame's industrial
+  look: square edges, a tinted border, corner registration marks, a mono
+  overline title and a square LED marker. `TimelineItem` takes `status`
   (`complete` success, `failed` error, `current` warning, `upcoming` muted)
   and `color` to override it; `TimelineMarker` takes `shape` (`circle`,
   `square`), `variant` (`solid`, `soft`, `outline`, defaulting from the

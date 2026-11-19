@@ -112,9 +112,15 @@ test("tiles put the content in the card and the tooltip button over it", async (
   expect(screen.getByRole("list", { name: "Deploy" }).getAttribute("data-variant")).toBe("tiles")
   const tile = screen.getByRole("listitem", { name: "Checks" })
   expect(tile.className).toContain("min-h-(--timeline-tile)")
-  expect(tile.className).toContain("[clip-path:inset(-8px_round_calc(var(--radius-xl)+8px))]")
+  expect(tile.className).toContain("[clip-path:inset(-8px)]")
+  expect(tile.className).toContain("before:border-t")
+  expect(tile.className).not.toContain("rounded")
   const button = screen.getByRole("button", { name: "312 tests passed" })
   expect(button.className).toContain("-inset-0.5")
+  const led = document.querySelector('[data-slot="timeline-marker"]')!
+  expect(led.className).toContain("size-(--timeline-marker)")
+  expect(led.className).not.toContain("border-2")
+  expect(document.querySelector('[data-slot="text"][data-variant="overline"]')!.textContent).toBe("Checks")
   expect(document.querySelector('[data-slot="timeline-connector"]')!.className).toContain("group-data-[variant=tiles]/timeline:hidden")
 })
 

@@ -101,7 +101,7 @@ export function TimelineCollapsibleDemo() {
                 <Timeline aria-label={`Order #${order.id} activity`} orientation="horizontal" variant="tiles" size="sm">
                   {events.map((event) => (
                     <TimelineItem key={event.key} value={event.key} status={event.status}>
-                      <TimelineMarker tooltip={event.detail} />
+                      <TimelineMarker pulse={event.status === "current"} tooltip={event.detail} />
                       <TimelineTitle>{event.title}</TimelineTitle>
                       <TimelineDescription>{event.label}</TimelineDescription>
                       {"time" in event && <TimelineTime>{event.time}</TimelineTime>}
