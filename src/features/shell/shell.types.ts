@@ -14,3 +14,6 @@ export type CopyButtonProps = {
   label?: string
   className?: string
 }
+
+/** What the reader chose: a fixed theme, or whatever the operating system uses. */
+export type ThemePreference = "light" | "dark" | "system"
