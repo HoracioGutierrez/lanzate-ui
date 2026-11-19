@@ -12,7 +12,7 @@ export function ButtonGroupMultiple({
   defaultValue = [],
   onValueChange,
   ...props
-}: Omit<ButtonGroupMultipleProps, "color" | "padding">) {
+}: Omit<ButtonGroupMultipleProps, "color" | "size">) {
   const [value, setValue] = useControllableValue({ value: valueProp, defaultValue, onValueChange })
 
   return (

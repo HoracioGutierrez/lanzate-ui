@@ -1,6 +1,7 @@
 import type { DemoEntry } from "../types/docs.types"
 import { ButtonGroupFiltersDemo } from "./button-group/button-group-filters.demo"
 import { ButtonGroupIconsDemo } from "./button-group/button-group-icons.demo"
+import { ButtonGroupSizesDemo } from "./button-group/button-group-sizes.demo"
 import { ButtonGroupStatesDemo } from "./button-group/button-group-states.demo"
 import { ButtonGroupSwitchDemo } from "./button-group/button-group-switch.demo"
 import { ButtonGroupVerticalDemo } from "./button-group/button-group-vertical.demo"
@@ -62,5 +63,6 @@ export const demoRegistry = {
   "button-group-switch": { component: ButtonGroupSwitchDemo, file: "button-group/button-group-switch.demo.tsx" },
   "button-group-icons": { component: ButtonGroupIconsDemo, file: "button-group/button-group-icons.demo.tsx" },
   "button-group-vertical": { component: ButtonGroupVerticalDemo, file: "button-group/button-group-vertical.demo.tsx" },
+  "button-group-sizes": { component: ButtonGroupSizesDemo, file: "button-group/button-group-sizes.demo.tsx" },
   "button-group-states": { component: ButtonGroupStatesDemo, file: "button-group/button-group-states.demo.tsx" },
 } satisfies Record<string, DemoEntry>

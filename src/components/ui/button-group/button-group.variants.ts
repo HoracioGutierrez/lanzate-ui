@@ -1,6 +1,6 @@
-import type { ButtonColor } from "@/components/ui/button/button.types"
+import type { ButtonColor, ButtonPadding } from "@/components/ui/button/button.types"
 
-import type { ButtonGroupOrientation, ButtonGroupSelection } from "./button-group.types"
+import type { ButtonGroupOrientation, ButtonGroupSelection, ButtonGroupSize } from "./button-group.types"
 
 // Primary-colored brackets on two opposite corners, like the crop marks on a technical drawing.
 // Duplicated from floating-toolbar on purpose: each registry component installs on its own.
@@ -10,9 +10,24 @@ const cornerMarkClasses = [
 ].join(" ")
 
 export const buttonGroupClasses = [
-  "relative isolate inline-flex max-w-full flex-wrap items-center gap-1 rounded-sm border border-border bg-card p-1",
+  "relative isolate inline-flex max-w-full flex-wrap items-center rounded-sm border border-border bg-card",
   cornerMarkClasses,
 ].join(" ")
+
+// The tray's inset and the gap between items grow with the items.
+export const buttonGroupSizeClasses = {
+  xs: "gap-0.5 p-0.5",
+  md: "gap-1 p-1",
+  lg: "gap-1.5 p-1.5",
+} satisfies Record<ButtonGroupSize, string>
+
+// Each size is a step of the Button's padding scale, which also sets its text size; icon-only
+// items get the matching square padding from the Button.
+export const buttonGroupItemPadding = {
+  xs: "xs",
+  md: "sm",
+  lg: "md",
+} satisfies Record<ButtonGroupSize, ButtonPadding>
 
 export const buttonGroupOrientationClasses = {
   horizontal: "flex-row",
@@ -52,4 +67,10 @@ export const buttonGroupItemClasses = {
 
 // A square LED before the label: dim when off, so items don't shift when they light up.
 export const buttonGroupLedClasses =
-  "size-1.5 shrink-0 bg-current opacity-25 transition-opacity duration-150 data-on:opacity-100 motion-reduce:transition-none"
+  "shrink-0 bg-current opacity-25 transition-opacity duration-150 data-on:opacity-100 motion-reduce:transition-none"
+
+export const buttonGroupLedSizeClasses = {
+  xs: "size-1",
+  md: "size-1.5",
+  lg: "size-2",
+} satisfies Record<ButtonGroupSize, string>

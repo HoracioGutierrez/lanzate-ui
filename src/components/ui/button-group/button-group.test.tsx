@@ -163,6 +163,24 @@ test("the LED is lit only on the active item and absent on items with an icon", 
   expect(led("Void")).toBeNull()
 })
 
+test.each([
+  [undefined, "md", "sm"],
+  ["xs", "xs", "xs"],
+  ["md", "md", "sm"],
+  ["lg", "lg", "md"],
+] as const)("size %s sizes the tray, its items and the LED", (size, groupSize, itemPadding) => {
+  render(
+    <ButtonGroup selection="multiple" aria-label="Status" size={size}>
+      <ButtonGroupItem value="paid">Paid</ButtonGroupItem>
+      <ButtonGroupItem value="late" icon={<svg />} aria-label="Late" />
+    </ButtonGroup>
+  )
+  expect(screen.getByRole("group", { name: "Status" }).getAttribute("data-size")).toBe(groupSize)
+  expect(toggle("Paid").getAttribute("data-padding")).toBe(itemPadding)
+  expect(toggle("Late").getAttribute("data-padding")).toBe(itemPadding)
+  expect(toggle("Paid").querySelector('[data-slot="button-group-led"]')?.getAttribute("data-size")).toBe(groupSize)
+})
+
 const tick = () => act(async () => { await new Promise((r) => setTimeout(r, 0)) })
 
 test("an icon-only item is named by its tooltip", async () => {

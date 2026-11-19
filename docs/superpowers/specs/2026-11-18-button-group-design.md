@@ -95,11 +95,11 @@ are hand-rolled (no keyboard model) and split across two components.
 ### Parts
 
 - **`ButtonGroup`** — root. Props: `selection`, `value`, `defaultValue`,
-  `onValueChange`, `color` (`ButtonColor`, default `primary`), `padding`
-  (`ButtonPadding`, default `sm`), `radius`, `orientation`, `disabled`,
+  `onValueChange`, `color` (`ButtonColor`, default `primary`), `size`
+  (`"xs" | "md" | "lg"`, default `md`; maps to Button padding `xs` / `sm` / `md`), `radius`, `orientation`, `disabled`,
   `aria-label`, `className`, `children`. `single` adds `name`, `required`.
   Renders the industrial tray (see Look). Provides a context:
-  `{ selection, color, padding }`. In `single` it renders
+  `{ selection, color, size }`. In `single` it renders
   `SegmentedControlIndicator` first.
 - **`ButtonGroupItem`** — `value` + the Button's content props (`icon`,
   `startIcon`, `endIcon`, `tooltip`, `disabled`, `children`, `aria-label`,

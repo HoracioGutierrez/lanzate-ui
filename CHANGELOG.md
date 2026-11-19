@@ -18,8 +18,9 @@ minor bump may contain breaking changes.
   (`icon` for icon-only, `startIcon`, `endIcon`; an item with an icon has
   no LED) and a `tooltip`;
   `ButtonGroupAll`, optional in both modes, is lit while nothing is chosen
-  and clears the group. `color`, `padding`, `orientation` and `disabled`
-  apply to the whole group.
+  and clears the group. `color`, `size` (`"xs" | "md" | "lg"`, scaling
+  the tray, items and LEDs), `orientation` and `disabled` apply to the
+  whole group.
 
 ## 0.11.0
 

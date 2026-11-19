@@ -10,7 +10,7 @@ import { cn } from "@/lib/cn"
 
 import { ButtonGroupContext } from "./button-group.constants"
 import type { ButtonGroupItemProps } from "./button-group.types"
-import { buttonGroupItemClasses } from "./button-group.variants"
+import { buttonGroupItemClasses, buttonGroupItemPadding } from "./button-group.variants"
 import { ButtonGroupLed } from "./button-group-led"
 
 // ui-sdk's item keeps the behavior (radio or pressed toggle, arrow keys); the registry Button draws it.
@@ -28,7 +28,7 @@ export function ButtonGroupItem({
 }: ButtonGroupItemProps) {
   const context = use(ButtonGroupContext)
   if (context == null) throw new Error("ButtonGroupItem must be inside a ButtonGroup.")
-  const { selection, color, padding } = context
+  const { selection, color, size } = context
   // An icon already marks the item, so the LED only shows on text-only items.
   const hasIcon = startIcon != null || endIcon != null
 
@@ -38,7 +38,7 @@ export function ButtonGroupItem({
       {...props}
       variant={on ? "solid" : "ghost"}
       color={on ? color : "muted"}
-      padding={padding}
+      padding={buttonGroupItemPadding[size]}
       radius="none"
       icon={icon}
       startIcon={startIcon}
@@ -50,7 +50,7 @@ export function ButtonGroupItem({
     >
       {icon == null && (
         <>
-          {!hasIcon && <ButtonGroupLed on={on} />}
+          {!hasIcon && <ButtonGroupLed on={on} size={size} />}
           {children}
         </>
       )}

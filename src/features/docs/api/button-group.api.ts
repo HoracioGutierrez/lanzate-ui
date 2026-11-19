@@ -7,7 +7,7 @@ export const buttonGroupApi: ApiRow[] = [
   { prop: "ButtonGroup defaultValue", type: "string | null (single), string[] (multiple)", default: "null / []", description: "The chosen items at first, when uncontrolled." },
   { prop: "ButtonGroup onValueChange", type: "(value) => void", description: "Runs when the user chooses an item, with the new value. ButtonGroupAll's internal value never appears in it." },
   { prop: "ButtonGroup color", type: '"primary" | "secondary" | "muted" | "info" | "warning" | "success" | "error"', default: '"primary"', description: "Color of the lit items and the indicator." },
-  { prop: "ButtonGroup padding", type: '"none" | "xs" | "sm" | "base" | "md" | "lg" | "xl"', default: '"sm"', description: "Size of every item, as the Button's padding." },
+  { prop: "ButtonGroup size", type: '"xs" | "md" | "lg"', default: '"md"', description: "Scales the tray and its items: padding, text, icons and LEDs." },
   { prop: "ButtonGroup orientation", type: '"horizontal" | "vertical"', default: '"horizontal"', description: "Lays the items out in a row or a column." },
   { prop: "ButtonGroup disabled", type: "boolean", default: "false", description: "Disables every item." },
   { prop: "ButtonGroup name", type: "string", description: "single only. Submits the chosen value with a form. With ButtonGroupAll, nothing chosen submits nothing." },

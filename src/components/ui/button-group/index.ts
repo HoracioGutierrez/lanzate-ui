@@ -9,4 +9,5 @@ export type {
   ButtonGroupProps,
   ButtonGroupSelection,
   ButtonGroupSingleProps,
+  ButtonGroupSize,
 } from "./button-group.types"
